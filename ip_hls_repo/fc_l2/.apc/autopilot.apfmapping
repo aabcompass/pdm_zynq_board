@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="L2triggerv5.h" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/fc_l2/L2triggerv5/cpp_code/L2triggerv5.h"/>
+    <originFiles name="L2triggerv5.cpp" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/fc_l2/L2triggerv5/cpp_code/L2triggerv5.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="L2trigger_testv5.cpp" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/fc_l2/L2triggerv5/cpp_code/L2trigger_testv5.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

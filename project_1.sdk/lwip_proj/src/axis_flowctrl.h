@@ -1,0 +1,72 @@
+/*
+ * axis_flowctrl.h
+ *
+ *  Created on: May 22, 2017
+ *      Author: alx
+ */
+#ifndef SRC_AXIS_FLOWCTRL_H_
+#define SRC_AXIS_FLOWCTRL_H_
+
+
+
+
+#define REGW_FLAGS					0
+#define REGW_CLR_FLAGS				1
+#define REGW_TRIG_DELAY				2
+#define REGW_EDGE_FLAGS				3
+#define REGW_RESET_ALARM			4
+#define REGW_TRIG_TST_GTU_H			5
+#define REGW_TRIG_TST_GTU_L			6
+#define REGW_PERIODIC_TRIG_PHASE	7
+
+#define REGR_GPIO_0			16
+#define REGR_GPIO_1			17
+#define REGR_GPIO_2			18
+#define REGR_GPIO_3			19
+#define REGR_GPIO_4			20
+#define REGR_GTU_CNT_H_RND	21
+#define REGR_GTU_CNT_L_RND	22
+#define REGR_TRANS_CNT_LCH	23
+#define REGR_TRANS_COUNTER	24
+#define REGR_MAXIS_ALARM	25
+#define REGR_FC_SM_STATE	26
+#define REGR_GTU_CNT_H		27
+#define REGR_GTU_CNT_L		28
+#define REGR_GTU_TIMEST_H	29
+#define REGR_GTU_TIMEST_L	30
+#define REGR_GTU_CNT_4DMA	31
+
+
+#define SM_STATE_IDLE		0
+#define SM_STATE_ARMED		3
+
+#define SetTrigTstGtuTime_L1(data) (*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_TRIG_TST_GTU_L*4) = data)
+
+#define GetCurPosFC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_TRANS_COUNTER*4))
+#define GetCurPosFC2() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_TRANS_COUNTER*4))
+#define GetGpio0FC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_0*4))
+#define GetGpio1FC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_1*4))
+#define GetGpio2FC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_2*4))
+#define GetGpio3FC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_3*4))
+#define GetGpio4FC1()		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_4*4))
+#define GetGpio5FC1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GPIO_5*4))
+
+#define GetMaxisAlarmL1() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_MAXIS_ALARM*4))
+#define GetMaxisAlarmL2() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_MAXIS_ALARM*4))
+
+#define GetNlifeCycle() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_L*4))
+
+#define BIT_FC_IS_STARTED		(1<<0)
+#define BIT_FC_EN_INT_TRIG		(1<<1)
+#define BIT_FC_EN_ALGO_TRIG		(1<<2)
+#define BIT_FC_EN_PERIODIC_TRIG	(1<<3)
+
+#define BIT_FC_CLR_TRANS_CNT	(1<<0)
+#define BIT_FC_CLR_ERROR		(1<<1)
+#define BIT_FC_CLR_ALL			(1<<2)
+
+#define BIT_FC_RELEASE			(1<<0)
+#define BIT_FC_TRIG_FORCE		(1<<1)
+
+
+#endif /* SRC_AXIS_FLOWCTRL_H_ */

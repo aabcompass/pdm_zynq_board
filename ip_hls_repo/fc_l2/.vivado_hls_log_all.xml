@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [SCHED 204-21] The critical path consists of the following:&#xA;&#x9;'bitconcatenate' operation ('sum_pixP1', L2triggerv5/cpp_code/L2triggerv5.cpp:105) (0 ns)&#xA;&#x9;'uitodp' operation ('tmp_17', L2triggerv5/cpp_code/L2triggerv5.cpp:107) (5.16 ns)" projectName="L2triggerv5" solutionName="solution1" date="2017-04-20T15:51:02.857+0300" type="Warning"/>
+        <logs message="WARNING: [SCHED 204-21] Estimated clock period (5.16ns) exceeds the target (target clock period: 5ns, clock uncertainty: 0.625ns, effective delay budget: 4.38ns)." projectName="L2triggerv5" solutionName="solution1" date="2017-04-20T15:51:02.855+0300" type="Warning"/>
+        <logs message="WARNING: [SCHED 204-21] Estimated delay (5.16ns) of 'uitodp' operation ('tmp_17', L2triggerv5/cpp_code/L2triggerv5.cpp:107) exceeds the target cycle time (target cycle time: 5ns, clock uncertainty: 0.625ns, effective cycle time: 4.38ns)." projectName="L2triggerv5" solutionName="solution1" date="2017-04-20T15:51:02.847+0300" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>

@@ -1,0 +1,5 @@
+create_clock -period 10.000 -name clk_art0_x1 -waveform {0.000 5.000} [get_ports clk_art0_x1]
+create_clock -period 10.000 -name clk_art1_x1 -waveform {0.000 5.000} [get_ports clk_art1_x1]
+create_clock -period 10.000 -name clk_art2_x1 -waveform {0.000 5.000} [get_ports clk_art2_x1]
+create_clock -period 10.000 -name m_axis_aclk -waveform {0.000 5.000} [get_ports m_axis_aclk]
+create_clock -period 10.000 -name s00_axi_aclk -waveform {0.000 5.000} [get_ports s00_axi_aclk]

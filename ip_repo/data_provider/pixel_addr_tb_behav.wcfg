@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="pixel_addr_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="pixel_addr_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="14425000000fs"></ZoomStartTime>
+      <ZoomEndTime time="20005000001fs"></ZoomEndTime>
+      <Cursor1Time time="18115000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="20" />
+   <wvobject type="other" fp_name="/pixel_addr_tb/cnt">
+      <obj_property name="ElementShortName">cnt</obj_property>
+      <obj_property name="ObjectShortName">cnt</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/pixel_addr_tb/dv">
+      <obj_property name="ElementShortName">dv</obj_property>
+      <obj_property name="ObjectShortName">dv</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/pixel_addr_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/pixel_addr_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/data">
+      <obj_property name="ElementShortName">data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/datain">
+      <obj_property name="ElementShortName">datain[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/arg_l">
+      <obj_property name="ElementShortName">arg_l[15:0]</obj_property>
+      <obj_property name="ObjectShortName">arg_l[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/arg_r">
+      <obj_property name="ElementShortName">arg_r[15:0]</obj_property>
+      <obj_property name="ObjectShortName">arg_r[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider8" type="divider">
+      <obj_property name="label">write2mem</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/addra">
+      <obj_property name="ElementShortName">addra[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_add_l">
+      <obj_property name="ElementShortName">acc_add_l[31:0]</obj_property>
+      <obj_property name="ObjectShortName">acc_add_l[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_add_r">
+      <obj_property name="ElementShortName">acc_add_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">acc_add_r[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/pixel_addr_tb/dut/wea[0]">
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider8" type="divider">
+      <obj_property name="label">readmem</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/addrb">
+      <obj_property name="ElementShortName">addrb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addrb[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_l">
+      <obj_property name="ElementShortName">acc_l[31:0]</obj_property>
+      <obj_property name="ObjectShortName">acc_l[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_r">
+      <obj_property name="ElementShortName">acc_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">acc_r[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider66" type="divider">
+      <obj_property name="label">zeroing</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/pixel_addr_tb/dut/datain_dv_front">
+      <obj_property name="ElementShortName">datain_dv_front</obj_property>
+      <obj_property name="ObjectShortName">datain_dv_front</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_cnt">
+      <obj_property name="ElementShortName">acc_cnt[15:0]</obj_property>
+      <obj_property name="ObjectShortName">acc_cnt[15:0]</obj_property>
+   </wvobject>
+</wave_config>

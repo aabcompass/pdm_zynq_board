@@ -1,0 +1,1660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_EC_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="testbench_EC" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="400000000001fs"></ZoomEndTime>
+      <Cursor1Time time="317705100000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="158" />
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/gtu_cnt_s1">
+      <obj_property name="ElementShortName">gtu_cnt_s1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">gtu_cnt_s1[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/s_aresetn">
+      <obj_property name="ElementShortName">s_aresetn</obj_property>
+      <obj_property name="ObjectShortName">s_aresetn</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/DATA">
+      <obj_property name="ElementShortName">DATA[15:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA[15:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/FRAME">
+      <obj_property name="ElementShortName">FRAME</obj_property>
+      <obj_property name="ObjectShortName">FRAME</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/clock_axi">
+      <obj_property name="ElementShortName">clock_axi</obj_property>
+      <obj_property name="ObjectShortName">clock_axi</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tready">
+      <obj_property name="ElementShortName">m_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/m_axis_tdata">
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus1120">
+      <obj_property name="label">New Virtual Bus 50</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[14]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[13]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[12]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[11]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[10]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[9]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[8]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[7]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[6]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[5]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[4]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[3]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[2]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[1]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus1104">
+      <obj_property name="label">New Virtual Bus 49</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[29]">
+         <obj_property name="ElementShortName">[29]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[29]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[28]">
+         <obj_property name="ElementShortName">[28]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[28]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[27]">
+         <obj_property name="ElementShortName">[27]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[27]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[26]">
+         <obj_property name="ElementShortName">[26]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[26]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[25]">
+         <obj_property name="ElementShortName">[25]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[25]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[24]">
+         <obj_property name="ElementShortName">[24]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[24]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[23]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[22]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[21]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[20]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[19]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[18]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[17]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[16]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/m_axis_tdata[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[15]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/AXI4_FIFO_OUT/m_axis_tlast">
+      <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/L1_EVENT">
+      <obj_property name="ElementShortName">L1_EVENT</obj_property>
+      <obj_property name="ObjectShortName">L1_EVENT</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/AXI4_FIFO_OUT/s_axis_tvalid">
+      <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/AXI4_FIFO_OUT/s_axis_tdata">
+      <obj_property name="ElementShortName">s_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l0">
+      <obj_property name="ElementShortName">sum_bus_l0[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l0[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l1">
+      <obj_property name="ElementShortName">sum_bus_l1[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l1[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l2">
+      <obj_property name="ElementShortName">sum_bus_l2[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l2[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l3">
+      <obj_property name="ElementShortName">sum_bus_l3[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l3[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l4">
+      <obj_property name="ElementShortName">sum_bus_l4[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l4[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l5">
+      <obj_property name="ElementShortName">sum_bus_l5[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l5[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l6">
+      <obj_property name="ElementShortName">sum_bus_l6[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l6[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l7">
+      <obj_property name="ElementShortName">sum_bus_l7[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l7[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l8">
+      <obj_property name="ElementShortName">sum_bus_l8[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l8[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l9">
+      <obj_property name="ElementShortName">sum_bus_l9[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l9[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l10">
+      <obj_property name="ElementShortName">sum_bus_l10[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l10[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l11">
+      <obj_property name="ElementShortName">sum_bus_l11[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l11[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l12">
+      <obj_property name="ElementShortName">sum_bus_l12[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l12[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l13">
+      <obj_property name="ElementShortName">sum_bus_l13[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l13[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l14">
+      <obj_property name="ElementShortName">sum_bus_l14[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l14[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_l15">
+      <obj_property name="ElementShortName">sum_bus_l15[14:0]</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_l15[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum_bus_rdy">
+      <obj_property name="ElementShortName">sum_bus_rdy</obj_property>
+      <obj_property name="ObjectShortName">sum_bus_rdy</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value0_s">
+      <obj_property name="ElementShortName">pixel_value0_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value0_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value1_s">
+      <obj_property name="ElementShortName">pixel_value1_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value1_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value2_s">
+      <obj_property name="ElementShortName">pixel_value2_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value2_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value3_s">
+      <obj_property name="ElementShortName">pixel_value3_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value3_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value4_s">
+      <obj_property name="ElementShortName">pixel_value4_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value4_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value5_s">
+      <obj_property name="ElementShortName">pixel_value5_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value5_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value6_s">
+      <obj_property name="ElementShortName">pixel_value6_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value6_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value7_s">
+      <obj_property name="ElementShortName">pixel_value7_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value7_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value8_s">
+      <obj_property name="ElementShortName">pixel_value8_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value8_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value9_s">
+      <obj_property name="ElementShortName">pixel_value9_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value9_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value10_s">
+      <obj_property name="ElementShortName">pixel_value10_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value10_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value11_s">
+      <obj_property name="ElementShortName">pixel_value11_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value11_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value12_s">
+      <obj_property name="ElementShortName">pixel_value12_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value12_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value13_s">
+      <obj_property name="ElementShortName">pixel_value13_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value13_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value14_s">
+      <obj_property name="ElementShortName">pixel_value14_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value14_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_value15_s">
+      <obj_property name="ElementShortName">pixel_value15_s[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_value15_s[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/pixel_rdy">
+      <obj_property name="ElementShortName">pixel_rdy</obj_property>
+      <obj_property name="ObjectShortName">pixel_rdy</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/CIRCULAR_MEM/wea">
+      <obj_property name="ElementShortName">wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/CIRCULAR_MEM/addra">
+      <obj_property name="ElementShortName">addra[8:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[8:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/column_cnt">
+      <obj_property name="ElementShortName">column_cnt[8:0]</obj_property>
+      <obj_property name="ObjectShortName">column_cnt[8:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/CIRCULAR_MEM/dina">
+      <obj_property name="ElementShortName">dina[127:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[127:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/CIRCULAR_MEM/douta">
+      <obj_property name="ElementShortName">douta[127:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[127:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/din">
+      <obj_property name="ElementShortName">din[127:0]</obj_property>
+      <obj_property name="ObjectShortName">din[127:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/wr_en">
+      <obj_property name="ElementShortName">wr_en</obj_property>
+      <obj_property name="ObjectShortName">wr_en</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/rd_en">
+      <obj_property name="ElementShortName">rd_en</obj_property>
+      <obj_property name="ObjectShortName">rd_en</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/dout">
+      <obj_property name="ElementShortName">dout[127:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[127:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/full">
+      <obj_property name="ElementShortName">full</obj_property>
+      <obj_property name="ObjectShortName">full</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/FIFO_BUFFER/empty">
+      <obj_property name="ElementShortName">empty</obj_property>
+      <obj_property name="ObjectShortName">empty</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/SCLR">
+      <obj_property name="ElementShortName">SCLR</obj_property>
+      <obj_property name="ObjectShortName">SCLR</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/B">
+      <obj_property name="ElementShortName">B[7:0]</obj_property>
+      <obj_property name="ObjectShortName">B[7:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l0/s_axis_cartesian_tvalid">
+      <obj_property name="ElementShortName">s_axis_cartesian_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axis_cartesian_tvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l0/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l1/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l2/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l3/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l4/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l5/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l6/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l7/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l8/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l9/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l10/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l11/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l12/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l13/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l14/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l15/m_axis_dout_tdata">
+      <obj_property name="ElementShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tdata[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/SQRT_15_l0/m_axis_dout_tvalid">
+      <obj_property name="ElementShortName">m_axis_dout_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tvalid</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l0">
+      <obj_property name="ElementShortName">sum16_l0[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l0[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l1">
+      <obj_property name="ElementShortName">sum16_l1[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l1[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l2">
+      <obj_property name="ElementShortName">sum16_l2[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l2[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l3">
+      <obj_property name="ElementShortName">sum16_l3[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l3[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l4">
+      <obj_property name="ElementShortName">sum16_l4[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l4[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l5">
+      <obj_property name="ElementShortName">sum16_l5[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l5[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l6">
+      <obj_property name="ElementShortName">sum16_l6[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l6[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l7">
+      <obj_property name="ElementShortName">sum16_l7[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l7[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l8">
+      <obj_property name="ElementShortName">sum16_l8[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l8[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l9">
+      <obj_property name="ElementShortName">sum16_l9[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l9[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l10">
+      <obj_property name="ElementShortName">sum16_l10[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l10[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l11">
+      <obj_property name="ElementShortName">sum16_l11[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l11[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l12">
+      <obj_property name="ElementShortName">sum16_l12[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l12[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l13">
+      <obj_property name="ElementShortName">sum16_l13[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l13[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l14">
+      <obj_property name="ElementShortName">sum16_l14[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l14[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_l15">
+      <obj_property name="ElementShortName">sum16_l15[10:0]</obj_property>
+      <obj_property name="ObjectShortName">sum16_l15[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/sum16_rdy">
+      <obj_property name="ElementShortName">sum16_rdy</obj_property>
+      <obj_property name="ObjectShortName">sum16_rdy</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l0/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l1/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l2/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l3/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l4/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l5/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l6/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l7/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l8/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l9/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l10/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l11/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l12/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l13/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l14/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/add_12_l15/S">
+      <obj_property name="ElementShortName">S[11:0]</obj_property>
+      <obj_property name="ObjectShortName">S[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_rdy">
+      <obj_property name="ElementShortName">S_rdy</obj_property>
+      <obj_property name="ObjectShortName">S_rdy</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/B">
+      <obj_property name="ElementShortName">B[7:0]</obj_property>
+      <obj_property name="ObjectShortName">B[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/SCLR">
+      <obj_property name="ElementShortName">SCLR</obj_property>
+      <obj_property name="ObjectShortName">SCLR</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="other" fp_name="/testbench_EC/uut/EC0_EC1_EC2/state_cir_sum">
+      <obj_property name="ElementShortName">state_cir_sum</obj_property>
+      <obj_property name="ObjectShortName">state_cir_sum</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_MEM/wea">
+      <obj_property name="ElementShortName">wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_MEM/addra">
+      <obj_property name="ElementShortName">addra[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_MEM/dina">
+      <obj_property name="ElementShortName">dina[191:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[191:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_MEM/addrb">
+      <obj_property name="ElementShortName">addrb[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addrb[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/S_MEM/doutb">
+      <obj_property name="ElementShortName">doutb[191:0]</obj_property>
+      <obj_property name="ObjectShortName">doutb[191:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/accu8_rdy">
+      <obj_property name="ElementShortName">accu8_rdy</obj_property>
+      <obj_property name="ObjectShortName">accu8_rdy</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/col_event">
+      <obj_property name="ElementShortName">col_event[15:0]</obj_property>
+      <obj_property name="ObjectShortName">col_event[15:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2240">
+      <obj_property name="label">s0</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[11]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[10]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[9]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[8]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[7]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[6]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[5]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[4]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[3]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[2]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[1]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l0/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2253">
+      <obj_property name="label">s1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[23]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[22]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[21]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[20]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[19]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[18]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[17]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[16]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[15]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[14]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[13]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[12]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l1/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2266">
+      <obj_property name="label">s2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[35]">
+         <obj_property name="ElementShortName">[35]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[35]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[34]">
+         <obj_property name="ElementShortName">[34]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[34]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[33]">
+         <obj_property name="ElementShortName">[33]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[33]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[32]">
+         <obj_property name="ElementShortName">[32]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[32]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[31]">
+         <obj_property name="ElementShortName">[31]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[31]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[30]">
+         <obj_property name="ElementShortName">[30]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[30]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[29]">
+         <obj_property name="ElementShortName">[29]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[29]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[28]">
+         <obj_property name="ElementShortName">[28]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[28]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[27]">
+         <obj_property name="ElementShortName">[27]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[27]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[26]">
+         <obj_property name="ElementShortName">[26]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[26]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[25]">
+         <obj_property name="ElementShortName">[25]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[25]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[24]">
+         <obj_property name="ElementShortName">[24]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[24]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l2/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2279">
+      <obj_property name="label">s3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[47]">
+         <obj_property name="ElementShortName">[47]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[47]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[46]">
+         <obj_property name="ElementShortName">[46]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[46]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[45]">
+         <obj_property name="ElementShortName">[45]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[45]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[44]">
+         <obj_property name="ElementShortName">[44]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[44]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[43]">
+         <obj_property name="ElementShortName">[43]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[43]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[42]">
+         <obj_property name="ElementShortName">[42]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[42]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[41]">
+         <obj_property name="ElementShortName">[41]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[41]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[40]">
+         <obj_property name="ElementShortName">[40]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[40]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[39]">
+         <obj_property name="ElementShortName">[39]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[39]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[38]">
+         <obj_property name="ElementShortName">[38]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[38]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[37]">
+         <obj_property name="ElementShortName">[37]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[37]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[36]">
+         <obj_property name="ElementShortName">[36]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[36]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l3/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2292">
+      <obj_property name="label">s4</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[59]">
+         <obj_property name="ElementShortName">[59]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[59]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[58]">
+         <obj_property name="ElementShortName">[58]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[58]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[57]">
+         <obj_property name="ElementShortName">[57]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[57]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[56]">
+         <obj_property name="ElementShortName">[56]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[56]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[55]">
+         <obj_property name="ElementShortName">[55]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[55]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[54]">
+         <obj_property name="ElementShortName">[54]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[54]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[53]">
+         <obj_property name="ElementShortName">[53]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[53]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[52]">
+         <obj_property name="ElementShortName">[52]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[52]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[51]">
+         <obj_property name="ElementShortName">[51]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[51]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[50]">
+         <obj_property name="ElementShortName">[50]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[50]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[49]">
+         <obj_property name="ElementShortName">[49]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[49]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[48]">
+         <obj_property name="ElementShortName">[48]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[48]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l4/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2305">
+      <obj_property name="label">s5</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[71]">
+         <obj_property name="ElementShortName">[71]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[71]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[70]">
+         <obj_property name="ElementShortName">[70]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[70]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[69]">
+         <obj_property name="ElementShortName">[69]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[69]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[68]">
+         <obj_property name="ElementShortName">[68]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[68]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[67]">
+         <obj_property name="ElementShortName">[67]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[67]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[66]">
+         <obj_property name="ElementShortName">[66]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[66]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[65]">
+         <obj_property name="ElementShortName">[65]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[65]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[64]">
+         <obj_property name="ElementShortName">[64]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[64]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[63]">
+         <obj_property name="ElementShortName">[63]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[63]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[62]">
+         <obj_property name="ElementShortName">[62]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[62]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[61]">
+         <obj_property name="ElementShortName">[61]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[61]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[60]">
+         <obj_property name="ElementShortName">[60]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[60]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l5/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2318">
+      <obj_property name="label">s6</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[83]">
+         <obj_property name="ElementShortName">[83]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[83]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[82]">
+         <obj_property name="ElementShortName">[82]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[82]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[81]">
+         <obj_property name="ElementShortName">[81]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[81]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[80]">
+         <obj_property name="ElementShortName">[80]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[80]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[79]">
+         <obj_property name="ElementShortName">[79]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[79]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[78]">
+         <obj_property name="ElementShortName">[78]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[78]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[77]">
+         <obj_property name="ElementShortName">[77]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[77]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[76]">
+         <obj_property name="ElementShortName">[76]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[76]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[75]">
+         <obj_property name="ElementShortName">[75]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[75]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[74]">
+         <obj_property name="ElementShortName">[74]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[74]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[73]">
+         <obj_property name="ElementShortName">[73]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[73]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[72]">
+         <obj_property name="ElementShortName">[72]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[72]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l6/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2331">
+      <obj_property name="label">s7</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[95]">
+         <obj_property name="ElementShortName">[95]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[95]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[94]">
+         <obj_property name="ElementShortName">[94]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[94]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[93]">
+         <obj_property name="ElementShortName">[93]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[93]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[92]">
+         <obj_property name="ElementShortName">[92]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[92]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[91]">
+         <obj_property name="ElementShortName">[91]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[91]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[90]">
+         <obj_property name="ElementShortName">[90]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[90]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[89]">
+         <obj_property name="ElementShortName">[89]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[89]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[88]">
+         <obj_property name="ElementShortName">[88]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[88]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[87]">
+         <obj_property name="ElementShortName">[87]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[87]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[86]">
+         <obj_property name="ElementShortName">[86]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[86]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[85]">
+         <obj_property name="ElementShortName">[85]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[85]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[84]">
+         <obj_property name="ElementShortName">[84]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[84]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l7/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2344">
+      <obj_property name="label">s8</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[107]">
+         <obj_property name="ElementShortName">[107]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[107]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[106]">
+         <obj_property name="ElementShortName">[106]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[106]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[105]">
+         <obj_property name="ElementShortName">[105]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[105]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[104]">
+         <obj_property name="ElementShortName">[104]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[104]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[103]">
+         <obj_property name="ElementShortName">[103]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[103]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[102]">
+         <obj_property name="ElementShortName">[102]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[102]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[101]">
+         <obj_property name="ElementShortName">[101]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[101]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[100]">
+         <obj_property name="ElementShortName">[100]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[100]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[99]">
+         <obj_property name="ElementShortName">[99]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[99]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[98]">
+         <obj_property name="ElementShortName">[98]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[98]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[97]">
+         <obj_property name="ElementShortName">[97]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[97]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[96]">
+         <obj_property name="ElementShortName">[96]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[96]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l8/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2357">
+      <obj_property name="label">s9</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[119]">
+         <obj_property name="ElementShortName">[119]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[119]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[118]">
+         <obj_property name="ElementShortName">[118]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[118]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[117]">
+         <obj_property name="ElementShortName">[117]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[117]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[116]">
+         <obj_property name="ElementShortName">[116]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[116]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[115]">
+         <obj_property name="ElementShortName">[115]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[115]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[114]">
+         <obj_property name="ElementShortName">[114]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[114]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[113]">
+         <obj_property name="ElementShortName">[113]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[113]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[112]">
+         <obj_property name="ElementShortName">[112]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[112]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[111]">
+         <obj_property name="ElementShortName">[111]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[111]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[110]">
+         <obj_property name="ElementShortName">[110]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[110]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[109]">
+         <obj_property name="ElementShortName">[109]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[109]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[108]">
+         <obj_property name="ElementShortName">[108]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[108]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l9/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2370">
+      <obj_property name="label">s10</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[131]">
+         <obj_property name="ElementShortName">[131]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[131]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[130]">
+         <obj_property name="ElementShortName">[130]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[130]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[129]">
+         <obj_property name="ElementShortName">[129]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[129]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[128]">
+         <obj_property name="ElementShortName">[128]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[128]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[127]">
+         <obj_property name="ElementShortName">[127]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[127]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[126]">
+         <obj_property name="ElementShortName">[126]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[126]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[125]">
+         <obj_property name="ElementShortName">[125]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[125]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[124]">
+         <obj_property name="ElementShortName">[124]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[124]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[123]">
+         <obj_property name="ElementShortName">[123]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[123]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[122]">
+         <obj_property name="ElementShortName">[122]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[122]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[121]">
+         <obj_property name="ElementShortName">[121]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[121]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[120]">
+         <obj_property name="ElementShortName">[120]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[120]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l10/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2383">
+      <obj_property name="label">s11</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[143]">
+         <obj_property name="ElementShortName">[143]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[143]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[142]">
+         <obj_property name="ElementShortName">[142]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[142]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[141]">
+         <obj_property name="ElementShortName">[141]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[141]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[140]">
+         <obj_property name="ElementShortName">[140]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[140]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[139]">
+         <obj_property name="ElementShortName">[139]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[139]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[138]">
+         <obj_property name="ElementShortName">[138]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[138]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[137]">
+         <obj_property name="ElementShortName">[137]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[137]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[136]">
+         <obj_property name="ElementShortName">[136]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[136]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[135]">
+         <obj_property name="ElementShortName">[135]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[135]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[134]">
+         <obj_property name="ElementShortName">[134]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[134]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[133]">
+         <obj_property name="ElementShortName">[133]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[133]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[132]">
+         <obj_property name="ElementShortName">[132]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[132]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l11/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2396">
+      <obj_property name="label">s12</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[155]">
+         <obj_property name="ElementShortName">[155]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[155]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[154]">
+         <obj_property name="ElementShortName">[154]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[154]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[153]">
+         <obj_property name="ElementShortName">[153]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[153]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[152]">
+         <obj_property name="ElementShortName">[152]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[152]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[151]">
+         <obj_property name="ElementShortName">[151]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[151]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[150]">
+         <obj_property name="ElementShortName">[150]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[150]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[149]">
+         <obj_property name="ElementShortName">[149]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[149]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[148]">
+         <obj_property name="ElementShortName">[148]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[148]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[147]">
+         <obj_property name="ElementShortName">[147]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[147]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[146]">
+         <obj_property name="ElementShortName">[146]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[146]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[145]">
+         <obj_property name="ElementShortName">[145]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[145]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[144]">
+         <obj_property name="ElementShortName">[144]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[144]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l12/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2409">
+      <obj_property name="label">s13</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[167]">
+         <obj_property name="ElementShortName">[167]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[167]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[166]">
+         <obj_property name="ElementShortName">[166]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[166]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[165]">
+         <obj_property name="ElementShortName">[165]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[165]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[164]">
+         <obj_property name="ElementShortName">[164]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[164]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[163]">
+         <obj_property name="ElementShortName">[163]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[163]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[162]">
+         <obj_property name="ElementShortName">[162]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[162]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[161]">
+         <obj_property name="ElementShortName">[161]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[161]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[160]">
+         <obj_property name="ElementShortName">[160]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[160]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[159]">
+         <obj_property name="ElementShortName">[159]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[159]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[158]">
+         <obj_property name="ElementShortName">[158]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[158]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[157]">
+         <obj_property name="ElementShortName">[157]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[157]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[156]">
+         <obj_property name="ElementShortName">[156]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[156]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l13/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2422">
+      <obj_property name="label">s14</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[179]">
+         <obj_property name="ElementShortName">[179]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[179]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[178]">
+         <obj_property name="ElementShortName">[178]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[178]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[177]">
+         <obj_property name="ElementShortName">[177]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[177]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[176]">
+         <obj_property name="ElementShortName">[176]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[176]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[175]">
+         <obj_property name="ElementShortName">[175]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[175]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[174]">
+         <obj_property name="ElementShortName">[174]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[174]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[173]">
+         <obj_property name="ElementShortName">[173]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[173]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[172]">
+         <obj_property name="ElementShortName">[172]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[172]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[171]">
+         <obj_property name="ElementShortName">[171]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[171]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[170]">
+         <obj_property name="ElementShortName">[170]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[170]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[169]">
+         <obj_property name="ElementShortName">[169]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[169]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[168]">
+         <obj_property name="ElementShortName">[168]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[168]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l14/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" type="vbus" fp_name="vbus2435">
+      <obj_property name="label">s15</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[191]">
+         <obj_property name="ElementShortName">[191]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[191]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[190]">
+         <obj_property name="ElementShortName">[190]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[190]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[189]">
+         <obj_property name="ElementShortName">[189]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[189]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[188]">
+         <obj_property name="ElementShortName">[188]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[188]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[187]">
+         <obj_property name="ElementShortName">[187]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[187]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[186]">
+         <obj_property name="ElementShortName">[186]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[186]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[185]">
+         <obj_property name="ElementShortName">[185]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[185]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[184]">
+         <obj_property name="ElementShortName">[184]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[184]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[183]">
+         <obj_property name="ElementShortName">[183]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[183]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[182]">
+         <obj_property name="ElementShortName">[182]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[182]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[181]">
+         <obj_property name="ElementShortName">[181]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[181]</obj_property>
+      </wvobject>
+      <wvobject db_ref_id="1" type="logic" fp_name="/testbench_EC/uut/EC0_EC1_EC2/doutb_smem[180]">
+         <obj_property name="ElementShortName">[180]</obj_property>
+         <obj_property name="ObjectShortName">doutb_smem[180]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject db_ref_id="1" type="array" fp_name="/testbench_EC/uut/EC0_EC1_EC2/ACCU_11_l15/Q">
+      <obj_property name="ElementShortName">Q[10:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

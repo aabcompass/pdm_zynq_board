@@ -1,0 +1,22 @@
+-Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+-Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+-Wl,--start-group,-lxilffs,-lxil,-lgcc,-lc,--end-group
+-Wl,--start-group,-lrsa,-lxil,-lgcc,-lc,--end-group
+--
+../../lwip_ex_bsp/ps7_cortexa9_0/lib
+
+lopt2	7	broad_1r1_M01_tready
+lopt4	29	axis_sw_0_tready
+lopt5	32	L2_tready
+lopt6	4	broad_1r1_M00_tready
+lopt8	26	flow_ctrl_1_tready
+
+lopt1	8	clk_conv_tvalid
+lopt3	20	dwidth_7_tready
+lopt7	22	fc0_tready
+
+1 4 7 11 14 17 20 22
+
+1 4 7 12 15 18 21 24 26 29 32 35
+
+12 18 24 35

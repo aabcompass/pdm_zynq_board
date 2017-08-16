@@ -1,0 +1,2004 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_EC_func_impl.wdb" id="1">
+         <top_modules>
+            <top_module name="testbench_EC" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="165001000000003fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="77" />
+   <wvobject type="array" fp_name="/testbench_EC/gtu_cnt_s1">
+      <obj_property name="ElementShortName">gtu_cnt_s1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">gtu_cnt_s1[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/CLOCK_200">
+      <obj_property name="ElementShortName">CLOCK_200</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_200</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/DATA">
+      <obj_property name="ElementShortName">DATA[15:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/FRAME">
+      <obj_property name="ElementShortName">FRAME</obj_property>
+      <obj_property name="ObjectShortName">FRAME</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L1_EVENT">
+      <obj_property name="ElementShortName">L1_EVENT</obj_property>
+      <obj_property name="ObjectShortName">L1_EVENT</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_EVENT">
+      <obj_property name="ElementShortName">L2_EVENT</obj_property>
+      <obj_property name="ObjectShortName">L2_EVENT</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_aresetn_L1">
+      <obj_property name="ElementShortName">s_aresetn_L1</obj_property>
+      <obj_property name="ObjectShortName">s_aresetn_L1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_aclk_L1">
+      <obj_property name="ElementShortName">m_aclk_L1</obj_property>
+      <obj_property name="ObjectShortName">m_aclk_L1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tvalid_L1">
+      <obj_property name="ElementShortName">m_axis_tvalid_L1</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid_L1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tready_L1">
+      <obj_property name="ElementShortName">m_axis_tready_L1</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready_L1</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/m_axis_tdata_L1">
+      <obj_property name="ElementShortName">m_axis_tdata_L1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata_L1[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tlast_L1">
+      <obj_property name="ElementShortName">m_axis_tlast_L1</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast_L1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_aresetn_L2">
+      <obj_property name="ElementShortName">s_aresetn_L2</obj_property>
+      <obj_property name="ObjectShortName">s_aresetn_L2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_aclk_L2">
+      <obj_property name="ElementShortName">m_aclk_L2</obj_property>
+      <obj_property name="ObjectShortName">m_aclk_L2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tvalid_L2">
+      <obj_property name="ElementShortName">m_axis_tvalid_L2</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid_L2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tready_L2">
+      <obj_property name="ElementShortName">m_axis_tready_L2</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready_L2</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/m_axis_tdata_L2">
+      <obj_property name="ElementShortName">m_axis_tdata_L2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata_L2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/m_axis_tlast_L2">
+      <obj_property name="ElementShortName">m_axis_tlast_L2</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast_L2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_aclk_cmd">
+      <obj_property name="ElementShortName">s_aclk_cmd</obj_property>
+      <obj_property name="ObjectShortName">s_aclk_cmd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_aresetn_cmd">
+      <obj_property name="ElementShortName">s_aresetn_cmd</obj_property>
+      <obj_property name="ObjectShortName">s_aresetn_cmd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tvalid_cmd">
+      <obj_property name="ElementShortName">s_axis_tvalid_cmd</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tvalid_cmd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tready_cmd">
+      <obj_property name="ElementShortName">s_axis_tready_cmd</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tready_cmd</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/s_axis_tdata_cmd">
+      <obj_property name="ElementShortName">s_axis_tdata_cmd[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tdata_cmd[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus520">
+      <obj_property name="label">N</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus514">
+      <obj_property name="label">P</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/s_axis_tdata_cmd[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/rd_clk_l1">
+      <obj_property name="ElementShortName">rd_clk_l1</obj_property>
+      <obj_property name="ObjectShortName">rd_clk_l1</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/dout_sum_fifo_l1">
+      <obj_property name="ElementShortName">dout_sum_fifo_l1[239:0]</obj_property>
+      <obj_property name="ObjectShortName">dout_sum_fifo_l1[239:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/rd_en_sum_fifo_l1">
+      <obj_property name="ElementShortName">rd_en_sum_fifo_l1</obj_property>
+      <obj_property name="ObjectShortName">rd_en_sum_fifo_l1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/empty_sum_fifo_l1">
+      <obj_property name="ElementShortName">empty_sum_fifo_l1</obj_property>
+      <obj_property name="ObjectShortName">empty_sum_fifo_l1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/CIRCILAR_BUFFER/clka">
+      <obj_property name="ElementShortName">clka</obj_property>
+      <obj_property name="ObjectShortName">clka</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/CIRCILAR_BUFFER/wea">
+      <obj_property name="ElementShortName">wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/CIRCILAR_BUFFER/addra">
+      <obj_property name="ElementShortName">addra[9:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/CIRCILAR_BUFFER/dina">
+      <obj_property name="ElementShortName">dina[239:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[239:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/CIRCILAR_BUFFER/douta">
+      <obj_property name="ElementShortName">douta[239:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[239:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/ACCUM_15x16_l0/B">
+      <obj_property name="ElementShortName">B[14:0]</obj_property>
+      <obj_property name="ObjectShortName">B[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/ACCUM_15x16_l0/CLK">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/ACCUM_15x16_l0/CE">
+      <obj_property name="ElementShortName">CE</obj_property>
+      <obj_property name="ObjectShortName">CE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/ACCUM_15x16_l0/SCLR">
+      <obj_property name="ElementShortName">SCLR</obj_property>
+      <obj_property name="ObjectShortName">SCLR</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/ACCUM_15x16_l0/Q">
+      <obj_property name="ElementShortName">Q[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Q[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/clka">
+      <obj_property name="ElementShortName">clka</obj_property>
+      <obj_property name="ObjectShortName">clka</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/wea">
+      <obj_property name="ElementShortName">wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/addra">
+      <obj_property name="ElementShortName">addra[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/dina">
+      <obj_property name="ElementShortName">dina[399:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[399:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta">
+      <obj_property name="ElementShortName">douta[399:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[399:0]</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus941">
+      <obj_property name="label">New Virtual Bus 16</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[399]">
+         <obj_property name="ElementShortName">[399]</obj_property>
+         <obj_property name="ObjectShortName">[399]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[398]">
+         <obj_property name="ElementShortName">[398]</obj_property>
+         <obj_property name="ObjectShortName">[398]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[397]">
+         <obj_property name="ElementShortName">[397]</obj_property>
+         <obj_property name="ObjectShortName">[397]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[396]">
+         <obj_property name="ElementShortName">[396]</obj_property>
+         <obj_property name="ObjectShortName">[396]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[395]">
+         <obj_property name="ElementShortName">[395]</obj_property>
+         <obj_property name="ObjectShortName">[395]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[394]">
+         <obj_property name="ElementShortName">[394]</obj_property>
+         <obj_property name="ObjectShortName">[394]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[393]">
+         <obj_property name="ElementShortName">[393]</obj_property>
+         <obj_property name="ObjectShortName">[393]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[392]">
+         <obj_property name="ElementShortName">[392]</obj_property>
+         <obj_property name="ObjectShortName">[392]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[391]">
+         <obj_property name="ElementShortName">[391]</obj_property>
+         <obj_property name="ObjectShortName">[391]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[390]">
+         <obj_property name="ElementShortName">[390]</obj_property>
+         <obj_property name="ObjectShortName">[390]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[389]">
+         <obj_property name="ElementShortName">[389]</obj_property>
+         <obj_property name="ObjectShortName">[389]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[388]">
+         <obj_property name="ElementShortName">[388]</obj_property>
+         <obj_property name="ObjectShortName">[388]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[387]">
+         <obj_property name="ElementShortName">[387]</obj_property>
+         <obj_property name="ObjectShortName">[387]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[386]">
+         <obj_property name="ElementShortName">[386]</obj_property>
+         <obj_property name="ObjectShortName">[386]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[385]">
+         <obj_property name="ElementShortName">[385]</obj_property>
+         <obj_property name="ObjectShortName">[385]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[384]">
+         <obj_property name="ElementShortName">[384]</obj_property>
+         <obj_property name="ObjectShortName">[384]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[383]">
+         <obj_property name="ElementShortName">[383]</obj_property>
+         <obj_property name="ObjectShortName">[383]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[382]">
+         <obj_property name="ElementShortName">[382]</obj_property>
+         <obj_property name="ObjectShortName">[382]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[381]">
+         <obj_property name="ElementShortName">[381]</obj_property>
+         <obj_property name="ObjectShortName">[381]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[380]">
+         <obj_property name="ElementShortName">[380]</obj_property>
+         <obj_property name="ObjectShortName">[380]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[379]">
+         <obj_property name="ElementShortName">[379]</obj_property>
+         <obj_property name="ObjectShortName">[379]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[378]">
+         <obj_property name="ElementShortName">[378]</obj_property>
+         <obj_property name="ObjectShortName">[378]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[377]">
+         <obj_property name="ElementShortName">[377]</obj_property>
+         <obj_property name="ObjectShortName">[377]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[376]">
+         <obj_property name="ElementShortName">[376]</obj_property>
+         <obj_property name="ObjectShortName">[376]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[375]">
+         <obj_property name="ElementShortName">[375]</obj_property>
+         <obj_property name="ObjectShortName">[375]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l15">
+      <obj_property name="ElementShortName">Psum_l15</obj_property>
+      <obj_property name="ObjectShortName">Psum_l15</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus915">
+      <obj_property name="label">New Virtual Bus 15</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[374]">
+         <obj_property name="ElementShortName">[374]</obj_property>
+         <obj_property name="ObjectShortName">[374]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[373]">
+         <obj_property name="ElementShortName">[373]</obj_property>
+         <obj_property name="ObjectShortName">[373]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[372]">
+         <obj_property name="ElementShortName">[372]</obj_property>
+         <obj_property name="ObjectShortName">[372]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[371]">
+         <obj_property name="ElementShortName">[371]</obj_property>
+         <obj_property name="ObjectShortName">[371]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[370]">
+         <obj_property name="ElementShortName">[370]</obj_property>
+         <obj_property name="ObjectShortName">[370]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[369]">
+         <obj_property name="ElementShortName">[369]</obj_property>
+         <obj_property name="ObjectShortName">[369]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[368]">
+         <obj_property name="ElementShortName">[368]</obj_property>
+         <obj_property name="ObjectShortName">[368]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[367]">
+         <obj_property name="ElementShortName">[367]</obj_property>
+         <obj_property name="ObjectShortName">[367]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[366]">
+         <obj_property name="ElementShortName">[366]</obj_property>
+         <obj_property name="ObjectShortName">[366]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[365]">
+         <obj_property name="ElementShortName">[365]</obj_property>
+         <obj_property name="ObjectShortName">[365]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[364]">
+         <obj_property name="ElementShortName">[364]</obj_property>
+         <obj_property name="ObjectShortName">[364]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[363]">
+         <obj_property name="ElementShortName">[363]</obj_property>
+         <obj_property name="ObjectShortName">[363]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[362]">
+         <obj_property name="ElementShortName">[362]</obj_property>
+         <obj_property name="ObjectShortName">[362]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[361]">
+         <obj_property name="ElementShortName">[361]</obj_property>
+         <obj_property name="ObjectShortName">[361]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[360]">
+         <obj_property name="ElementShortName">[360]</obj_property>
+         <obj_property name="ObjectShortName">[360]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[359]">
+         <obj_property name="ElementShortName">[359]</obj_property>
+         <obj_property name="ObjectShortName">[359]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[358]">
+         <obj_property name="ElementShortName">[358]</obj_property>
+         <obj_property name="ObjectShortName">[358]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[357]">
+         <obj_property name="ElementShortName">[357]</obj_property>
+         <obj_property name="ObjectShortName">[357]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[356]">
+         <obj_property name="ElementShortName">[356]</obj_property>
+         <obj_property name="ObjectShortName">[356]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[355]">
+         <obj_property name="ElementShortName">[355]</obj_property>
+         <obj_property name="ObjectShortName">[355]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[354]">
+         <obj_property name="ElementShortName">[354]</obj_property>
+         <obj_property name="ObjectShortName">[354]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[353]">
+         <obj_property name="ElementShortName">[353]</obj_property>
+         <obj_property name="ObjectShortName">[353]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[352]">
+         <obj_property name="ElementShortName">[352]</obj_property>
+         <obj_property name="ObjectShortName">[352]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[351]">
+         <obj_property name="ElementShortName">[351]</obj_property>
+         <obj_property name="ObjectShortName">[351]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[350]">
+         <obj_property name="ElementShortName">[350]</obj_property>
+         <obj_property name="ObjectShortName">[350]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l14">
+      <obj_property name="ElementShortName">Psum_l14[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l14[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus889">
+      <obj_property name="label">New Virtual Bus 14</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[349]">
+         <obj_property name="ElementShortName">[349]</obj_property>
+         <obj_property name="ObjectShortName">[349]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[348]">
+         <obj_property name="ElementShortName">[348]</obj_property>
+         <obj_property name="ObjectShortName">[348]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[347]">
+         <obj_property name="ElementShortName">[347]</obj_property>
+         <obj_property name="ObjectShortName">[347]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[346]">
+         <obj_property name="ElementShortName">[346]</obj_property>
+         <obj_property name="ObjectShortName">[346]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[345]">
+         <obj_property name="ElementShortName">[345]</obj_property>
+         <obj_property name="ObjectShortName">[345]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[344]">
+         <obj_property name="ElementShortName">[344]</obj_property>
+         <obj_property name="ObjectShortName">[344]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[343]">
+         <obj_property name="ElementShortName">[343]</obj_property>
+         <obj_property name="ObjectShortName">[343]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[342]">
+         <obj_property name="ElementShortName">[342]</obj_property>
+         <obj_property name="ObjectShortName">[342]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[341]">
+         <obj_property name="ElementShortName">[341]</obj_property>
+         <obj_property name="ObjectShortName">[341]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[340]">
+         <obj_property name="ElementShortName">[340]</obj_property>
+         <obj_property name="ObjectShortName">[340]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[339]">
+         <obj_property name="ElementShortName">[339]</obj_property>
+         <obj_property name="ObjectShortName">[339]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[338]">
+         <obj_property name="ElementShortName">[338]</obj_property>
+         <obj_property name="ObjectShortName">[338]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[337]">
+         <obj_property name="ElementShortName">[337]</obj_property>
+         <obj_property name="ObjectShortName">[337]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[336]">
+         <obj_property name="ElementShortName">[336]</obj_property>
+         <obj_property name="ObjectShortName">[336]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[335]">
+         <obj_property name="ElementShortName">[335]</obj_property>
+         <obj_property name="ObjectShortName">[335]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[334]">
+         <obj_property name="ElementShortName">[334]</obj_property>
+         <obj_property name="ObjectShortName">[334]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[333]">
+         <obj_property name="ElementShortName">[333]</obj_property>
+         <obj_property name="ObjectShortName">[333]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[332]">
+         <obj_property name="ElementShortName">[332]</obj_property>
+         <obj_property name="ObjectShortName">[332]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[331]">
+         <obj_property name="ElementShortName">[331]</obj_property>
+         <obj_property name="ObjectShortName">[331]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[330]">
+         <obj_property name="ElementShortName">[330]</obj_property>
+         <obj_property name="ObjectShortName">[330]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[329]">
+         <obj_property name="ElementShortName">[329]</obj_property>
+         <obj_property name="ObjectShortName">[329]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[328]">
+         <obj_property name="ElementShortName">[328]</obj_property>
+         <obj_property name="ObjectShortName">[328]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[327]">
+         <obj_property name="ElementShortName">[327]</obj_property>
+         <obj_property name="ObjectShortName">[327]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[326]">
+         <obj_property name="ElementShortName">[326]</obj_property>
+         <obj_property name="ObjectShortName">[326]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[325]">
+         <obj_property name="ElementShortName">[325]</obj_property>
+         <obj_property name="ObjectShortName">[325]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l13">
+      <obj_property name="ElementShortName">Psum_l13[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l13[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus863">
+      <obj_property name="label">New Virtual Bus 13</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[324]">
+         <obj_property name="ElementShortName">[324]</obj_property>
+         <obj_property name="ObjectShortName">[324]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[323]">
+         <obj_property name="ElementShortName">[323]</obj_property>
+         <obj_property name="ObjectShortName">[323]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[322]">
+         <obj_property name="ElementShortName">[322]</obj_property>
+         <obj_property name="ObjectShortName">[322]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[321]">
+         <obj_property name="ElementShortName">[321]</obj_property>
+         <obj_property name="ObjectShortName">[321]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[320]">
+         <obj_property name="ElementShortName">[320]</obj_property>
+         <obj_property name="ObjectShortName">[320]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[319]">
+         <obj_property name="ElementShortName">[319]</obj_property>
+         <obj_property name="ObjectShortName">[319]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[318]">
+         <obj_property name="ElementShortName">[318]</obj_property>
+         <obj_property name="ObjectShortName">[318]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[317]">
+         <obj_property name="ElementShortName">[317]</obj_property>
+         <obj_property name="ObjectShortName">[317]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[316]">
+         <obj_property name="ElementShortName">[316]</obj_property>
+         <obj_property name="ObjectShortName">[316]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[315]">
+         <obj_property name="ElementShortName">[315]</obj_property>
+         <obj_property name="ObjectShortName">[315]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[314]">
+         <obj_property name="ElementShortName">[314]</obj_property>
+         <obj_property name="ObjectShortName">[314]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[313]">
+         <obj_property name="ElementShortName">[313]</obj_property>
+         <obj_property name="ObjectShortName">[313]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[312]">
+         <obj_property name="ElementShortName">[312]</obj_property>
+         <obj_property name="ObjectShortName">[312]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[311]">
+         <obj_property name="ElementShortName">[311]</obj_property>
+         <obj_property name="ObjectShortName">[311]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[310]">
+         <obj_property name="ElementShortName">[310]</obj_property>
+         <obj_property name="ObjectShortName">[310]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[309]">
+         <obj_property name="ElementShortName">[309]</obj_property>
+         <obj_property name="ObjectShortName">[309]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[308]">
+         <obj_property name="ElementShortName">[308]</obj_property>
+         <obj_property name="ObjectShortName">[308]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[307]">
+         <obj_property name="ElementShortName">[307]</obj_property>
+         <obj_property name="ObjectShortName">[307]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[306]">
+         <obj_property name="ElementShortName">[306]</obj_property>
+         <obj_property name="ObjectShortName">[306]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[305]">
+         <obj_property name="ElementShortName">[305]</obj_property>
+         <obj_property name="ObjectShortName">[305]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[304]">
+         <obj_property name="ElementShortName">[304]</obj_property>
+         <obj_property name="ObjectShortName">[304]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[303]">
+         <obj_property name="ElementShortName">[303]</obj_property>
+         <obj_property name="ObjectShortName">[303]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[302]">
+         <obj_property name="ElementShortName">[302]</obj_property>
+         <obj_property name="ObjectShortName">[302]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[301]">
+         <obj_property name="ElementShortName">[301]</obj_property>
+         <obj_property name="ObjectShortName">[301]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[300]">
+         <obj_property name="ElementShortName">[300]</obj_property>
+         <obj_property name="ObjectShortName">[300]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l12">
+      <obj_property name="ElementShortName">Psum_l12[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l12[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus837">
+      <obj_property name="label">New Virtual Bus 12</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[299]">
+         <obj_property name="ElementShortName">[299]</obj_property>
+         <obj_property name="ObjectShortName">[299]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[298]">
+         <obj_property name="ElementShortName">[298]</obj_property>
+         <obj_property name="ObjectShortName">[298]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[297]">
+         <obj_property name="ElementShortName">[297]</obj_property>
+         <obj_property name="ObjectShortName">[297]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[296]">
+         <obj_property name="ElementShortName">[296]</obj_property>
+         <obj_property name="ObjectShortName">[296]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[295]">
+         <obj_property name="ElementShortName">[295]</obj_property>
+         <obj_property name="ObjectShortName">[295]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[294]">
+         <obj_property name="ElementShortName">[294]</obj_property>
+         <obj_property name="ObjectShortName">[294]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[293]">
+         <obj_property name="ElementShortName">[293]</obj_property>
+         <obj_property name="ObjectShortName">[293]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[292]">
+         <obj_property name="ElementShortName">[292]</obj_property>
+         <obj_property name="ObjectShortName">[292]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[291]">
+         <obj_property name="ElementShortName">[291]</obj_property>
+         <obj_property name="ObjectShortName">[291]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[290]">
+         <obj_property name="ElementShortName">[290]</obj_property>
+         <obj_property name="ObjectShortName">[290]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[289]">
+         <obj_property name="ElementShortName">[289]</obj_property>
+         <obj_property name="ObjectShortName">[289]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[288]">
+         <obj_property name="ElementShortName">[288]</obj_property>
+         <obj_property name="ObjectShortName">[288]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[287]">
+         <obj_property name="ElementShortName">[287]</obj_property>
+         <obj_property name="ObjectShortName">[287]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[286]">
+         <obj_property name="ElementShortName">[286]</obj_property>
+         <obj_property name="ObjectShortName">[286]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[285]">
+         <obj_property name="ElementShortName">[285]</obj_property>
+         <obj_property name="ObjectShortName">[285]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[284]">
+         <obj_property name="ElementShortName">[284]</obj_property>
+         <obj_property name="ObjectShortName">[284]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[283]">
+         <obj_property name="ElementShortName">[283]</obj_property>
+         <obj_property name="ObjectShortName">[283]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[282]">
+         <obj_property name="ElementShortName">[282]</obj_property>
+         <obj_property name="ObjectShortName">[282]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[281]">
+         <obj_property name="ElementShortName">[281]</obj_property>
+         <obj_property name="ObjectShortName">[281]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[280]">
+         <obj_property name="ElementShortName">[280]</obj_property>
+         <obj_property name="ObjectShortName">[280]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[279]">
+         <obj_property name="ElementShortName">[279]</obj_property>
+         <obj_property name="ObjectShortName">[279]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[278]">
+         <obj_property name="ElementShortName">[278]</obj_property>
+         <obj_property name="ObjectShortName">[278]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[277]">
+         <obj_property name="ElementShortName">[277]</obj_property>
+         <obj_property name="ObjectShortName">[277]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[276]">
+         <obj_property name="ElementShortName">[276]</obj_property>
+         <obj_property name="ObjectShortName">[276]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[275]">
+         <obj_property name="ElementShortName">[275]</obj_property>
+         <obj_property name="ObjectShortName">[275]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l11">
+      <obj_property name="ElementShortName">Psum_l11[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l11[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus811">
+      <obj_property name="label">New Virtual Bus 11</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[274]">
+         <obj_property name="ElementShortName">[274]</obj_property>
+         <obj_property name="ObjectShortName">[274]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[273]">
+         <obj_property name="ElementShortName">[273]</obj_property>
+         <obj_property name="ObjectShortName">[273]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[272]">
+         <obj_property name="ElementShortName">[272]</obj_property>
+         <obj_property name="ObjectShortName">[272]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[271]">
+         <obj_property name="ElementShortName">[271]</obj_property>
+         <obj_property name="ObjectShortName">[271]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[270]">
+         <obj_property name="ElementShortName">[270]</obj_property>
+         <obj_property name="ObjectShortName">[270]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[269]">
+         <obj_property name="ElementShortName">[269]</obj_property>
+         <obj_property name="ObjectShortName">[269]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[268]">
+         <obj_property name="ElementShortName">[268]</obj_property>
+         <obj_property name="ObjectShortName">[268]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[267]">
+         <obj_property name="ElementShortName">[267]</obj_property>
+         <obj_property name="ObjectShortName">[267]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[266]">
+         <obj_property name="ElementShortName">[266]</obj_property>
+         <obj_property name="ObjectShortName">[266]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[265]">
+         <obj_property name="ElementShortName">[265]</obj_property>
+         <obj_property name="ObjectShortName">[265]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[264]">
+         <obj_property name="ElementShortName">[264]</obj_property>
+         <obj_property name="ObjectShortName">[264]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[263]">
+         <obj_property name="ElementShortName">[263]</obj_property>
+         <obj_property name="ObjectShortName">[263]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[262]">
+         <obj_property name="ElementShortName">[262]</obj_property>
+         <obj_property name="ObjectShortName">[262]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[261]">
+         <obj_property name="ElementShortName">[261]</obj_property>
+         <obj_property name="ObjectShortName">[261]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[260]">
+         <obj_property name="ElementShortName">[260]</obj_property>
+         <obj_property name="ObjectShortName">[260]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[259]">
+         <obj_property name="ElementShortName">[259]</obj_property>
+         <obj_property name="ObjectShortName">[259]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[258]">
+         <obj_property name="ElementShortName">[258]</obj_property>
+         <obj_property name="ObjectShortName">[258]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[257]">
+         <obj_property name="ElementShortName">[257]</obj_property>
+         <obj_property name="ObjectShortName">[257]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[256]">
+         <obj_property name="ElementShortName">[256]</obj_property>
+         <obj_property name="ObjectShortName">[256]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[255]">
+         <obj_property name="ElementShortName">[255]</obj_property>
+         <obj_property name="ObjectShortName">[255]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[254]">
+         <obj_property name="ElementShortName">[254]</obj_property>
+         <obj_property name="ObjectShortName">[254]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[253]">
+         <obj_property name="ElementShortName">[253]</obj_property>
+         <obj_property name="ObjectShortName">[253]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[252]">
+         <obj_property name="ElementShortName">[252]</obj_property>
+         <obj_property name="ObjectShortName">[252]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[251]">
+         <obj_property name="ElementShortName">[251]</obj_property>
+         <obj_property name="ObjectShortName">[251]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[250]">
+         <obj_property name="ElementShortName">[250]</obj_property>
+         <obj_property name="ObjectShortName">[250]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l10">
+      <obj_property name="ElementShortName">Psum_l10[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l10[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus785">
+      <obj_property name="label">New Virtual Bus 10</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[249]">
+         <obj_property name="ElementShortName">[249]</obj_property>
+         <obj_property name="ObjectShortName">[249]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[248]">
+         <obj_property name="ElementShortName">[248]</obj_property>
+         <obj_property name="ObjectShortName">[248]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[247]">
+         <obj_property name="ElementShortName">[247]</obj_property>
+         <obj_property name="ObjectShortName">[247]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[246]">
+         <obj_property name="ElementShortName">[246]</obj_property>
+         <obj_property name="ObjectShortName">[246]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[245]">
+         <obj_property name="ElementShortName">[245]</obj_property>
+         <obj_property name="ObjectShortName">[245]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[244]">
+         <obj_property name="ElementShortName">[244]</obj_property>
+         <obj_property name="ObjectShortName">[244]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[243]">
+         <obj_property name="ElementShortName">[243]</obj_property>
+         <obj_property name="ObjectShortName">[243]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[242]">
+         <obj_property name="ElementShortName">[242]</obj_property>
+         <obj_property name="ObjectShortName">[242]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[241]">
+         <obj_property name="ElementShortName">[241]</obj_property>
+         <obj_property name="ObjectShortName">[241]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[240]">
+         <obj_property name="ElementShortName">[240]</obj_property>
+         <obj_property name="ObjectShortName">[240]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[239]">
+         <obj_property name="ElementShortName">[239]</obj_property>
+         <obj_property name="ObjectShortName">[239]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[238]">
+         <obj_property name="ElementShortName">[238]</obj_property>
+         <obj_property name="ObjectShortName">[238]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[237]">
+         <obj_property name="ElementShortName">[237]</obj_property>
+         <obj_property name="ObjectShortName">[237]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[236]">
+         <obj_property name="ElementShortName">[236]</obj_property>
+         <obj_property name="ObjectShortName">[236]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[235]">
+         <obj_property name="ElementShortName">[235]</obj_property>
+         <obj_property name="ObjectShortName">[235]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[234]">
+         <obj_property name="ElementShortName">[234]</obj_property>
+         <obj_property name="ObjectShortName">[234]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[233]">
+         <obj_property name="ElementShortName">[233]</obj_property>
+         <obj_property name="ObjectShortName">[233]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[232]">
+         <obj_property name="ElementShortName">[232]</obj_property>
+         <obj_property name="ObjectShortName">[232]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[231]">
+         <obj_property name="ElementShortName">[231]</obj_property>
+         <obj_property name="ObjectShortName">[231]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[230]">
+         <obj_property name="ElementShortName">[230]</obj_property>
+         <obj_property name="ObjectShortName">[230]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[229]">
+         <obj_property name="ElementShortName">[229]</obj_property>
+         <obj_property name="ObjectShortName">[229]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[228]">
+         <obj_property name="ElementShortName">[228]</obj_property>
+         <obj_property name="ObjectShortName">[228]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[227]">
+         <obj_property name="ElementShortName">[227]</obj_property>
+         <obj_property name="ObjectShortName">[227]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[226]">
+         <obj_property name="ElementShortName">[226]</obj_property>
+         <obj_property name="ObjectShortName">[226]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[225]">
+         <obj_property name="ElementShortName">[225]</obj_property>
+         <obj_property name="ObjectShortName">[225]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l9">
+      <obj_property name="ElementShortName">Psum_l9[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l9[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus759">
+      <obj_property name="label">New Virtual Bus 9</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[224]">
+         <obj_property name="ElementShortName">[224]</obj_property>
+         <obj_property name="ObjectShortName">[224]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[223]">
+         <obj_property name="ElementShortName">[223]</obj_property>
+         <obj_property name="ObjectShortName">[223]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[222]">
+         <obj_property name="ElementShortName">[222]</obj_property>
+         <obj_property name="ObjectShortName">[222]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[221]">
+         <obj_property name="ElementShortName">[221]</obj_property>
+         <obj_property name="ObjectShortName">[221]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[220]">
+         <obj_property name="ElementShortName">[220]</obj_property>
+         <obj_property name="ObjectShortName">[220]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[219]">
+         <obj_property name="ElementShortName">[219]</obj_property>
+         <obj_property name="ObjectShortName">[219]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[218]">
+         <obj_property name="ElementShortName">[218]</obj_property>
+         <obj_property name="ObjectShortName">[218]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[217]">
+         <obj_property name="ElementShortName">[217]</obj_property>
+         <obj_property name="ObjectShortName">[217]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[216]">
+         <obj_property name="ElementShortName">[216]</obj_property>
+         <obj_property name="ObjectShortName">[216]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[215]">
+         <obj_property name="ElementShortName">[215]</obj_property>
+         <obj_property name="ObjectShortName">[215]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[214]">
+         <obj_property name="ElementShortName">[214]</obj_property>
+         <obj_property name="ObjectShortName">[214]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[213]">
+         <obj_property name="ElementShortName">[213]</obj_property>
+         <obj_property name="ObjectShortName">[213]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[212]">
+         <obj_property name="ElementShortName">[212]</obj_property>
+         <obj_property name="ObjectShortName">[212]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[211]">
+         <obj_property name="ElementShortName">[211]</obj_property>
+         <obj_property name="ObjectShortName">[211]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[210]">
+         <obj_property name="ElementShortName">[210]</obj_property>
+         <obj_property name="ObjectShortName">[210]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[209]">
+         <obj_property name="ElementShortName">[209]</obj_property>
+         <obj_property name="ObjectShortName">[209]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[208]">
+         <obj_property name="ElementShortName">[208]</obj_property>
+         <obj_property name="ObjectShortName">[208]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[207]">
+         <obj_property name="ElementShortName">[207]</obj_property>
+         <obj_property name="ObjectShortName">[207]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[206]">
+         <obj_property name="ElementShortName">[206]</obj_property>
+         <obj_property name="ObjectShortName">[206]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[205]">
+         <obj_property name="ElementShortName">[205]</obj_property>
+         <obj_property name="ObjectShortName">[205]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[204]">
+         <obj_property name="ElementShortName">[204]</obj_property>
+         <obj_property name="ObjectShortName">[204]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[203]">
+         <obj_property name="ElementShortName">[203]</obj_property>
+         <obj_property name="ObjectShortName">[203]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[202]">
+         <obj_property name="ElementShortName">[202]</obj_property>
+         <obj_property name="ObjectShortName">[202]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[201]">
+         <obj_property name="ElementShortName">[201]</obj_property>
+         <obj_property name="ObjectShortName">[201]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[200]">
+         <obj_property name="ElementShortName">[200]</obj_property>
+         <obj_property name="ObjectShortName">[200]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l8">
+      <obj_property name="ElementShortName">Psum_l8[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l8[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus733">
+      <obj_property name="label">New Virtual Bus 8</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[199]">
+         <obj_property name="ElementShortName">[199]</obj_property>
+         <obj_property name="ObjectShortName">[199]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[198]">
+         <obj_property name="ElementShortName">[198]</obj_property>
+         <obj_property name="ObjectShortName">[198]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[197]">
+         <obj_property name="ElementShortName">[197]</obj_property>
+         <obj_property name="ObjectShortName">[197]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[196]">
+         <obj_property name="ElementShortName">[196]</obj_property>
+         <obj_property name="ObjectShortName">[196]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[195]">
+         <obj_property name="ElementShortName">[195]</obj_property>
+         <obj_property name="ObjectShortName">[195]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[194]">
+         <obj_property name="ElementShortName">[194]</obj_property>
+         <obj_property name="ObjectShortName">[194]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[193]">
+         <obj_property name="ElementShortName">[193]</obj_property>
+         <obj_property name="ObjectShortName">[193]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[192]">
+         <obj_property name="ElementShortName">[192]</obj_property>
+         <obj_property name="ObjectShortName">[192]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[191]">
+         <obj_property name="ElementShortName">[191]</obj_property>
+         <obj_property name="ObjectShortName">[191]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[190]">
+         <obj_property name="ElementShortName">[190]</obj_property>
+         <obj_property name="ObjectShortName">[190]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[189]">
+         <obj_property name="ElementShortName">[189]</obj_property>
+         <obj_property name="ObjectShortName">[189]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[188]">
+         <obj_property name="ElementShortName">[188]</obj_property>
+         <obj_property name="ObjectShortName">[188]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[187]">
+         <obj_property name="ElementShortName">[187]</obj_property>
+         <obj_property name="ObjectShortName">[187]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[186]">
+         <obj_property name="ElementShortName">[186]</obj_property>
+         <obj_property name="ObjectShortName">[186]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[185]">
+         <obj_property name="ElementShortName">[185]</obj_property>
+         <obj_property name="ObjectShortName">[185]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[184]">
+         <obj_property name="ElementShortName">[184]</obj_property>
+         <obj_property name="ObjectShortName">[184]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[183]">
+         <obj_property name="ElementShortName">[183]</obj_property>
+         <obj_property name="ObjectShortName">[183]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[182]">
+         <obj_property name="ElementShortName">[182]</obj_property>
+         <obj_property name="ObjectShortName">[182]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[181]">
+         <obj_property name="ElementShortName">[181]</obj_property>
+         <obj_property name="ObjectShortName">[181]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[180]">
+         <obj_property name="ElementShortName">[180]</obj_property>
+         <obj_property name="ObjectShortName">[180]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[179]">
+         <obj_property name="ElementShortName">[179]</obj_property>
+         <obj_property name="ObjectShortName">[179]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[178]">
+         <obj_property name="ElementShortName">[178]</obj_property>
+         <obj_property name="ObjectShortName">[178]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[177]">
+         <obj_property name="ElementShortName">[177]</obj_property>
+         <obj_property name="ObjectShortName">[177]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[176]">
+         <obj_property name="ElementShortName">[176]</obj_property>
+         <obj_property name="ObjectShortName">[176]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[175]">
+         <obj_property name="ElementShortName">[175]</obj_property>
+         <obj_property name="ObjectShortName">[175]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l7">
+      <obj_property name="ElementShortName">Psum_l7[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l7[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus707">
+      <obj_property name="label">New Virtual Bus 7</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[174]">
+         <obj_property name="ElementShortName">[174]</obj_property>
+         <obj_property name="ObjectShortName">[174]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[173]">
+         <obj_property name="ElementShortName">[173]</obj_property>
+         <obj_property name="ObjectShortName">[173]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[172]">
+         <obj_property name="ElementShortName">[172]</obj_property>
+         <obj_property name="ObjectShortName">[172]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[171]">
+         <obj_property name="ElementShortName">[171]</obj_property>
+         <obj_property name="ObjectShortName">[171]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[170]">
+         <obj_property name="ElementShortName">[170]</obj_property>
+         <obj_property name="ObjectShortName">[170]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[169]">
+         <obj_property name="ElementShortName">[169]</obj_property>
+         <obj_property name="ObjectShortName">[169]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[168]">
+         <obj_property name="ElementShortName">[168]</obj_property>
+         <obj_property name="ObjectShortName">[168]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[167]">
+         <obj_property name="ElementShortName">[167]</obj_property>
+         <obj_property name="ObjectShortName">[167]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[166]">
+         <obj_property name="ElementShortName">[166]</obj_property>
+         <obj_property name="ObjectShortName">[166]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[165]">
+         <obj_property name="ElementShortName">[165]</obj_property>
+         <obj_property name="ObjectShortName">[165]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[164]">
+         <obj_property name="ElementShortName">[164]</obj_property>
+         <obj_property name="ObjectShortName">[164]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[163]">
+         <obj_property name="ElementShortName">[163]</obj_property>
+         <obj_property name="ObjectShortName">[163]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[162]">
+         <obj_property name="ElementShortName">[162]</obj_property>
+         <obj_property name="ObjectShortName">[162]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[161]">
+         <obj_property name="ElementShortName">[161]</obj_property>
+         <obj_property name="ObjectShortName">[161]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[160]">
+         <obj_property name="ElementShortName">[160]</obj_property>
+         <obj_property name="ObjectShortName">[160]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[159]">
+         <obj_property name="ElementShortName">[159]</obj_property>
+         <obj_property name="ObjectShortName">[159]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[158]">
+         <obj_property name="ElementShortName">[158]</obj_property>
+         <obj_property name="ObjectShortName">[158]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[157]">
+         <obj_property name="ElementShortName">[157]</obj_property>
+         <obj_property name="ObjectShortName">[157]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[156]">
+         <obj_property name="ElementShortName">[156]</obj_property>
+         <obj_property name="ObjectShortName">[156]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[155]">
+         <obj_property name="ElementShortName">[155]</obj_property>
+         <obj_property name="ObjectShortName">[155]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[154]">
+         <obj_property name="ElementShortName">[154]</obj_property>
+         <obj_property name="ObjectShortName">[154]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[153]">
+         <obj_property name="ElementShortName">[153]</obj_property>
+         <obj_property name="ObjectShortName">[153]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[152]">
+         <obj_property name="ElementShortName">[152]</obj_property>
+         <obj_property name="ObjectShortName">[152]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[151]">
+         <obj_property name="ElementShortName">[151]</obj_property>
+         <obj_property name="ObjectShortName">[151]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[150]">
+         <obj_property name="ElementShortName">[150]</obj_property>
+         <obj_property name="ObjectShortName">[150]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l6">
+      <obj_property name="ElementShortName">Psum_l6[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l6[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus681">
+      <obj_property name="label">New Virtual Bus 6</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[149]">
+         <obj_property name="ElementShortName">[149]</obj_property>
+         <obj_property name="ObjectShortName">[149]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[148]">
+         <obj_property name="ElementShortName">[148]</obj_property>
+         <obj_property name="ObjectShortName">[148]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[147]">
+         <obj_property name="ElementShortName">[147]</obj_property>
+         <obj_property name="ObjectShortName">[147]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[146]">
+         <obj_property name="ElementShortName">[146]</obj_property>
+         <obj_property name="ObjectShortName">[146]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[145]">
+         <obj_property name="ElementShortName">[145]</obj_property>
+         <obj_property name="ObjectShortName">[145]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[144]">
+         <obj_property name="ElementShortName">[144]</obj_property>
+         <obj_property name="ObjectShortName">[144]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[143]">
+         <obj_property name="ElementShortName">[143]</obj_property>
+         <obj_property name="ObjectShortName">[143]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[142]">
+         <obj_property name="ElementShortName">[142]</obj_property>
+         <obj_property name="ObjectShortName">[142]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[141]">
+         <obj_property name="ElementShortName">[141]</obj_property>
+         <obj_property name="ObjectShortName">[141]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[140]">
+         <obj_property name="ElementShortName">[140]</obj_property>
+         <obj_property name="ObjectShortName">[140]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[139]">
+         <obj_property name="ElementShortName">[139]</obj_property>
+         <obj_property name="ObjectShortName">[139]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[138]">
+         <obj_property name="ElementShortName">[138]</obj_property>
+         <obj_property name="ObjectShortName">[138]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[137]">
+         <obj_property name="ElementShortName">[137]</obj_property>
+         <obj_property name="ObjectShortName">[137]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[136]">
+         <obj_property name="ElementShortName">[136]</obj_property>
+         <obj_property name="ObjectShortName">[136]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[135]">
+         <obj_property name="ElementShortName">[135]</obj_property>
+         <obj_property name="ObjectShortName">[135]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[134]">
+         <obj_property name="ElementShortName">[134]</obj_property>
+         <obj_property name="ObjectShortName">[134]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[133]">
+         <obj_property name="ElementShortName">[133]</obj_property>
+         <obj_property name="ObjectShortName">[133]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[132]">
+         <obj_property name="ElementShortName">[132]</obj_property>
+         <obj_property name="ObjectShortName">[132]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[131]">
+         <obj_property name="ElementShortName">[131]</obj_property>
+         <obj_property name="ObjectShortName">[131]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[130]">
+         <obj_property name="ElementShortName">[130]</obj_property>
+         <obj_property name="ObjectShortName">[130]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[129]">
+         <obj_property name="ElementShortName">[129]</obj_property>
+         <obj_property name="ObjectShortName">[129]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[128]">
+         <obj_property name="ElementShortName">[128]</obj_property>
+         <obj_property name="ObjectShortName">[128]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[127]">
+         <obj_property name="ElementShortName">[127]</obj_property>
+         <obj_property name="ObjectShortName">[127]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[126]">
+         <obj_property name="ElementShortName">[126]</obj_property>
+         <obj_property name="ObjectShortName">[126]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[125]">
+         <obj_property name="ElementShortName">[125]</obj_property>
+         <obj_property name="ObjectShortName">[125]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l5">
+      <obj_property name="ElementShortName">Psum_l5[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l5[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus655">
+      <obj_property name="label">New Virtual Bus 5</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[124]">
+         <obj_property name="ElementShortName">[124]</obj_property>
+         <obj_property name="ObjectShortName">[124]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[123]">
+         <obj_property name="ElementShortName">[123]</obj_property>
+         <obj_property name="ObjectShortName">[123]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[122]">
+         <obj_property name="ElementShortName">[122]</obj_property>
+         <obj_property name="ObjectShortName">[122]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[121]">
+         <obj_property name="ElementShortName">[121]</obj_property>
+         <obj_property name="ObjectShortName">[121]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[120]">
+         <obj_property name="ElementShortName">[120]</obj_property>
+         <obj_property name="ObjectShortName">[120]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[119]">
+         <obj_property name="ElementShortName">[119]</obj_property>
+         <obj_property name="ObjectShortName">[119]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[118]">
+         <obj_property name="ElementShortName">[118]</obj_property>
+         <obj_property name="ObjectShortName">[118]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[117]">
+         <obj_property name="ElementShortName">[117]</obj_property>
+         <obj_property name="ObjectShortName">[117]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[116]">
+         <obj_property name="ElementShortName">[116]</obj_property>
+         <obj_property name="ObjectShortName">[116]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[115]">
+         <obj_property name="ElementShortName">[115]</obj_property>
+         <obj_property name="ObjectShortName">[115]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[114]">
+         <obj_property name="ElementShortName">[114]</obj_property>
+         <obj_property name="ObjectShortName">[114]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[113]">
+         <obj_property name="ElementShortName">[113]</obj_property>
+         <obj_property name="ObjectShortName">[113]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[112]">
+         <obj_property name="ElementShortName">[112]</obj_property>
+         <obj_property name="ObjectShortName">[112]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[111]">
+         <obj_property name="ElementShortName">[111]</obj_property>
+         <obj_property name="ObjectShortName">[111]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[110]">
+         <obj_property name="ElementShortName">[110]</obj_property>
+         <obj_property name="ObjectShortName">[110]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[109]">
+         <obj_property name="ElementShortName">[109]</obj_property>
+         <obj_property name="ObjectShortName">[109]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[108]">
+         <obj_property name="ElementShortName">[108]</obj_property>
+         <obj_property name="ObjectShortName">[108]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[107]">
+         <obj_property name="ElementShortName">[107]</obj_property>
+         <obj_property name="ObjectShortName">[107]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[106]">
+         <obj_property name="ElementShortName">[106]</obj_property>
+         <obj_property name="ObjectShortName">[106]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[105]">
+         <obj_property name="ElementShortName">[105]</obj_property>
+         <obj_property name="ObjectShortName">[105]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[104]">
+         <obj_property name="ElementShortName">[104]</obj_property>
+         <obj_property name="ObjectShortName">[104]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[103]">
+         <obj_property name="ElementShortName">[103]</obj_property>
+         <obj_property name="ObjectShortName">[103]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[102]">
+         <obj_property name="ElementShortName">[102]</obj_property>
+         <obj_property name="ObjectShortName">[102]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[101]">
+         <obj_property name="ElementShortName">[101]</obj_property>
+         <obj_property name="ObjectShortName">[101]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[100]">
+         <obj_property name="ElementShortName">[100]</obj_property>
+         <obj_property name="ObjectShortName">[100]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l4">
+      <obj_property name="ElementShortName">Psum_l4[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l4[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus629">
+      <obj_property name="label">New Virtual Bus 4</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[99]">
+         <obj_property name="ElementShortName">[99]</obj_property>
+         <obj_property name="ObjectShortName">[99]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[98]">
+         <obj_property name="ElementShortName">[98]</obj_property>
+         <obj_property name="ObjectShortName">[98]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[97]">
+         <obj_property name="ElementShortName">[97]</obj_property>
+         <obj_property name="ObjectShortName">[97]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[96]">
+         <obj_property name="ElementShortName">[96]</obj_property>
+         <obj_property name="ObjectShortName">[96]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[95]">
+         <obj_property name="ElementShortName">[95]</obj_property>
+         <obj_property name="ObjectShortName">[95]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[94]">
+         <obj_property name="ElementShortName">[94]</obj_property>
+         <obj_property name="ObjectShortName">[94]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[93]">
+         <obj_property name="ElementShortName">[93]</obj_property>
+         <obj_property name="ObjectShortName">[93]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[92]">
+         <obj_property name="ElementShortName">[92]</obj_property>
+         <obj_property name="ObjectShortName">[92]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[91]">
+         <obj_property name="ElementShortName">[91]</obj_property>
+         <obj_property name="ObjectShortName">[91]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[90]">
+         <obj_property name="ElementShortName">[90]</obj_property>
+         <obj_property name="ObjectShortName">[90]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[89]">
+         <obj_property name="ElementShortName">[89]</obj_property>
+         <obj_property name="ObjectShortName">[89]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[88]">
+         <obj_property name="ElementShortName">[88]</obj_property>
+         <obj_property name="ObjectShortName">[88]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[87]">
+         <obj_property name="ElementShortName">[87]</obj_property>
+         <obj_property name="ObjectShortName">[87]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[86]">
+         <obj_property name="ElementShortName">[86]</obj_property>
+         <obj_property name="ObjectShortName">[86]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[85]">
+         <obj_property name="ElementShortName">[85]</obj_property>
+         <obj_property name="ObjectShortName">[85]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[84]">
+         <obj_property name="ElementShortName">[84]</obj_property>
+         <obj_property name="ObjectShortName">[84]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[83]">
+         <obj_property name="ElementShortName">[83]</obj_property>
+         <obj_property name="ObjectShortName">[83]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[82]">
+         <obj_property name="ElementShortName">[82]</obj_property>
+         <obj_property name="ObjectShortName">[82]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[81]">
+         <obj_property name="ElementShortName">[81]</obj_property>
+         <obj_property name="ObjectShortName">[81]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[80]">
+         <obj_property name="ElementShortName">[80]</obj_property>
+         <obj_property name="ObjectShortName">[80]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[79]">
+         <obj_property name="ElementShortName">[79]</obj_property>
+         <obj_property name="ObjectShortName">[79]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[78]">
+         <obj_property name="ElementShortName">[78]</obj_property>
+         <obj_property name="ObjectShortName">[78]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[77]">
+         <obj_property name="ElementShortName">[77]</obj_property>
+         <obj_property name="ObjectShortName">[77]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[76]">
+         <obj_property name="ElementShortName">[76]</obj_property>
+         <obj_property name="ObjectShortName">[76]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[75]">
+         <obj_property name="ElementShortName">[75]</obj_property>
+         <obj_property name="ObjectShortName">[75]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l3">
+      <obj_property name="ElementShortName">Psum_l3[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l3[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus603">
+      <obj_property name="label">New Virtual Bus 3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[74]">
+         <obj_property name="ElementShortName">[74]</obj_property>
+         <obj_property name="ObjectShortName">[74]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[73]">
+         <obj_property name="ElementShortName">[73]</obj_property>
+         <obj_property name="ObjectShortName">[73]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[72]">
+         <obj_property name="ElementShortName">[72]</obj_property>
+         <obj_property name="ObjectShortName">[72]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[71]">
+         <obj_property name="ElementShortName">[71]</obj_property>
+         <obj_property name="ObjectShortName">[71]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[70]">
+         <obj_property name="ElementShortName">[70]</obj_property>
+         <obj_property name="ObjectShortName">[70]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[69]">
+         <obj_property name="ElementShortName">[69]</obj_property>
+         <obj_property name="ObjectShortName">[69]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[68]">
+         <obj_property name="ElementShortName">[68]</obj_property>
+         <obj_property name="ObjectShortName">[68]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[67]">
+         <obj_property name="ElementShortName">[67]</obj_property>
+         <obj_property name="ObjectShortName">[67]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[66]">
+         <obj_property name="ElementShortName">[66]</obj_property>
+         <obj_property name="ObjectShortName">[66]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[65]">
+         <obj_property name="ElementShortName">[65]</obj_property>
+         <obj_property name="ObjectShortName">[65]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[64]">
+         <obj_property name="ElementShortName">[64]</obj_property>
+         <obj_property name="ObjectShortName">[64]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[63]">
+         <obj_property name="ElementShortName">[63]</obj_property>
+         <obj_property name="ObjectShortName">[63]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[62]">
+         <obj_property name="ElementShortName">[62]</obj_property>
+         <obj_property name="ObjectShortName">[62]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[61]">
+         <obj_property name="ElementShortName">[61]</obj_property>
+         <obj_property name="ObjectShortName">[61]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[60]">
+         <obj_property name="ElementShortName">[60]</obj_property>
+         <obj_property name="ObjectShortName">[60]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[59]">
+         <obj_property name="ElementShortName">[59]</obj_property>
+         <obj_property name="ObjectShortName">[59]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[58]">
+         <obj_property name="ElementShortName">[58]</obj_property>
+         <obj_property name="ObjectShortName">[58]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[57]">
+         <obj_property name="ElementShortName">[57]</obj_property>
+         <obj_property name="ObjectShortName">[57]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[56]">
+         <obj_property name="ElementShortName">[56]</obj_property>
+         <obj_property name="ObjectShortName">[56]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[55]">
+         <obj_property name="ElementShortName">[55]</obj_property>
+         <obj_property name="ObjectShortName">[55]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[54]">
+         <obj_property name="ElementShortName">[54]</obj_property>
+         <obj_property name="ObjectShortName">[54]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[53]">
+         <obj_property name="ElementShortName">[53]</obj_property>
+         <obj_property name="ObjectShortName">[53]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[52]">
+         <obj_property name="ElementShortName">[52]</obj_property>
+         <obj_property name="ObjectShortName">[52]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[51]">
+         <obj_property name="ElementShortName">[51]</obj_property>
+         <obj_property name="ObjectShortName">[51]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[50]">
+         <obj_property name="ElementShortName">[50]</obj_property>
+         <obj_property name="ObjectShortName">[50]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l2">
+      <obj_property name="ElementShortName">Psum_l2[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l2[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus577">
+      <obj_property name="label">New Virtual Bus 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[49]">
+         <obj_property name="ElementShortName">[49]</obj_property>
+         <obj_property name="ObjectShortName">[49]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[48]">
+         <obj_property name="ElementShortName">[48]</obj_property>
+         <obj_property name="ObjectShortName">[48]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[47]">
+         <obj_property name="ElementShortName">[47]</obj_property>
+         <obj_property name="ObjectShortName">[47]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[46]">
+         <obj_property name="ElementShortName">[46]</obj_property>
+         <obj_property name="ObjectShortName">[46]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[45]">
+         <obj_property name="ElementShortName">[45]</obj_property>
+         <obj_property name="ObjectShortName">[45]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[44]">
+         <obj_property name="ElementShortName">[44]</obj_property>
+         <obj_property name="ObjectShortName">[44]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[43]">
+         <obj_property name="ElementShortName">[43]</obj_property>
+         <obj_property name="ObjectShortName">[43]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[42]">
+         <obj_property name="ElementShortName">[42]</obj_property>
+         <obj_property name="ObjectShortName">[42]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[41]">
+         <obj_property name="ElementShortName">[41]</obj_property>
+         <obj_property name="ObjectShortName">[41]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[40]">
+         <obj_property name="ElementShortName">[40]</obj_property>
+         <obj_property name="ObjectShortName">[40]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[39]">
+         <obj_property name="ElementShortName">[39]</obj_property>
+         <obj_property name="ObjectShortName">[39]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[38]">
+         <obj_property name="ElementShortName">[38]</obj_property>
+         <obj_property name="ObjectShortName">[38]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[37]">
+         <obj_property name="ElementShortName">[37]</obj_property>
+         <obj_property name="ObjectShortName">[37]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[36]">
+         <obj_property name="ElementShortName">[36]</obj_property>
+         <obj_property name="ObjectShortName">[36]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[35]">
+         <obj_property name="ElementShortName">[35]</obj_property>
+         <obj_property name="ObjectShortName">[35]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[34]">
+         <obj_property name="ElementShortName">[34]</obj_property>
+         <obj_property name="ObjectShortName">[34]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[33]">
+         <obj_property name="ElementShortName">[33]</obj_property>
+         <obj_property name="ObjectShortName">[33]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[32]">
+         <obj_property name="ElementShortName">[32]</obj_property>
+         <obj_property name="ObjectShortName">[32]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[31]">
+         <obj_property name="ElementShortName">[31]</obj_property>
+         <obj_property name="ObjectShortName">[31]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[30]">
+         <obj_property name="ElementShortName">[30]</obj_property>
+         <obj_property name="ObjectShortName">[30]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[29]">
+         <obj_property name="ElementShortName">[29]</obj_property>
+         <obj_property name="ObjectShortName">[29]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[28]">
+         <obj_property name="ElementShortName">[28]</obj_property>
+         <obj_property name="ObjectShortName">[28]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[27]">
+         <obj_property name="ElementShortName">[27]</obj_property>
+         <obj_property name="ObjectShortName">[27]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[26]">
+         <obj_property name="ElementShortName">[26]</obj_property>
+         <obj_property name="ObjectShortName">[26]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[25]">
+         <obj_property name="ElementShortName">[25]</obj_property>
+         <obj_property name="ObjectShortName">[25]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l1">
+      <obj_property name="ElementShortName">Psum_l1[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l1[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus551">
+      <obj_property name="label">New Virtual Bus 1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[24]">
+         <obj_property name="ElementShortName">[24]</obj_property>
+         <obj_property name="ObjectShortName">[24]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">[23]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">[22]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">[21]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">[20]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_EC/uut/L2_TRIGGER/S_MEMORY/douta[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_EC/uut/L2_TRIGGER/Psum_l0">
+      <obj_property name="ElementShortName">Psum_l0[18:0]</obj_property>
+      <obj_property name="ObjectShortName">Psum_l0[18:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

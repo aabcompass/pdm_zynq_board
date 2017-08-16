@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="spi_if_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="spi_if_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="161000000001fs"></ZoomEndTime>
+      <Cursor1Time time="161000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="other" fp_name="/spi_if_tb/clk_counter">
+      <obj_property name="ElementShortName">clk_counter</obj_property>
+      <obj_property name="ObjectShortName">clk_counter</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/start">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider19" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/cs_exp">
+      <obj_property name="ElementShortName">cs_exp</obj_property>
+      <obj_property name="ObjectShortName">cs_exp</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/cs_dac">
+      <obj_property name="ElementShortName">cs_dac</obj_property>
+      <obj_property name="ObjectShortName">cs_dac</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/sck">
+      <obj_property name="ElementShortName">sck</obj_property>
+      <obj_property name="ObjectShortName">sck</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/mosi">
+      <obj_property name="ElementShortName">mosi</obj_property>
+      <obj_property name="ObjectShortName">mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/miso">
+      <obj_property name="ElementShortName">miso</obj_property>
+      <obj_property name="ObjectShortName">miso</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/start">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/ready">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/datain">
+      <obj_property name="ElementShortName">datain[23:0]</obj_property>
+      <obj_property name="ObjectShortName">datain[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/datain2">
+      <obj_property name="ElementShortName">datain2[23:0]</obj_property>
+      <obj_property name="ObjectShortName">datain2[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/datain3">
+      <obj_property name="ElementShortName">datain3[23:0]</obj_property>
+      <obj_property name="ObjectShortName">datain3[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/dataout">
+      <obj_property name="ElementShortName">dataout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/cnt">
+      <obj_property name="ElementShortName">cnt[5:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/datain_sr">
+      <obj_property name="ElementShortName">datain_sr[23:0]</obj_property>
+      <obj_property name="ObjectShortName">datain_sr[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/bit_cnt">
+      <obj_property name="ElementShortName">bit_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_cnt[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spi_if_tb/dut/bit_cnt2">
+      <obj_property name="ElementShortName">bit_cnt2[6:0]</obj_property>
+      <obj_property name="ObjectShortName">bit_cnt2[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spi_if_tb/dut/sck_i">
+      <obj_property name="ElementShortName">sck_i</obj_property>
+      <obj_property name="ObjectShortName">sck_i</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/spi_if_tb/dut/C_SPI_RATIO">
+      <obj_property name="ElementShortName">C_SPI_RATIO</obj_property>
+      <obj_property name="ObjectShortName">C_SPI_RATIO</obj_property>
+   </wvobject>
+</wave_config>
