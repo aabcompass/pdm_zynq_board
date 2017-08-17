@@ -354,7 +354,7 @@ begin
      src_clk  => s_axi_clk,  -- optional; required when SRC_INPUT_REG = 1
      src_in   => infinite,
      dest_clk => clk_art_x1(i),
-     dest_out => clk_art_x1(i)
+     dest_out => infinite_d1
   );
 
   inst_fd0: fd port map(start_sig_d1(i), clk_art_x1(i), start_sig);
