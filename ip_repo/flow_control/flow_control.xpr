@@ -10,15 +10,16 @@
     <Option Name="Part" Val="xc7z030ffg676-2"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control/flow_control.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PCACHEDIR/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PCACHEDIR/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PCACHEDIR/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PCACHEDIR/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PCACHEDIR/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PCACHEDIR/compile_simlib/activehdl"/>
     <Option Name="BoardPart" Val=""/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
+    <Option Name="IPRepoPath" Val="$PSRCDIR/sources_1"/>
     <Option Name="IPRepoPath" Val="$PSRCDIR/sources_1/imports/new"/>
     <Option Name="EnableCoreContainer" Val="FALSE"/>
     <Option Name="XPMLibraries" Val="XPM_CDC"/>
@@ -45,10 +46,8 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/imports/Downloads/debounce.vhd">
+      <File Path="$PSRCDIR/sources_1/new/debounce23.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Downloads/debounce.vhd"/>
-          <Attr Name="ImportTime" Val="1502794195"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -61,7 +60,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/component.xml">
+      <File Path="$PSRCDIR/sources_1/component.xml">
         <FileInfo SFType="IPXACT"/>
       </File>
       <Config>
