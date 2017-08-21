@@ -224,5 +224,27 @@ typedef struct
 #define FILENAME_MODE_TRIGGER1 	"frm_tr1_%08d.dat"
 #define FILENAME_MODE_TRIGGER2 	"frm_tr2_%08d.dat"
 #define FILENAME_MODE_TRIGGER3 	"frm_tr3_%08d.dat"
+#define FILENAME_SCURVE	 		"scurve_%08d.dat"
+
+//========================================
+//  S-curve structures
+//========================================
+
+#define NMAX_OF_THESHOLDS	1024
+
+typedef struct
+{
+	uint32_t int32_data[NMAX_OF_THESHOLDS][N_OF_PIXEL_PER_PDM];
+} DATA_TYPE_SCURVE_V1;
+
+typedef struct
+{
+	ZynqBoardHeader zbh;
+	DATA_TYPE_SCURVE_V1 payload;
+} Z_DATA_TYPE_SCURVE_V1;
+
+//If not all 1024 DACs thresholds was requested, but only 200 (for example),
+// the array in DATA_TYPE_SCURVE_V1 will have corresponding number of thresholds.
+
 
 #endif /* SRC_PDMDATA_H_ */
