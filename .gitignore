@@ -1,0 +1,68 @@
+# in the main folder: (at the moment *.sdk is controlled in the separated git repository)
+*.log
+*~
+.Xil/
+/*
+/*/
+!.gitignore
+!/*.xpr
+!/*.tcl
+!/*.txt
+!/*.sh
+!/*.bif
+!/BOOT.bin
+!/*.wcfg
+!/ip_repo/
+!/ip_hls/
+!/ip_hls_repo/
+!/*.srcs/
+!/*.sdk/
+# in the *.srcs folder:
+*/.srcs/*
+!/*.srcs/sources_*/
+!/*.srcs/constrs_*/
+!/*.srcs/sources_*/
+# in the project_1.srcs/sources_1/bd/design_1 folder:
+/*.srcs/sources_1/bd/design_*/*
+/*.srcs/sources_1/bd/design_*/*/
+!/*.srcs/sources_1/bd/design_*/*.bd
+!/*.srcs/sources_1/bd/design_*/hdl/
+# in all folders in ip_repo:
+/ip_repo/*/*
+/ip_repo/*/*/
+!/ip_repo/*/*.xpr
+!/ip_repo/*/component.xml
+!/ip_repo/*/*.wcfg
+!/ip_repo/*/*.wcfg
+!/ip_repo/*/*.srcs/
+# in all folders in ip_repo in *.srcs:
+/ip_repo/*/*.srcs/*
+/ip_repo/*/*.srcs/*/
+!/ip_repo/*/*.srcs/constrs_*
+!/ip_repo/*/*.srcs/sim_*
+!/ip_repo/*/*.srcs/sources_*
+# in all folders ip_repo/*/*.srcs/sources_*/ip/
+/ip_repo/*/*.srcs/sources_*/ip/*/*
+/ip_repo/*/*.srcs/sources_*/ip/*/*/
+!/ip_repo/*/*.srcs/sources_*/ip/*/*.xci
+# in all folders in ip_hls_repo
+/ip_hls_repo/*/Debug/
+/ip_hls_repo/*/solution*/*
+/ip_hls_repo/*/solution*/*/
+!/ip_hls_repo/*/solution*/impl/
+/ip_hls_repo/*/solution*/impl/*
+/ip_hls_repo/*/solution*/impl/*/
+!/ip_hls_repo/*/solution*/impl/ip/
+/ip_hls_repo/*/solution*/impl/ip/tmp.*/
+# in the *.sdk folder:
+/*.sdk/*/Debug/
+/*.sdk/*/ps7_cortexa9_0/
+/*.sdk/RemoteSystemsTempFiles/
+/*.sdk/*.hdf
+/*.sdk/SDK.log
+/*.sdk/webtalk/
+/*.sdk/.metadata/
+/*.sdk/.sdk/
+/*.sdk/*hw_platform*/*
+/*.sdk/*hw_platform*/*/
+!/*.sdk/*hw_platform*/*.hdf
