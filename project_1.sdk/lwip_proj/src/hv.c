@@ -9,10 +9,11 @@
 #include "xil_types.h"
 #include "xil_printf.h"
 #include "pdmdp_err.h"
+#include "xscugic.h"
 
 
 int prev_int_status = 0;
-int int_status = 0;
+volatile int int_status = 0;
 
 
 
@@ -313,40 +314,53 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
   return ret;
  }
 
-void HVInterruptHundler()
-{
-	int i;
-	int data_intf, data_defval, data_gpinten, data_gpio ;
-	xil_printf("\n\r!!!!!!!!!!!! rprzerwanie od MCP23S08 !!!!!!!!!!!! \n\r ");
-	  //xil_printf("INTF = %02x\n\r ", getRegister(0x40, INTF));
-	//delay(400000000);
-//	for(i=0;i<100;i++)
-//	{
-//		xil_printf("GPIO = %02x ", getRegister(exp_addr, GPIO));
-//		xil_printf("INTCAP = %02x ", getRegister(exp_addr, INTCAP));
-//		xil_printf("i=%d Intr: %d\n\r", i, *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
-//	}
-	data_intf=getRegister(0x40, INTF);
-	data_defval=getRegister(0x40, DEFVAL);
-	data_gpinten=getRegister(0x40, GPINTEN);
-	setRegister(0x40, GPINTEN, data_gpinten & (~data_intf));
-	xil_printf("GPIO = %02x", getRegister(0x40, GPIO));
-	data_gpio=getRegister(0x40, GPIO);
-	setRegister(0x40, DEFVAL, 0x3F);
-	setRegister(0x40, IOCON,  0x3F);
-	setRegister(0x40, GPINTEN,0x3F);
-	  //delay(20000);
-	 // int_status = *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR);
-}
-
 void HVInterruptService()
 {
-	//print(".");
-	prev_int_status = int_status;
-	int_status = *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR);
-	if((prev_int_status == 1) && (int_status == 0))
-		HVInterruptHundler();
+	if(int_status > 1)
+	{
+		int_status--;
+		print("*");
+	}
+	else if(int_status == 1)
+	{
+		print_expander_regs();
+		//xil_printf("GPIO(EXP2) = %02x", getRegister(EXP2, GPIO));
+		//xil_printf("INTCAP(EXP2) = %02x", getRegister(EXP2, INTCAP));
+		int_status = 0;
+	}
 }
+
+void HVInterruptHundler(void *Callback)
+{
+	int i;
+//	int data_intf, data_defval, data_gpinten, data_gpio ;
+	xil_printf("\n\r!!!!!!!!!!!! rprzerwanie od MCP23S08 !!!!!!!!!!!! \n\r ");
+	int_status = 2000;
+	// Try to release interrupt line. Read ALL registers
+	//for(i=0;i<=10;i++)
+	//	getRegister(EXP2, i);
+//	  //xil_printf("INTF = %02x\n\r ", getRegister(0x40, INTF));
+//	//delay(400000000);
+////	for(i=0;i<100;i++)
+////	{
+////		xil_printf("GPIO = %02x ", getRegister(exp_addr, GPIO));
+////		xil_printf("INTCAP = %02x ", getRegister(exp_addr, INTCAP));
+////		xil_printf("i=%d Intr: %d\n\r", i, *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
+////	}
+//	data_intf=getRegister(0x40, INTF);
+//	data_defval=getRegister(0x40, DEFVAL);
+//	data_gpinten=getRegister(0x40, GPINTEN);
+//	setRegister(0x40, GPINTEN, data_gpinten & (~data_intf));
+//	xil_printf("GPIO = %02x", getRegister(0x40, GPIO));
+//	data_gpio=getRegister(0x40, GPIO);
+//	setRegister(0x40, DEFVAL, 0x3F);
+//	setRegister(0x40, IOCON,  0x3F);
+//	setRegister(0x40, GPINTEN,0x3F);
+//	  //delay(20000);
+//	 // int_status = *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR);
+
+}
+
 
 
 void print_expander_regs()
@@ -505,5 +519,39 @@ void InterruptOnAb()
 	setRegister(EXP1, GPINTEN, 0x00);
 	setRegister(EXP2, GPINTEN, 0x0C);
 	setRegister(EXP3, GPINTEN, 0x00);
+
+}
+
+void SetupHVPSIntrSystem(XScuGic* pIntc)
+{
+	int Result;
+
+
+	XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
+					0xA8, 0x3);
+
+	/*
+	 * Connect the interrupt handler that will be called when an
+	 * interrupt occurs for the device.
+	 */
+	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
+				 (Xil_ExceptionHandler)HVInterruptHundler, NULL);
+	if (Result != XST_SUCCESS) {
+		print("Error XScuGic_Connect\n\r");
+	}
+
+	/* Enable the interrupt for the GPIO device.*/
+	XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
+
+
+//	Xil_ExceptionInit();
+//
+//	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+//			 (Xil_ExceptionHandler)XScuGic_InterruptHandler, pIntc);
+//
+//	/* Enable non-critical exceptions */
+//	Xil_ExceptionEnable();
+
+	return;
 
 }

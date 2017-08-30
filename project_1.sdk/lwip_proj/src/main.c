@@ -265,7 +265,7 @@ int main()
 		ftp_config_sm();
 		TriggerService();
 		//xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
-		//HVInterruptService();
+		HVInterruptService();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))
 		{
 			c_uart[0] = XUartPs_RecvByte (XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/);
