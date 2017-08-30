@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Tue Aug 29 23:54:16 2017
+--Date        : Wed Aug 30 19:20:26 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.2 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -9029,7 +9029,7 @@ architecture STRUCTURE of design_1 is
     S_AXI_HP1_WID : in STD_LOGIC_VECTOR ( 5 downto 0 );
     S_AXI_HP1_WDATA : in STD_LOGIC_VECTOR ( 63 downto 0 );
     S_AXI_HP1_WSTRB : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    IRQ_F2P : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    IRQ_F2P : in STD_LOGIC_VECTOR ( 3 downto 0 );
     FCLK_CLK0 : out STD_LOGIC;
     FCLK_CLK1 : out STD_LOGIC;
     FCLK_RESET0_N : out STD_LOGIC;
@@ -10436,7 +10436,8 @@ architecture STRUCTURE of design_1 is
     In0 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In2 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    dout : out STD_LOGIC_VECTOR ( 2 downto 0 )
+    In3 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component design_1_xlconcat_1_0;
   component design_1_algo_b_conv_1_0 is
@@ -10893,6 +10894,7 @@ architecture STRUCTURE of design_1 is
     intr_p : in STD_LOGIC;
     intr_n : in STD_LOGIC;
     hv_led : out STD_LOGIC;
+    intr_out : out STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
@@ -11417,6 +11419,7 @@ architecture STRUCTURE of design_1 is
   signal hv_hk_v1_0_0_cs_exp_n : STD_LOGIC;
   signal hv_hk_v1_0_0_cs_exp_p : STD_LOGIC;
   signal hv_hk_v1_0_0_hv_led : STD_LOGIC;
+  signal hv_hk_v1_0_0_intr_out : STD_LOGIC;
   signal hv_hk_v1_0_0_mosi_n : STD_LOGIC;
   signal hv_hk_v1_0_0_mosi_p : STD_LOGIC;
   signal hv_hk_v1_0_0_sck_n : STD_LOGIC;
@@ -11899,7 +11902,7 @@ architecture STRUCTURE of design_1 is
   signal trig_button_1 : STD_LOGIC;
   signal util_vector_logic_0_Res : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xlconcat_0_dout : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal xlconcat_1_dout : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal xlconcat_1_dout : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xlconstant_1_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xlslice_0_Dout : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -13726,6 +13729,7 @@ hv_hk_v1_0_0: component design_1_hv_hk_v1_0_0_1
       cs_exp_p => hv_hk_v1_0_0_cs_exp_p,
       hv_led => hv_hk_v1_0_0_hv_led,
       intr_n => intr_n_1,
+      intr_out => hv_hk_v1_0_0_intr_out,
       intr_p => intr_p_1,
       miso_n => miso_n_1,
       miso_p => miso_p_1,
@@ -14308,7 +14312,7 @@ processing_system7_0: component design_1_processing_system7_0_0
       FCLK_CLK0 => processing_system7_0_FCLK_CLK1,
       FCLK_CLK1 => processing_system7_0_FCLK_CLK0,
       FCLK_RESET0_N => processing_system7_0_FCLK_RESET0_N,
-      IRQ_F2P(2 downto 0) => xlconcat_1_dout(2 downto 0),
+      IRQ_F2P(3 downto 0) => xlconcat_1_dout(3 downto 0),
       MIO(53 downto 0) => FIXED_IO_mio(53 downto 0),
       M_AXI_GP0_ACLK => processing_system7_0_FCLK_CLK1,
       M_AXI_GP0_ARADDR(31 downto 0) => processing_system7_0_M_AXI_GP0_ARADDR(31 downto 0),
@@ -14786,7 +14790,8 @@ xlconcat_1: component design_1_xlconcat_1_0
       In0(0) => axi_dma_raw_s2mm_introut,
       In1(0) => axi_dma_L1_s2mm_introut,
       In2(0) => axi_dma_L2_s2mm_introut,
-      dout(2 downto 0) => xlconcat_1_dout(2 downto 0)
+      In3(0) => hv_hk_v1_0_0_intr_out,
+      dout(3 downto 0) => xlconcat_1_dout(3 downto 0)
     );
 xlconstant_0: component design_1_xlconstant_0_0
      port map (

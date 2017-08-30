@@ -416,8 +416,8 @@ void HV_turnON_list(int list[NUM_OF_HV])
 	{
 		if(list[i])
 		{
-			HV_setINT(i);
 			HV_turnON(i);
+			HV_setINT(i);
 			delay(10);
 		}
 	}
@@ -490,4 +490,20 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = (1<<BIT_TRANSMIT);
 	print("t");
 	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
+}
+
+void InterruptOnAb()
+{
+	setRegister(EXP1, INTCON, 0x00);
+	setRegister(EXP2, INTCON, 0x0C);
+	setRegister(EXP3, INTCON, 0x00);
+
+	setRegister(EXP1, DEFVAL, 0x00);
+	setRegister(EXP2, DEFVAL, 0x0C);
+	setRegister(EXP3, DEFVAL, 0x00);
+
+	setRegister(EXP1, GPINTEN, 0x00);
+	setRegister(EXP2, GPINTEN, 0x0C);
+	setRegister(EXP3, GPINTEN, 0x00);
+
 }

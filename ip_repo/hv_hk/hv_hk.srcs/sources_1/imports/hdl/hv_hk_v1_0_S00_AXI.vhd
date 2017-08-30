@@ -24,6 +24,7 @@ entity hv_hk_v1_0_S00_AXI is
 		miso_p, intr_p: in std_logic;
 		miso_n, intr_n: in std_logic;
 		hv_led: out std_logic;
+		intr_out: out std_logic;
 
 		-- User ports ends
 		-- Do not modify the ports beyond this line
@@ -501,6 +502,8 @@ begin
 	i_obufds_cs_exp: obufds port map(cs_exp_p, cs_exp_n, cs_exp);
 	i_obufds_cs_dac: obufds port map(cs_dac_p, cs_dac_n, cs_dac);
 	i_obufds_intr: ibufds port map(intr, intr_p, intr_n);
+	
+	intr_out <= not intr;
 	
 		i_debounce : debounce
   GENERIC map(

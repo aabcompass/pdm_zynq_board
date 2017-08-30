@@ -19,6 +19,7 @@ entity hv_hk_v1_0 is
 		sck_p, sck_n, mosi_p, mosi_n, cs_exp_p, cs_exp_n, cs_dac_p,	cs_dac_n: out std_logic;
 		miso_p, miso_n, intr_p, intr_n: in std_logic;
 		hv_led: out std_logic;
+		intr_out: out std_logic;
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -61,6 +62,7 @@ architecture arch_imp of hv_hk_v1_0 is
 		miso_p, intr_p: in std_logic;
 		miso_n, intr_n: in std_logic;
 		hv_led: out std_logic;
+		intr_out: out std_logic;
 		--
 		S_AXI_ACLK	: in std_logic;
 		S_AXI_ARESETN	: in std_logic;
@@ -108,6 +110,7 @@ hv_hk_v1_0_S00_AXI_inst : hv_hk_v1_0_S00_AXI
 		miso_n => miso_n,--, 
 		intr_n => intr_n,--: in std_logic;
 		hv_led => hv_led,
+		intr_out => intr_out,--: out std_logic;
 		--
 		S_AXI_ACLK	=> s00_axi_aclk,
 		S_AXI_ARESETN	=> s00_axi_aresetn,

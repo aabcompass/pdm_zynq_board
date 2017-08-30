@@ -335,11 +335,14 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("DMA RAW DEST=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_DESTADDR_OFFSET));
 		xil_printf("GetPacketCounter=0x%08x\n\r", GetPacketCounter(XPAR_TOP_SWITCH_TST_BASEADDR));
 		RxNEvents();
-
+	}
+	else if(c == 'S')
+	{
+		print_expander_regs();
 	}
 	else if(c == '!')
 	{
-		ProvideTestData();
+		InterruptOnAb();
 	}
 	else if(c == 'p')
 	{
