@@ -13,8 +13,7 @@
 
 
 int prev_int_status = 0;
-volatile int int_status = 0;
-
+int hv_turned_on = 0;
 
 
 void delay(int time)
@@ -285,6 +284,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
   if (!(datGPIO & kON_OFF)) { // HVPS_CW off
      unsigned char kOFF = 0x3f - kStatus; // ON/OFF and Status bits are 0
      setRegister(expAddressW, GPINTEN, (datGPINTEN & kOFF) );   // disable interrupts
+     print("A");
     }
    else if ((datGPIO & kStatus) == kStatus) { // both ON/OFF and  Polish_Status are 1
       unsigned char datDEFVAL = getRegister(expAddressR, DEFVAL);   // read reference INT for 3 HVPSs
@@ -293,6 +293,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
       setRegister(expAddressW, INTCON, datINTCON|kStatus);   // sets INTCON
       setRegister(expAddressW, GPINTEN, (datGPINTEN | kStatus));   // sets interrupts
       ret = datGPIO;
+      print("B");
     }
    else if ((datGPIO & kON_OFF) == kON_OFF) { // only ON/OFF == 1
       unsigned char datDEFVAL = getRegister(expAddressR, DEFVAL);   // read reference INT for 3 HVPSs
@@ -302,6 +303,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
       setRegister(expAddressW, INTCON, ((datINTCON&kNoStatus)|kON_OFF));   // sets INTCON
       setRegister(expAddressW, GPINTEN, ((datGPINTEN&kNoStatus)| kON_OFF));   // sets interrupts (without Status)
       ret = datGPIO;
+      print("C");
     }
    else {
      unsigned char kOFF = 0x3f - kStatus; // ON/OFF and Status bits are 0
@@ -309,27 +311,45 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
      setRegister(expAddressW, GPIO, (datGPINTEN & kOFF) );
      datGPIO = getRegister(expAddressR, GPIO);
      ret = datGPIO;
+     print("D");
     }
 
   return ret;
  }
 
+void regs_clr_intr()
+{
+	print("*");
+
+	getRegister(EXP1, INTCAP);
+	getRegister(EXP1, GPIO);
+	getRegister(EXP2, INTCAP);
+	getRegister(EXP2, GPIO);
+	getRegister(EXP3, INTCAP);
+	getRegister(EXP3, GPIO);
+}
+
+int Get_hv_turned_on()
+{
+	return hv_turned_on;
+}
+
 void HVInterruptService()
 {
 	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
 	{
-		regs_clr_intr();
+		if(Get_hv_turned_on())
+			regs_clr_intr();
 	}
 }
 
 void HVInterruptHundler(void *Callback)
 {
-	int i;
 	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
 
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
-	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
-	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
+	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP1, INTCAP));
+	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP1, GPIO));
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP2, INTF));
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
@@ -338,17 +358,7 @@ void HVInterruptHundler(void *Callback)
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP3, GPIO));
 }
 
-void regs_clr_intr()
-{
-	print("*");
 
-	getRegister(EXP2, INTCAP);
-	getRegister(EXP2, GPIO);
-	getRegister(EXP2, INTCAP);
-	getRegister(EXP2, GPIO);
-	getRegister(EXP3, INTCAP);
-	getRegister(EXP3, GPIO);
-}
 
 
 void print_expander_regs()
@@ -362,8 +372,8 @@ void print_expander_regs()
 	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP1, IOCON));
 	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP1, GPPU));
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
-	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
-	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
+	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP1, INTCAP));
+	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP1, GPIO));
 	xil_printf("OLAT=0x%02x\n\r", getRegister(EXP1, OLAT));
 
 	print("EXP2:\n\r");
@@ -405,8 +415,9 @@ void HV_turnON_all()
 	int i;
 	for(i=0;i<NUM_OF_HV;i++)
 	{
-		HV_setINT(i);
 		HV_turnON(i);
+		delay(10);
+		HV_setINT(i);
 		delay(10);
 	}
 }
@@ -419,8 +430,10 @@ void HV_turnON_list(int list[NUM_OF_HV])
 		if(list[i])
 		{
 			HV_turnON(i);
+			delay(10);
 			HV_setINT(i);
 			delay(10);
+			hv_turned_on |= (1<<i);
 		}
 	}
 }
@@ -434,6 +447,7 @@ void HV_turnOFF_list(int list[NUM_OF_HV])
 		{
 			HV_turnOFF(i);
 			delay(10);
+			hv_turned_on &= ~(1<<i);
 		}
 	}
 }
@@ -450,6 +464,7 @@ void HV_setDAC_list(int list[NUM_OF_HV])
 		}
 	}
 }
+
 
 
 int GetIntrState()
