@@ -56,8 +56,127 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xci">
           <Proxy FileSetName="design_1_processing_system7_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xbar_2/design_1_xbar_2.xci">
-          <Proxy FileSetName="design_1_xbar_2"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.hwdef"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1.hwh"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="design_1_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_3/design_1_auto_pc_3.xci">
+          <Proxy FileSetName="design_1_auto_pc_3"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_2/design_1_auto_pc_2.xci">
+          <Proxy FileSetName="design_1_auto_pc_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_us_0/design_1_auto_us_0.xci">
+          <Proxy FileSetName="design_1_auto_us_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.vhd"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_0/design_1_auto_pc_0.xci">
+          <Proxy FileSetName="design_1_auto_pc_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_1/design_1_auto_pc_1.xci">
+          <Proxy FileSetName="design_1_auto_pc_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_1_0/design_1_xlconstant_1_0.xci">
+          <Proxy FileSetName="design_1_xlconstant_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0.xci">
+          <Proxy FileSetName="design_1_util_vector_logic_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_l2_trigger_0_0/design_1_l2_trigger_0_0.xci">
+          <Proxy FileSetName="design_1_l2_trigger_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
+          <Proxy FileSetName="design_1_xlconstant_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_0/design_1_ALGO_B_0_0.xci">
+          <Proxy FileSetName="design_1_ALGO_B_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_0/design_1_axi_fifo_mm_s_0_0.xci">
+          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_top_switch_raw_0/design_1_top_switch_raw_0.xci">
+          <Proxy FileSetName="design_1_top_switch_raw_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_13_0/design_1_axis_dwidth_converter_13_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_13_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_algo_b_conv_2_0/design_1_algo_b_conv_2_0.xci">
+          <Proxy FileSetName="design_1_algo_b_conv_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_algo_b_conv_1_0/design_1_algo_b_conv_1_0.xci">
+          <Proxy FileSetName="design_1_algo_b_conv_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
+          <Proxy FileSetName="design_1_xlconcat_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L13_0/design_1_axis_data_fifo_fc_L13_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L13_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L11_0/design_1_axis_data_fifo_fc_L11_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L11_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_2/design_1_axis_data_fifo_fc_L9_2.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_9_0/design_1_axis_dwidth_converter_9_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_9_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_8_0/design_1_axis_dwidth_converter_8_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_8_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_2/design_1_axis_dwidth_converter_7_2.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_7_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r14_0/design_1_axis_broadcaster_1r14_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r14_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r13_0/design_1_axis_broadcaster_1r13_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r13_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r12_0/design_1_axis_broadcaster_1r12_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r12_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r11_0/design_1_axis_broadcaster_1r11_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r11_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r10_0/design_1_axis_broadcaster_1r10_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r10_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r7_2/design_1_axis_broadcaster_1r7_2.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r7_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xci">
+          <Proxy FileSetName="design_1_rst_processing_system7_0_100M_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_2_0/design_1_clk_wiz_2_0.xci">
+          <Proxy FileSetName="design_1_clk_wiz_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
+          <Proxy FileSetName="design_1_xlslice_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_0_1/design_1_axis_flow_control_0_1.xci">
+          <Proxy FileSetName="design_1_axis_flow_control_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_1/design_1_axis_data_fifo_fc_L9_1.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_0/design_1_axis_data_fifo_fc_L9_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L2_7/design_1_axis_data_fifo_fc_L2_7.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_fc_L2_7"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_1/design_1_axis_dwidth_converter_7_1.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_7_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_0/design_1_axis_dwidth_converter_7_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_7_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_9/design_1_axis_dwidth_converter_0_9.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_0_9"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_interconnect_0_1/design_1_axi_interconnect_0_1.xci"/>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_combiner_0_2/design_1_axis_combiner_0_2.xci">
@@ -81,14 +200,14 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_4/design_1_axis_dwidth_converter_0_4.xci">
           <Proxy FileSetName="design_1_axis_dwidth_converter_0_4"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_clock_converter_0_5/design_1_axis_clock_converter_0_5.xci">
-          <Proxy FileSetName="design_1_axis_clock_converter_0_5"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_3/design_1_axis_dwidth_converter_0_3.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_0_3"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_2/design_1_axis_dwidth_converter_0_2.xci">
           <Proxy FileSetName="design_1_axis_dwidth_converter_0_2"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_3/design_1_axis_dwidth_converter_0_3.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_0_3"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_clock_converter_0_5/design_1_axis_clock_converter_0_5.xci">
+          <Proxy FileSetName="design_1_axis_clock_converter_0_5"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_clock_converter_0_4/design_1_axis_clock_converter_0_4.xci">
           <Proxy FileSetName="design_1_axis_clock_converter_0_4"/>
@@ -225,136 +344,17 @@
           <Proxy FileSetName="design_1_rst_processing_system7_0_50M_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_processing_system7_0_axi_periph_0/design_1_processing_system7_0_axi_periph_0.xci"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.vhd"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_1_0/design_1_xlconstant_1_0.xci">
-          <Proxy FileSetName="design_1_xlconstant_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0.xci">
-          <Proxy FileSetName="design_1_util_vector_logic_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_l2_trigger_0_0/design_1_l2_trigger_0_0.xci">
-          <Proxy FileSetName="design_1_l2_trigger_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
-          <Proxy FileSetName="design_1_xlconstant_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_0/design_1_ALGO_B_0_0.xci">
-          <Proxy FileSetName="design_1_ALGO_B_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_0/design_1_axi_fifo_mm_s_0_0.xci">
-          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_top_switch_raw_0/design_1_top_switch_raw_0.xci">
-          <Proxy FileSetName="design_1_top_switch_raw_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_13_0/design_1_axis_dwidth_converter_13_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_13_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_algo_b_conv_2_0/design_1_algo_b_conv_2_0.xci">
-          <Proxy FileSetName="design_1_algo_b_conv_2_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_algo_b_conv_1_0/design_1_algo_b_conv_1_0.xci">
-          <Proxy FileSetName="design_1_algo_b_conv_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
-          <Proxy FileSetName="design_1_xlconcat_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L13_0/design_1_axis_data_fifo_fc_L13_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L13_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L11_0/design_1_axis_data_fifo_fc_L11_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L11_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_2/design_1_axis_data_fifo_fc_L9_2.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_9_0/design_1_axis_dwidth_converter_9_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_9_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_8_0/design_1_axis_dwidth_converter_8_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_8_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_2/design_1_axis_dwidth_converter_7_2.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_7_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r14_0/design_1_axis_broadcaster_1r14_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r14_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r13_0/design_1_axis_broadcaster_1r13_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r13_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r12_0/design_1_axis_broadcaster_1r12_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r12_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r11_0/design_1_axis_broadcaster_1r11_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r11_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r10_0/design_1_axis_broadcaster_1r10_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r10_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r7_2/design_1_axis_broadcaster_1r7_2.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r7_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xci">
-          <Proxy FileSetName="design_1_rst_processing_system7_0_100M_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_2_0/design_1_clk_wiz_2_0.xci">
-          <Proxy FileSetName="design_1_clk_wiz_2_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
-          <Proxy FileSetName="design_1_xlslice_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_0_1/design_1_axis_flow_control_0_1.xci">
-          <Proxy FileSetName="design_1_axis_flow_control_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_1/design_1_axis_data_fifo_fc_L9_1.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L9_0/design_1_axis_data_fifo_fc_L9_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L9_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_fc_L2_7/design_1_axis_data_fifo_fc_L2_7.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_fc_L2_7"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_1/design_1_axis_dwidth_converter_7_1.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_7_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_0/design_1_axis_dwidth_converter_7_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_7_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_0_9/design_1_axis_dwidth_converter_0_9.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_0_9"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_0_0/design_1_axis_flow_control_0_0.xci">
-          <Proxy FileSetName="design_1_axis_flow_control_0_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_tst_L2_0/design_1_axi_dma_tst_L2_0.xci">
+          <Proxy FileSetName="design_1_axi_dma_tst_L2_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_top_switch_0_0/design_1_top_switch_0_0.xci">
           <Proxy FileSetName="design_1_top_switch_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_tst_L2_0/design_1_axi_dma_tst_L2_0.xci">
-          <Proxy FileSetName="design_1_axi_dma_tst_L2_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xbar_2/design_1_xbar_2.xci">
+          <Proxy FileSetName="design_1_xbar_2"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_0/design_1_auto_pc_0.xci">
-          <Proxy FileSetName="design_1_auto_pc_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_1/design_1_auto_pc_1.xci">
-          <Proxy FileSetName="design_1_auto_pc_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1.hwh"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.hwdef"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="design_1_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_3/design_1_auto_pc_3.xci">
-          <Proxy FileSetName="design_1_auto_pc_3"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_2/design_1_auto_pc_2.xci">
-          <Proxy FileSetName="design_1_auto_pc_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_us_0/design_1_auto_us_0.xci">
-          <Proxy FileSetName="design_1_auto_us_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_0_0/design_1_axis_flow_control_0_0.xci">
+          <Proxy FileSetName="design_1_axis_flow_control_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_1/hdl/design_1_wrapper.vhd">
@@ -1742,54 +1742,42 @@
     </Run>
     <Run Id="design_1_hv_hk_v1_0_0_1_synth_1" Type="Ft3:Synth" SrcSet="design_1_hv_hk_v1_0_0_1" Part="xc7z030ffg676-2" ConstrsSet="design_1_hv_hk_v1_0_0_1" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_hv_hk_v1_0_0_1_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="design_1_auto_pc_0_synth_1" Type="Ft3:Synth" SrcSet="design_1_auto_pc_0" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_0" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_auto_pc_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="design_1_auto_pc_1_synth_1" Type="Ft3:Synth" SrcSet="design_1_auto_pc_1" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_1" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_auto_pc_1_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="design_1_auto_pc_3_synth_1" Type="Ft3:Synth" SrcSet="design_1_auto_pc_3" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_3" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_auto_pc_3_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="design_1_auto_pc_2_synth_1" Type="Ft3:Synth" SrcSet="design_1_auto_pc_2" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_2" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_auto_pc_2_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="design_1_auto_us_0_synth_1" Type="Ft3:Synth" SrcSet="design_1_auto_us_0" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_us_0" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/design_1_auto_us_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -3099,9 +3087,7 @@
     </Run>
     <Run Id="design_1_hv_hk_v1_0_0_1_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_hv_hk_v1_0_0_1" Description="Default settings for Implementation." SynthRun="design_1_hv_hk_v1_0_0_1_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -3115,9 +3101,7 @@
     </Run>
     <Run Id="design_1_auto_pc_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_0" Description="Default settings for Implementation." SynthRun="design_1_auto_pc_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -3131,9 +3115,7 @@
     </Run>
     <Run Id="design_1_auto_pc_1_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_1" Description="Default settings for Implementation." SynthRun="design_1_auto_pc_1_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -3147,9 +3129,7 @@
     </Run>
     <Run Id="design_1_auto_pc_3_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_3" Description="Default settings for Implementation." SynthRun="design_1_auto_pc_3_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -3163,9 +3143,7 @@
     </Run>
     <Run Id="design_1_auto_pc_2_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_pc_2" Description="Default settings for Implementation." SynthRun="design_1_auto_pc_2_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -3179,9 +3157,7 @@
     </Run>
     <Run Id="design_1_auto_us_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="design_1_auto_us_0" Description="Default settings for Implementation." SynthRun="design_1_auto_us_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

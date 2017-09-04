@@ -340,6 +340,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		print_expander_regs();
 	}
+	else if(c == 'c')
+	{
+		regs_clr_intr();
+	}
 	else if(c == '!')
 	{
 		InterruptOnAb();

@@ -316,17 +316,22 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
 
 void HVInterruptService()
 {
-	if(int_status > 1)
+//	if(int_status > 1)
+//	{
+//		int_status--;
+//		print("*");
+//	}
+//	else if(int_status == 1)
+//	{
+//		print_expander_regs_clr_intr();
+//		//xil_printf("GPIO(EXP2) = %02x", getRegister(EXP2, GPIO));
+//		//xil_printf("INTCAP(EXP2) = %02x", getRegister(EXP2, INTCAP));
+//		int_status = 0;
+//	}
+
+	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
 	{
-		int_status--;
-		print("*");
-	}
-	else if(int_status == 1)
-	{
-		print_expander_regs();
-		//xil_printf("GPIO(EXP2) = %02x", getRegister(EXP2, GPIO));
-		//xil_printf("INTCAP(EXP2) = %02x", getRegister(EXP2, INTCAP));
-		int_status = 0;
+		regs_clr_intr();
 	}
 }
 
@@ -334,8 +339,48 @@ void HVInterruptHundler(void *Callback)
 {
 	int i;
 //	int data_intf, data_defval, data_gpinten, data_gpio ;
-	xil_printf("\n\r!!!!!!!!!!!! rprzerwanie od MCP23S08 !!!!!!!!!!!! \n\r ");
-	int_status = 2000;
+	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
+	int_status = 1;
+
+//	print("EXP1:\n\r");
+//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP1, IODIR));
+//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP1, IPOL));
+//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP1, GPINTEN));
+//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP1, DEFVAL));
+//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP1, INTCON));
+//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP1, IOCON));
+//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP1, GPPU));
+	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
+	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
+	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
+//	xil_printf("OLAT=0x%02x\n\r", getRegister(EXP1, OLAT));
+
+//	print("EXP2:\n\r");
+//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP2, IODIR));
+//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP2, IPOL));
+//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP2, GPINTEN));
+//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP2, DEFVAL));
+//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP2, INTCON));
+//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP2, IOCON));
+//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP2, GPPU));
+	xil_printf("INTF=0x%02x\n\r", getRegister(EXP2, INTF));
+	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
+	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
+//	xil_printf("OLAT=0x%02x\n\r", getRegister(EXP2, OLAT));
+
+//	print("EXP3:\n\r");
+//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP3, IODIR));
+//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP3, IPOL));
+//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP3, GPINTEN));
+//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP3, DEFVAL));
+//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP3, INTCON));
+//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP3, IOCON));
+//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP3, GPPU));
+	xil_printf("INTF=0x%02x\n\r", getRegister(EXP3, INTF));
+	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP3, INTCAP));
+	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP3, GPIO));
+
+
 	// Try to release interrupt line. Read ALL registers
 	//for(i=0;i<=10;i++)
 	//	getRegister(EXP2, i);
@@ -361,6 +406,17 @@ void HVInterruptHundler(void *Callback)
 
 }
 
+void regs_clr_intr()
+{
+	print("*");
+
+	getRegister(EXP2, INTCAP);
+	getRegister(EXP2, GPIO);
+	getRegister(EXP2, INTCAP);
+	getRegister(EXP2, GPIO);
+	getRegister(EXP3, INTCAP);
+	getRegister(EXP3, GPIO);
+}
 
 
 void print_expander_regs()
@@ -519,7 +575,6 @@ void InterruptOnAb()
 	setRegister(EXP1, GPINTEN, 0x00);
 	setRegister(EXP2, GPINTEN, 0x0C);
 	setRegister(EXP3, GPINTEN, 0x00);
-
 }
 
 void SetupHVPSIntrSystem(XScuGic* pIntc)

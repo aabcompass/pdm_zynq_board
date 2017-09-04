@@ -218,6 +218,8 @@ int main()
 	//SetupIntrSystem();
 	print("HVPS expander initialization...\n\r");
 	expIni(); //init hv
+	print("Starting interrupt system for HVPS...\n\r");
+	InterruptOnAb();
 	print("SD card file system initialization...\n\r");
 	FfsSdPolledInit();
 	print("SPACIROC FIFO initialization...\n\r");
