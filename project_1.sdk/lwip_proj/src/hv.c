@@ -316,19 +316,6 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
 
 void HVInterruptService()
 {
-//	if(int_status > 1)
-//	{
-//		int_status--;
-//		print("*");
-//	}
-//	else if(int_status == 1)
-//	{
-//		print_expander_regs_clr_intr();
-//		//xil_printf("GPIO(EXP2) = %02x", getRegister(EXP2, GPIO));
-//		//xil_printf("INTCAP(EXP2) = %02x", getRegister(EXP2, INTCAP));
-//		int_status = 0;
-//	}
-
 	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
 	{
 		regs_clr_intr();
@@ -338,72 +325,17 @@ void HVInterruptService()
 void HVInterruptHundler(void *Callback)
 {
 	int i;
-//	int data_intf, data_defval, data_gpinten, data_gpio ;
 	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
-	int_status = 1;
 
-//	print("EXP1:\n\r");
-//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP1, IODIR));
-//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP1, IPOL));
-//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP1, GPINTEN));
-//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP1, DEFVAL));
-//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP1, INTCON));
-//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP1, IOCON));
-//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP1, GPPU));
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
-//	xil_printf("OLAT=0x%02x\n\r", getRegister(EXP1, OLAT));
-
-//	print("EXP2:\n\r");
-//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP2, IODIR));
-//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP2, IPOL));
-//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP2, GPINTEN));
-//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP2, DEFVAL));
-//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP2, INTCON));
-//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP2, IOCON));
-//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP2, GPPU));
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP2, INTF));
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
-//	xil_printf("OLAT=0x%02x\n\r", getRegister(EXP2, OLAT));
-
-//	print("EXP3:\n\r");
-//	xil_printf("IODIR=0x%02x\n\r", getRegister(EXP3, IODIR));
-//	xil_printf("IPOL=0x%02x\n\r", getRegister(EXP3, IPOL));
-//	xil_printf("GPINTEN=0x%02x\n\r", getRegister(EXP3, GPINTEN));
-//	xil_printf("DEFVAL=0x%02x\n\r", getRegister(EXP3, DEFVAL));
-//	xil_printf("INTCON=0x%02x\n\r", getRegister(EXP3, INTCON));
-//	xil_printf("IOCON=0x%02x\n\r", getRegister(EXP3, IOCON));
-//	xil_printf("GPPU=0x%02x\n\r", getRegister(EXP3, GPPU));
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP3, INTF));
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP3, INTCAP));
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP3, GPIO));
-
-
-	// Try to release interrupt line. Read ALL registers
-	//for(i=0;i<=10;i++)
-	//	getRegister(EXP2, i);
-//	  //xil_printf("INTF = %02x\n\r ", getRegister(0x40, INTF));
-//	//delay(400000000);
-////	for(i=0;i<100;i++)
-////	{
-////		xil_printf("GPIO = %02x ", getRegister(exp_addr, GPIO));
-////		xil_printf("INTCAP = %02x ", getRegister(exp_addr, INTCAP));
-////		xil_printf("i=%d Intr: %d\n\r", i, *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
-////	}
-//	data_intf=getRegister(0x40, INTF);
-//	data_defval=getRegister(0x40, DEFVAL);
-//	data_gpinten=getRegister(0x40, GPINTEN);
-//	setRegister(0x40, GPINTEN, data_gpinten & (~data_intf));
-//	xil_printf("GPIO = %02x", getRegister(0x40, GPIO));
-//	data_gpio=getRegister(0x40, GPIO);
-//	setRegister(0x40, DEFVAL, 0x3F);
-//	setRegister(0x40, IOCON,  0x3F);
-//	setRegister(0x40, GPINTEN,0x3F);
-//	  //delay(20000);
-//	 // int_status = *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR);
-
 }
 
 void regs_clr_intr()
@@ -598,14 +530,6 @@ void SetupHVPSIntrSystem(XScuGic* pIntc)
 	/* Enable the interrupt for the GPIO device.*/
 	XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
 
-
-//	Xil_ExceptionInit();
-//
-//	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
-//			 (Xil_ExceptionHandler)XScuGic_InterruptHandler, pIntc);
-//
-//	/* Enable non-critical exceptions */
-//	Xil_ExceptionEnable();
 
 	return;
 
