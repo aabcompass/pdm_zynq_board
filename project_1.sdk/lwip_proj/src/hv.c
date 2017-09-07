@@ -10,10 +10,42 @@
 #include "xil_printf.h"
 #include "pdmdp_err.h"
 #include "xscugic.h"
+#include "pdmdata.h"
+
+// HVPS sanity check period.
+// Every this time the self checking is performed. As a result of HVPS sanity check some HVPS channels can be switched off
+//  in order to prevent system from too many interrupts.
+#define HVPS_SANITY_CHECK_PERIOD_SEC	10 /*sec*/
+
+// hv_turned_on_user - represents for each HV channel is it switched on by user or not.
+// LSB bit represents channel0, etc...
+int hv_turned_on_user = 0;
+
+// hv_turned_successful - represents for each HV channel is it successful.
+// bit of hv_turned_successful is set if both HVon and HVok of corresponding channel were set to HIGH during the last turn on.
+// bit of hv_turned_successful is cleared if:
+// 1. HVPS channel is turned off by user.
+// 2. Both HVon and HVok were not gone back to HIGH state after interrupt event in period HVPS_SANITY_CHECK_PERIOD_SEC.
+// 3. HVPS channel has produced more than specified number of interrupts over HVPS_SANITY_CHECK_PERIOD_SEC.
+// LSB bit represents channel0, etc...
+int hv_turned_successful = 0;
+
+// hv_n_interrupts - number of interrupts for each HVPS channel.
+// The values in this array are cleared if corresponding HVPS channels are turned off by user
+int hv_n_interrupts[NUM_OF_HV] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+// hv_n_interrupts_latched - the copy of hv_n_interrupts is being made every HVPS_SANITY_CHECK_PERIOD_SEC sec.
+int hv_n_interrupts_latched[NUM_OF_HV] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+// is_interrupt_pending - represents, is interrupt event post-processed or not
+volatile int is_interrupt_pending = 0;
+
+//hvps_log - the database for events related to HVPS
+u32 hvps_log[HVPS_LOG_SIZE_NRECORDS];
+u32 hvps_log_current_record = 0;
 
 
-int prev_int_status = 0;
-int hv_turned_on = 0;
+
 
 
 void delay(int time)
@@ -366,27 +398,24 @@ void regs_clr_intr()
 	getRegister(EXP3, GPIO);
 }
 
-// Function to provide data exchange with other .c files
-int Get_hv_turned_on()
-{
-	return hv_turned_on;
-}
 
 // This function is periodically called from the lifecycle in main().
 // Call of this function is independent of interrupt services
 void HVInterruptService()
 {
-	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
-	{
-		if(Get_hv_turned_on())
-			regs_clr_intr();
-	}
+//	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
+//	{
+//		if(Get_hv_turned_on())
+//			regs_clr_intr();
+//	}
 }
 
 // Interrupt Hundler which  is automatically called where interrupt line from expanders is rising up.
 void HVInterruptHundler(void *Callback)
 {
 	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
+	is_interrupt_pending = 1;
+
 
 	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP1, INTCAP));
@@ -445,6 +474,7 @@ void print_expander_regs()
 
 void InitHV()
 {
+	memset(hvps_log, 0, sizeof(hvps_log));
 	initDac();
 	expIni();
 }
@@ -473,7 +503,7 @@ void HV_turnON_list(int list[NUM_OF_HV])
 			delay(10);
 			HV_setINT(i);
 			delay(10);
-			hv_turned_on |= (1<<i);
+			hv_turned_on_user |= (1<<i);
 		}
 	}
 }
@@ -488,7 +518,7 @@ void HV_turnOFF_list(int list[NUM_OF_HV])
 		{
 			HV_turnOFF(i);
 			delay(10);
-			hv_turned_on &= ~(1<<i);
+			hv_turned_on_user &= ~(1<<i);
 		}
 	}
 }
@@ -557,21 +587,9 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
 }
 
-void InterruptOnAb()
-{
-	setRegister(EXP1, INTCON, 0x00);
-	setRegister(EXP2, INTCON, 0x0C);
-	setRegister(EXP3, INTCON, 0x00);
 
-	setRegister(EXP1, DEFVAL, 0x00);
-	setRegister(EXP2, DEFVAL, 0x0C);
-	setRegister(EXP3, DEFVAL, 0x00);
-
-	setRegister(EXP1, GPINTEN, 0x00);
-	setRegister(EXP2, GPINTEN, 0x0C);
-	setRegister(EXP3, GPINTEN, 0x00);
-}
-
+// Setup interrupt system for HVPS
+// This function is called from the main() at the beginning
 void SetupHVPSIntrSystem(XScuGic* pIntc)
 {
 	int Result;

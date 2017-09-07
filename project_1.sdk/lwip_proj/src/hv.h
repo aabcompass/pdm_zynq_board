@@ -110,6 +110,4 @@ void HVInterruptService();
 #define HV_MAX_DAC_VALUE	4095
 
 
-
-
 #endif /* SRC_HV_H_ */

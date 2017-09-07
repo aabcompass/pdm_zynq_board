@@ -344,10 +344,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		regs_clr_intr();
 	}
-	else if(c == '!')
-	{
-		InterruptOnAb();
-	}
 	else if(c == 'p')
 	{
 		systemSettings.isPrinting = !systemSettings.isPrinting;

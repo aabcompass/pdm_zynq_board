@@ -247,4 +247,40 @@ typedef struct
 // the array in DATA_TYPE_SCURVE_V1 will have corresponding number of thresholds.
 
 
+//========================================
+//  HVPS log structure
+//========================================
+
+
+#define HVPS_LOG_SIZE_NRECORDS	100000
+
+#define HVPS_TURN_ON			0x00
+#define HVPS_TURN_OFF			0x01
+#define HVPS_DACS_LOADED		0x02
+#define HVPS_SR_LOADED			0x03
+#define HVPS_INTR_HVON			0x04
+#define HVPS_INTR_HVOK			0x05
+#define HVPS_SANITY_INTR_HVON	0x08
+#define HVPS_SANITY_INTR_HVOK	0x09
+#define HVPS_SANITY_LINE_HVON	0x0A
+#define HVPS_SANITY_LINE_HVOK	0x0B
+#define HVPS_AGC_UP_3_to_1		0x0C
+#define HVPS_AGC_UP_1_to_0		0x0D
+#define HVPS_AGC_UP_0_to_1		0x0E
+#define HVPS_AGC_UP_1_to_3		0x0F
+
+
+typedef struct
+{
+	uint32_t gtu; // small GTU - in 2.5 us
+	uint16_t record_type;
+	uint16_t channels; // bit0 - ch0, bit2 - ch1, ..., bit8 - ch8
+} DATA_TYPE_HVPS_LOG_V0;
+
+typedef struct
+{
+	ZynqBoardHeader zbh;
+	DATA_TYPE_HVPS_LOG_V0 payload[HVPS_LOG_SIZE_NRECORDS];
+} Z_DATA_TYPE_HVPS_LOG_V0;
+
 #endif /* SRC_PDMDATA_H_ */
