@@ -22,6 +22,16 @@ void delay(int time)
 	for(i=0;i<70000*time;i++); // 100 thousands means 1 ms
 }
 
+
+// Set the register in the expander.
+// Expanders are connected to the processor via logic part of Zynq.
+// Special IP core was designed for access expander.
+// Core name is "HV_HK" because in the other EUSO experiments
+// the HVPS expanders and DACs are under HK control
+// This IP core works like SPI peripheral in microcontrollers
+// opcode - EXP1, 2, or 3
+// reg_addr - register number inside expander
+// reg_data - data to be written
 void setRegister(u32 opcode, u32 reg_addr, u32 reg_data)
 {
 	int i;
@@ -35,6 +45,12 @@ void setRegister(u32 opcode, u32 reg_addr, u32 reg_data)
 	//xil_printf("status=0x%08x\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_STATUS));
 }
 
+// Get the register in the expander.
+// Expanders are connected to the processor via logic part of Zynq.
+// Special IP core was designed for access expander.  This IP core works like SPI peripheral
+// opcode - EXP1, 2, or 3
+// reg_addr - register number inside expander
+// return - data was read
 u32 getRegister(u32 opcode, u32 reg_addr/*, u32* reg_data*/)
 {
 	int i;
@@ -49,6 +65,10 @@ u32 getRegister(u32 opcode, u32 reg_addr/*, u32* reg_data*/)
 	return *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*DATAOUT);
 }
 
+// Set DAC value for DAC which determine voltage of HVPS
+// DACs are connected to the processor via logic part of Zynq.
+// Access to DAC is performed via IP core for expander
+// reg, reg2, reg3 - registers of all 3 DACs
 u32 setDacReg(u32 reg, u32 reg2, u32 reg3)
 {
 	int i;
@@ -82,6 +102,8 @@ void setDacSameValue(int value)
 	setAllDacRegs(0x3F0000 | value<<4);
 }
 
+// Special function for set all 9 DACs
+// dac - array with 9 values
 void setDacValue_list(int dac[NUM_OF_HV])
 {
 	setDacReg(0x310000 | (dac[0] & HV_MAX_DAC_VALUE)<<4,
@@ -95,6 +117,7 @@ void setDacValue_list(int dac[NUM_OF_HV])
 			  0x340000 | (dac[6+2] & HV_MAX_DAC_VALUE)<<4);
 }
 
+// Expander initialization
 void expIni(void){
 	setRegister(EXP1, IOCON,    (1<<SREAD) | (1<<DISSLW) | (1<<ODR) /*0x34*/);  //
 	setRegister(EXP2, IOCON,   (1<<SREAD) | (1<<DISSLW) | (1<<ODR)  /*0x34*/);  //
@@ -114,6 +137,9 @@ void expIni(void){
 
 
 // ****************
+// Turn off selected HV
+// kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
+// This functions was imported from the Mexican code
 void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
   unsigned char expAddress = kHV/3;   // expander number: 0, 1, 2
   unsigned char kHVCWinEXP = kHV - 3 * expAddress; // C-W id within expander (0, 1, 2)
@@ -148,8 +174,11 @@ void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 // ? :   setRegister(Exp, INTCON, data2);
  }
 
+
 // ****************
-void HV_turnOFF_all(void) {
+// Turn off all HV
+// This functions was imported from the Mexican code
+void HV_turnOFF_all(void)  {
 	unsigned char iExp = 0;
 	//unsigned char int_bits = 0x00;
   unsigned char kGPIO_CWoff = 0x2a;
@@ -174,6 +203,8 @@ void HV_turnOFF_all(void) {
 
  }
 
+// This functions was imported from the Mexican code
+// I don't know why this function is needed for.
 // ****************
 unsigned char HV_ON_test(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
   unsigned char expAddress = kHV/3;   // expander number: 0, 1, 2
@@ -218,6 +249,10 @@ unsigned char HV_ON_test(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
  }
 
 // ****************
+// ****************
+// Turn on selected HV
+// kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
+// This functions was imported from the Mexican code
 unsigned char HV_turnON(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 	int i;
 	HV_turnOFF(kHV);   // to turn OFF it is necessary to turn OFF, first (discharge capacitor)
@@ -265,6 +300,7 @@ unsigned char HV_turnON(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 
 
 // ****************
+// SetUp interrupt modes of expanders
 unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON (also for
                                      //  Polish_Status when it is==1)
                                      // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
@@ -317,6 +353,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
   return ret;
  }
 
+// TODO rework this function
 void regs_clr_intr()
 {
 	print("*");
@@ -329,11 +366,14 @@ void regs_clr_intr()
 	getRegister(EXP3, GPIO);
 }
 
+// Function to provide data exchange with other .c files
 int Get_hv_turned_on()
 {
 	return hv_turned_on;
 }
 
+// This function is periodically called from the lifecycle in main().
+// Call of this function is independent of interrupt services
 void HVInterruptService()
 {
 	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
@@ -343,6 +383,7 @@ void HVInterruptService()
 	}
 }
 
+// Interrupt Hundler which  is automatically called where interrupt line from expanders is rising up.
 void HVInterruptHundler(void *Callback)
 {
 	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
@@ -357,8 +398,6 @@ void HVInterruptHundler(void *Callback)
 	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP3, INTCAP));
 	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP3, GPIO));
 }
-
-
 
 
 void print_expander_regs()
@@ -422,6 +461,7 @@ void HV_turnON_all()
 	}
 }
 
+// Turn on HVs by list
 void HV_turnON_list(int list[NUM_OF_HV])
 {
 	int i;
@@ -438,6 +478,7 @@ void HV_turnON_list(int list[NUM_OF_HV])
 	}
 }
 
+// Turn off HVs by list
 void HV_turnOFF_list(int list[NUM_OF_HV])
 {
 	int i;
@@ -452,6 +493,7 @@ void HV_turnOFF_list(int list[NUM_OF_HV])
 	}
 }
 
+// Set DAC value by list
 void HV_setDAC_list(int list[NUM_OF_HV])
 {
 	int i;
@@ -466,12 +508,14 @@ void HV_setDAC_list(int list[NUM_OF_HV])
 }
 
 
-
+// Function to provide data exchange with other .c files
 int GetIntrState()
 {
 	return *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR);
 }
 
+// Get status of HVPS
+// Function to provide data exchange with other .c files
 void HV_getStatus(int list[NUM_OF_HV])
 {
 	int gpio_exp1 = getRegister(EXP1, GPIO);
@@ -488,7 +532,11 @@ void HV_getStatus(int list[NUM_OF_HV])
 	list[8] = (gpio_exp3>>4) & 0x3;
 }
 
-
+// Set Cathode voltage by list
+// Each value can be 0 or 1 or 3.
+// All value are serialized to shift registers
+// Access to shift register was organized via IP core "HV_AERA",
+// because initially Aera J. VHDL core was taken
 int HV_setCathodeVoltage(int list[NUM_OF_HV])
 {
 	u32 reg = 0, i;
