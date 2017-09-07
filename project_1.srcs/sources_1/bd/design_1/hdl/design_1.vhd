@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Aug 30 19:20:26 2017
+--Date        : Thu Sep  7 23:27:48 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.2 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10895,9 +10895,10 @@ architecture STRUCTURE of design_1 is
     intr_n : in STD_LOGIC;
     hv_led : out STD_LOGIC;
     intr_out : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     s00_axi_awvalid : in STD_LOGIC;
     s00_axi_awready : out STD_LOGIC;
@@ -10908,7 +10909,7 @@ architecture STRUCTURE of design_1 is
     s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
     s00_axi_bvalid : out STD_LOGIC;
     s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
     s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     s00_axi_arvalid : in STD_LOGIC;
     s00_axi_arready : out STD_LOGIC;
@@ -13727,6 +13728,7 @@ hv_hk_v1_0_0: component design_1_hv_hk_v1_0_0_1
       cs_dac_p => hv_hk_v1_0_0_cs_dac_p,
       cs_exp_n => hv_hk_v1_0_0_cs_exp_n,
       cs_exp_p => hv_hk_v1_0_0_cs_exp_p,
+      gtu_sig => axi_data_provider_0_gtu_sig,
       hv_led => hv_hk_v1_0_0_hv_led,
       intr_n => intr_n_1,
       intr_out => hv_hk_v1_0_0_intr_out,
@@ -13736,12 +13738,12 @@ hv_hk_v1_0_0: component design_1_hv_hk_v1_0_0_1
       mosi_n => hv_hk_v1_0_0_mosi_n,
       mosi_p => hv_hk_v1_0_0_mosi_p,
       s00_axi_aclk => processing_system7_0_FCLK_CLK0,
-      s00_axi_araddr(4 downto 0) => processing_system7_0_axi_periph_M08_AXI_ARADDR(4 downto 0),
+      s00_axi_araddr(6 downto 0) => processing_system7_0_axi_periph_M08_AXI_ARADDR(6 downto 0),
       s00_axi_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
       s00_axi_arprot(2 downto 0) => processing_system7_0_axi_periph_M08_AXI_ARPROT(2 downto 0),
       s00_axi_arready => processing_system7_0_axi_periph_M08_AXI_ARREADY,
       s00_axi_arvalid => processing_system7_0_axi_periph_M08_AXI_ARVALID,
-      s00_axi_awaddr(4 downto 0) => processing_system7_0_axi_periph_M08_AXI_AWADDR(4 downto 0),
+      s00_axi_awaddr(6 downto 0) => processing_system7_0_axi_periph_M08_AXI_AWADDR(6 downto 0),
       s00_axi_awprot(2 downto 0) => processing_system7_0_axi_periph_M08_AXI_AWPROT(2 downto 0),
       s00_axi_awready => processing_system7_0_axi_periph_M08_AXI_AWREADY,
       s00_axi_awvalid => processing_system7_0_axi_periph_M08_AXI_AWVALID,

@@ -1358,6 +1358,7 @@
         <spirit:componentRef spirit:library="user" spirit:name="hv_hk_v1_0" spirit:vendor="user.org" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_hv_hk_v1_0_0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="C_S00_AXI_ADDR_WIDTH">7</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -2476,6 +2477,7 @@
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="gtu_sig"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="gtu_sig"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="gtu_sig"/>
+        <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="gtu_sig"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>trig_button_1</spirit:name>
