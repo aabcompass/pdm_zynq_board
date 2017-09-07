@@ -18,6 +18,10 @@
 #define DATAOUT				5
 #define DATAIN2				6
 #define DATAIN3				7
+#define REGW_CLR_FLAGS		8
+#define REGR_GTU_CNT_H		27
+#define REGR_GTU_CNT_L		28
+
 
 
 #define BIT_HVHK_START		0

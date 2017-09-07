@@ -12,7 +12,7 @@ entity hv_hk_v1_0 is
 
 		-- Parameters of Axi Slave Bus Interface S00_AXI
 		C_S00_AXI_DATA_WIDTH	: integer	:= 32;
-		C_S00_AXI_ADDR_WIDTH	: integer	:= 5
+		C_S00_AXI_ADDR_WIDTH	: integer	:= 7
 	);
 	port (
 		-- Users to add ports here
@@ -20,6 +20,8 @@ entity hv_hk_v1_0 is
 		miso_p, miso_n, intr_p, intr_n: in std_logic;
 		hv_led: out std_logic;
 		intr_out: out std_logic;
+		--
+		gtu_sig: in std_logic; 	
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -63,6 +65,8 @@ architecture arch_imp of hv_hk_v1_0 is
 		miso_n, intr_n: in std_logic;
 		hv_led: out std_logic;
 		intr_out: out std_logic;
+		--
+		gtu_sig: in std_logic; 	
 		--
 		S_AXI_ACLK	: in std_logic;
 		S_AXI_ARESETN	: in std_logic;
@@ -111,6 +115,7 @@ hv_hk_v1_0_S00_AXI_inst : hv_hk_v1_0_S00_AXI
 		intr_n => intr_n,--: in std_logic;
 		hv_led => hv_led,
 		intr_out => intr_out,--: out std_logic;
+		gtu_sig => gtu_sig,--: in std_logic; 	
 		--
 		S_AXI_ACLK	=> s00_axi_aclk,
 		S_AXI_ARESETN	=> s00_axi_aresetn,
