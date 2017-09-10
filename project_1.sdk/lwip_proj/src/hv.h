@@ -8,19 +8,46 @@
 #ifndef SRC_HV_H_
 #define SRC_HV_H_
 
+// Note:
+// This module contains acronym HK which means that earlier this functionality was performing by HK subsystem
+
+// RW: register of read/write
+// RO: register is only for read
+
 #include "xil_types.h"
 
-#define REGW_HVHK_CMD		0
-#define REGW_HVHK_STATUS 	1
-#define REGW_CONFIG			2
-#define REGW_INTR			3
-#define DATAIN				4
-#define DATAOUT				5
-#define DATAIN2				6
-#define DATAIN3				7
-#define REGW_HVHK_CLR_FLAGS		8
-#define REGR_HVHK_GTU_CNT_H		27
-#define REGR_HVHK_GTU_CNT_L		28
+#define REGW_HVHK_CMD						0 /*RW: bit0  - start transfer to or from HVPS HK part */
+#define REGW_HVHK_STATUS 					1 /*RO: bit0 indicates that transfer is completed*/
+#define REGW_CONFIG							2 /*RW: bit0 == 1 if transfer to expander. == 0 if transfer to DAC*/
+#define REGW_INTR							3 /*RO: bit0 == 1 if interrupt line == 0. And vice versa.*/
+#define DATAIN								4 /*RW:  register for sending data to Expander or DAC*/
+#define DATAOUT								5 /*RO:  register for receiving data from Expander or DAC*/
+#define DATAIN2								6 /*RW:  register for sending data to DAC*/
+#define DATAIN3								7 /*RW:  register for sending data to DAC*/
+
+// This register contains bit2 which clears GTU counter
+#define REGW_HVHK_CLR_FLAGS					8 /*RW: */
+// IP Core contains 2 timers in order to facilitate the time interval measurements
+//  which are needed for HVPS HK expander interrupt handling
+// Timers are registers  which are decremented every 1 us by 1.
+// Timers are stopped if their values reach zero
+// On start (restart) the REGW_HVHK_TIMERx_RESTART_VALUE to register is loaded
+// Timers are registers 28 bit width
+
+#define REGW_HVHK_TIMER0_RESTART_VALUE		10 /*RW:  Start value for Timer 0*/
+#define REGW_HVHK_TIMER1_RESTART_VALUE		11 /*RW:  Start value for Timer 1*/
+#define REGW_HVHK_TIMER0					12 /*RO: Timer 0 current value*/
+#define REGW_HVHK_TIMER1					13 /*RO: Timer 1 current value*/
+#define REGW_HVHK_TIMER0_STOPPED			14 /*RO: bit0 == 1 => timer0 is stopped*/
+#define REGW_HVHK_TIMER1_STOPPED			15 /*RO: bit0 == 1 => timer1 is stopped*/
+#define REGW_HVHK_TIMER0_START				16 /*RW: bit0 == 1 => timer0 is restarting. Register must be manually returned to zero*/
+#define REGW_HVHK_TIMER1_START				17 /*RW: bit0 == 1 => timer1 is restarting. Register must be manually returned to zero*/
+
+
+// These registers contains number of small GTU
+// from the device start or from CLR command
+#define REGR_HVHK_GTU_CNT_H					27 /*RO: */
+#define REGR_HVHK_GTU_CNT_L					28 /*RO: */
 
 
 
