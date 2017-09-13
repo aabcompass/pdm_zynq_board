@@ -846,8 +846,8 @@ begin
 		);
 	
 	clr_all <= slv_reg8(2);
-	slv_reg27 <= gtu_sig_counter_h;
-	slv_reg28 <= gtu_sig_counter_l;
+	slv_reg28 <= gtu_sig_counter_h;
+	slv_reg27 <= gtu_sig_counter_l;
 	
 	gtu_sig_d0 <= gtu_sig;
 	
@@ -892,24 +892,20 @@ begin
 	timer0_process: process(S_AXI_ACLK)
 	begin
 		if(rising_edge(S_AXI_ACLK)) then
-			if(timer0_clr = '1') then timer0 <= (others => '0');
+			if(timer0_clr = '1') then timer0 <= (others => '0'); timer0_is_stopped <= '1';
 			elsif(timer0_start = '1') then timer0 <= timer0_restart_value;
-			elsif(timer_tick = '1') then timer0 <= timer0 - 1; end if;
-			
-			if(timer0 = 0) then timer0_is_stopped <= '1';
-			else  timer0_is_stopped <= '0'; end if;
+			elsif(timer0 = 0) then timer0_is_stopped <= '1';
+			elsif(timer_tick = '1') then timer0 <= timer0 - 1;  timer0_is_stopped <= '0';end if;
 		end if;
 	end process; 
 
 	timer1_process: process(S_AXI_ACLK)
 	begin
 		if(rising_edge(S_AXI_ACLK)) then
-			if(timer1_clr = '1') then timer1 <= (others => '0');
+			if(timer1_clr = '1') then timer1 <= (others => '0'); timer1_is_stopped <= '1';
 			elsif(timer1_start = '1') then timer1 <= timer1_restart_value;
-			elsif(timer_tick = '1') then timer1 <= timer1 - 1; end if;
-			
-			if(timer1 = 0) then timer1_is_stopped <= '1';
-			else  timer1_is_stopped <= '0'; end if;
+			elsif(timer1 = 0) then timer1_is_stopped <= '1';
+			elsif(timer_tick = '1') then timer1 <= timer1 - 1;  timer1_is_stopped <= '0';end if;
 		end if;
 	end process;		
 	

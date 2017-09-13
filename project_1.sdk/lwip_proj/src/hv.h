@@ -46,8 +46,8 @@
 
 // These registers contains number of small GTU
 // from the device start or from CLR command
-#define REGR_HVHK_GTU_CNT_H					27 /*RO: */
-#define REGR_HVHK_GTU_CNT_L					28 /*RO: */
+#define REGR_HVHK_GTU_CNT_H					28 /*RO: */
+#define REGR_HVHK_GTU_CNT_L					27 /*RO: */
 
 
 
@@ -140,5 +140,7 @@ void HVInterruptService();
 #define HV_MIN_DAC_VALUE	0
 #define HV_MAX_DAC_VALUE	4095
 
+#define HVHK_TIMER_RESTART_VALUE_US		10000 /* ms*/
+#define HVHK_N_TRIES_INTR_RELEASE_MAX	100 /* sec*/
 
 #endif /* SRC_HV_H_ */

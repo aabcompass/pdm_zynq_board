@@ -276,6 +276,17 @@ void ProcessUartCommands(struct netif *netif, char c)
 			if(i%4==0) xil_printf("\n\r%d.", i);
 			xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR+i*4));
 		}
+		print("\n\rXPAR_HV_HK_V1_0_0_BASEADDR");
+		for(i=0;i<32;i++)
+		{
+			if(i%4==0) xil_printf("\n\r%d.", i);
+			xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
+		}
+	}
+	else if(c == 'm')
+	{
+		*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 1;
+		*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 0;
 	}
 	else if(c == 't')
 	{
@@ -313,6 +324,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
 
 		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
+		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
+
 		xil_printf("Timestamp2: %08x %08x\n\r",
 				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_TIMESTAMP+4),
 				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_TIMESTAMP));

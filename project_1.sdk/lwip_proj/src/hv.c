@@ -21,28 +21,32 @@
 // LSB bit represents channel0, etc...
 int hv_turned_on_user = 0;
 
-// hv_turned_successful - represents for each HV channel is it successful.
+// hv_working_successful - represents for each HV channel is it successful.
 // bit of hv_turned_successful is set if both HVon and HVok of corresponding channel were set to HIGH during the last turn on.
 // bit of hv_turned_successful is cleared if:
 // 1. HVPS channel is turned off by user.
 // 2. Both HVon and HVok were not gone back to HIGH state after interrupt event in period HVPS_SANITY_CHECK_PERIOD_SEC.
 // 3. HVPS channel has produced more than specified number of interrupts over HVPS_SANITY_CHECK_PERIOD_SEC.
 // LSB bit represents channel0, etc...
-int hv_turned_successful = 0;
+int hv_working_successful = 0;
 
 // hv_n_interrupts - number of interrupts for each HVPS channel.
 // The values in this array are cleared if corresponding HVPS channels are turned off by user
 int hv_n_interrupts[NUM_OF_HV] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+// hv_n_tries_to_release - number of tries to turn on interrupt
+// try is fail if corresponding HVok or HVon line is in LOW state
+int hv_n_tries_to_release[NUM_OF_HV*2] = {0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 // hv_n_interrupts_latched - the copy of hv_n_interrupts is being made every HVPS_SANITY_CHECK_PERIOD_SEC sec.
 int hv_n_interrupts_latched[NUM_OF_HV] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-// is_interrupt_pending - represents, is interrupt event post-processed or not
+// is_interrupt_pending - represents, is interrupt event post-processed or not for each HVok and HVon
 volatile int is_interrupt_pending = 0;
 
 //hvps_log - the database for events related to HVPS
-u32 hvps_log[HVPS_LOG_SIZE_NRECORDS];
-u32 hvps_log_current_record = 0;
+DATA_TYPE_HVPS_LOG_V0 hvps_log[HVPS_LOG_SIZE_NRECORDS];
+volatile u32 hvps_log_current_record = 0;
 
 
 
@@ -398,34 +402,110 @@ void regs_clr_intr()
 	getRegister(EXP3, GPIO);
 }
 
+// Add new record to HVPS log
+void HV_addLog(u32 record_type, u32 channels)
+{
+	if(hvps_log_current_record < HVPS_LOG_SIZE_NRECORDS)
+	{
+		hvps_log[hvps_log_current_record].ts.n_gtu = *(u64*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGR_HVHK_GTU_CNT_L);
+		hvps_log[hvps_log_current_record].record_type = record_type;
+		hvps_log[hvps_log_current_record].channels = channels;
+		hvps_log_current_record++;
+	}
+}
+
+int HV_getLogSize()
+{
+	return hvps_log_current_record;
+}
 
 // This function is periodically called from the lifecycle in main().
 // Call of this function is independent of interrupt services
 void HVInterruptService()
 {
-//	if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR) == 0)
-//	{
-//		if(Get_hv_turned_on())
-//			regs_clr_intr();
-//	}
+	int i;
+	unsigned char  expAddress, kHVCWinEXP, expAddressW, expAddressR;
+	u32 datGPIO, datGPINTEN, hvonok;
+	if(is_interrupt_pending)
+	{
+		if(*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_STOPPED))
+		{
+			for(i=0;i<NUM_OF_HV*2;i++) // for each HVon OVok of each HV channel
+			{
+				if((is_interrupt_pending>>i)&1 && (hv_working_successful>>(i/2))&1)
+				{
+					expAddress = i/6;
+					kHVCWinEXP = i/2 - 3 * expAddress;
+					expAddressW = expAddress * 2 + 0x40; // expander address for write (0x40, 0x42, 0x44)
+					expAddressR = expAddressW + 0x01; // expander address for read (0x41, 0x43, 0x45)
+					datGPIO = getRegister(expAddressR, GPIO);
+					datGPINTEN = getRegister(expAddressR, GPINTEN);
+					hvonok = datGPIO & (1<<(i - expAddress*6));
+					if(hvonok)
+					{
+						setRegister(expAddressW, GPINTEN, datGPINTEN | hvonok);
+						is_interrupt_pending &= ~(1<<i);
+						hv_n_tries_to_release[i] = 0;
+						print("Interrupt has been released\n\r");
+					}
+					else
+					{
+						print("!");
+						hv_n_tries_to_release[i]++;
+						// if too many tries to release interrupt
+						if(hv_n_tries_to_release[i] > HVHK_N_TRIES_INTR_RELEASE_MAX)
+						{
+							HV_turnOFF(i/2); // turn off this HV
+							hv_working_successful &= ~(1<<i/2);
+							is_interrupt_pending &= ~(1<<i);
+							HV_addLog(HVPS_SANITY_RELEASE, (1<<i));
+							print("HV channel has been blocked\n\r");
+						}
+					}
+				}
+			}
+			// Start timer0
+			*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 1;
+			*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 0;
+		}
+	}
 }
 
 // Interrupt Hundler which  is automatically called where interrupt line from expanders is rising up.
 void HVInterruptHundler(void *Callback)
 {
-	xil_printf("\n\rRprzerwanie od MCP23S08\n\r ");
-	is_interrupt_pending = 1;
+	xil_printf("HVintr");
+	u32 exp1_intf, exp2_intf, exp3_intf;
+	u32 exp1_intcap, exp2_intcap, exp3_intcap;
+	u32 exp1_gpinten, exp2_gpinten, exp3_gpinten;
 
+	// gather register content
+	exp1_intf = getRegister(EXP1, INTF);
+	exp2_intf = getRegister(EXP2, INTF);
+	exp3_intf = getRegister(EXP3, INTF);
+	exp1_intcap = getRegister(EXP1, INTCAP);
+	exp2_intcap = getRegister(EXP2, INTCAP);
+	exp3_intcap = getRegister(EXP3, INTCAP);
+	exp1_gpinten = getRegister(EXP1, GPINTEN);
+	exp2_gpinten = getRegister(EXP2, GPINTEN);
+	exp3_gpinten = getRegister(EXP3, GPINTEN);
+	xil_printf("INTF=0x%02x\n\r", exp2_intf);
+	xil_printf("INTCAP=0x%02x\n\r", exp2_intcap);
 
-	xil_printf("INTF=0x%02x\n\r", getRegister(EXP1, INTF));
-	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP1, INTCAP));
-	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP1, GPIO));
-	xil_printf("INTF=0x%02x\n\r", getRegister(EXP2, INTF));
-	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP2, INTCAP));
-	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP2, GPIO));
-	xil_printf("INTF=0x%02x\n\r", getRegister(EXP3, INTF));
-	xil_printf("INTCAP=0x%02x\n\r", getRegister(EXP3, INTCAP));
-	xil_printf("GPIO=0x%02x\n\r", getRegister(EXP3, GPIO));
+	// turn off corresponding interrupt lines
+	if(exp1_intf)
+		setRegister(EXP2, GPINTEN, (~exp1_intf) & exp1_gpinten);
+	if(exp2_intf)
+		setRegister(EXP2, GPINTEN, (~exp2_intf) & exp2_gpinten);
+	if(exp3_intf)
+		setRegister(EXP2, GPINTEN, (~exp3_intf) & exp3_gpinten);
+
+	is_interrupt_pending |= (exp3_intf<<12 | exp2_intf<<6 | exp3_intf);
+	// Add log
+	HV_addLog(HVPS_INTR, is_interrupt_pending);
+	// Start timer0
+	*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 1;
+	*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 0;
 }
 
 
@@ -500,10 +580,15 @@ void HV_turnON_list(int list[NUM_OF_HV])
 		if(list[i])
 		{
 			HV_turnON(i);
-			delay(10);
+			delay(100);
 			HV_setINT(i);
 			delay(10);
 			hv_turned_on_user |= (1<<i);
+			hv_working_successful |= (1<<i);
+			hv_n_interrupts[i] = 0;
+			hv_n_interrupts_latched[i] = 0;
+			hv_n_tries_to_release[i*2] = 0;
+			hv_n_tries_to_release[i*2+1] = 0;
 		}
 	}
 }
@@ -519,6 +604,7 @@ void HV_turnOFF_list(int list[NUM_OF_HV])
 			HV_turnOFF(i);
 			delay(10);
 			hv_turned_on_user &= ~(1<<i);
+			hv_working_successful &= ~(1<<i);
 		}
 	}
 }
@@ -611,7 +697,8 @@ void SetupHVPSIntrSystem(XScuGic* pIntc)
 	/* Enable the interrupt for the GPIO device.*/
 	XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
 
-
+	// Config timers
+	// Set up restart value
+	*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_RESTART_VALUE) = HVHK_TIMER_RESTART_VALUE_US;
 	return;
-
 }

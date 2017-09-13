@@ -262,9 +262,8 @@ typedef struct
 #define HVPS_TURN_OFF			0x01 // turn off by user
 #define HVPS_DACS_LOADED		0x02 // DAC loaded by user
 #define HVPS_SR_LOADED			0x03 // Shift register loaded by user
-#define HVPS_INTR_HVON			0x04 // Interrupt related to HVon deserting is occurred
-#define HVPS_INTR_HVOK			0x05 // Interrupt related to HVok deserting is occurred
-#define HVPS_SANITY_INTR_HVON	0x08 // HVPS channel has been turned off because of too many interrupts from its HVON line
+#define HVPS_INTR				0x04 // Interrupt
+#define HVPS_SANITY_RELEASE		0x08 // HVPS channel has been turned off because of too many tries to turn on this HV
 #define HVPS_SANITY_INTR_HVOK	0x09 // HVPS channel has been turned off because of too many interrupts from its HVOK line
 #define HVPS_AGC_UP_3_to_1		0x0C // Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
 #define HVPS_AGC_UP_1_to_0		0x0D // Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
@@ -274,9 +273,9 @@ typedef struct
 
 typedef struct
 {
-	uint32_t gtu; // small GTU - in 2.5 us
-	uint16_t record_type;
-	uint16_t channels; // bit0 - ch0, bit1 - ch1, ..., bit8 - ch8
+	TimeStamp_symplified ts; //
+	uint32_t record_type;
+	uint32_t channels; // bit0,1 - ch0, bit2,3 - ch1, ..., bit16,17 - ch8
 } DATA_TYPE_HVPS_LOG_V0;
 
 typedef struct
