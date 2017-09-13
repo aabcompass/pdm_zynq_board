@@ -283,10 +283,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 			xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
 		}
 	}
-	else if(c == 'm')
+	else if(c == 'h')
 	{
-		*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 1;
-		*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 0;
+		HV_prnLog();
 	}
 	else if(c == 't')
 	{
@@ -353,10 +352,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		print_expander_regs();
 	}
-	else if(c == 'c')
-	{
-		regs_clr_intr();
-	}
+//	else if(c == 'c')
+//	{
+//		regs_clr_intr();
+//	}
 	else if(c == 'p')
 	{
 		systemSettings.isPrinting = !systemSettings.isPrinting;

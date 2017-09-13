@@ -258,13 +258,13 @@ typedef struct
 #define HVPS_LOG_SIZE_NRECORDS	100000
 
 // The list of possible types of records
-#define HVPS_TURN_ON			0x00 // turn on by user
-#define HVPS_TURN_OFF			0x01 // turn off by user
+#define HVPS_TURN_ON			0x00 // turn on
+#define HVPS_TURN_OFF			0x01 // turn off
 #define HVPS_DACS_LOADED		0x02 // DAC loaded by user
 #define HVPS_SR_LOADED			0x03 // Shift register loaded by user
 #define HVPS_INTR				0x04 // Interrupt
 #define HVPS_SANITY_RELEASE		0x08 // HVPS channel has been turned off because of too many tries to turn on this HV
-#define HVPS_SANITY_INTR_HVOK	0x09 // HVPS channel has been turned off because of too many interrupts from its HVOK line
+#define HVPS_SANITY_INTR		0x09 // HVPS channel has been turned off because of too many interrupts from its HVOK line
 #define HVPS_AGC_UP_3_to_1		0x0C // Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
 #define HVPS_AGC_UP_1_to_0		0x0D // Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
 #define HVPS_AGC_UP_0_to_1		0x0E // Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.

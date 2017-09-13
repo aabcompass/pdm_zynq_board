@@ -140,7 +140,8 @@ void HVInterruptService();
 #define HV_MIN_DAC_VALUE	0
 #define HV_MAX_DAC_VALUE	4095
 
-#define HVHK_TIMER_RESTART_VALUE_US		10000 /* ms*/
-#define HVHK_N_TRIES_INTR_RELEASE_MAX	100 /* sec*/
+#define HVHK_TIMER_RESTART_VALUE_US		10000 /* 10 ms*/
+#define HVHK_N_TRIES_INTR_RELEASE_MAX	100 /* 1 sec*/
+#define HVHK_MAX_INTERRUPTS				1000
 
 #endif /* SRC_HV_H_ */
