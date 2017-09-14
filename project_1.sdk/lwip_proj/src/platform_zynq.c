@@ -271,7 +271,7 @@ void platform_setup_interrupts_AB(void)
 	XScuGic_EnableIntr(INTC_DIST_BASE_ADDR, TIMER_IRPT_INTR);
 	XScuGic_Enable(&intc, TIMER_IRPT_INTR);
 
-	SetupHVPSIntrSystem(&intc);
+	//SetupHVPSIntrSystem(&intc);
 	SetupDMAIntrSystem(&intc);
 
 
