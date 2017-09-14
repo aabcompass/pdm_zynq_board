@@ -190,6 +190,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		HV_turnON_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
+		SetupHVPSIntrSystem(getIntcPtr());
 	}
 	else if(sscanf(p->payload, "hvps turnoff %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)

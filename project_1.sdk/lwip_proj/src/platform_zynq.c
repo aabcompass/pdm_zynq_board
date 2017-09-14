@@ -92,6 +92,11 @@ void dhcp_coarse_tmr();
 
 XScuGic intc; /* The Instance of the Interrupt Controller Driver */
 
+XScuGic* getIntcPtr()
+{
+	return &intc;
+}
+
 void
 timer_callback(XScuTimer * TimerInstance)
 {
