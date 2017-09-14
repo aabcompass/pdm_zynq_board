@@ -27,7 +27,7 @@ int hv_working_successful = 0;
 
 // hv_n_interrupts - number of interrupts for each HVPS channel.
 // The values in this array are cleared if corresponding HVPS channels are turned off by user
-int hv_n_interrupts[NUM_OF_HV] = {0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0, 0, 0, 0, 0};
+int hv_n_interrupts[NUM_OF_HV*2] = {0, 0, 0, 0, 0, 0, 0, 0, 0,    0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // hv_n_tries_to_release - number of tries to turn on interrupt
 // try is fail if corresponding HVok or HVon line is in LOW state
