@@ -73,7 +73,7 @@ void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
 	print("\n\rCopyEventData: ");
 	if(data_type == DATA_TYPE_L1)
 	{
-		print("L1: ");
+		print("L1:");
 		// copy the timestamp
 		memcpy(&Z_DATA_TYPE_SCI_L1.payload.ts, XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
 		print("T");
