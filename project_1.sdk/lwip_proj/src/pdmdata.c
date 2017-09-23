@@ -144,6 +144,13 @@ void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
 void DmaReset(XAxiDma* pdma)
 {
 	XAxiDma_Reset(pdma);
+	while(1)
+	{
+		if(XAxiDma_ResetIsDone(pdma))
+			return;
+		else
+			print("*");
+	}
 }
 
 void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
@@ -195,6 +202,7 @@ static void RxIntrHandlerRaw(void *Callback)
 	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
 	{
 		DmaReset(AxiDmaInst);
+
 		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
 		dma_intr_counter_raw++;
 		//print("x");
