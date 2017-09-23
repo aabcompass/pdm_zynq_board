@@ -175,7 +175,7 @@ void ParsePortStr(char* str, u16* port)
 			*port+=k*(str[j]-0x30);
 		}
 	}
-	xil_printf("\n\rstr=%s port=%d state=%d\n\r", str, *port, ftp_state);
+	//xil_printf("\n\rstr=%s port=%d state=%d\n\r", str, *port, ftp_state);
 }
 
 
@@ -188,8 +188,8 @@ ftpctrl_rcv_callback(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 	{
 		if(/*systemSettings.isPrinting*/1)
 		{
-			print("$");
-			print(p->payload);
+			//print("$");
+			//print(p->payload);
 		}
 		if(strncmp(p->payload, "220", 3) == 0) {connect_acknowledged=1;stor_complete=0;}
 		else if(strncmp(p->payload, "331", 3) == 0) {user_acknowledged=1;}
@@ -230,7 +230,7 @@ ftpctrl_client_err_callback(void * arg, err_t err)
 static err_t
 ftpctrl_connected_callback(void *arg, struct tcp_pcb *tpcb, err_t err)
 {
-	xil_printf("BIN: ftpctrl_connected_callback: Connected to ftpctrl server\r\n");
+	//xil_printf("BIN: ftpctrl_connected_callback: Connected to ftpctrl server\r\n");
 
 	/* store state */
 	ftpctrl_connected_pcb = tpcb;
@@ -277,7 +277,7 @@ start_ftpctrl_application()
 //	/* initialize data buffer being sent */
 //	for (i = 0; i < SEND_BUFSIZE; i++)
 //		send_buf[i] = (i % 10) + '0';
-	print("BIN: Started FTP control client\n\r");
+	//print("BIN: Started FTP control client\n\r");
 
 	return 0;
 }
@@ -332,7 +332,7 @@ ftpdata_client_err_callback(void * arg, err_t err)
 static err_t
 ftpdata_connected_callback(void *arg, struct tcp_pcb *tpcb, err_t err)
 {
-	xil_printf("txperf: Connected to ftpdata server\r\n");
+	//xil_printf("txperf: Connected to ftpdata server\r\n");
     ftpdata_connected = 1;
 	/* store state */
 	//ftpdata_connected_pcb = tpcb;
@@ -373,7 +373,7 @@ start_ftpdata_application()
 		return err;
 	}
 
-	print("BIN: Started FTP data client\n\r");
+	//print("BIN: Started FTP data client\n\r");
 	return 0;
 }
 
@@ -489,7 +489,7 @@ void ftp_data_sm()
 				ftp_frame_acknowlodged = 0;
 				if(spectrum_nbytes)
 				{
-					print(".");
+					//print(".");
 					ftp_state = buffer_wait_state;
 				}
 				else
@@ -524,7 +524,7 @@ void ftp_data_sm()
 			break;
 		case tcp_data_close_state:
 			buf_sz=tcp_sndbuf(/*ftpdata_connected_pcb*/ftpdata_pcb);
-			xil_printf("tcp_data_close_state: buf_sz=%d\n\r", buf_sz);
+			//xil_printf("tcp_data_close_state: buf_sz=%d\n\r", buf_sz);
 			if(buf_sz == 8192)
 			{
 				ret = tcp_close(/*ftpdata_connected_pcb*/ftpdata_pcb);
@@ -549,7 +549,7 @@ void ftp_data_sm()
 
 void StartFTP_data()
 {
-	print("StartFTP_BIN...\n\r");
+	//print("StartFTP_BIN...\n\r");
 	ftp_state = idle_state;
 }
 
