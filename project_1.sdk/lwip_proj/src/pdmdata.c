@@ -96,7 +96,7 @@ void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
 			// copy the sci data
 			memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data, addr, (N_OF_FRAMES_L1_V0 - gtu_offset)*N_OF_PIXEL_PER_PDM);
 			print("D1");
-			memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data + gtu_offset*N_OF_PIXEL_PER_PDM, addr2, gtu_offset*N_OF_PIXEL_PER_PDM);
+			memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data + (N_OF_FRAMES_L1_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, gtu_offset*N_OF_PIXEL_PER_PDM);
 			print("D2");
 		}
 	}
@@ -125,7 +125,7 @@ void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
 			// copy the sci data
 			memcpy(&Z_DATA_TYPE_SCI_L2.payload.int16_data, addr, 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM);
 			print("D1");
-			memcpy((char*)&Z_DATA_TYPE_SCI_L2.payload.int16_data + 2*gtu_offset*N_OF_PIXEL_PER_PDM, addr2, 2*(gtu_offset)*N_OF_PIXEL_PER_PDM);
+			memcpy((char*)&Z_DATA_TYPE_SCI_L2.payload.int16_data + 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, 2*(gtu_offset)*N_OF_PIXEL_PER_PDM);
 			print("D2");
 		}
 	}
