@@ -171,6 +171,7 @@ void TriggerService()
 	int i, offset;
 	char* ptr;
 	char filename_str[20];
+	static int what_trigger_armed = 0; // 1- L1, 2 - L2, 3 - L3
 	if(systemSettings.isPrinting) xil_printf("#%d", trigger_sm_state);
 	switch(trigger_sm_state)
 	{
@@ -205,15 +206,19 @@ void TriggerService()
 	case wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
+			xil_printf("BufferL2Changed!\n\r");
 			InvalidateCacheRanges(DATA_TYPE_L3);
 			CopyEventData(DATA_TYPE_L3);
 			sprintf(filename_str, FILENAME_MODE_TRIGGER3, instrumentState.file_counter_l3++);
 
 			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V1), filename_str);
 			trigger_sm_state = wait4ftp_ready2;
+			what_trigger_armed = 3;
 		}
 		else if(*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGR_FC_SM_STATE)) == SM_STATE_ARMED)
 		{
+			xil_printf("L2 ARMED!\n\r");
+			DmaResetN(2);
 			InvalidateCacheRanges(DATA_TYPE_L2);
 			CopyEventData(DATA_TYPE_L2);
 			sprintf(filename_str, FILENAME_MODE_TRIGGER2, instrumentState.file_counter_l2++);
@@ -221,11 +226,12 @@ void TriggerService()
 			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L2), sizeof(Z_DATA_TYPE_SCI_L2_V1), filename_str);
 			trigger_sm_state = wait4ftp_ready2;
 
-			*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
-			*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
+			what_trigger_armed = 2;
 		}
 		else if(*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGR_FC_SM_STATE)) == SM_STATE_ARMED)
 		{
+			xil_printf("L1 ARMED!\n\r");
+			DmaResetN(1);
 			InvalidateCacheRanges(DATA_TYPE_L1);
 			CopyEventData(DATA_TYPE_L1);
 			sprintf(filename_str, FILENAME_MODE_TRIGGER1, instrumentState.file_counter_l1++);
@@ -233,13 +239,25 @@ void TriggerService()
 			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L1), sizeof(Z_DATA_TYPE_SCI_L1_V1), filename_str);
 			trigger_sm_state = wait4ftp_ready2;
 
-			*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
-			*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
+			what_trigger_armed = 1;
 		}
 		break;
 	case wait4ftp_ready2:
 		if(IsFTP_bin_idle())
 		{
+			if(what_trigger_armed == 1)
+			{
+				DmaStartN(1);
+				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
+				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
+			}
+			else if(what_trigger_armed == 2)
+			{
+				DmaStartN(2);
+				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
+				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
+			}
+
 			// release trigger
 			trigger_sm_state = idle_state;
 		}

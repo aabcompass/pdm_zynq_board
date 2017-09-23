@@ -146,6 +146,17 @@ void DmaReset(XAxiDma* pdma)
 	XAxiDma_Reset(pdma);
 }
 
+void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
+{
+	if(n == 1)
+		XAxiDma_Reset(&dma_raw);
+	else if(n == 2)
+		XAxiDma_Reset(&dma_l1);
+	else if(n == 3)
+		XAxiDma_Reset(&dma_l2);
+}
+
+
 void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 {
 	//int status;
@@ -155,6 +166,14 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 	//if(status)	print("Error in XAxiDma_SimpleTransfer dma_raw!\n\r");
 }
 
+
+void DmaStartN(int n) //1 - L1, 2 - L2, 3 - L3
+{
+	if(n == 1)
+		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
+	else if(n == 2)
+		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+}
 //void DmaAllStart()
 //{
 //}
@@ -232,6 +251,7 @@ static void RxIntrHandlerL2(void *Callback)
 		return;
 	}
 }
+
 
 int IsBufferL2Changed()
 {
