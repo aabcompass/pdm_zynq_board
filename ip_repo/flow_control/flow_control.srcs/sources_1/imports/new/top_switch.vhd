@@ -189,7 +189,7 @@ architecture Behavioral of axis_flow_control is
 	signal clr_trans_counter : std_logic := '0';
 	
 	signal gtu_sig_d0, gtu_sig_d1: std_logic := '0';
-	signal gtu_sig_counter_l, gtu_sig_counter_h, gtu_sig_counter_4dma : std_logic_vector(31 downto 0) := (others => '0');
+	signal gtu_sig_counter_l, gtu_sig_counter_l_d1, gtu_sig_counter_h, gtu_sig_counter_4dma: std_logic_vector(31 downto 0) := (others => '0');
 	signal gtu_sig_counter_l_latch, gtu_sig_counter_h_latch : std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal trig_test_gtu_time_l, trig_test_gtu_time_h : std_logic_vector(31 downto 0) := (others => '0');
@@ -956,13 +956,15 @@ begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1') then
 				gtu_sig_counter_l <= (others => '0');
+				gtu_sig_counter_l_d1 <= (others => '0');
 				gtu_sig_counter_h <= (others => '0');
 				gtu_sig_counter_4dma <= (others => '0');
 			else
 				gtu_sig_d1 <= gtu_sig_d0;
 				if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
 					gtu_sig_counter_l <= gtu_sig_counter_l + 1;
-					if(gtu_sig_counter_h /= gtu_sig_counter_l and gtu_sig_counter_l = 0) then
+					gtu_sig_counter_l_d1 <= gtu_sig_counter_l;
+					if(gtu_sig_counter_l /= gtu_sig_counter_l_d1 and gtu_sig_counter_l = 0) then
 						gtu_sig_counter_h <= gtu_sig_counter_h + 1;
 					end if;
 					if(pass = '1') then
