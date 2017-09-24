@@ -153,6 +153,8 @@ typedef struct
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
+	// reserv field
+	uint32_t	reserv;
 	// raw data (2.5 us GTU)
 	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L1_V1;

@@ -364,7 +364,7 @@ start_ftpdata_application()
 	//IP4_ADDR(&ipaddr,  192, 168,   7, 2);		/* iperf server address */
 	ipaddr.addr = FTP_SERVER_IP;
 
-	xil_printf("Port_str=%d\n\r", port_str);
+	//xil_printf("Port_str=%d\n\r", port_str);
 	err = tcp_connect(ftpdata_pcb, &ipaddr, port_str, ftpdata_connected_callback);
 	tcp_err(ftpdata_pcb, ftpdata_client_err_callback);
 //	txperf_client_connected = 0;

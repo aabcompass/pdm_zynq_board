@@ -56,13 +56,23 @@ void PrintFrame(int frame_num)
 	}
 }
 
-void PrintFirstElements()
+void PrintFirstElementsL1()
+{
+	int i;
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], sizeof(DataDMA__L1));
+	for(i=0;i<2304/2;i++)
+	{
+		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
+	}
+}
+
+void PrintFirstElementsRaw()
 {
 	int i;
 	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], sizeof(DataDMA__Raw));
-	for(i=0;i<N_FRAMES_DMA_RAW;i++)
+	for(i=0;i<2304/2;i++)
 	{
-		xil_printf("i=%d\t[i][384]=0x%02x\t[i][385]=0x%02x\n\r", i, DataDMA__Raw[0][i][384], DataDMA__Raw[0][i][385]);
+		xil_printf("DataDMA__Raw[0][0][%d]=0x%04x\n\r", i, DataDMA__Raw[0][0][i]);
 	}
 }
 

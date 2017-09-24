@@ -179,6 +179,7 @@ void TriggerService()
 		if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
 		{
 			// configure flow control block according to INSTRUMENT_MODE_FREERUN
+			FlowControlsClr();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
 					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
@@ -189,6 +190,7 @@ void TriggerService()
 		else if(instrumentState.mode == INSTRUMENT_MODE_TRIGGERS)
 		{
 			// configure flow control block according to INSTRUMENT_MODE_TRIGGERS
+			FlowControlsClr();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
 					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG | BIT_FC_EN_ALGO_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
@@ -380,11 +382,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'P')
 	{
-		PrintFirstElements();
+		PrintFirstElementsL1();
 	}
 	else if(c == 'Q')
 	{
-		PrintFrame(num);
+		PrintFirstElementsRaw();
 	}
 	else if(c == '+')
 	{
