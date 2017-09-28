@@ -96,6 +96,7 @@ typedef struct
 	// HVPS status
 	uint32_t hv_status;
 	// raw data (2.5 us GTU)
+	uint32_t padding;
 	uint8_t raw_data [N_OF_FRAMES_RAW_POLY_V0][N_OF_PIXEL_PER_PDM];
 	// integrated data (320 us GTU)
 	uint16_t int16_data [N_OF_FRAMES_INT16_POLY_V0][N_OF_PIXEL_PER_PDM];
@@ -181,7 +182,9 @@ typedef struct
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
-	// raw data (2.5 us GTU)
+	// reserv field
+	uint32_t	reserv;
+	// intergrated data
 	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L2_V1;
 
@@ -208,7 +211,9 @@ typedef struct
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
-	// raw data (2.5 us GTU)
+	// reserv field
+	uint32_t	reserv;
+	// double integrated data
 	uint32_t int32_data[N_OF_FRAMES_L3_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L3_V1;
 
