@@ -75,3 +75,4 @@
 /*.sdk/*hw_platform*/*
 /*.sdk/*hw_platform*/*/
 !/*.sdk/*hw_platform*/*.hdf
+!/*.sdk/*hw_platform*/*.tcl
