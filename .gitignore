@@ -17,6 +17,14 @@
 !/ip_hls_repo/
 !/*.srcs/
 !/*.sdk/
+!/*.runs/
+# in the *.runs folder:
+/*.runs/*
+/*.runs/*/
+!/*.runs/impl_*/
+/*.runs/impl_*/*
+/*.runs/impl_*/*/
+!/*.runs/impl_*/*.bit
 # in the *.srcs folder:
 */.srcs/*
 !/*.srcs/sources_*/
@@ -55,7 +63,8 @@
 !/ip_hls_repo/*/solution*/impl/ip/
 /ip_hls_repo/*/solution*/impl/ip/tmp.*/
 # in the *.sdk folder:
-/*.sdk/*/Debug/
+/*.sdk/*/Debug/*
+!/*.sdk/*/Debug/*.elf
 /*.sdk/*/ps7_cortexa9_0/
 /*.sdk/RemoteSystemsTempFiles/
 /*.sdk/*.hdf
