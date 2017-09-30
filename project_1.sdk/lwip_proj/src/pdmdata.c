@@ -20,7 +20,8 @@ uint32_t DataDMA__L2[N_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __at
 //uint16_t DataDMA_tst_L2[DMA_CYCLIC_BUF_SIZE] __attribute__ ((aligned (64)));
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
-volatile u32 current_buffer_L2 = 0, buffer_L2_changed;
+volatile u32 current_buffer_L2 = 0;
+volatile u32 buffer_L2_changed;
 
 Z_DATA_TYPE_SCI_L1_V1 Z_DATA_TYPE_SCI_L1;
 Z_DATA_TYPE_SCI_L2_V1 Z_DATA_TYPE_SCI_L2;

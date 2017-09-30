@@ -179,7 +179,7 @@ void TriggerService()
 		if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
 		{
 			// configure flow control block according to INSTRUMENT_MODE_FREERUN
-			FlowControlsClr();
+			FlowControlsClrUnset();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
 					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
@@ -190,7 +190,7 @@ void TriggerService()
 		else if(instrumentState.mode == INSTRUMENT_MODE_TRIGGERS)
 		{
 			// configure flow control block according to INSTRUMENT_MODE_TRIGGERS
-			FlowControlsClr();
+			FlowControlsClrUnset();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
 					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG | BIT_FC_EN_ALGO_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
@@ -200,6 +200,7 @@ void TriggerService()
 		}
 		else if(instrumentState.mode == INSTRUMENT_MODE_NONE)
 		{
+			FlowControlsClrSet();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = 0;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
@@ -259,7 +260,7 @@ void TriggerService()
 				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
 				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
 			}
-
+			what_trigger_armed = 0;
 			// release trigger
 			trigger_sm_state = idle_state;
 		}
