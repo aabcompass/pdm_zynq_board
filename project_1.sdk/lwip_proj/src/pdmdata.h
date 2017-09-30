@@ -20,6 +20,7 @@
 
 #define N_OF_SCURVE_THRS		1024
 
+#pragma pack(push, 1) /* force no padding in structs */
 
 //-----------------------------------------------------------------------------
 
@@ -96,7 +97,6 @@ typedef struct
 	// HVPS status
 	uint32_t hv_status;
 	// raw data (2.5 us GTU)
-	uint32_t padding;
 	uint8_t raw_data [N_OF_FRAMES_RAW_POLY_V0][N_OF_PIXEL_PER_PDM];
 	// integrated data (320 us GTU)
 	uint16_t int16_data [N_OF_FRAMES_INT16_POLY_V0][N_OF_PIXEL_PER_PDM];
@@ -148,14 +148,13 @@ typedef struct
 // 4) records the (N_OF_FRAMES_L1 / 2) raw data frames preserved after L1 event
 // Then Zynq collects this data in the DATA_TYPE_SCI_L1 structure and holds it until the end of current lifecycle
 
+
 typedef struct
 {
 	// Unix timestamp
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
-	// reserv field
-	uint32_t	reserv;
 	// raw data (2.5 us GTU)
 	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L1_V1;
@@ -168,6 +167,7 @@ typedef struct
 	ZynqBoardHeader zbh;
 	DATA_TYPE_SCI_L1_V1 payload;
 } Z_DATA_TYPE_SCI_L1_V1;
+
 
 // If L2 occurred, Zynq makes:
 // 1) the timestamp for this event,
@@ -182,8 +182,6 @@ typedef struct
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
-	// reserv field
-	uint32_t	reserv;
 	// intergrated data
 	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L2_V1;
@@ -211,8 +209,6 @@ typedef struct
 	TimeStamp_symplified ts;
 	// HVPS status
 	uint32_t hv_status;
-	// reserv field
-	uint32_t	reserv;
 	// double integrated data
 	uint32_t int32_data[N_OF_FRAMES_L3_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L3_V1;
@@ -291,5 +287,7 @@ typedef struct
 	ZynqBoardHeader zbh;
 	DATA_TYPE_HVPS_LOG_V0 payload[HVPS_LOG_SIZE_NRECORDS];
 } Z_DATA_TYPE_HVPS_LOG_V0;
+
+#pragma pack(pop) /* return to normal packing */
 
 #endif /* SRC_PDMDATA_H_ */
