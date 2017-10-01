@@ -212,9 +212,11 @@ void TriggerService()
 			xil_printf("BufferL2Changed!\n\r");
 			InvalidateCacheRanges(DATA_TYPE_L3);
 			CopyEventData(DATA_TYPE_L3);
-			sprintf(filename_str, FILENAME_MODE_TRIGGER3, instrumentState.file_counter_l3++);
-
-			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V1), filename_str);
+			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
+			{
+				sprintf(filename_str, FILENAME_MODE_TRIGGER3, instrumentState.file_counter_l3++);
+				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V1), filename_str);
+			}
 			trigger_sm_state = wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}
@@ -224,9 +226,11 @@ void TriggerService()
 			DmaResetN(2);
 			InvalidateCacheRanges(DATA_TYPE_L2);
 			CopyEventData(DATA_TYPE_L2);
-			sprintf(filename_str, FILENAME_MODE_TRIGGER2, instrumentState.file_counter_l2++);
-
-			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L2), sizeof(Z_DATA_TYPE_SCI_L2_V1), filename_str);
+			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
+			{
+				sprintf(filename_str, FILENAME_MODE_TRIGGER2, instrumentState.file_counter_l2++);
+				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L2), sizeof(Z_DATA_TYPE_SCI_L2_V1), filename_str);
+			}
 			trigger_sm_state = wait4ftp_ready2;
 
 			what_trigger_armed = 2;
@@ -237,11 +241,12 @@ void TriggerService()
 			DmaResetN(1);
 			InvalidateCacheRanges(DATA_TYPE_L1);
 			CopyEventData(DATA_TYPE_L1);
-			sprintf(filename_str, FILENAME_MODE_TRIGGER1, instrumentState.file_counter_l1++);
-
-			SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L1), sizeof(Z_DATA_TYPE_SCI_L1_V1), filename_str);
+			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
+			{
+				sprintf(filename_str, FILENAME_MODE_TRIGGER1, instrumentState.file_counter_l1++);
+				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L1), sizeof(Z_DATA_TYPE_SCI_L1_V1), filename_str);
+			}
 			trigger_sm_state = wait4ftp_ready2;
-
 			what_trigger_armed = 1;
 		}
 		break;
@@ -477,6 +482,7 @@ void SetDefaultParameters()
 	SetDefaultSCParameters();
 
 	instrumentState.mode = INSTRUMENT_MODE_NONE;
+	instrumentState.ftp_files_mode = INSTRUMENT_FTPFILES_SEPARATED;
 	instrumentState.file_counter_l1 = 0;
 	instrumentState.file_counter_l2 = 0;
 	instrumentState.file_counter_l3 = 0;

@@ -61,6 +61,7 @@ typedef struct
 typedef struct
 {
 	u32 mode;
+	u32 ftp_files_mode;
 	//u32 is_started;
 	int file_counter_l1;
 	int file_counter_l2;

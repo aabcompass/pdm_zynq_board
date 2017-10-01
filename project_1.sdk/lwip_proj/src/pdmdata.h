@@ -219,16 +219,32 @@ typedef struct
 	DATA_TYPE_SCI_L3_V1 payload;
 } Z_DATA_TYPE_SCI_L3_V1;
 
+/* zynq packet passed to the CPU every 5.24 s */
+/* 4718772 bytes */
+#define MAX_PACKETS_L1 4
+#define MAX_PACKETS_L2 4
+#define MAX_PACKETS_L3 1
+typedef struct
+{
+  Z_DATA_TYPE_SCI_L1_V1 level1_data[MAX_PACKETS_L1]; /* 294932 * 4 bytes */
+  Z_DATA_TYPE_SCI_L2_V1 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
+  Z_DATA_TYPE_SCI_L3_V1 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
+} ZYNQ_PACKET;
+
+
 #define INSTRUMENT_MODE_NONE			0
 #define INSTRUMENT_MODE_OLD_PROTOCOL	1
 #define INSTRUMENT_MODE_FREERUN			2
 #define INSTRUMENT_MODE_TRIGGERS		3
 
+#define INSTRUMENT_FTPFILES_CONCAT		0
+#define INSTRUMENT_FTPFILES_SEPARATED	1
 
 #define FILENAME_MODE_TRIGGER1 	"frm_tr1_%08d.dat"
 #define FILENAME_MODE_TRIGGER2 	"frm_tr2_%08d.dat"
 #define FILENAME_MODE_TRIGGER3 	"frm_tr3_%08d.dat"
 #define FILENAME_SCURVE	 		"scurve_%08d.dat"
+#define FILENAME_CONCATED		"frm_cc_%08d.dat"
 
 //========================================
 //  S-curve structures
