@@ -4,6 +4,7 @@
 #include "axi_spectral_core.h"
 #include <string.h>
 #include "hv.h"
+#include "ver.h"
 
 u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
@@ -49,6 +50,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		strcpy(ans_str, __DATE__);
 		strcat(ans_str, " ");
 		strcat(ans_str, __TIME__);
+		strcat(ans_str, " ");
+		strcat(ans_str, VER_STRING);
 		strcat(ans_str, "\r\n");
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 	}

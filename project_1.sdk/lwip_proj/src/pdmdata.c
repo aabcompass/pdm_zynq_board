@@ -48,6 +48,11 @@ void* GetZ_DATA_TYPE_SCI_ptr(int data_type) // 1 - L1, 2 - L2, 3 - L3
 		return &zynqPacket.level3_data[0];
 }
 
+void* Get_ZYNQ_PACKET()
+{
+	return &zynqPacket;
+}
+
 void PrintFrame(int frame_num)
 {
 	int i;
