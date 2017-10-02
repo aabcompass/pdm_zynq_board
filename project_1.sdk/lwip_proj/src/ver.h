@@ -8,7 +8,7 @@
 #ifndef SRC_VER_H_
 #define SRC_VER_H_
 
-#define VER_STRING "v1.1.1"
+#define VER_STRING "v1.2.1"
 
 
 #endif /* SRC_VER_H_ */

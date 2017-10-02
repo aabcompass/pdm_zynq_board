@@ -135,7 +135,7 @@ void LoadSameDataToSlowControl(SLOWCTRL_SP3_SAME_ASIC_V1* data)
 void LoadSameDataToSlowControl2(u32 current_dac_value)
 {
 	u32 s_value=0, i;
-	xil_printf("dac=%d", current_dac_value);
+	xil_printf("dac=%d ", current_dac_value);
 	slowctrl_samedata.misc_reg0 = 0x07A20007 | current_dac_value<<7 | s_value<<3;
 	LoadSameDataToSlowControl(&slowctrl_samedata);
 	for(i=0;i<1000000;i++);

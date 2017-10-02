@@ -8,6 +8,9 @@
 #ifndef SRC_PDMDP_ERR_H_
 #define SRC_PDMDP_ERR_H_
 
-#define ERR_PDM_OUT_OF_RANGE	2
+#define ERR_OK							0
+#define ERR_NO_SUCH_COMMAND				1
+#define ERR_PDM_OUT_OF_RANGE			2
+#define ERR_SCURVE_IS_BEING_GATHERED	3
 
 #endif /* SRC_PDMDP_ERR_H_ */

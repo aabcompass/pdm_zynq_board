@@ -588,6 +588,12 @@ void InitHLS_peripherals()
 	XL2_trigger_Start(&l2trigger);
 }
 
+static void delay(int time)
+{
+	int i;
+	for(i=0;i<70000*time;i++); // 100 thousands means 1 ms
+}
+
 int start_application()
 {
 	struct tcp_pcb *pcb;

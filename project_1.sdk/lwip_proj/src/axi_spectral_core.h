@@ -43,12 +43,15 @@ typedef struct
 	u32 n_tries; // ����� ������� ����� �� ����������������� IP
 } NetworkNVSettings;
 
+
 typedef struct
 {
 	u32 start_dac_value;
 	u32 stop_dac_value;
 	u32 step_dac_value;
 	u32 accumulation;
+	u32 current_dac_value;
+	u32 is_scurve_being_gathered;
 } SCurveStruct;
 
 typedef struct

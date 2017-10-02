@@ -44,7 +44,7 @@ volatile u32 hvps_log_current_record = 0;
 
 
 
-void delay(int time)
+static void delay(int time)
 {
 	int i;
 	for(i=0;i<70000*time;i++); // 100 thousands means 1 ms

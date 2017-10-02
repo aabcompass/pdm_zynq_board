@@ -9,6 +9,8 @@
 #include "xscugic.h"
 #include "xparameters.h"
 #include "axis_flowctrl.h"
+#include "axi_spectral_core.h"
+#include "pdmdp_err.h"
 
 
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
@@ -23,10 +25,9 @@ volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter
 volatile u32 current_buffer_L2 = 0;
 volatile u32 buffer_L2_changed;
 
-//Z_DATA_TYPE_SCI_L1_V1 Z_DATA_TYPE_SCI_L1;
-//Z_DATA_TYPE_SCI_L2_V1 Z_DATA_TYPE_SCI_L2;
-//Z_DATA_TYPE_SCI_L3_V1 Z_DATA_TYPE_SCI_L3;
 ZYNQ_PACKET zynqPacket;
+Z_DATA_TYPE_SCURVE_V1 scurvePacket;
+SCurveStruct sCurveStruct;
 
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
@@ -439,3 +440,66 @@ void ProvideTestDataL1()
 		//print("*-------->");
 	}
 }
+
+//////////////////////
+/// S-CURVE
+//////////////////////
+
+static void delay(int time)
+{
+	int i;
+	for(i=0;i<70000*time;i++); // 100 thousands means 1 ms
+}
+
+int StartScurveGathering(u32 start_dac_value, u32 step_dac_value, u32 stop_dac_value, u32 accumulation)
+{
+	if (sCurveStruct.is_scurve_being_gathered) return ERR_SCURVE_IS_BEING_GATHERED;
+	sCurveStruct.accumulation = accumulation;
+	sCurveStruct.current_dac_value = start_dac_value;
+	sCurveStruct.is_scurve_being_gathered = 1;
+	sCurveStruct.step_dac_value = step_dac_value;
+	sCurveStruct.start_dac_value = start_dac_value;
+	sCurveStruct.stop_dac_value = stop_dac_value;
+	memset(&scurvePacket.payload, 0xFFFFFFFF, sizeof(scurvePacket.payload));
+	return ERR_OK;
+}
+
+SCurveStruct* GetSCurveStruct()
+{
+	return &sCurveStruct;
+}
+
+
+void ScurveService()
+{
+	char filename_str[20];
+	static u32 scurve_counter = 0;
+	if(sCurveStruct.is_scurve_being_gathered)
+	{
+		LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
+		delay(10);
+		//TODO fill the array
+		// Now just write zeros to there
+		if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
+		{
+			print("\n\rWrong s-curve address!!\n\r");
+			return;
+		}
+		memset(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], 0, sizeof(u32)*N_OF_PIXEL_PER_PDM);
+		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
+		if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
+		{
+			sCurveStruct.is_scurve_being_gathered = 0;
+			sprintf(filename_str, FILENAME_SCURVE, scurve_counter++);
+			SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
+		}
+	}
+}
+
+void ScurveDataInit()
+{
+	scurvePacket.zbh.header = BuildHeader(DATA_TYPE_SCURVE, 1);
+	scurvePacket.zbh.payload_size = sizeof(DATA_TYPE_SCURVE_V1);
+	memset(&sCurveStruct, 0, sizeof(sCurveStruct));
+}
+

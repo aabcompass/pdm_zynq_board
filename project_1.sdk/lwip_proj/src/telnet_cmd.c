@@ -10,7 +10,7 @@ u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
 
 
-u32 scurve_counter = 0;
+
 u32 frame_counter = 0;
 extern SCurveStruct sCurveStruct;
 extern InstrumentState instrumentState;
@@ -21,6 +21,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
 	u8 str_len=0; char reply[128];
 	u32 get_len, param, i;
+	u32 param0, param1, param2, param3, param4;
 	u64 long_param;
 	u8 array_param[15];
 	char ans_str[64]; u8 ans_pos;
@@ -40,9 +41,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	}
 	else if(strncmp(p->payload, "instrument status", 17) == 0)
 	{
-		char ok_eomess_str[] = "Ok\n\r";
 		sprintf(reply, "%d %d\n\r", GetFTP_bin_State(), instrumentState.mode);
-		tcp_write(tpcb, reply, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, reply, sizeof(reply), 1);
 	}
 	else if(strncmp(p->payload, "instrument ver", 14) == 0)
 	{
@@ -131,24 +131,24 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 //		char str[] = "Ok\n\r";
 //		tcp_write(tpcb, str, sizeof(str), 1);
 //	}
-//	else if(sscanf(p->payload, "acq sweep %d %d %d %d",
-//			&sCurveStruct.start_dac_value,
-//			&sCurveStruct.step_dac_value,
-//			&sCurveStruct.stop_dac_value,
-//			&sCurveStruct.accumulation) == 4)
-//	{
-//		u32 datasize = 0;
-//		char filename_str[20];
-//		//TODO !!! Use new functions for gather data !!!
-//		GetSCurveFromAllArtix(scurve_buffer, &datasize);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		sprintf(filename_str, "sc_%08d.dat", scurve_counter++);
-//		SendSpectrum2FTP(scurve_buffer, datasize, filename_str);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		//TODO !!! We must wait for operation complete !!!
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
+	else if(sscanf(p->payload, "acq scurve %d %d %d %d",
+			&param0,
+			&param1,
+			&param2,
+			&param3) == 4)
+	{
+		u32 datasize = 0;
+		ret = StartScurveGathering(param0, param1, param2, param3);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "acq scurve status", 17) == 0)
+	{
+		SCurveStruct* pSCurveStruct;
+		pSCurveStruct = GetSCurveStruct();
+		sprintf(reply, "CurrentDAC=%d GatheringInProgress=%d\n\r", pSCurveStruct->current_dac_value, pSCurveStruct->is_scurve_being_gathered);
+		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
 //	else if(strncmp(p->payload, "acq shot", 8) == 0)
 //	{
 //		u32 datasize = 0;
