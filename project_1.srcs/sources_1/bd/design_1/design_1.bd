@@ -270,13 +270,13 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc_art</spirit:name>
+          <spirit:name>sr_ck_pc</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc</spirit:name>
+          <spirit:name>sr_ck_pc_art</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
@@ -1026,7 +1026,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_7</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_0_9</spirit:configurableElementValue>
@@ -1036,7 +1036,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_8</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_2</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_7_0</spirit:configurableElementValue>
@@ -1046,7 +1046,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_9</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_4</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_7_1</spirit:configurableElementValue>
@@ -1056,7 +1056,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L9</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L2_7</spirit:configurableElementValue>
@@ -1066,7 +1066,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L10</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_2</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L9_0</spirit:configurableElementValue>
@@ -1076,7 +1076,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L11</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_3</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L9_1</spirit:configurableElementValue>
@@ -1163,7 +1163,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_10</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_7_2</spirit:configurableElementValue>
@@ -1173,7 +1173,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_11</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_3</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_8_0</spirit:configurableElementValue>
@@ -1183,7 +1183,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_dwidth_converter_12</spirit:instanceName>
+        <spirit:instanceName>axis_dwidth_conv_sw_5</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_dwidth_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_dwidth_converter_9_0</spirit:configurableElementValue>
@@ -1193,7 +1193,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L12</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L9_2</spirit:configurableElementValue>
@@ -1203,7 +1203,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L13</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_4</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L11_0</spirit:configurableElementValue>
@@ -1213,7 +1213,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_data_fifo_fc_L14</spirit:instanceName>
+        <spirit:instanceName>axis_fifo_sw_5</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_data_fifo" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_data_fifo_fc_L13_0</spirit:configurableElementValue>
@@ -1359,6 +1359,13 @@
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_hv_hk_v1_0_0_1</spirit:configurableElementValue>
           <spirit:configurableElementValue spirit:referenceId="C_S00_AXI_ADDR_WIDTH">7</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>xlconstant_2</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconstant" spirit:vendor="xilinx.com" spirit:version="1.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_xlconstant_2_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -1605,12 +1612,12 @@
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_7_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_7"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L9"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_0"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L9_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L9"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_0"/>
         <spirit:activeInterface spirit:busRef="s_axis_0" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
@@ -1720,83 +1727,83 @@
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L12_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L12"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_1"/>
         <spirit:activeInterface spirit:busRef="s_axis_1" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L10_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L10"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_2"/>
         <spirit:activeInterface spirit:busRef="s_axis_2" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L11_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L11"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_3"/>
         <spirit:activeInterface spirit:busRef="s_axis_3" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L13_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L13"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_4"/>
         <spirit:activeInterface spirit:busRef="s_axis_4" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_fc_L14_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_fifo_fc_L14"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_fifo_sw_5"/>
         <spirit:activeInterface spirit:busRef="s_axis_5" spirit:componentRef="top_switch_raw"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_10_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_10"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L12"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_1"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_1"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_8_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_8"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L10"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_2"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_2"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_11_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_11"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L11"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_3"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_3"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_9_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_9"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L13"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_4"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_4"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_12_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_12"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_fc_L14"/>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_conv_sw_5"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_fifo_sw_5"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r10_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r10"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_7"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r11_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r11"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_10"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_1"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r12_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r12"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_8"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_2"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r13_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r13"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_11"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_3"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r14_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r14"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_9"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_4"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r15_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_1r15"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_12"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_conv_sw_5"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>inst_interconnect_100MHz_M04_AXI</spirit:name>
@@ -1947,6 +1954,9 @@
         <spirit:internalPortReference spirit:componentRef="l2_trigger_0" spirit:portRef="ap_clk"/>
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="S_AXI_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ACLK"/>
@@ -1967,9 +1977,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="S_AXI_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>processing_system7_0_FCLK_RESET0_N</spirit:name>
@@ -2016,6 +2023,9 @@
         <spirit:internalPortReference spirit:componentRef="axis_clock_converter_0" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="l2_trigger_0" spirit:portRef="ap_rst_n"/>
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="S_AXI_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M01_ARESETN"/>
@@ -2034,9 +2044,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L2" spirit:portRef="S_AXI_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>rst_processing_system7_0_50M_interconnect_aresetn</spirit:name>
@@ -2107,8 +2114,8 @@
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_ck_pc</spirit:name>
         <spirit:internalPortReference spirit:componentRef="spaciroc3_sc_0" spirit:portRef="sr_ck_pc"/>
-        <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
         <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
+        <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_rstb_pc</spirit:name>
@@ -2268,21 +2275,21 @@
         <spirit:internalPortReference spirit:componentRef="axis_clock_converter_4" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_clock_converter_2" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_clock_converter_3" spirit:portRef="m_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L11" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L10" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L9" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_7" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_8" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_9" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_3" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_2" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_0" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_0" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_2" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_4" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="processing_system7_0" spirit:portRef="M_AXI_GP0_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="processing_system7_0" spirit:portRef="S_AXI_HP0_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="rst_processing_system7_0_200M" spirit:portRef="slowest_sync_clk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_10" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_11" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_12" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L14" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L13" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L12" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_1" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_3" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_5" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_5" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_4" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_1" spirit:portRef="s_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r10" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r11" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r12" spirit:portRef="aclk"/>
@@ -2299,6 +2306,8 @@
         <spirit:internalPortReference spirit:componentRef="top_switch_tst" spirit:portRef="s_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_tst" spirit:portRef="S_AXI_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="ALGO_B_0" spirit:portRef="CLOCK_200"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="S_AXI_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ACLK"/>
@@ -2311,22 +2320,20 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M03_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="S_AXI_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L9_axis_data_count</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L9" spirit:portRef="axis_data_count"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_0" spirit:portRef="axis_data_count"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="gpio_0"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L11_axis_data_count</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L11" spirit:portRef="axis_data_count"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_3" spirit:portRef="axis_data_count"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="gpio_1"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L10_axis_data_count</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L10" spirit:portRef="axis_data_count"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_2" spirit:portRef="axis_data_count"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="gpio_2"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
@@ -2375,21 +2382,21 @@
         <spirit:internalPortReference spirit:componentRef="axis_combiner_0" spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_combiner_2" spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_combiner_1" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_7" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_8" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_9" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L9" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L10" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L11" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_0" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_2" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_4" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_0" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_2" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_3" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_data_fifo_6" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_dma_raw" spirit:portRef="axi_resetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_dma_tst_L1" spirit:portRef="axi_resetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_10" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_11" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_dwidth_converter_12" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L14" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L13" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_data_fifo_fc_L12" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_1" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_3" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_dwidth_conv_sw_5" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_5" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_4" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_fifo_sw_1" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r10" spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r11" spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_broadcaster_1r12" spirit:portRef="aresetn"/>
@@ -2403,6 +2410,8 @@
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="S_AXI_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_tst" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_tst" spirit:portRef="S_AXI_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="S_AXI_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S01_ARESETN"/>
@@ -2413,8 +2422,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M03_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_L1" spirit:portRef="S_AXI_ARESETN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconcat_1_dout</spirit:name>
@@ -2509,6 +2516,11 @@
         <spirit:name>hv_hk_v1_0_0_intr_out</spirit:name>
         <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="intr_out"/>
         <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In3"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>xlconstant_2_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="xlconstant_2" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="axis_combiner_0" spirit:portRef="m_axis_tready"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
