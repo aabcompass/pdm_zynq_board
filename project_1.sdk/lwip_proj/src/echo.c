@@ -200,7 +200,7 @@ void TriggerService()
 		}
 		else if(instrumentState.mode == INSTRUMENT_MODE_NONE)
 		{
-			FlowControlsClrSet();
+			//FlowControlsClrSet();
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = 0;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
@@ -449,6 +449,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 'i')
 	{
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
+	}
+	else if(c == 'c')
+	{
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
 	else if(c == 'U')
 	{

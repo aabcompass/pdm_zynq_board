@@ -196,6 +196,7 @@ architecture Behavioral of axis_flow_control is
 	signal periodic_trig_phase : std_logic_vector(20 downto 0) := (others => '0');
 	
 	signal led_cnt : std_logic_vector(23 downto 0) := (others => '0');
+	signal dma_length, dma_length_cntr : std_logic_vector(19 downto 0) := (others => '0');
 	
 	signal int_trig_d0, int_trig_d1, int_trig, trig_force : std_logic := '0';
 
@@ -211,6 +212,62 @@ architecture Behavioral of axis_flow_control is
 	signal trig_button_debounced: std_logic;
 	signal trig_button_n: std_logic;
 	signal clr_all: std_logic;
+	
+	signal restart_intr: std_logic;
+	
+	COMPONENT axis_fifo_fc
+		PORT (
+			s_axis_aresetn : IN STD_LOGIC;
+			s_axis_aclk : IN STD_LOGIC;
+			s_axis_tvalid : IN STD_LOGIC;
+			s_axis_tready : OUT STD_LOGIC;
+			s_axis_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+			m_axis_tvalid : OUT STD_LOGIC;
+			m_axis_tready : IN STD_LOGIC;
+			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
+	END COMPONENT;
+	
+	COMPONENT axis_fifo_fc_32
+		PORT (
+			s_axis_aresetn : IN STD_LOGIC;
+			s_axis_aclk : IN STD_LOGIC;
+			s_axis_tvalid : IN STD_LOGIC;
+			s_axis_tready : OUT STD_LOGIC;
+			s_axis_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+			m_axis_tvalid : OUT STD_LOGIC;
+			m_axis_tready : IN STD_LOGIC;
+			m_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
+	END COMPONENT;
+	
+	signal axis_fifo_fc_count: std_logic_vector(31 downto 0) := (others => '0');
+	
+	signal m_axis_tlast_i : std_logic := '0';
+	
+	signal m_axis_tvalid_not_buffered : std_logic := '0';--=> s_axis_tvalid_not_buffered,
+	signal m_axis_tready_not_buffered : std_logic := '0';--=> s_axis_tready_not_buffered,
+	signal m_axis_tdata_not_buffered: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
+
+	signal m_axis_tvalid_key, m_axis_tready_key, pass_intr: std_logic := '0';
+	
+	attribute keep : string;  
+	attribute keep of m_axis_tvalid_key: signal is "true";  
+	attribute keep of m_axis_tready_key: signal is "true";  
+	attribute keep of pass_intr: signal is "true";  
+	attribute keep of m_axis_tvalid_not_buffered: signal is "true";  
+	attribute keep of m_axis_tdata_not_buffered: signal is "true";  
+	attribute keep of m_axis_tready_not_buffered: signal is "true";  
+	attribute keep of m_axis_tlast_i: signal is "true";  
+	attribute keep of axis_fifo_fc_count: signal is "true";  
+	attribute keep of dma_length_cntr: signal is "true";  
+	attribute keep of dma_length: signal is "true";  
 
 begin
 
@@ -817,9 +874,8 @@ begin
 
 	trig <= ((trig0 or trig1 or trig2) and en_algo_trig) or (int_trig and en_int_trig) or (periodic_trig and periodic_trig_en) or trig_force or trig_button_debounced;
 
-	m_axis_tdata <= s_axis_tdata;
-	m_axis_tvalid <= s_axis_tvalid and pass;
-	m_axis_tlast <= '0';--s_axis_tlast;
+	m_axis_tdata_not_buffered <= s_axis_tdata;
+	m_axis_tvalid_not_buffered <= s_axis_tvalid and pass;
 	s_axis_tready <= '1';
 
 	is_started <= slv_reg0(0);
@@ -830,6 +886,7 @@ begin
 	clr_trans_counter <= slv_reg1(0);
 	clear_error <= slv_reg1(1);
 	clr_all <= slv_reg1(2);
+	restart_intr <= slv_reg1(3);
 	
 	trig_delay <= slv_reg2(C_CNT_DWIDTH-1 downto 0);
 
@@ -840,6 +897,7 @@ begin
 	trig_test_gtu_time_l <= slv_reg6;
 	
 	periodic_trig_phase <= slv_reg7(20 downto 0);
+	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
 
 	slv_reg16 <= gpio_0;
 	slv_reg17 <= gpio_1;
@@ -853,6 +911,7 @@ begin
 	slv_reg24(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
 	slv_reg25(0) <= m_axis_fifo_error; 
 	slv_reg26(3 downto 0) <= sm_state;
+	slv_reg26(16) <= pass_intr;
 	slv_reg27 <= gtu_sig_counter_h;
 	slv_reg28 <= gtu_sig_counter_l;
 	slv_reg29 <= gtu_sig_counter_h_latch;
@@ -926,7 +985,7 @@ begin
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			case state is
-				when 0 => if(is_started = '1' and m_axis_tready = '0') then
+				when 0 => if(is_started = '1' and m_axis_tready_not_buffered = '0') then
 										m_axis_fifo_error <= '1';
 										state := 1;
 									end if;
@@ -1020,6 +1079,75 @@ begin
 			end case;
 		end if;
 	end process;
-	
 
+	axis_fifo_fc_64_gen: if(C_AXIS_DWIDTH = 64) generate
+		i_axis_fifo_fc : axis_fifo_fc
+			PORT MAP (
+				s_axis_aresetn => s_axis_aresetn,
+				s_axis_aclk => s_axis_aclk,
+				s_axis_tvalid => m_axis_tvalid_not_buffered,
+				s_axis_tready => m_axis_tready_not_buffered,
+				s_axis_tdata => m_axis_tdata_not_buffered,
+				m_axis_tvalid => m_axis_tvalid_key,
+				m_axis_tready => m_axis_tready_key,
+				m_axis_tdata => m_axis_tdata,
+				axis_data_count => axis_fifo_fc_count,
+				axis_wr_data_count => open,
+				axis_rd_data_count => open
+			);
+	end generate;		
+
+	axis_fifo_fc_32_gen: if(C_AXIS_DWIDTH = 32) generate
+		i_axis_fifo_fc : axis_fifo_fc_32
+			PORT MAP (
+				s_axis_aresetn => s_axis_aresetn,
+				s_axis_aclk => s_axis_aclk,
+				s_axis_tvalid => m_axis_tvalid_not_buffered,
+				s_axis_tready => m_axis_tready_not_buffered,
+				s_axis_tdata => m_axis_tdata_not_buffered,
+				m_axis_tvalid => m_axis_tvalid_key,
+				m_axis_tready => m_axis_tready_key,
+				m_axis_tdata => m_axis_tdata,
+				axis_data_count => axis_fifo_fc_count,
+				axis_wr_data_count => open,
+				axis_rd_data_count => open
+			);
+	end generate;		
+
+
+	m_axis_tlast <= m_axis_tlast_i;
+
+	m_axis_tlast_not_buffered_former: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then			
+			-- with restart_intr asserted, we close output data
+			if(restart_intr = '1' or clr_all = '1') then
+				dma_length_cntr <= (others => '0');
+				pass_intr <= '0';
+				m_axis_tlast_i <= '0';
+			else
+				-- manage with dma_length_cntr, pass_intr
+				if(m_axis_tvalid_key = '1' and m_axis_tready = '1') then	
+					if(dma_length_cntr /= dma_length-1) then
+						dma_length_cntr <= dma_length_cntr + 1;
+						pass_intr <= '1';
+					else
+						pass_intr <= '0'; -- close output data flow after valid m_axis_tlast_i, wait until restart_intr or clr_all
+					end if;	
+				end if;
+				-- assert m_axis_tlast_i according with counter
+				if(dma_length_cntr = dma_length-2) then
+					m_axis_tlast_i <= '1';
+				else
+					m_axis_tlast_i <= '0';
+				end if;	
+					
+			end if;	
+		end if;
+	end process;
+	
+	-- output data switch
+	m_axis_tvalid <= m_axis_tvalid_key and pass_intr;
+	m_axis_tready_key <= m_axis_tready and pass_intr;
+		
 end Behavioral;

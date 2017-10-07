@@ -18,6 +18,7 @@
 #define REGW_TRIG_TST_GTU_H			5
 #define REGW_TRIG_TST_GTU_L			6
 #define REGW_PERIODIC_TRIG_PHASE	7
+#define REGW_DMA_LENGTH				8
 
 #define REGR_GPIO_0			16
 #define REGR_GPIO_1			17
@@ -64,6 +65,7 @@
 #define BIT_FC_CLR_TRANS_CNT	(1<<0)
 #define BIT_FC_CLR_ERROR		(1<<1)
 #define BIT_FC_CLR_ALL			(1<<2)
+#define BIT_FC_CLR_INTR			(1<<3)
 
 #define BIT_FC_RELEASE			(1<<0)
 #define BIT_FC_TRIG_FORCE		(1<<1)

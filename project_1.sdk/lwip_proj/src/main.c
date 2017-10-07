@@ -118,20 +118,28 @@ int LoadArtix()
 	int err;
 	char artixBitstream[10000000]; // 10 MBytes
 	int artixBitstream_size;
-	print("Loading bitstream to the cross board\n\r");
-	PrepareArtixConfiguration();
-	err = ReadArtixBitstream(&artixBitstream, &artixBitstream_size);
-	if(!err) {
-		SetBitstreamPtr(&artixBitstream, artixBitstream_size);
-		init_loadbit_spi();
-		upload_bit();
-		print("Cross board has been loaded\n\r");
-	} else {
-		print("Cross board NOT loaded\n\r");
+	if(*(u32*)(XPAR_AXI_GPIO_0_BASEADDR) & 0x7)
+	{
+		print("Artix already loaded.\n\r");
 	}
-	instrumentState.artix_locked = *(u32*)(XPAR_AXI_GPIO_0_BASEADDR);
-	xil_printf("artix_locked = %x\n\r", instrumentState.artix_locked);
-	//FfsSdClose();
+	else
+	{
+		print("Loading bitstream to the cross board\n\r");
+		PrepareArtixConfiguration();
+		err = ReadArtixBitstream(&artixBitstream, &artixBitstream_size);
+		if(!err) {
+			SetBitstreamPtr(&artixBitstream, artixBitstream_size);
+			init_loadbit_spi();
+			upload_bit();
+			print("Cross board has been loaded\n\r");
+		} else {
+			print("Cross board NOT loaded\n\r");
+		}
+		instrumentState.artix_locked = *(u32*)(XPAR_AXI_GPIO_0_BASEADDR);
+		xil_printf("artix_locked = %x\n\r", instrumentState.artix_locked);
+		//FfsSdClose();
+	}
+	return 0;
 }
 
 //int LoadSpaciroc1()

@@ -77,8 +77,8 @@ void PrintFirstElementsL1()
 void PrintFirstElementsRaw()
 {
 	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1/*sizeof(DataDMA__Raw)*/);
-	for(i=0;i<1/*2304/2*/;i++)
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 10/*sizeof(DataDMA__Raw)*/);
+	for(i=0;i<10/*2304/2*/;i++)
 	{
 		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
 		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
@@ -223,12 +223,14 @@ static void RxIntrHandlerRaw(void *Callback)
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
 	/*Interrupt on Error because we are using overflow*/
-	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
+	//if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
 	{
 		DmaReset(AxiDmaInst);
 
 		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
 		dma_intr_counter_raw++;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 		//print("x");
 
 		return;
@@ -247,11 +249,13 @@ static void RxIntrHandlerL1(void *Callback)
 	/* Acknowledge pending interrupts */
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
-	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
+	//if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
 	{
 		DmaReset(AxiDmaInst);
 		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 		dma_intr_counter_l1++;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 		//print("y");
 
 		return;
@@ -278,7 +282,7 @@ static void RxIntrHandlerL2(void *Callback)
 		DmaReset(AxiDmaInst);
 		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L2[current_buffer_L2][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
 		buffer_L2_changed = 1;
-		//print("z");
+		print("z");
 
 		return;
 	}

@@ -8,6 +8,7 @@
 #include "xparameters.h"
 #include "xbasic_types.h"
 #include "pdmdata.h"
+#include "pdmdata_hw.h"
 
 void ResetMaxisAlarm()
 {
@@ -31,6 +32,8 @@ void FlowControlsClrUnset()
 
 void FlowControlInit()
 {
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_DMA_LENGTH*4) = N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW / sizeof(uint64_t);
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_DMA_LENGTH*4) = N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1 / sizeof(uint32_t);
 	//reset flow control cores
 	FlowControlsClrSet();
 	FlowControlsClrUnset();
