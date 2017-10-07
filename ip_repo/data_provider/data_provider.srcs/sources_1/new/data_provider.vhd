@@ -162,11 +162,6 @@ architecture Behavioral of data_provider is
 	signal timestamp2_l_21: std_logic := '0';
 	signal timestamp2_l_21_d1: std_logic := '0';
 
-	attribute keep : string;  
-	attribute keep of frame_art0_check: signal is "true"; 
-	attribute keep of frame_art1_check: signal is "true"; 
-	attribute keep of frame_art2_check: signal is "true"; 
-	attribute keep of frame_art_Q1: signal is "true"; 
 	
 	signal m_axis_art0l_tvalid_i: std_logic := '0';
 	signal m_axis_art0r_tvalid_i: std_logic := '0';
@@ -189,6 +184,34 @@ architecture Behavioral of data_provider is
 	--signal counter_testmode1_art0 : std_logic_vector(15 downto 0) := (others => '0');
 	--signal counter_testmode1_art1 : std_logic_vector(15 downto 0) := (others => '0');
 	--signal counter_testmode1_art2 : std_logic_vector(15 downto 0) := (others => '0');
+	
+	signal counter_tvalid_art0l, counter_tvalid_art0l_latch: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_art0r, counter_tvalid_art0r_latch: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_art1l, counter_tvalid_art1l_latch: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_art1r, counter_tvalid_art1r_latch: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_art2l, counter_tvalid_art2l_latch: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_art2r, counter_tvalid_art2r_latch: std_logic_vector(15 downto 0) := (others => '0');
+
+	attribute keep : string;  
+	attribute keep of frame_art0_check: signal is "true"; 
+	attribute keep of frame_art1_check: signal is "true"; 
+	attribute keep of frame_art2_check: signal is "true"; 
+	
+	attribute keep of counter_tvalid_art0l: signal is "true"; 
+	attribute keep of counter_tvalid_art0r: signal is "true"; 
+	attribute keep of counter_tvalid_art1l: signal is "true"; 
+	attribute keep of counter_tvalid_art1r: signal is "true"; 
+	attribute keep of counter_tvalid_art2l: signal is "true"; 
+	attribute keep of counter_tvalid_art2r: signal is "true";
+	attribute keep of counter_tvalid_art0l_latch: signal is "true"; 
+	attribute keep of counter_tvalid_art0r_latch: signal is "true"; 
+	attribute keep of counter_tvalid_art1l_latch: signal is "true"; 
+	attribute keep of counter_tvalid_art1r_latch: signal is "true"; 
+	attribute keep of counter_tvalid_art2l_latch: signal is "true"; 
+	attribute keep of counter_tvalid_art2r_latch: signal is "true";
+	 
+	attribute keep of frame_art_Q1: signal is "true"; 
+
 	
 begin
 
@@ -599,5 +622,55 @@ end generate;
 		end if;
 	end process;
 	
+	packet_size_verificator: process(m_axis_aclk)
+	begin
+		if(rising_edge(m_axis_aclk)) then
+			--art0l
+			if(m_axis_art0l_tvalid_i = '1') then
+				counter_tvalid_art0l <= counter_tvalid_art0l + 1;
+			else
+				counter_tvalid_art0l_latch <= counter_tvalid_art0l;
+				counter_tvalid_art0l <= (others => '0');
+			end if;
+			--art0r
+			if(m_axis_art0r_tvalid_i = '1') then
+				counter_tvalid_art0r <= counter_tvalid_art0r + 1;
+			else
+				counter_tvalid_art0r_latch <= counter_tvalid_art0r;
+				counter_tvalid_art0r <= (others => '0');
+			end if;
+
+			--art1l
+			if(m_axis_art1l_tvalid_i = '1') then
+				counter_tvalid_art1l <= counter_tvalid_art1l + 1;
+			else
+				counter_tvalid_art1l_latch <= counter_tvalid_art1l;
+				counter_tvalid_art1l <= (others => '0');
+			end if;
+			--art0r
+			if(m_axis_art1r_tvalid_i = '1') then
+				counter_tvalid_art1r <= counter_tvalid_art1r + 1;
+			else
+				counter_tvalid_art1r_latch <= counter_tvalid_art1r;
+				counter_tvalid_art1r <= (others => '0');
+			end if;
+
+			--art2l
+			if(m_axis_art2l_tvalid_i = '1') then
+				counter_tvalid_art2l <= counter_tvalid_art2l + 1;
+			else
+				counter_tvalid_art2l_latch <= counter_tvalid_art2l;
+				counter_tvalid_art2l <= (others => '0');
+			end if;
+			--art0r
+			if(m_axis_art2r_tvalid_i = '1') then
+				counter_tvalid_art2r <= counter_tvalid_art2r + 1;
+			else
+				counter_tvalid_art2r_latch <= counter_tvalid_art2r;
+				counter_tvalid_art2r <= (others => '0');
+			end if;
+
+		end if;
+	end process;
 	
 end Behavioral;
