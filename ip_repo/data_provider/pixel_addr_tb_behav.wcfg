@@ -3,106 +3,155 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="pixel_addr_tb_behav.wdb" id="1">
+      <db_ref path="data_provider_tb_behav.wdb" id="1">
          <top_modules>
+            <top_module name="data_provider_tb" />
             <top_module name="glbl" />
-            <top_module name="pixel_addr_tb" />
+            <top_module name="vcomponents" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="14425000000fs"></ZoomStartTime>
-      <ZoomEndTime time="20005000001fs"></ZoomEndTime>
-      <Cursor1Time time="18115000000fs"></Cursor1Time>
+      <ZoomStartTime time="144573270000fs"></ZoomStartTime>
+      <ZoomEndTime time="176023270001fs"></ZoomEndTime>
+      <Cursor1Time time="160060000000fs"></Cursor1Time>
    </zoom_setting>
    <WVObjectSize size="20" />
-   <wvobject type="other" fp_name="/pixel_addr_tb/cnt">
-      <obj_property name="ElementShortName">cnt</obj_property>
-      <obj_property name="ObjectShortName">cnt</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/clk_art">
+      <obj_property name="ElementShortName">clk_art</obj_property>
+      <obj_property name="ObjectShortName">clk_art</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/pixel_addr_tb/dv">
-      <obj_property name="ElementShortName">dv</obj_property>
-      <obj_property name="ObjectShortName">dv</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/m_axis_aclk">
+      <obj_property name="ElementShortName">m_axis_aclk</obj_property>
+      <obj_property name="ObjectShortName">m_axis_aclk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/pixel_addr_tb/clk">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/s_axi_clk">
+      <obj_property name="ElementShortName">s_axi_clk</obj_property>
+      <obj_property name="ObjectShortName">s_axi_clk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/pixel_addr_tb/reset">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/frame_art">
+      <obj_property name="ElementShortName">frame_art</obj_property>
+      <obj_property name="ObjectShortName">frame_art</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/data">
-      <obj_property name="ElementShortName">data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">data[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/start_sig">
+      <obj_property name="ElementShortName">start_sig</obj_property>
+      <obj_property name="ObjectShortName">start_sig</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/datain">
-      <obj_property name="ElementShortName">datain[31:0]</obj_property>
-      <obj_property name="ObjectShortName">datain[31:0]</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0l_tvalid">
+      <obj_property name="ElementShortName">m_axis_art0l_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_art0l_tvalid</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/arg_l">
-      <obj_property name="ElementShortName">arg_l[15:0]</obj_property>
-      <obj_property name="ObjectShortName">arg_l[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/arg_r">
-      <obj_property name="ElementShortName">arg_r[15:0]</obj_property>
-      <obj_property name="ObjectShortName">arg_r[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/s_axis_tvalid_art_cc_fifo">
+      <obj_property name="ElementShortName">s_axis_tvalid_art_cc_fifo[2:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tvalid_art_cc_fifo[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="divider8" type="divider">
-      <obj_property name="label">write2mem</obj_property>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/start_feed">
+      <obj_property name="ElementShortName">start_feed[2:0]</obj_property>
+      <obj_property name="ObjectShortName">start_feed[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/counter_frames">
+      <obj_property name="ElementShortName">counter_frames[20:0]</obj_property>
+      <obj_property name="ObjectShortName">counter_frames[20:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/counter">
+      <obj_property name="ElementShortName">counter[8:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[8:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/infinite_d1">
+      <obj_property name="ElementShortName">infinite_d1</obj_property>
+      <obj_property name="ObjectShortName">infinite_d1</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/data_provider_tb/clk_axi_counter">
+      <obj_property name="ElementShortName">clk_axi_counter</obj_property>
+      <obj_property name="ObjectShortName">clk_axi_counter</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/fifo_rst_n">
+      <obj_property name="ElementShortName">fifo_rst_n[2:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_rst_n[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/atleast_one_empty">
+      <obj_property name="ElementShortName">atleast_one_empty</obj_property>
+      <obj_property name="ObjectShortName">atleast_one_empty</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/s_axis_tlast_art_cc_fifo">
+      <obj_property name="ElementShortName">s_axis_tlast_art_cc_fifo[2:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tlast_art_cc_fifo[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group70">
+      <obj_property name="label">fifo</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tvalid">
+         <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tready">
+         <obj_property name="ElementShortName">s_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tlast">
+         <obj_property name="ElementShortName">s_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tkeep">
+         <obj_property name="ElementShortName">s_axis_tkeep[1:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tkeep[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tdata">
+         <obj_property name="ElementShortName">s_axis_tdata[15:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tdata[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_aresetn">
+         <obj_property name="ElementShortName">s_aresetn</obj_property>
+         <obj_property name="ObjectShortName">s_aresetn</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_aclk">
+         <obj_property name="ElementShortName">s_aclk</obj_property>
+         <obj_property name="ObjectShortName">s_aclk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tvalid">
+         <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tready">
+         <obj_property name="ElementShortName">m_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tlast">
+         <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tkeep">
+         <obj_property name="ElementShortName">m_axis_tkeep[1:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tkeep[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tdata">
+         <obj_property name="ElementShortName">m_axis_tdata[15:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_aclk">
+         <obj_property name="ElementShortName">m_aclk</obj_property>
+         <obj_property name="ObjectShortName">m_aclk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/axis_prog_empty">
+         <obj_property name="ElementShortName">axis_prog_empty</obj_property>
+         <obj_property name="ObjectShortName">axis_prog_empty</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/addra">
-      <obj_property name="ElementShortName">addra[7:0]</obj_property>
-      <obj_property name="ObjectShortName">addra[7:0]</obj_property>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/counter_tvalid_art0l">
+      <obj_property name="ElementShortName">counter_tvalid_art0l[15:0]</obj_property>
+      <obj_property name="ObjectShortName">counter_tvalid_art0l[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/counter_tvalid_art0l_latch">
+      <obj_property name="ElementShortName">counter_tvalid_art0l_latch[15:0]</obj_property>
+      <obj_property name="ObjectShortName">counter_tvalid_art0l_latch[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_add_l">
-      <obj_property name="ElementShortName">acc_add_l[31:0]</obj_property>
-      <obj_property name="ObjectShortName">acc_add_l[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_add_r">
-      <obj_property name="ElementShortName">acc_add_r[31:0]</obj_property>
-      <obj_property name="ObjectShortName">acc_add_r[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/pixel_addr_tb/dut/wea[0]">
-      <obj_property name="ElementShortName">[0]</obj_property>
-      <obj_property name="ObjectShortName">[0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider8" type="divider">
-      <obj_property name="label">readmem</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/addrb">
-      <obj_property name="ElementShortName">addrb[7:0]</obj_property>
-      <obj_property name="ObjectShortName">addrb[7:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_l">
-      <obj_property name="ElementShortName">acc_l[31:0]</obj_property>
-      <obj_property name="ObjectShortName">acc_l[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_r">
-      <obj_property name="ElementShortName">acc_r[31:0]</obj_property>
-      <obj_property name="ObjectShortName">acc_r[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider66" type="divider">
-      <obj_property name="label">zeroing</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/pixel_addr_tb/dut/datain_dv_front">
-      <obj_property name="ElementShortName">datain_dv_front</obj_property>
-      <obj_property name="ObjectShortName">datain_dv_front</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/pixel_addr_tb/dut/acc_cnt">
-      <obj_property name="ElementShortName">acc_cnt[15:0]</obj_property>
-      <obj_property name="ObjectShortName">acc_cnt[15:0]</obj_property>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/infinite_d1">
+      <obj_property name="ElementShortName">infinite_d1</obj_property>
+      <obj_property name="ObjectShortName">infinite_d1</obj_property>
    </wvobject>
 </wave_config>

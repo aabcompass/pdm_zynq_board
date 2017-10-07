@@ -136,6 +136,7 @@ architecture Behavioral of data_provider is
 	
 	signal clk_art_x1 : std_logic_vector(2 downto 0);
 	signal frame_art_Q1, frame_art_Q2 : std_logic_vector(2 downto 0) := "000";
+	signal fifo_rst_n : std_logic_vector(2 downto 0) := "000";
 	
 	signal start_sig_d1, start_sig_d2 : std_logic_vector(2 downto 0) := "000";
 	signal start_sig_int_d1, start_sig_int_d2 : std_logic_vector(2 downto 0) := "000";
@@ -374,7 +375,7 @@ begin
   generic map (
      DEST_SYNC_FF   => 4, -- integer; range: 2-10
      SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
-     SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
+     SRC_INPUT_REG  => 1  -- integer; 0=do not register input, 1=register input
   )
   port map (
      src_clk  => s_axi_clk,  -- optional; required when SRC_INPUT_REG = 1
@@ -393,17 +394,17 @@ begin
 		if(rising_edge(clk_art_x1(i))) then
 			case state is
 				when 0 => if(start_feed(i) = '1') then
+										counter_frames <= num_of_frames - 1;	
 										state := state + 1;
 									elsif (counter_frames /= 0) then
-										state := state + 1;		
+										state := state + 1;	
+										counter_frames <= counter_frames - 1;	
 									elsif(infinite_d1 = '1') then	
 										state := state + 1;								
-									end if;
-									counter_frames <= num_of_frames;									
+									end if;																
 									s_axis_tlast_art_cc_fifo(i) <= '0';
 									s_axis_tvalid_art_cc_fifo(i) <= '0';
 				when 1 => if(frame_art_Q1(i) = '0') then
-										counter_frames <= counter_frames - 1;
 										state := state + 1;
 									end if;
 				when 2 => if(frame_art_Q1(i) = '1') then
@@ -424,8 +425,18 @@ begin
 	
 	frame_art_Q1_1_d1 <= frame_art_Q1(1) when rising_edge(clk_art_x1(1));
 	frame_art_Q1_1_front <= frame_art_Q1(1) and (not frame_art_Q1_1_d1) when rising_edge(clk_art_x1(1));
-
-
+	
+	fifo_rstn_former: process(clk_art_x1(i))
+		variable cntv: integer := 0;
+	begin
+		if(rising_edge(clk_art_x1(i))) then
+			if(cntv = 10) then
+				fifo_rst_n(i) <= '1';
+			else
+				cntv := cntv + 1;
+			end if;
+		end if;
+	end process;
 end generate;  
 	
 	--data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8) when testmode(0) = '0' else X"00000101";
@@ -490,7 +501,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art0_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(0),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(0),
 			s_axis_tready => open,
 			s_axis_tdata => data_art0_ddr_d2_sw16(31 downto 16),--(15 downto 0),
@@ -509,7 +520,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art0_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(0),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(0),
 			s_axis_tready => open,
 			s_axis_tdata => data_art0_ddr_d2_sw16(15 downto 0),--(31 downto 16),
@@ -527,7 +538,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art1_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(1),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(1),
 			s_axis_tready => open,
 			s_axis_tdata => data_art1_ddr_d2_sw16(31 downto 16),--(15 downto 0),
@@ -545,7 +556,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art1_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(1),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(1),
 			s_axis_tready => open,
 			s_axis_tdata => data_art1_ddr_d2_sw16(15 downto 0),--(31 downto 16),
@@ -563,7 +574,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art2_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(2),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(2),
 			s_axis_tready => open,
 			s_axis_tdata => data_art2_ddr_d2_sw16(31 downto 16),--(15 downto 0),
@@ -581,7 +592,7 @@ end generate;
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art2_x1,
-			s_aresetn => '1',
+			s_aresetn => fifo_rst_n(2),
 			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(2),
 			s_axis_tready => open,
 			s_axis_tdata => data_art2_ddr_d2_sw16(15 downto 0),--(31 downto 16),
@@ -595,12 +606,13 @@ end generate;
 			axis_prog_empty => axis_prog_empty_2r
 		);
 
-	m_axis_art0l_tvalid <= all_ready;
-	m_axis_art0r_tvalid <= all_ready;
-	m_axis_art1l_tvalid <= all_ready;
-	m_axis_art1r_tvalid <= all_ready;
-	m_axis_art2l_tvalid <= all_ready;
-	m_axis_art2r_tvalid <= all_ready;
+-------------------------------------------------vv--  <-- It's Ok
+	m_axis_art0l_tvalid <= all_ready and m_axis_art0l_tvalid_i;
+	m_axis_art0r_tvalid <= all_ready and m_axis_art0l_tvalid_i;
+	m_axis_art1l_tvalid <= all_ready and m_axis_art0l_tvalid_i;
+	m_axis_art1r_tvalid <= all_ready and m_axis_art0l_tvalid_i;
+	m_axis_art2l_tvalid <= all_ready and m_axis_art0l_tvalid_i;
+	m_axis_art2r_tvalid <= all_ready and m_axis_art0l_tvalid_i;
 	
 	atleast_one_empty <= (axis_prog_empty_0l or axis_prog_empty_0r or axis_prog_empty_1l or axis_prog_empty_1r or axis_prog_empty_2l or axis_prog_empty_2r) when rising_edge(m_axis_aclk); 
 	
@@ -629,14 +641,14 @@ end generate;
 	begin
 		if(rising_edge(m_axis_aclk)) then
 			--art0l
-			if(m_axis_art0l_tvalid_i = '1') then
+			if(m_axis_art0l_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art0l <= counter_tvalid_art0l + 1;
 			else
 				counter_tvalid_art0l_latch <= counter_tvalid_art0l;
 				counter_tvalid_art0l <= (others => '0');
 			end if;
 			--art0r
-			if(m_axis_art0r_tvalid_i = '1') then
+			if(m_axis_art0r_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art0r <= counter_tvalid_art0r + 1;
 			else
 				counter_tvalid_art0r_latch <= counter_tvalid_art0r;
@@ -644,14 +656,14 @@ end generate;
 			end if;
 
 			--art1l
-			if(m_axis_art1l_tvalid_i = '1') then
+			if(m_axis_art1l_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art1l <= counter_tvalid_art1l + 1;
 			else
 				counter_tvalid_art1l_latch <= counter_tvalid_art1l;
 				counter_tvalid_art1l <= (others => '0');
 			end if;
 			--art0r
-			if(m_axis_art1r_tvalid_i = '1') then
+			if(m_axis_art1r_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art1r <= counter_tvalid_art1r + 1;
 			else
 				counter_tvalid_art1r_latch <= counter_tvalid_art1r;
@@ -659,14 +671,14 @@ end generate;
 			end if;
 
 			--art2l
-			if(m_axis_art2l_tvalid_i = '1') then
+			if(m_axis_art2l_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art2l <= counter_tvalid_art2l + 1;
 			else
 				counter_tvalid_art2l_latch <= counter_tvalid_art2l;
 				counter_tvalid_art2l <= (others => '0');
 			end if;
 			--art0r
-			if(m_axis_art2r_tvalid_i = '1') then
+			if(m_axis_art2r_tvalid_i = '1' and all_ready = '1') then
 				counter_tvalid_art2r <= counter_tvalid_art2r + 1;
 			else
 				counter_tvalid_art2r_latch <= counter_tvalid_art2r;
