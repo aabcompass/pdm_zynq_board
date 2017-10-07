@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sat Oct  7 20:10:41 2017
+--Date        : Sat Oct  7 22:40:13 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.2 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -14758,6 +14758,72 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_xlconstant_2_0;
+  component design_1_axi_data_provider_0_0 is
+  port (
+    clk_art0_x1 : in STD_LOGIC;
+    clk_art1_x1 : in STD_LOGIC;
+    clk_art2_x1 : in STD_LOGIC;
+    frame_art0 : in STD_LOGIC;
+    frame_art1 : in STD_LOGIC;
+    frame_art2 : in STD_LOGIC;
+    data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_aclk : in STD_LOGIC;
+    m_axis_art0l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art0l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art0l_tvalid : out STD_LOGIC;
+    m_axis_art0l_tlast : out STD_LOGIC;
+    m_axis_art0l_tready : in STD_LOGIC;
+    m_axis_art0r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art0r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art0r_tvalid : out STD_LOGIC;
+    m_axis_art0r_tlast : out STD_LOGIC;
+    m_axis_art0r_tready : in STD_LOGIC;
+    m_axis_art1l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art1l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art1l_tvalid : out STD_LOGIC;
+    m_axis_art1l_tlast : out STD_LOGIC;
+    m_axis_art1l_tready : in STD_LOGIC;
+    m_axis_art1r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art1r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art1r_tvalid : out STD_LOGIC;
+    m_axis_art1r_tlast : out STD_LOGIC;
+    m_axis_art1r_tready : in STD_LOGIC;
+    m_axis_art2l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art2l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art2l_tvalid : out STD_LOGIC;
+    m_axis_art2l_tlast : out STD_LOGIC;
+    m_axis_art2l_tready : in STD_LOGIC;
+    m_axis_art2r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art2r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art2r_tvalid : out STD_LOGIC;
+    m_axis_art2r_tlast : out STD_LOGIC;
+    m_axis_art2r_tready : in STD_LOGIC;
+    gtu_sig : out STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC
+  );
+  end component design_1_axi_data_provider_0_0;
   component design_1_axis_flow_control_L1_0 is
   port (
     s_axis_aclk : in STD_LOGIC;
@@ -14852,72 +14918,6 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_L2_0;
-  component design_1_axi_data_provider_0_0 is
-  port (
-    clk_art0_x1 : in STD_LOGIC;
-    clk_art1_x1 : in STD_LOGIC;
-    clk_art2_x1 : in STD_LOGIC;
-    frame_art0 : in STD_LOGIC;
-    frame_art1 : in STD_LOGIC;
-    frame_art2 : in STD_LOGIC;
-    data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_aclk : in STD_LOGIC;
-    m_axis_art0l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art0l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art0l_tvalid : out STD_LOGIC;
-    m_axis_art0l_tlast : out STD_LOGIC;
-    m_axis_art0l_tready : in STD_LOGIC;
-    m_axis_art0r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art0r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art0r_tvalid : out STD_LOGIC;
-    m_axis_art0r_tlast : out STD_LOGIC;
-    m_axis_art0r_tready : in STD_LOGIC;
-    m_axis_art1l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art1l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art1l_tvalid : out STD_LOGIC;
-    m_axis_art1l_tlast : out STD_LOGIC;
-    m_axis_art1l_tready : in STD_LOGIC;
-    m_axis_art1r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art1r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art1r_tvalid : out STD_LOGIC;
-    m_axis_art1r_tlast : out STD_LOGIC;
-    m_axis_art1r_tready : in STD_LOGIC;
-    m_axis_art2l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art2l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art2l_tvalid : out STD_LOGIC;
-    m_axis_art2l_tlast : out STD_LOGIC;
-    m_axis_art2l_tready : in STD_LOGIC;
-    m_axis_art2r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art2r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art2r_tvalid : out STD_LOGIC;
-    m_axis_art2r_tlast : out STD_LOGIC;
-    m_axis_art2r_tready : in STD_LOGIC;
-    gtu_sig : out STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component design_1_axi_data_provider_0_0;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
   signal CLK_IN1_D_1_2_CLK_N : STD_LOGIC;
   signal CLK_IN1_D_1_2_CLK_P : STD_LOGIC;
@@ -15115,6 +15115,30 @@ architecture STRUCTURE of design_1 is
   signal axi_interconnect_1_M00_AXI_WVALID : STD_LOGIC;
   signal axi_quad_spi_0_io0_o : STD_LOGIC;
   signal axi_quad_spi_0_sck_o : STD_LOGIC;
+  signal axis_broadcaster_00_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_00_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_00_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_00_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_01_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_01_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_01_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_01_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_02_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_02_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_02_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_02_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_03_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_03_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_03_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_03_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_04_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_04_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_04_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_04_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_05_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
+  signal axis_broadcaster_05_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal axis_broadcaster_05_M01_AXIS_TREADY : STD_LOGIC;
+  signal axis_broadcaster_05_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r10_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal axis_broadcaster_1r10_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r10_M00_AXIS_TREADY : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -15167,50 +15191,26 @@ architecture STRUCTURE of design_1 is
   signal axis_broadcaster_1r1_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r1_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r1_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r1_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r1_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r1_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r1_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r2_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axis_broadcaster_1r2_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r2_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r2_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r2_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r2_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r2_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r2_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r3_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axis_broadcaster_1r3_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r3_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r3_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r3_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r3_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r3_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r3_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r4_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axis_broadcaster_1r4_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r4_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r4_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r4_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r4_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r4_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r4_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r5_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axis_broadcaster_1r5_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r5_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r5_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r5_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r5_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r5_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r5_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r6_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axis_broadcaster_1r6_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r6_M00_AXIS_TREADY : STD_LOGIC;
   signal axis_broadcaster_1r6_M00_AXIS_TVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal axis_broadcaster_1r6_M01_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 16 );
-  signal axis_broadcaster_1r6_M01_AXIS_TLAST : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal axis_broadcaster_1r6_M01_AXIS_TREADY : STD_LOGIC;
-  signal axis_broadcaster_1r6_M01_AXIS_TVALID : STD_LOGIC_VECTOR ( 1 to 1 );
   signal axis_broadcaster_1r_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_broadcaster_1r_M00_AXIS_TLAST : STD_LOGIC_VECTOR ( 0 to 0 );
   signal axis_broadcaster_1r_M00_AXIS_TREADY : STD_LOGIC;
@@ -16718,13 +16718,13 @@ axis_broadcaster_00: component design_1_axis_broadcaster_00_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r1_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_00_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r1_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r1_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_00_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r1_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r1_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_00_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r1_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r1_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_00_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r1_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art0l_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art0l_TLAST,
@@ -16735,13 +16735,13 @@ axis_broadcaster_01: component design_1_axis_broadcaster_01_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r6_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_01_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r6_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r6_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_01_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r6_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r6_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_01_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r6_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r6_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_01_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r6_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art0r_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art0r_TLAST,
@@ -16752,13 +16752,13 @@ axis_broadcaster_02: component design_1_axis_broadcaster_02_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r2_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_02_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r2_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r2_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_02_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r2_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r2_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_02_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r2_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r2_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_02_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r2_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art1l_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art1l_TLAST,
@@ -16769,13 +16769,13 @@ axis_broadcaster_03: component design_1_axis_broadcaster_03_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r5_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_03_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r5_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r5_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_03_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r5_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r5_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_03_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r5_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r5_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_03_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r5_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art1r_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art1r_TLAST,
@@ -16786,13 +16786,13 @@ axis_broadcaster_04: component design_1_axis_broadcaster_04_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r4_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_04_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r4_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r4_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_04_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r4_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r4_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_04_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r4_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r4_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_04_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r4_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art2l_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art2l_TLAST,
@@ -16803,13 +16803,13 @@ axis_broadcaster_05: component design_1_axis_broadcaster_05_0
      port map (
       aclk => processing_system7_0_FCLK_CLK0,
       aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      m_axis_tdata(31 downto 16) => axis_broadcaster_1r3_M01_AXIS_TDATA(31 downto 16),
+      m_axis_tdata(31 downto 16) => axis_broadcaster_05_M01_AXIS_TDATA(31 downto 16),
       m_axis_tdata(15 downto 0) => axis_broadcaster_1r3_M00_AXIS_TDATA(15 downto 0),
-      m_axis_tlast(1) => axis_broadcaster_1r3_M01_AXIS_TLAST(1),
+      m_axis_tlast(1) => axis_broadcaster_05_M01_AXIS_TLAST(1),
       m_axis_tlast(0) => axis_broadcaster_1r3_M00_AXIS_TLAST(0),
-      m_axis_tready(1) => axis_broadcaster_1r3_M01_AXIS_TREADY,
+      m_axis_tready(1) => axis_broadcaster_05_M01_AXIS_TREADY,
       m_axis_tready(0) => axis_broadcaster_1r3_M00_AXIS_TREADY,
-      m_axis_tvalid(1) => axis_broadcaster_1r3_M01_AXIS_TVALID(1),
+      m_axis_tvalid(1) => axis_broadcaster_05_M01_AXIS_TVALID(1),
       m_axis_tvalid(0) => axis_broadcaster_1r3_M00_AXIS_TVALID(0),
       s_axis_tdata(15 downto 0) => axi_data_provider_0_m_axis_art2r_TDATA(15 downto 0),
       s_axis_tlast => axi_data_provider_0_m_axis_art2r_TLAST,
@@ -16954,10 +16954,10 @@ axis_clock_converter_0: component design_1_axis_clock_converter_0_0
       m_axis_tvalid => axis_clock_converter_0_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r1_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r1_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r1_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r1_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_00_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_00_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_00_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_00_M01_AXIS_TVALID(1)
     );
 axis_clock_converter_1: component design_1_axis_clock_converter_1_0
      port map (
@@ -16969,10 +16969,10 @@ axis_clock_converter_1: component design_1_axis_clock_converter_1_0
       m_axis_tvalid => axis_clock_converter_1_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r6_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r6_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r6_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r6_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_01_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_01_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_01_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_01_M01_AXIS_TVALID(1)
     );
 axis_clock_converter_2: component design_1_axis_clock_converter_2_0
      port map (
@@ -16984,10 +16984,10 @@ axis_clock_converter_2: component design_1_axis_clock_converter_2_0
       m_axis_tvalid => axis_clock_converter_2_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r4_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r4_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r4_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r4_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_04_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_04_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_04_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_04_M01_AXIS_TVALID(1)
     );
 axis_clock_converter_3: component design_1_axis_clock_converter_3_0
      port map (
@@ -16999,10 +16999,10 @@ axis_clock_converter_3: component design_1_axis_clock_converter_3_0
       m_axis_tvalid => axis_clock_converter_3_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r3_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r3_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r3_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r3_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_05_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_05_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_05_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_05_M01_AXIS_TVALID(1)
     );
 axis_clock_converter_4: component design_1_axis_clock_converter_4_0
      port map (
@@ -17014,10 +17014,10 @@ axis_clock_converter_4: component design_1_axis_clock_converter_4_0
       m_axis_tvalid => axis_clock_converter_4_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r5_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r5_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r5_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r5_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_03_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_03_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_03_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_03_M01_AXIS_TVALID(1)
     );
 axis_clock_converter_5: component design_1_axis_clock_converter_5_0
      port map (
@@ -17029,10 +17029,10 @@ axis_clock_converter_5: component design_1_axis_clock_converter_5_0
       m_axis_tvalid => axis_clock_converter_5_M_AXIS_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK0,
       s_axis_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s_axis_tdata(15 downto 0) => axis_broadcaster_1r2_M01_AXIS_TDATA(31 downto 16),
-      s_axis_tlast => axis_broadcaster_1r2_M01_AXIS_TLAST(1),
-      s_axis_tready => axis_broadcaster_1r2_M01_AXIS_TREADY,
-      s_axis_tvalid => axis_broadcaster_1r2_M01_AXIS_TVALID(1)
+      s_axis_tdata(15 downto 0) => axis_broadcaster_02_M01_AXIS_TDATA(31 downto 16),
+      s_axis_tlast => axis_broadcaster_02_M01_AXIS_TLAST(1),
+      s_axis_tready => axis_broadcaster_02_M01_AXIS_TREADY,
+      s_axis_tvalid => axis_broadcaster_02_M01_AXIS_TVALID(1)
     );
 axis_combiner_0: component design_1_axis_combiner_0_0
      port map (

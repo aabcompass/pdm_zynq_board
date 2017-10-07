@@ -234,6 +234,8 @@ component data_provider is
     axis_1r_rd_data_count: out std_logic_vector(15 downto 0);
     axis_2l_rd_data_count: out std_logic_vector(15 downto 0);
     axis_2r_rd_data_count: out std_logic_vector(15 downto 0);
+    
+    counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
     -- -- data to trigger L1 and to memory buffer
     s_axi_clk: in std_logic;
     -- raw data to MPU
@@ -386,7 +388,7 @@ begin
 	      slv_reg15 <= (others => '0');
 	      --slv_reg16 <= (others => '0');
 	      --slv_reg17 <= (others => '0');
-	      slv_reg18 <= (others => '0');
+	      --slv_reg18 <= (others => '0');
 	      slv_reg19 <= (others => '0');
 	      slv_reg20 <= (others => '0');
 	      slv_reg21 <= (others => '0');
@@ -548,14 +550,14 @@ begin
 --	                slv_reg17(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 --	              end if;
 --	            end loop;
-	          when b"10010" =>
-	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-	                -- Respective byte enables are asserted as per write strobes                   
-	                -- slave registor 18
-	                slv_reg18(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
-	              end if;
-	            end loop;
+--	          when b"10010" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 18
+--	                slv_reg18(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
 	          when b"10011" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
@@ -679,7 +681,7 @@ begin
 	            slv_reg15 <= slv_reg15;
 	            --slv_reg16 <= slv_reg16;
 	           -- slv_reg17 <= slv_reg17;
-	            slv_reg18 <= slv_reg18;
+	            --slv_reg18 <= slv_reg18;
 	            slv_reg19 <= slv_reg19;
 	            slv_reg20 <= slv_reg20;
 	            slv_reg21 <= slv_reg21;
@@ -913,6 +915,8 @@ begin
 				axis_1r_rd_data_count => slv_reg5(31 downto 16),--: out std_logic_vector(15 downto 0);
 				axis_2l_rd_data_count => slv_reg6(15 downto 0),--: out std_logic_vector(15 downto 0);
 				axis_2r_rd_data_count => slv_reg6(31 downto 16),--: out std_logic_vector(15 downto 0 
+				--
+				counter_tvalid_all_latch => slv_reg18(15 downto 0),--: out std_logic_vector(15 downto 0);--
 				-- -- data to trigger L1 and to memory buffer
 				-- raw data to MPU
 				m_axis_aclk => m_axis_aclk,--: in std_logic;

@@ -24,7 +24,7 @@
 #define REGR_GPIO_1			17
 #define REGR_GPIO_2			18
 #define REGR_GPIO_3			19
-#define REGR_GPIO_4			20
+#define REGR_RESERV			20
 #define REGR_GTU_CNT_H_RND	21
 #define REGR_GTU_CNT_L_RND	22
 #define REGR_TRANS_CNT_LCH	23

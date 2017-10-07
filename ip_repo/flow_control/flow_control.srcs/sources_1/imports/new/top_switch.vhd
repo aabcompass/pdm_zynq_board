@@ -257,6 +257,9 @@ architecture Behavioral of axis_flow_control is
 
 	signal m_axis_tvalid_key, m_axis_tready_key, pass_intr: std_logic := '0';
 	
+	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
+	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
+	
 	attribute keep : string;  
 	attribute keep of m_axis_tvalid_key: signal is "true";  
 	attribute keep of m_axis_tready_key: signal is "true";  
@@ -268,6 +271,7 @@ architecture Behavioral of axis_flow_control is
 	attribute keep of axis_fifo_fc_count: signal is "true";  
 	attribute keep of dma_length_cntr: signal is "true";  
 	attribute keep of dma_length: signal is "true";  
+	attribute keep of counter_tvalid_latch: signal is "true";  
 
 begin
 
@@ -903,7 +907,7 @@ begin
 	slv_reg17 <= gpio_1;
 	slv_reg18 <= gpio_2;
 	slv_reg19 <= gpio_3;
-	slv_reg20 <= gpio_4;
+	slv_reg20(15 downto 0) <= counter_tvalid_latch;
 	--slv_reg21 <= gpio_5;
 	slv_reg21 <= gtu_sig_counter_h;
 	slv_reg22 <= gtu_sig_counter_l and "11111111111000000000000000000000";
@@ -1079,6 +1083,20 @@ begin
 			end case;
 		end if;
 	end process;
+
+	packet_size_verificator: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			--art0l
+			if(m_axis_tvalid_not_buffered = '1') then
+				counter_tvalid <= counter_tvalid + 1;
+			else
+				counter_tvalid_latch <= counter_tvalid;
+				counter_tvalid <= (others => '0');
+			end if;
+		end if;
+	end process;
+
 
 	axis_fifo_fc_64_gen: if(C_AXIS_DWIDTH = 64) generate
 		i_axis_fifo_fc : axis_fifo_fc

@@ -52,6 +52,8 @@ entity data_provider is
 			axis_1r_rd_data_count: out std_logic_vector(15 downto 0);
 			axis_2l_rd_data_count: out std_logic_vector(15 downto 0);
 			axis_2r_rd_data_count: out std_logic_vector(15 downto 0);
+			
+			counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
 			-- -- data to trigger L1 and to memory buffer
 			s_axi_clk: in std_logic;
 			-- raw data to MPU
@@ -209,6 +211,7 @@ architecture Behavioral of data_provider is
 	attribute keep of counter_tvalid_art1r_latch: signal is "true"; 
 	attribute keep of counter_tvalid_art2l_latch: signal is "true"; 
 	attribute keep of counter_tvalid_art2r_latch: signal is "true";
+	attribute keep of start_feed: signal is "true";
 	 
 	attribute keep of frame_art_Q1: signal is "true"; 
 
@@ -669,6 +672,14 @@ end generate;
 				counter_tvalid_art2r_latch <= counter_tvalid_art2r;
 				counter_tvalid_art2r <= (others => '0');
 			end if;
+			
+			counter_tvalid_all_latch <= 
+				counter_tvalid_art0l_latch and
+				counter_tvalid_art0r_latch and
+				counter_tvalid_art1l_latch and
+				counter_tvalid_art1r_latch and
+				counter_tvalid_art2l_latch and
+				counter_tvalid_art2r_latch;
 
 		end if;
 	end process;
