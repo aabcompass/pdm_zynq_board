@@ -35,13 +35,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="4"/>
-    <Option Name="WTModelSimExportSim" Val="4"/>
-    <Option Name="WTQuestaExportSim" Val="4"/>
-    <Option Name="WTIesExportSim" Val="4"/>
-    <Option Name="WTVcsExportSim" Val="4"/>
-    <Option Name="WTRivieraExportSim" Val="4"/>
-    <Option Name="WTActivehdlExportSim" Val="4"/>
+    <Option Name="WTXSimExportSim" Val="6"/>
+    <Option Name="WTModelSimExportSim" Val="6"/>
+    <Option Name="WTQuestaExportSim" Val="6"/>
+    <Option Name="WTIesExportSim" Val="6"/>
+    <Option Name="WTVcsExportSim" Val="6"/>
+    <Option Name="WTRivieraExportSim" Val="6"/>
+    <Option Name="WTActivehdlExportSim" Val="6"/>
   </Configuration>
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
@@ -95,6 +95,34 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_vector2axis.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_axis2vector.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_aclken_converter_wrapper.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_aclken_converter.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_mux_enc.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_data_fifo_v1_1_10/doc/axis_data_fifo_v1_1_changelog.txt"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc.vho"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_0_axis_infrastructure.vh"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc.veo"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_rfs.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="sim/axis_fifo_fc.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_data_fifo_v1_1_10/hdl/verilog/axis_data_fifo_v1_1_axis_data_fifo.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="fifo_generator_v13_1_1/simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_clock_synchronizer.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_cdc_handshake.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc.xml"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="synth/axis_fifo_fc.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc/axis_fifo_fc.xdc"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1.vhd"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="blk_mem_gen_v8_3_3/hdl/blk_mem_gen_v8_3.vhd"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="blk_mem_gen_v8_3_3/hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc_stub.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc_sim_netlist.v"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc_sim_netlist.vhdl"/>
+        <CompFileExtendedInfo CompFileName="axis_fifo_fc.xci" FileRelPathName="axis_fifo_fc_stub.vhdl"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="axis_fifo_fc"/>

@@ -67,8 +67,8 @@ void PrintFrame(int frame_num)
 void PrintFirstElementsL1()
 {
 	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], sizeof(DataDMA__L1));
-	for(i=0;i<1/*2304/2*/;i++)
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 20/* sizeof(DataDMA__L1)*/);
+	for(i=0;i<10/*2304/2*/;i++)
 	{
 		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
 	}
