@@ -433,7 +433,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'G')
 	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = 1;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_FRAMES_DMA_RAW*40;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 	}
@@ -458,6 +458,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 'c')
 	{
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+	}
+	else if(c == 'C')
+	{
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_ALL;
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
 	else if(c == 'U')
