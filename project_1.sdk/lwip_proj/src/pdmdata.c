@@ -32,11 +32,11 @@ SCurveStruct sCurveStruct;
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
 	if(data_type == DATA_TYPE_L1)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], sizeof(DataDMA__Raw));
+		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1*N_OF_FRAMES_RAW_POLY_V0*N_OF_PIXEL_PER_PDM);
 	else if(data_type == DATA_TYPE_L2)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], sizeof(DataDMA__L1));
+		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2*N_OF_FRAMES_INT16_POLY_V0*N_OF_PIXEL_PER_PDM);
 	else if(data_type == DATA_TYPE_L3)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][0][0], sizeof(DataDMA__L2));
+		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
 }
 
 void* GetZ_DATA_TYPE_SCI_ptr(int data_type) // 1 - L1, 2 - L2, 3 - L3
@@ -64,6 +64,16 @@ void PrintFrame(int frame_num)
 	}
 }
 
+void PrintFirstElementsL2()
+{
+	int i;
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][0][0], 40/* sizeof(DataDMA__L1)*/);
+	for(i=0;i<10/*2304/2*/;i++)
+	{
+		xil_printf("DataDMA__L2[0][0][%d]=0x%04x\n\r", i, DataDMA__L2[0][0][i]);
+	}
+}
+
 void PrintFirstElementsL1()
 {
 	int i;
@@ -83,6 +93,25 @@ void PrintFirstElementsRaw()
 		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
 		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
 	}
+}
+
+void CopyEventDataFreerun()
+{
+	//L1 data
+	InvalidateCacheRanges(1);
+	memcpy(&zynqPacket.level1_data[0].payload.ts, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT_H*4), 8);
+	void* addr = &DataDMA__Raw[0][0][0];
+	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
+	//L2 data
+	InvalidateCacheRanges(2);
+	memcpy(&zynqPacket.level2_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
+	addr = &DataDMA__L1[0][0][0];
+	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
+	//L3 data
+	InvalidateCacheRanges(3);
+	memcpy(&zynqPacket.level3_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
+	addr = &DataDMA__L2[0][0][0];
+	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
 }
 
 // This function copies the data from DMA memory to ethernet structure
@@ -484,6 +513,7 @@ void ScurveService()
 		LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
 		delay(10);
 		//TODO fill the array
+
 		// Now just write zeros to there
 		if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
 		{

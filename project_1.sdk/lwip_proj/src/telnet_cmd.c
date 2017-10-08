@@ -5,6 +5,7 @@
 #include <string.h>
 #include "hv.h"
 #include "ver.h"
+#include "pdmdp_err.h"
 
 u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
@@ -137,10 +138,19 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			&param2,
 			&param3) == 4)
 	{
-		u32 datasize = 0;
-		ret = StartScurveGathering(param0, param1, param2, param3);
-		char str[] = "Ok\n\r";
-		tcp_write(tpcb, str, sizeof(str), 1);
+		if(instrumentState.mode == INSTRUMENT_MODE_NONE)
+		{
+			u32 datasize = 0;
+			ret = StartScurveGathering(param0, param1, param2, param3);
+			char str[] = "Ok\n\r";
+			tcp_write(tpcb, str, sizeof(str), 1);
+		}
+		else
+		{
+			char str[20];
+			sprintf(str, "Error %d\n\r", ERR_INSTR_MODE_MUSTBE_0);
+			tcp_write(tpcb, str, sizeof(str), 1);
+		}
 	}
 	else if(strncmp(p->payload, "acq scurve status", 17) == 0)
 	{
