@@ -511,16 +511,22 @@ void ScurveService()
 	if(sCurveStruct.is_scurve_being_gathered)
 	{
 		LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
-		delay(10);
-		//TODO fill the array
-
-		// Now just write zeros to there
+		delay(5);
+		//start acquisition for 128*128 GTUs
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+		//wait some time
+		//TODO big question how much time to wait. Maybe the best is to make the status from DataProvider about end of operation
+		delay(50);
+		//now we are expecting 1 double integrated GTU in L3 array
+		memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[scurve_counter][0][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+		//check whether  current_dac_value is OK
 		if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
 		{
 			print("\n\rWrong s-curve address!!\n\r");
 			return;
 		}
-		memset(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], 0, sizeof(u32)*N_OF_PIXEL_PER_PDM);
 		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
 		if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
 		{
