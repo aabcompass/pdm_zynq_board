@@ -46,6 +46,7 @@ entity data_provider is
 			infinite : in std_logic;
 			num_of_frames: in std_logic_vector(20 downto 0);
 			-- stat
+			status : out std_logic_vector(31 downto 0);
 			axis_0l_rd_data_count: out std_logic_vector(15 downto 0);
 			axis_0r_rd_data_count: out std_logic_vector(15 downto 0);
 			axis_1l_rd_data_count: out std_logic_vector(15 downto 0);
@@ -368,6 +369,7 @@ raw_datapath_gen: for i in 0 to 2 generate
 	signal counter_frames : std_logic_vector(20 downto 0) := (others => '0');
 	signal counter : std_logic_vector(8 downto 0) := (others => '0');
 	signal infinite_d1: std_logic := '0';
+	signal status_d0: std_logic := '0';
 	
 begin
 
@@ -405,7 +407,7 @@ begin
 									s_axis_tlast_art_cc_fifo(i) <= '0';
 									s_axis_tvalid_art_cc_fifo(i) <= '0';
 				when 1 => if(frame_art_Q1(i) = '0') then
-										state := state + 1;
+										state := state + 1; 
 									end if;
 				when 2 => if(frame_art_Q1(i) = '1') then
 										state := state + 1;
@@ -423,6 +425,31 @@ begin
 		end if;
 	end process;
 	
+	status_former: process(clk_art_x1(i))
+	begin
+		if(rising_edge(clk_art_x1(i))) then
+			if(counter_frames /= 0 or infinite_d1 = '1') then
+				status_d0 <= '1';
+			else
+				status_d0 <= '0';
+			end if;
+		end if;
+	end process;
+		
+	xpm_cdc_status: xpm_cdc_single
+  generic map (
+     DEST_SYNC_FF   => 4, -- integer; range: 2-10
+     SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+     SRC_INPUT_REG  => 1  -- integer; 0=do not register input, 1=register input
+  )
+  port map (
+     src_clk  => clk_art_x1(i),  -- optional; required when SRC_INPUT_REG = 1
+     src_in   => status_d0,
+     dest_clk => s_axi_clk,
+     dest_out => status(i)
+  );
+		
+	
 	frame_art_Q1_1_d1 <= frame_art_Q1(1) when rising_edge(clk_art_x1(1));
 	frame_art_Q1_1_front <= frame_art_Q1(1) and (not frame_art_Q1_1_d1) when rising_edge(clk_art_x1(1));
 	
@@ -437,6 +464,7 @@ begin
 			end if;
 		end if;
 	end process;
+	
 end generate;  
 	
 	--data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8) when testmode(0) = '0' else X"00000101";

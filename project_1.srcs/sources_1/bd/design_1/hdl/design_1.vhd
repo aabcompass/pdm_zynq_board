@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sun Oct  8 19:56:18 2017
+--Date        : Tue Oct 10 15:24:07 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.2 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -14758,72 +14758,6 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_xlconstant_2_0;
-  component design_1_axi_data_provider_0_0 is
-  port (
-    clk_art0_x1 : in STD_LOGIC;
-    clk_art1_x1 : in STD_LOGIC;
-    clk_art2_x1 : in STD_LOGIC;
-    frame_art0 : in STD_LOGIC;
-    frame_art1 : in STD_LOGIC;
-    frame_art2 : in STD_LOGIC;
-    data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_aclk : in STD_LOGIC;
-    m_axis_art0l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art0l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art0l_tvalid : out STD_LOGIC;
-    m_axis_art0l_tlast : out STD_LOGIC;
-    m_axis_art0l_tready : in STD_LOGIC;
-    m_axis_art0r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art0r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art0r_tvalid : out STD_LOGIC;
-    m_axis_art0r_tlast : out STD_LOGIC;
-    m_axis_art0r_tready : in STD_LOGIC;
-    m_axis_art1l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art1l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art1l_tvalid : out STD_LOGIC;
-    m_axis_art1l_tlast : out STD_LOGIC;
-    m_axis_art1l_tready : in STD_LOGIC;
-    m_axis_art1r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art1r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art1r_tvalid : out STD_LOGIC;
-    m_axis_art1r_tlast : out STD_LOGIC;
-    m_axis_art1r_tready : in STD_LOGIC;
-    m_axis_art2l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art2l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art2l_tvalid : out STD_LOGIC;
-    m_axis_art2l_tlast : out STD_LOGIC;
-    m_axis_art2l_tready : in STD_LOGIC;
-    m_axis_art2r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    m_axis_art2r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    m_axis_art2r_tvalid : out STD_LOGIC;
-    m_axis_art2r_tlast : out STD_LOGIC;
-    m_axis_art2r_tready : in STD_LOGIC;
-    gtu_sig : out STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component design_1_axi_data_provider_0_0;
   component design_1_axis_flow_control_L1_0 is
   port (
     s_axis_aclk : in STD_LOGIC;
@@ -14918,6 +14852,72 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_L2_0;
+  component design_1_axi_data_provider_0_0 is
+  port (
+    clk_art0_x1 : in STD_LOGIC;
+    clk_art1_x1 : in STD_LOGIC;
+    clk_art2_x1 : in STD_LOGIC;
+    frame_art0 : in STD_LOGIC;
+    frame_art1 : in STD_LOGIC;
+    frame_art2 : in STD_LOGIC;
+    data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_aclk : in STD_LOGIC;
+    m_axis_art0l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art0l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art0l_tvalid : out STD_LOGIC;
+    m_axis_art0l_tlast : out STD_LOGIC;
+    m_axis_art0l_tready : in STD_LOGIC;
+    m_axis_art0r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art0r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art0r_tvalid : out STD_LOGIC;
+    m_axis_art0r_tlast : out STD_LOGIC;
+    m_axis_art0r_tready : in STD_LOGIC;
+    m_axis_art1l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art1l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art1l_tvalid : out STD_LOGIC;
+    m_axis_art1l_tlast : out STD_LOGIC;
+    m_axis_art1l_tready : in STD_LOGIC;
+    m_axis_art1r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art1r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art1r_tvalid : out STD_LOGIC;
+    m_axis_art1r_tlast : out STD_LOGIC;
+    m_axis_art1r_tready : in STD_LOGIC;
+    m_axis_art2l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art2l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art2l_tvalid : out STD_LOGIC;
+    m_axis_art2l_tlast : out STD_LOGIC;
+    m_axis_art2l_tready : in STD_LOGIC;
+    m_axis_art2r_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    m_axis_art2r_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    m_axis_art2r_tvalid : out STD_LOGIC;
+    m_axis_art2r_tlast : out STD_LOGIC;
+    m_axis_art2r_tready : in STD_LOGIC;
+    gtu_sig : out STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC
+  );
+  end component design_1_axi_data_provider_0_0;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
   signal CLK_IN1_D_1_2_CLK_N : STD_LOGIC;
   signal CLK_IN1_D_1_2_CLK_P : STD_LOGIC;

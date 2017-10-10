@@ -228,6 +228,7 @@ component data_provider is
     infinite: in std_logic;
     num_of_frames: in std_logic_vector(20 downto 0);
     -- stat
+    status : out std_logic_vector(31 downto 0);
     axis_0l_rd_data_count: out std_logic_vector(15 downto 0);
     axis_0r_rd_data_count: out std_logic_vector(15 downto 0);
     axis_1l_rd_data_count: out std_logic_vector(15 downto 0);
@@ -908,7 +909,7 @@ begin
 				alarm => slv_reg7(0),--: out std_logic;
 				clr_alarm => slv_reg0(9),--: in std_logic;
 				
-				
+				status => slv_reg16,--: out std_logic_vector(31 downto 0);
 				axis_0l_rd_data_count => slv_reg4(15 downto 0),--: out std_logic_vector(15 downto 0);
 				axis_0r_rd_data_count => slv_reg4(31 downto 16),--: out std_logic_vector(15 downto 0);
 				axis_1l_rd_data_count => slv_reg5(15 downto 0),--: out std_logic_vector(15 downto 0);
@@ -957,10 +958,5 @@ begin
 				m_axis_art2r_tlast => m_axis_art2r_tlast,--: out std_logic;
 				m_axis_art2r_tready => m_axis_art2r_tready--: in std_logic;
 	    );
-
-	slv_reg16 <= timestamp2(31 downto 0);
-	slv_reg17 <= timestamp2(63 downto 32);
-
-	-- User logic ends
 
 end arch_imp;
