@@ -267,6 +267,14 @@ typedef struct
 //If not all 1024 DACs thresholds was requested, but only 200 (for example),
 // the array in DATA_TYPE_SCURVE_V1 will have corresponding number of thresholds.
 
+// Symplified S-curve format for matlab
+
+#define NMAX_OF_THESHOLDS_4MATLAB	128
+
+typedef struct
+{
+	uint32_t int32_data[NMAX_OF_THESHOLDS_4MATLAB][N_OF_PIXEL_PER_PDM];
+} DATA_TYPE_SCURVE_4MATLAB;
 
 //========================================
 //  HVPS log structure

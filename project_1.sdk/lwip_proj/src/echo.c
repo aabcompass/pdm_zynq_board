@@ -357,9 +357,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
 		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
 
-		xil_printf("Timestamp2: %08x %08x\n\r",
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_TIMESTAMP+4),
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_TIMESTAMP));
 		xil_printf("Alarm: %08x\n\r",
 				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_ALARM));
 		//xil_printf("REGR_RAW_ERR=0x%01x\n\r", *(u32*)(XPAR_HIER_RAW_TOP_SWITCH_RAW_BASEADDR + 4*REGR_ERR));
@@ -378,11 +375,12 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("DMA RAW SR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET));
 		xil_printf("DMA RAW DEST=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_DESTADDR_OFFSET));
 		xil_printf("GetPacketCounter=0x%08x\n\r", GetPacketCounter(XPAR_TOP_SWITCH_TST_BASEADDR));
+		xil_printf("Data provider status = 0x%08x\n\r", *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS));
 		RxNEvents();
 	}
 	else if(c == 'S')
 	{
-		print_expander_regs();
+		instrumentState.is_simple_packets = 1;
 	}
 //	else if(c == 'c')
 //	{
@@ -398,7 +396,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'R')
 	{
-		PrintFirstElementsL2();
+		PrintFirstElementsL2(num);
 	}
 	else if(c == 'Q')
 	{
@@ -430,7 +428,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'g')
 	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		print("  ");
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
@@ -438,7 +436,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'G')
 	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_FRAMES_DMA_RAW*40;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_FRAMES_DMA_RAW;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 	}
@@ -511,6 +509,7 @@ void SetDefaultParameters()
 	instrumentState.file_counter_l1 = 0;
 	instrumentState.file_counter_l2 = 0;
 	instrumentState.file_counter_l3 = 0;
+	instrumentState.is_simple_packets = 0;
 }
 
 

@@ -52,6 +52,7 @@ typedef struct
 	u32 accumulation;
 	u32 current_dac_value;
 	u32 is_scurve_being_gathered;
+	u32 scurve_counter;
 } SCurveStruct;
 
 typedef struct
@@ -71,6 +72,7 @@ typedef struct
 	int file_counter_l3;
 	int file_counter_cc;
 	u32 artix_locked;
+	int is_simple_packets;
 } InstrumentState;
 
 #define GPIO_OUTPUT_REG_OFFSET	8
@@ -98,7 +100,7 @@ typedef struct
 #define REGR_ALARM			7
 #define REGW_TESTMODE		9
 #define REGW_INFINITE		10
-#define REGR_TIMESTAMP		16
+#define REGR_STATUS			16
 
 #define CMD_START_BIT_OFFSET		0
 #define CMD_START_INT_BIT_OFFSET	1

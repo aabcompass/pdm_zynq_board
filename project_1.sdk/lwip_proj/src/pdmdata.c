@@ -25,8 +25,12 @@ volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter
 volatile u32 current_buffer_L2 = 0;
 volatile u32 buffer_L2_changed;
 
+
+extern InstrumentState instrumentState;
+
 ZYNQ_PACKET zynqPacket;
 Z_DATA_TYPE_SCURVE_V1 scurvePacket;
+DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
@@ -64,21 +68,21 @@ void PrintFrame(int frame_num)
 	}
 }
 
-void PrintFirstElementsL2()
+void PrintFirstElementsL2(int section)
 {
 	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][0][0], 40/* sizeof(DataDMA__L1)*/);
-	for(i=0;i<10/*2304/2*/;i++)
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][section][0], 2304*4);
+	for(i=0;i<2304;i++)
 	{
-		xil_printf("DataDMA__L2[0][0][%d]=0x%04x\n\r", i, DataDMA__L2[0][0][i]);
+		xil_printf("DataDMA__L2[0][0][%d]=0x%06x\n\r", i, DataDMA__L2[0][section][i]);
 	}
 }
 
 void PrintFirstElementsL1()
 {
 	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 20/* sizeof(DataDMA__L1)*/);
-	for(i=0;i<10/*2304/2*/;i++)
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2304*2);
+	for(i=0;i<2304;i++)
 	{
 		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
 	}
@@ -87,10 +91,10 @@ void PrintFirstElementsL1()
 void PrintFirstElementsRaw()
 {
 	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 10/*sizeof(DataDMA__Raw)*/);
-	for(i=0;i<10/*2304/2*/;i++)
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 2304);
+	for(i=0;i<2304;i++)
 	{
-		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
+		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
 		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
 	}
 }
@@ -494,7 +498,9 @@ int StartScurveGathering(u32 start_dac_value, u32 step_dac_value, u32 stop_dac_v
 	sCurveStruct.step_dac_value = step_dac_value;
 	sCurveStruct.start_dac_value = start_dac_value;
 	sCurveStruct.stop_dac_value = stop_dac_value;
-	memset(&scurvePacket.payload, 0xFFFFFFFF, sizeof(scurvePacket.payload));
+	sCurveStruct.scurve_counter = 0;
+	memset(&scurvePacket.payload, 0xFF, sizeof(scurvePacket.payload));
+	memset(&scurvePacket4MatLab, 0, sizeof(scurvePacket4MatLab));
 	return ERR_OK;
 }
 
@@ -504,35 +510,65 @@ SCurveStruct* GetSCurveStruct()
 }
 
 
+
 void ScurveService()
 {
-	char filename_str[20];
-	static u32 scurve_counter = 0;
+	char filename_str[20];int i;
+	static u32 scurve_filename_counter = 0;
 	if(sCurveStruct.is_scurve_being_gathered)
 	{
-		LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
-		delay(5);
-		//start acquisition for 128*128 GTUs
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-		//wait some time
-		//TODO big question how much time to wait. Maybe the best is to make the status from DataProvider about end of operation
-		delay(50);
-		//now we are expecting 1 double integrated GTU in L3 array
-		memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[scurve_counter][0][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
-		//check whether  current_dac_value is OK
-		if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
+		if(sCurveStruct.step_dac_value == 8)
 		{
-			print("\n\rWrong s-curve address!!\n\r");
-			return;
-		}
-		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
-		if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
-		{
-			sCurveStruct.is_scurve_being_gathered = 0;
-			sprintf(filename_str, FILENAME_SCURVE, scurve_counter++);
-			SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
+			LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
+			delay(5);
+			//start acquisition for 128*128 GTUs
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+			//TODO !!! большой костыль !!!
+			if(sCurveStruct.scurve_counter == 0)
+			{
+				//wait for data_provider to be in idle_state
+				for(i=0;i<10000000;i++)
+					if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
+						break;
+				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
+				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+			}
+			//wait for data_provider to be in idle_state
+			for(i=0;i<10000000;i++)
+				if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
+					break;
+			if(i==10000000)
+				print("Data_provider is stalled\n\r");
+			delay(50);
+			//Print in order to delay for a short time
+			print("-->");
+			//Invalidate DCache Range
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
+			//now we are expecting 1 double integrated GTU in L3 array
+			if(instrumentState.is_simple_packets == 0)
+				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+			else
+				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+			//check whether  current_dac_value is OK
+			if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
+			{
+				print("\n\rWrong s-curve address!!\n\r");
+				return;
+			}
+			sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
+			sCurveStruct.scurve_counter++;
+			if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
+			{
+				sCurveStruct.is_scurve_being_gathered = 0;
+				sprintf(filename_str, FILENAME_SCURVE, scurve_filename_counter++);
+				if(instrumentState.is_simple_packets == 0)
+					SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
+				else
+					SendSpectrum2FTP((char*)&scurvePacket4MatLab, sizeof(DATA_TYPE_SCURVE_4MATLAB), filename_str);
+			}
 		}
 	}
 }

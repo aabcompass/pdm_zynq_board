@@ -1,7 +1,7 @@
 //arch = zynq; split = false; format = BIN
 the_ROM_image:
 {
-	[bootloader]/home/alx/xil_proj/pdm_zynq_board/current/project_1.sdk/fsbl/Debug/fsbl.elf
-	/home/alx/xil_proj/pdm_zynq_board/current/project_1.runs/impl_1/design_1_wrapper.bit
-	/home/alx/xil_proj/pdm_zynq_board/current/project_1.sdk/lwip_proj/Debug/lwip_proj.elf
+	[bootloader]/home/alx/xil_proj/pdm_zynq_board/clone/current/project_1.sdk/fsbl/Debug/fsbl.elf
+	/home/alx/xil_proj/pdm_zynq_board/clone/current/project_1.runs/impl_1/design_1_wrapper.bit
+	/home/alx/xil_proj/pdm_zynq_board/clone/current/project_1.sdk/lwip_proj/Debug/lwip_proj.elf
 }

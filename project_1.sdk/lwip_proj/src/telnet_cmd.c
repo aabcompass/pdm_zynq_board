@@ -140,6 +140,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		if(instrumentState.mode == INSTRUMENT_MODE_NONE)
 		{
+			print("Starting S-curve gathering...\n\r");
 			u32 datasize = 0;
 			ret = StartScurveGathering(param0, param1, param2, param3);
 			char str[] = "Ok\n\r";
