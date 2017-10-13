@@ -37,7 +37,7 @@ int hv_n_tries_to_release[NUM_OF_HV*2] = {0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 
 volatile int is_interrupt_pending = 0;
 
 //hvps_log - the database for events related to HVPS
-DATA_TYPE_HVPS_LOG_V0 hvps_log[HVPS_LOG_SIZE_NRECORDS];
+Z_DATA_TYPE_HVPS_LOG_V0 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
 volatile u32 hvps_log_current_record = 0;
 
 
@@ -145,7 +145,7 @@ void setDacValue_list(int dac[NUM_OF_HV])
 			  0x340000 | (dac[3+2] & HV_MAX_DAC_VALUE)<<4,
 			  0x340000 | (dac[6+2] & HV_MAX_DAC_VALUE)<<4);
 	for(i=0;i<NUM_OF_HV;i++)
-		HV_addLog(HVPS_DACS_LOADED, i<<16 | dac[i]);
+		HV_addLog(HVPS_DACS_LOADED, HVPS_DACS_LOADED_STR, i<<16 | dac[i]);
 }
 
 // Expander initialization
@@ -194,7 +194,7 @@ void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 
   delay(10);  // 10 millisec delay
 
-  HV_addLog(HVPS_TURN_OFF, kHV);
+  HV_addLog(HVPS_TURN_OFF, HVPS_TURN_OFF_STR, kHV);
 
 // this procedure leaves:
 //     *  interupts disable for ON/OFF and Status pins,
@@ -324,7 +324,7 @@ unsigned char HV_turnON(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
    }
   datGPIO = getRegister(expAddressR, GPIO); // once again
 
-  HV_addLog(HVPS_TURN_ON, kHV);
+  HV_addLog(HVPS_TURN_ON, HVPS_TURN_ON_STR, kHV);
 
   return datGPIO;
 
@@ -403,15 +403,15 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
 //}
 
 // Add new record to HVPS log
-void HV_addLog(u32 record_type, u32 channels)
+void HV_addLog(u32 record_type, char* message, u32 channels)
 {
 	if(hvps_log_current_record < HVPS_LOG_SIZE_NRECORDS)
 	{
-		hvps_log[hvps_log_current_record].ts.n_gtu = *(u64*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGR_HVHK_GTU_CNT_L);
-		hvps_log[hvps_log_current_record].record_type = record_type;
-		hvps_log[hvps_log_current_record].channels = channels;
+		hvps_log.payload[hvps_log_current_record].ts.n_gtu = *(u64*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGR_HVHK_GTU_CNT_L);
+		hvps_log.payload[hvps_log_current_record].record_type = record_type;
+		hvps_log.payload[hvps_log_current_record].channels = channels;
+		xil_printf("HVPS GTU%08x rec%04d.\t%s\t(0x%08x)\n\r", hvps_log.payload[hvps_log_current_record].ts.n_gtu, hvps_log_current_record, message, channels);
 		hvps_log_current_record++;
-		xil_printf("record_type=0x%02x\n\r", record_type);
 	}
 }
 
@@ -420,15 +420,30 @@ int HV_getLogSize()
 	return hvps_log_current_record;
 }
 
+void SendLogToFTP()
+{
+	static int filename_str_cntr = 0;
+	char filename_str[32];
+	if(hvps_log_current_record != 0)
+	{
+		sprintf(filename_str, FILENAME_HVLOG, filename_str_cntr++);
+		SendSpectrum2FTP((UINTPTR)(hvps_log.payload), hvps_log_current_record*sizeof(DATA_TYPE_HVPS_LOG_V0), filename_str);
+	}
+	else
+	{
+		print("Nothing to send.\n\r");
+	}
+}
+
 void HV_prnLog()
 {
 	int i;
 	for(i=0;i<hvps_log_current_record;i++)
 	{
 		xil_printf("%d.\tGTU=%d\tTYPE:%02x\tCH:%05x\n\r", i,
-				(u32)hvps_log[i].ts.n_gtu,
-				hvps_log[i].record_type,
-				hvps_log[i].channels);
+				(u32)hvps_log.payload[i].ts.n_gtu,
+				hvps_log.payload[i].record_type,
+				hvps_log.payload[i].channels);
 	}
 }
 // This function is periodically called from the lifecycle in main().
@@ -471,7 +486,7 @@ void HVInterruptService()
 							HV_turnOFF(i/2); // turn off this HV
 							hv_working_successful &= ~(1<<i/2);
 							is_interrupt_pending &= ~(1<<i);
-							HV_addLog(HVPS_SANITY_RELEASE, (1<<i));
+							HV_addLog(HVPS_SANITY_RELEASE, HVPS_SANITY_RELEASE_STR, (1<<i));
 							print("HV channel has been blocked\n\r");
 						}
 					}
@@ -490,7 +505,7 @@ void HVInterruptService()
 			if(hv_n_interrupts[i] > HVHK_MAX_INTERRUPTS)
 			{
 				hv_working_successful &= ~(1<<i/2);
-				HV_addLog(HVPS_SANITY_INTR, 1<<i);
+				HV_addLog(HVPS_SANITY_INTR, HVPS_SANITY_INTR_STR, 1<<i);
 				HV_turnOFF(i/2);
 				print("HV channel turned off due to big number if interrupts\n\r");
 			}
@@ -530,7 +545,7 @@ void HVInterruptHundler(void *Callback)
 
 	is_interrupt_pending |= (exp3_intf<<12 | exp2_intf<<6 | exp3_intf);
 	// Add log
-	HV_addLog(HVPS_INTR, is_interrupt_pending);
+	HV_addLog(HVPS_INTR, HVPS_INTR_STR, is_interrupt_pending);
 	// Start timer0
 	*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 1;
 	*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_START) = 0;
@@ -588,7 +603,7 @@ void print_expander_regs()
 
 void InitHV()
 {
-	memset(hvps_log, 0, sizeof(hvps_log));
+	memset(&hvps_log.payload[0], 0, sizeof(hvps_log.payload));
 	initDac();
 	expIni();
 }
@@ -705,7 +720,7 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = (1<<BIT_TRANSMIT);
 	print("t");
 	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
-	HV_addLog(HVPS_SR_LOADED, reg);
+	HV_addLog(HVPS_SR_LOADED, HVPS_SR_LOADED_STR, reg);
 	return 0;
 }
 

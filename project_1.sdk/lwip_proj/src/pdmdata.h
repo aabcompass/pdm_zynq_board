@@ -246,6 +246,7 @@ typedef struct
 #define FILENAME_MODE_TRIGGER3 	"frm_tr3_%08d.dat"
 #define FILENAME_SCURVE	 		"scurve_%08d.dat"
 #define FILENAME_CONCATED		"frm_cc_%08d.dat"
+#define FILENAME_HVLOG			"hv_%08d.dat"
 
 //========================================
 //  S-curve structures
@@ -298,6 +299,18 @@ typedef struct
 #define HVPS_AGC_UP_1_to_0		0x0D // Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
 #define HVPS_AGC_UP_0_to_1		0x0E // Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
 #define HVPS_AGC_UP_1_to_3		0x0F // Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
+
+#define HVPS_TURN_ON_STR			 "TURN_ON" // turn on
+#define HVPS_TURN_OFF_STR			 "TURN_OFF"// turn off
+#define HVPS_DACS_LOADED_STR		 "DACS_LOADED"// DAC loaded by user
+#define HVPS_SR_LOADED_STR			 "SR_LOADED"// Shift register loaded by user
+#define HVPS_INTR_STR				 "INTR"// Interrupt
+#define HVPS_SANITY_RELEASE_STR		 "SANITY_RELEASE"// HVPS channel has been turned off because of too many tries to turn on this HV
+#define HVPS_SANITY_INTR_STR		 "SANITY_INTR"// HVPS channel has been turned off because of too many interrupts from its HVOK line
+#define HVPS_AGC_UP_3_to_1_STR		 "AGC_UP_3_to_1"// Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
+#define HVPS_AGC_UP_1_to_0_STR		 "AGC_UP_1_to_0"// Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
+#define HVPS_AGC_UP_0_to_1_STR		 "AGC_UP_0_to_1"// Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
+#define HVPS_AGC_UP_1_to_3_STR		 "AGC_UP_1_to_3"// Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
 
 
 typedef struct
