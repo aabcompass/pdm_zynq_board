@@ -110,12 +110,12 @@ void CopyEventDataFreerun()
 	InvalidateCacheRanges(2);
 	memcpy(&zynqPacket.level2_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
 	addr = &DataDMA__L1[0][0][0];
-	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
+	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
 	//L3 data
 	InvalidateCacheRanges(3);
 	memcpy(&zynqPacket.level3_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
 	addr = &DataDMA__L2[0][0][0];
-	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
+	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
 }
 
 // This function copies the data from DMA memory to ethernet structure
