@@ -196,87 +196,80 @@ architecture arch_imp of axi_data_provider_v1_0_S00_AXI is
 	signal reg_data_out	:std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
 	signal byte_index	: integer;
 	
-	signal timestamp2: std_logic_vector(63 downto 0);
 
 component data_provider is
     Port ( 
 			-- 100 MHz clocks from external PLL/MMCM
-    clk_art0_x1 : in STD_LOGIC;
-    clk_art1_x1 : in STD_LOGIC;
-    clk_art2_x1 : in STD_LOGIC;
-    -- frame signals
-    frame_art0:  in std_logic;
-    frame_art1:  in std_logic;
-    frame_art2:  in std_logic;
-    -- data lines
-    data_art0: in std_logic_vector(15 downto 0);
-    data_art1: in std_logic_vector(15 downto 0);
-    data_art2: in std_logic_vector(15 downto 0);			
-    -- control
-    start_sig: in std_logic;
-    start_sig_int: in std_logic;
-    run_timestamp2_counter: in std_logic;
-    reset_timestamp2_counter: in std_logic;
-    timestamp2: out std_logic_vector(63 downto 0);
-    alarm: out std_logic;
-    clr_alarm: in std_logic;
-    --testgen
-    is_test_gen: in std_logic;
-    test_duty1, test_duty2: in std_logic_vector(7 downto 0);
-		testmode: in std_logic_vector(31 downto 0);
-			   -- params
-    infinite: in std_logic;
-    num_of_frames: in std_logic_vector(20 downto 0);
-    -- stat
-    status : out std_logic_vector(31 downto 0);
-    axis_0l_rd_data_count: out std_logic_vector(15 downto 0);
-    axis_0r_rd_data_count: out std_logic_vector(15 downto 0);
-    axis_1l_rd_data_count: out std_logic_vector(15 downto 0);
-    axis_1r_rd_data_count: out std_logic_vector(15 downto 0);
-    axis_2l_rd_data_count: out std_logic_vector(15 downto 0);
-    axis_2r_rd_data_count: out std_logic_vector(15 downto 0);
-    
-    counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
-    -- -- data to trigger L1 and to memory buffer
-    s_axi_clk: in std_logic;
-    -- raw data to MPU
-    m_axis_aclk: in std_logic;
-    
-    m_axis_art0l_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art0l_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art0l_tvalid: out std_logic;
-    m_axis_art0l_tlast: out std_logic;
-    m_axis_art0l_tready: in std_logic;
-    
-    m_axis_art0r_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art0r_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art0r_tvalid: out std_logic;
-    m_axis_art0r_tlast: out std_logic;
-    m_axis_art0r_tready: in std_logic;
-    
-    m_axis_art1l_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art1l_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art1l_tvalid: out std_logic;
-    m_axis_art1l_tlast: out std_logic;
-    m_axis_art1l_tready: in std_logic;
-    
-    m_axis_art1r_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art1r_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art1r_tvalid: out std_logic;
-    m_axis_art1r_tlast: out std_logic;
-    m_axis_art1r_tready: in std_logic;
-    
-    m_axis_art2l_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art2l_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art2l_tvalid: out std_logic;
-    m_axis_art2l_tlast: out std_logic;
-    m_axis_art2l_tready: in std_logic;
-    
-    m_axis_art2r_tdata: out std_logic_vector(15 downto 0);
-    m_axis_art2r_tkeep: out std_logic_vector(1 downto 0);
-    m_axis_art2r_tvalid: out std_logic;
-    m_axis_art2r_tlast: out std_logic;
-    m_axis_art2r_tready: in std_logic);
+			clk_art0_x1 : in STD_LOGIC;
+			clk_art1_x1 : in STD_LOGIC;
+			clk_art2_x1 : in STD_LOGIC;
+			-- frame signals
+			frame_art0:  in std_logic;
+			frame_art1:  in std_logic;
+			frame_art2:  in std_logic;
+			-- data lines
+			data_art0: in std_logic_vector(15 downto 0);
+			data_art1: in std_logic_vector(15 downto 0);
+			data_art2: in std_logic_vector(15 downto 0);			
+			-- control
+			start_sig: in std_logic;
+			--testgen
+			clr_reg: in std_logic_vector(31 downto 0);
+			testmode: in std_logic_vector(31 downto 0);
+			pattern_initial_0r_01: in std_logic_vector(31 downto 0);
+			pattern_initial_1r_1l: in std_logic_vector(31 downto 0);
+			pattern_initial_2r_21: in std_logic_vector(31 downto 0);
+			pattern_trans_step: in std_logic_vector(31 downto 0);
+			pattern_trans_max: in std_logic_vector(31 downto 0);
+			-- params
+			infinite : in std_logic;
+			num_of_frames: in std_logic_vector(20 downto 0);
+			-- stat
+			status : out std_logic_vector(31 downto 0);
+			
+			counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
+			-- -- data to trigger L1 and to memory buffer
+			s_axi_clk: in std_logic;
+			-- raw data to MPU
+			m_axis_aclk: in std_logic;
+--			m_axis_200MHz_aclk: in std_logic;
+			
+			m_axis_art0l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art0l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art0l_tvalid: out std_logic;
+			m_axis_art0l_tlast: out std_logic;
+			m_axis_art0l_tready: in std_logic;
+			
+			m_axis_art0r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art0r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art0r_tvalid: out std_logic;
+			m_axis_art0r_tlast: out std_logic;
+			m_axis_art0r_tready: in std_logic;
+			
+			m_axis_art1l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art1l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art1l_tvalid: out std_logic;
+			m_axis_art1l_tlast: out std_logic;
+			m_axis_art1l_tready: in std_logic;
+			
+			m_axis_art1r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art1r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art1r_tvalid: out std_logic;
+			m_axis_art1r_tlast: out std_logic;
+			m_axis_art1r_tready: in std_logic;
+			
+			m_axis_art2l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art2l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art2l_tvalid: out std_logic;
+			m_axis_art2l_tlast: out std_logic;
+			m_axis_art2l_tready: in std_logic;
+			
+			m_axis_art2r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art2r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art2r_tvalid: out std_logic;
+			m_axis_art2r_tlast: out std_logic;
+			m_axis_art2r_tready: in std_logic
+);
 end component;
 
 
@@ -375,10 +368,10 @@ begin
 	      slv_reg1 <= (others => '0');
 	      slv_reg2 <= (others => '0');
 	      slv_reg3 <= (others => '0');
-	      --slv_reg4 <= (others => '0');
-	      --slv_reg5 <= (others => '0');
-	     -- slv_reg6 <= (others => '0');
-	      --slv_reg7 <= (others => '0');
+	      slv_reg4 <= (others => '0');
+	      slv_reg5 <= (others => '0');
+	      slv_reg6 <= (others => '0');
+	      slv_reg7 <= (others => '0');
 	      slv_reg8 <= (others => '0');
 	      slv_reg9 <= (others => '0');
 	      slv_reg10 <= (others => '0');
@@ -388,7 +381,7 @@ begin
 	      slv_reg14 <= (others => '0');
 	      slv_reg15 <= (others => '0');
 	      --slv_reg16 <= (others => '0');
-	      --slv_reg17 <= (others => '0');
+	      slv_reg17 <= (others => '0');
 	      --slv_reg18 <= (others => '0');
 	      slv_reg19 <= (others => '0');
 	      slv_reg20 <= (others => '0');
@@ -439,38 +432,38 @@ begin
 	                slv_reg3(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
---	          when b"00100" =>
---	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
---	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
---	                -- Respective byte enables are asserted as per write strobes                   
---	                -- slave registor 4
---	                slv_reg4(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
---	              end if;
---	            end loop;
---	          when b"00101" =>
---	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
---	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
---	                -- Respective byte enables are asserted as per write strobes                   
---	                -- slave registor 5
---	                slv_reg5(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
---	              end if;
---	            end loop;
---	          when b"00110" =>
---	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
---	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
---	                -- Respective byte enables are asserted as per write strobes                   
---	                -- slave registor 6
---	                slv_reg6(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
---	              end if;
---	            end loop;
---	          when b"00111" =>
---	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
---	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
---	                -- Respective byte enables are asserted as per write strobes                   
---	                -- slave registor 7
---	                slv_reg7(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
---	              end if;
---	            end loop;
+	          when b"00100" =>
+	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+	                -- Respective byte enables are asserted as per write strobes                   
+	                -- slave registor 4
+	                slv_reg4(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+	              end if;
+	            end loop;
+	          when b"00101" =>
+	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+	                -- Respective byte enables are asserted as per write strobes                   
+	                -- slave registor 5
+	                slv_reg5(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+	              end if;
+	            end loop;
+	          when b"00110" =>
+	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+	                -- Respective byte enables are asserted as per write strobes                   
+	                -- slave registor 6
+	                slv_reg6(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+	              end if;
+	            end loop;
+	          when b"00111" =>
+	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+	                -- Respective byte enables are asserted as per write strobes                   
+	                -- slave registor 7
+	                slv_reg7(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+	              end if;
+	            end loop;
 	          when b"01000" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
@@ -543,14 +536,14 @@ begin
 --	                slv_reg16(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 --	              end if;
 --	            end loop;
---	          when b"10001" =>
---	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
---	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
---	                -- Respective byte enables are asserted as per write strobes                   
---	                -- slave registor 17
---	                slv_reg17(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
---	              end if;
---	            end loop;
+	          when b"10001" =>
+	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+	                -- Respective byte enables are asserted as per write strobes                   
+	                -- slave registor 17
+	                slv_reg17(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+	              end if;
+	            end loop;
 --	          when b"10010" =>
 --	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 --	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
@@ -668,10 +661,10 @@ begin
 	            slv_reg1 <= slv_reg1;
 	            slv_reg2 <= slv_reg2;
 	            slv_reg3 <= slv_reg3;
---	            slv_reg4 <= slv_reg4;
---	            slv_reg5 <= slv_reg5;
---	            slv_reg6 <= slv_reg6;
---	            slv_reg7 <= slv_reg7;
+	            slv_reg4 <= slv_reg4;
+	            slv_reg5 <= slv_reg5;
+	            slv_reg6 <= slv_reg6;
+	            slv_reg7 <= slv_reg7;
 	            slv_reg8 <= slv_reg8;
 	            slv_reg9 <= slv_reg9;
 	            slv_reg10 <= slv_reg10;
@@ -681,7 +674,7 @@ begin
 	            slv_reg14 <= slv_reg14;
 	            slv_reg15 <= slv_reg15;
 	            --slv_reg16 <= slv_reg16;
-	           -- slv_reg17 <= slv_reg17;
+	            slv_reg17 <= slv_reg17;
 	            --slv_reg18 <= slv_reg18;
 	            slv_reg19 <= slv_reg19;
 	            slv_reg20 <= slv_reg20;
@@ -895,30 +888,20 @@ begin
 				data_art2 => data_art2,--: in std_logic_vector(15 downto 0);			
 				-- control
 				start_sig => slv_reg0(0),--: in std_logic;
-				start_sig_int => slv_reg0(1),--: in std_logic;
-				is_test_gen => slv_reg1(0),--: in std_logic;
-				test_duty1 => slv_reg2(7 downto 0),--, 
-				test_duty2 => slv_reg2(7 downto 0),--: in std_logic_vector(7 downto 0);
 				testmode => slv_reg9,
 				infinite => slv_reg10(0),
 				num_of_frames => slv_reg3(20 downto 0),--: in std_logic_vector(7 downto 0);
 				-- counter
-				run_timestamp2_counter => slv_reg1(8),--: in std_logic;
-				reset_timestamp2_counter => slv_reg0(8),--: in std_logic;
-				timestamp2 => timestamp2,--: out std_logic_vector(63 downto 0);
-				alarm => slv_reg7(0),--: out std_logic;
-				clr_alarm => slv_reg0(9),--: in std_logic;
-				
 				status => slv_reg16,--: out std_logic_vector(31 downto 0);
-				axis_0l_rd_data_count => slv_reg4(15 downto 0),--: out std_logic_vector(15 downto 0);
-				axis_0r_rd_data_count => slv_reg4(31 downto 16),--: out std_logic_vector(15 downto 0);
-				axis_1l_rd_data_count => slv_reg5(15 downto 0),--: out std_logic_vector(15 downto 0);
-				axis_1r_rd_data_count => slv_reg5(31 downto 16),--: out std_logic_vector(15 downto 0);
-				axis_2l_rd_data_count => slv_reg6(15 downto 0),--: out std_logic_vector(15 downto 0);
-				axis_2r_rd_data_count => slv_reg6(31 downto 16),--: out std_logic_vector(15 downto 0 
-				--
 				counter_tvalid_all_latch => slv_reg18(15 downto 0),--: out std_logic_vector(15 downto 0);--
-				-- -- data to trigger L1 and to memory buffer
+
+				clr_reg => slv_reg4,--: in std_logic_vector(31 downto 0);
+				pattern_initial_0r_01 => slv_reg11,--: in std_logic_vector(31 downto 0);
+				pattern_initial_1r_1l => slv_reg12,--: in std_logic_vector(31 downto 0);
+				pattern_initial_2r_21 => slv_reg13,--: in std_logic_vector(31 downto 0);
+				pattern_trans_step => 	slv_reg7,--: in std_logic_vector(31 downto 0);
+				pattern_trans_max => slv_reg8,--: in std_logic_vector(31 downto 0);
+
 				-- raw data to MPU
 				m_axis_aclk => m_axis_aclk,--: in std_logic;
 				

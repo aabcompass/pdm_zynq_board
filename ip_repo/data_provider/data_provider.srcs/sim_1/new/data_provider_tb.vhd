@@ -1,3 +1,57 @@
+-- The basic of data provider artificial modes
+---------------------------------------
+-- 1. This mode of data provider allows to verify whether the mixture between EC-ASIC boards or not.
+	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_0r_01 => X"06060000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_1r_1l => X"12120C0C",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_2r_21 => X"1E1E1818",--: in std_logic_vector(31 downto 0);
+	--pattern_trans_step => conv_std_logic_vector(0, 32),--: in std_logic_vector(31 downto 0);
+	--pattern_trans_max => conv_std_logic_vector(0, 32),--: in std_logic_vector(31 downto 0);
+
+-- All pixels in each EC-ASIC boards will be the same
+
+---------------------------------------
+-- 2. This mode of data provider allows to verify whether the mixture between PMTs.
+	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_0r_01 => X"06060000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_1r_1l => X"12120C0C",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_2r_21 => X"1E1E1818",--: in std_logic_vector(31 downto 0);
+	--pattern_trans_step => conv_std_logic_vector(32, 32),--: in std_logic_vector(31 downto 0);
+	--pattern_trans_max => conv_std_logic_vector(6, 32),--: in std_logic_vector(31 downto 0);
+
+-- All pixels in each EC-ASIC boards will be the same
+
+---------------------------------------
+-- 3. This mode of data provider allows to verify whether the mixture between PDMs. 
+--    Also it is possible to check the integrators
+	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_trans_step => conv_std_logic_vector(32*6, 32),--: in std_logic_vector(31 downto 0);
+	--pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
+
+---------------------------------------
+-- 4. This mode of data provider allows to verify whether the mixture between single integrated data. 
+--    Also it is possible to check the integrators
+	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_trans_step => conv_std_logic_vector(128*32*6, 32),--: in std_logic_vector(31 downto 0);
+	--pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
+
+---------------------------------------
+-- 5. This mode of data provider allows to verify whether the mixture between single integrated data. 
+--    Also it is possible to check the integrators
+	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
+	--pattern_trans_step => conv_std_logic_vector(128*128*32*6, 32),--: in std_logic_vector(31 downto 0);
+	--pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
+
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -11,85 +65,79 @@ end data_provider_tb;
 architecture Behavioral of data_provider_tb is
 
 	component data_provider is
-			Port ( 
-				-- 100 MHz clocks from external PLL/MMCM
-				clk_art0_x1 : in STD_LOGIC;
-				clk_art1_x1 : in STD_LOGIC;
-				clk_art2_x1 : in STD_LOGIC;
-				-- frame signals
-				frame_art0:  in std_logic;
-				frame_art1:  in std_logic;
-				frame_art2:  in std_logic;
-				-- data lines
-				data_art0: in std_logic_vector(15 downto 0);
-				data_art1: in std_logic_vector(15 downto 0);
-				data_art2: in std_logic_vector(15 downto 0);			
-				-- control
-				start_sig: in std_logic;
-				start_sig_int: in std_logic;
-				run_timestamp2_counter: in std_logic;
-				reset_timestamp2_counter: in std_logic;
-				timestamp2: out std_logic_vector(63 downto 0);
-				alarm: out std_logic;
-				clr_alarm: in std_logic;
-				--testgen
-				is_test_gen: in std_logic;
-				test_duty1, test_duty2: in std_logic_vector(7 downto 0);
-				testmode: in std_logic_vector(31 downto 0);
-				-- params
-				infinite : in std_logic;
-				num_of_frames: in std_logic_vector(20 downto 0);
-				-- stat
-				axis_0l_rd_data_count: out std_logic_vector(15 downto 0);
-				axis_0r_rd_data_count: out std_logic_vector(15 downto 0);
-				axis_1l_rd_data_count: out std_logic_vector(15 downto 0);
-				axis_1r_rd_data_count: out std_logic_vector(15 downto 0);
-				axis_2l_rd_data_count: out std_logic_vector(15 downto 0);
-				axis_2r_rd_data_count: out std_logic_vector(15 downto 0);
-				
-				counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
-				-- -- data to trigger L1 and to memory buffer
-				s_axi_clk: in std_logic;
-				-- raw data to MPU
-				m_axis_aclk: in std_logic;
-	--			m_axis_200MHz_aclk: in std_logic;
-				
-				m_axis_art0l_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art0l_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art0l_tvalid: out std_logic;
-				m_axis_art0l_tlast: out std_logic;
-				m_axis_art0l_tready: in std_logic;
-				
-				m_axis_art0r_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art0r_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art0r_tvalid: out std_logic;
-				m_axis_art0r_tlast: out std_logic;
-				m_axis_art0r_tready: in std_logic;
-				
-				m_axis_art1l_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art1l_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art1l_tvalid: out std_logic;
-				m_axis_art1l_tlast: out std_logic;
-				m_axis_art1l_tready: in std_logic;
-				
-				m_axis_art1r_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art1r_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art1r_tvalid: out std_logic;
-				m_axis_art1r_tlast: out std_logic;
-				m_axis_art1r_tready: in std_logic;
-				
-				m_axis_art2l_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art2l_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art2l_tvalid: out std_logic;
-				m_axis_art2l_tlast: out std_logic;
-				m_axis_art2l_tready: in std_logic;
-				
-				m_axis_art2r_tdata: out std_logic_vector(15 downto 0);
-				m_axis_art2r_tkeep: out std_logic_vector(1 downto 0);
-				m_axis_art2r_tvalid: out std_logic;
-				m_axis_art2r_tlast: out std_logic;
-				m_axis_art2r_tready: in std_logic
-			);
+    Port ( 
+			-- 100 MHz clocks from external PLL/MMCM
+			clk_art0_x1 : in STD_LOGIC;
+			clk_art1_x1 : in STD_LOGIC;
+			clk_art2_x1 : in STD_LOGIC;
+			-- frame signals
+			frame_art0:  in std_logic;
+			frame_art1:  in std_logic;
+			frame_art2:  in std_logic;
+			-- data lines
+			data_art0: in std_logic_vector(15 downto 0);
+			data_art1: in std_logic_vector(15 downto 0);
+			data_art2: in std_logic_vector(15 downto 0);			
+			-- control
+			start_sig: in std_logic;
+			--testgen
+			clr_reg: in std_logic_vector(31 downto 0);
+			
+			testmode: in std_logic_vector(31 downto 0);
+			pattern_initial_0r_01: in std_logic_vector(31 downto 0);
+			pattern_initial_1r_1l: in std_logic_vector(31 downto 0);
+			pattern_initial_2r_21: in std_logic_vector(31 downto 0);
+			pattern_trans_step: in std_logic_vector(31 downto 0);
+			pattern_trans_max: in std_logic_vector(31 downto 0);
+			-- params
+			infinite : in std_logic;
+			num_of_frames: in std_logic_vector(20 downto 0);
+			-- stat
+			status : out std_logic_vector(31 downto 0);
+			
+			counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
+			-- -- data to trigger L1 and to memory buffer
+			s_axi_clk: in std_logic;
+			-- raw data to MPU
+			m_axis_aclk: in std_logic;
+--			m_axis_200MHz_aclk: in std_logic;
+			
+			m_axis_art0l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art0l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art0l_tvalid: out std_logic;
+			m_axis_art0l_tlast: out std_logic;
+			m_axis_art0l_tready: in std_logic;
+			
+			m_axis_art0r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art0r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art0r_tvalid: out std_logic;
+			m_axis_art0r_tlast: out std_logic;
+			m_axis_art0r_tready: in std_logic;
+			
+			m_axis_art1l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art1l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art1l_tvalid: out std_logic;
+			m_axis_art1l_tlast: out std_logic;
+			m_axis_art1l_tready: in std_logic;
+			
+			m_axis_art1r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art1r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art1r_tvalid: out std_logic;
+			m_axis_art1r_tlast: out std_logic;
+			m_axis_art1r_tready: in std_logic;
+			
+			m_axis_art2l_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art2l_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art2l_tvalid: out std_logic;
+			m_axis_art2l_tlast: out std_logic;
+			m_axis_art2l_tready: in std_logic;
+			
+			m_axis_art2r_tdata: out std_logic_vector(15 downto 0);
+			m_axis_art2r_tkeep: out std_logic_vector(1 downto 0);
+			m_axis_art2r_tvalid: out std_logic;
+			m_axis_art2r_tlast: out std_logic;
+			m_axis_art2r_tready: in std_logic
+	);
 	end component; 
 
 	signal clk_axi_counter: integer := 0;
@@ -101,6 +149,7 @@ architecture Behavioral of data_provider_tb is
 	signal s_axi_clk: std_logic := '0';
 	signal m_axis_aclk: std_logic := '0';
 	signal infinite: std_logic := '0';
+	signal clr_reg: std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 
@@ -120,27 +169,18 @@ begin
 				data_art2 => data_art,--: in std_logic_vector(15 downto 0);			
 				-- control
 				start_sig => start_sig,--: in std_logic;
-				start_sig_int => '0',--: in std_logic;
-				run_timestamp2_counter => '0',--: in std_logic;
-				reset_timestamp2_counter => '0',--: in std_logic;
-				timestamp2 => open,--: out std_logic_vector(63 downto 0);
-				alarm => open,--: out std_logic;
-				clr_alarm => '0',--: in std_logic;
-				--testgen
-				is_test_gen => '0',--: in std_logic;
-				test_duty1 => (others => '0'),--, 
-				test_duty2 => (others => '0'),--: in std_logic_vector(7 downto 0);
-				testmode => (others => '0'),--: in std_logic_vector(31 downto 0);
+				
+				clr_reg => clr_reg,---: in std_logic_vector(31 downto 0);
+				
+				testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+				pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
+				pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
+				pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
+				pattern_trans_step => conv_std_logic_vector(128*32*6, 32),--: in std_logic_vector(31 downto 0);
+				pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
 				-- params
 				infinite => infinite,--: in std_logic;
 				num_of_frames => conv_std_logic_vector(10, 21),--: in std_logic_vector(20 downto 0);
-				-- stat
-				axis_0l_rd_data_count => open,--: out std_logic_vector(15 downto 0);
-				axis_0r_rd_data_count => open,--: out std_logic_vector(15 downto 0);
-				axis_1l_rd_data_count => open,--: out std_logic_vector(15 downto 0);
-				axis_1r_rd_data_count => open,--: out std_logic_vector(15 downto 0);
-				axis_2l_rd_data_count => open,--: out std_logic_vector(15 downto 0);
-				axis_2r_rd_data_count => open,--: out std_logic_vector(15 downto 0);
 				
 				counter_tvalid_all_latch => open,--: out std_logic_vector(15 downto 0);
 				-- -- data to trigger L1 and to memory buffer
@@ -207,13 +247,15 @@ begin
 				if(rising_edge(s_axi_clk)) then
 					if(clk_axi_counter = 100) then
 						start_sig <= '1';
+						clr_reg(0) <= '1';
 					end if;
 					if(clk_axi_counter = 6000) then
 						infinite <= '1';
+						clr_reg(0) <= '0';
 					end if;
-					if(clk_axi_counter = 16000) then
-						infinite <= '0';
-					end if;
+					--if(clk_axi_counter = 16000) then
+					--	infinite <= '0';
+					--end if;
 				end if;			
 			end process;
 			

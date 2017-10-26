@@ -60,6 +60,7 @@
 
 #include "xscurve_adder.h"
 #include "xl2_trigger.h"
+#include "data_provider.h"
 
 //#include "netif/xaxiemacif.h"
 
@@ -357,10 +358,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
 		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
 
-		xil_printf("Alarm: %08x\n\r",
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_ALARM));
-		//xil_printf("REGR_RAW_ERR=0x%01x\n\r", *(u32*)(XPAR_HIER_RAW_TOP_SWITCH_RAW_BASEADDR + 4*REGR_ERR));
-		//DMA_PrintStatus();
 		xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
 		xil_printf("GetCurPosFC1()=%d\n\r", GetCurPosFC1());

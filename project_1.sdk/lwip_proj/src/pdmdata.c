@@ -11,6 +11,7 @@
 #include "axis_flowctrl.h"
 #include "axi_spectral_core.h"
 #include "pdmdp_err.h"
+#include "data_provider.h"
 
 
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;

@@ -32,27 +32,19 @@ entity data_provider is
 			data_art2: in std_logic_vector(15 downto 0);			
 			-- control
 			start_sig: in std_logic;
-			start_sig_int: in std_logic;
-			run_timestamp2_counter: in std_logic;
-			reset_timestamp2_counter: in std_logic;
-			timestamp2: out std_logic_vector(63 downto 0);
-			alarm: out std_logic;
-			clr_alarm: in std_logic;
 			--testgen
-			is_test_gen: in std_logic;
-			test_duty1, test_duty2: in std_logic_vector(7 downto 0);
+			clr_reg: in std_logic_vector(31 downto 0);
 			testmode: in std_logic_vector(31 downto 0);
+			pattern_initial_0r_01: in std_logic_vector(31 downto 0);
+			pattern_initial_1r_1l: in std_logic_vector(31 downto 0);
+			pattern_initial_2r_21: in std_logic_vector(31 downto 0);
+			pattern_trans_step: in std_logic_vector(31 downto 0);
+			pattern_trans_max: in std_logic_vector(31 downto 0);
 			-- params
 			infinite : in std_logic;
 			num_of_frames: in std_logic_vector(20 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
-			axis_0l_rd_data_count: out std_logic_vector(15 downto 0);
-			axis_0r_rd_data_count: out std_logic_vector(15 downto 0);
-			axis_1l_rd_data_count: out std_logic_vector(15 downto 0);
-			axis_1r_rd_data_count: out std_logic_vector(15 downto 0);
-			axis_2l_rd_data_count: out std_logic_vector(15 downto 0);
-			axis_2r_rd_data_count: out std_logic_vector(15 downto 0);
 			
 			counter_tvalid_all_latch: out std_logic_vector(15 downto 0);
 			-- -- data to trigger L1 and to memory buffer
@@ -100,7 +92,7 @@ entity data_provider is
 end data_provider; 
 
 architecture Behavioral of data_provider is
-
+ 
 	
 	COMPONENT fifo_generator_0
 		PORT (
@@ -140,7 +132,6 @@ architecture Behavioral of data_provider is
 	signal fifo_rst_n : std_logic_vector(2 downto 0) := "000";
 	
 	signal start_sig_d1, start_sig_d2 : std_logic_vector(2 downto 0) := "000";
-	signal start_sig_int_d1, start_sig_int_d2 : std_logic_vector(2 downto 0) := "000";
 	signal start_feed : std_logic_vector(2 downto 0) := "000";
 	signal start_feed_int : std_logic_vector(2 downto 0) := "000";
 	signal s_axis_tlast_art_cc_fifo, s_axis_tvalid_art_cc_fifo  : std_logic_vector(2 downto 0) := "000";
@@ -158,10 +149,7 @@ architecture Behavioral of data_provider is
 	signal testgen_dout_dv, testgen_dout_dv_d1 : std_logic := '0';
 	signal is_test_gen_d1, is_test_gen_d2 : std_logic := '0';
 
-	signal timestamp2_l: std_logic_vector(31 downto 0) := (others => '0');
-	signal timestamp2_h: std_logic_vector(31 downto 0) := (others => '0');
-	
-	signal timestamp2_carry_d1, timestamp2_carry, timestamp2_31_d1, gtu_front, frame_art_Q1_1_front_d1, frame_art_Q1_1_front, frame_art_Q1_1_d1: std_logic := '0'; 
+	signal gtu_front, frame_art_Q1_1_front_d1, frame_art_Q1_1_front, frame_art_Q1_1_d1: std_logic := '0'; 
 
 	signal timestamp2_l_21: std_logic := '0';
 	signal timestamp2_l_21_d1: std_logic := '0';
@@ -185,16 +173,32 @@ architecture Behavioral of data_provider is
 	signal atleast_one_empty: std_logic := '0';
 	signal counter_rd : std_logic_vector(8 downto 0) := (others => '0');
 	
-	--signal counter_testmode1_art0 : std_logic_vector(15 downto 0) := (others => '0');
-	--signal counter_testmode1_art1 : std_logic_vector(15 downto 0) := (others => '0');
-	--signal counter_testmode1_art2 : std_logic_vector(15 downto 0) := (others => '0');
-	
+
 	signal counter_tvalid_art0l, counter_tvalid_art0l_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_art0r, counter_tvalid_art0r_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_art1l, counter_tvalid_art1l_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_art1r, counter_tvalid_art1r_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_art2l, counter_tvalid_art2l_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_art2r, counter_tvalid_art2r_latch: std_logic_vector(15 downto 0) := (others => '0');
+	
+	signal m_axis_art0l_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art0r_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art1l_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art1r_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art2l_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art2r_tdata_real: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art0l_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art0r_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art1l_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art1r_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art2l_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_art2r_tdata_pattern: std_logic_vector(15 downto 0) := (others => '0');
+	
+	signal pattern_step_cntr: std_logic_vector(31 downto 0) := (others => '0');
+	signal pattern_cntr: std_logic_vector(31 downto 0) := (others => '0');
+	
+	signal is_pattern: std_logic := '0';
+	signal clr_pattern: std_logic := '0';
 
 	attribute keep : string;  
 	attribute keep of frame_art0_check: signal is "true"; 
@@ -467,61 +471,25 @@ begin
 	
 end generate;  
 	
-	--data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8) when testmode(0) = '0' else X"00000101";
-	--data_art1_ddr_d2_sw16 <= data_art1_ddr_d2(23 downto 16) & data_art1_ddr_d2(31 downto 24) & data_art1_ddr_d2(7 downto 0) & data_art1_ddr_d2(15 downto 8) when testmode(0) = '0' else X"02020303";
-	--data_art2_ddr_d2_sw16 <= data_art2_ddr_d2(23 downto 16) & data_art2_ddr_d2(31 downto 24) & data_art2_ddr_d2(7 downto 0) & data_art2_ddr_d2(15 downto 8) when testmode(0) = '0' else X"04040505";
 
 	process(clk_art0_x1)
 	begin
 		if(rising_edge(clk_art0_x1)) then
-			if(testmode(0) = '1') then
-				data_art0_ddr_d2_sw16 <= X"00000000";
-			elsif(testmode(1) = '1') then
-				--data_art0_ddr_d2_sw16 <= counter_testmode1_art0 & counter_testmode1_art0;
-				if(s_axis_tvalid_art_cc_fifo(0) = '1') then											 
-					data_art0_ddr_d2_sw16 <= data_art0_ddr_d2_sw16 + 1;
-					--counter_testmode1_art0 <= counter_testmode1_art0 + 1;
-				end if;
-			else
-				data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8);
-				--counter_testmode1_art0 <= (others => '0');
-			end if;
+			data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8);
 		end if;
 	end process;
 	
 	process(clk_art1_x1)
 	begin
 		if(rising_edge(clk_art1_x1)) then
-			if(testmode(0) = '1') then
-				data_art1_ddr_d2_sw16 <= X"00000000";
-			elsif(testmode(1) = '1') then
-				--data_art1_ddr_d2_sw16 <= counter_testmode1_art1 & counter_testmode1_art1;
-				if(s_axis_tvalid_art_cc_fifo(1) = '1') then											 
-					--counter_testmode1_art1 <= counter_testmode1_art1 + 1;
-					data_art1_ddr_d2_sw16 <= data_art1_ddr_d2_sw16 + 1;
-				end if;
-			else
-				data_art1_ddr_d2_sw16 <= data_art1_ddr_d2(23 downto 16) & data_art1_ddr_d2(31 downto 24) & data_art1_ddr_d2(7 downto 0) & data_art1_ddr_d2(15 downto 8);
-				--counter_testmode1_art1 <= (others => '0');
-			end if;
+			data_art1_ddr_d2_sw16 <= data_art1_ddr_d2(23 downto 16) & data_art1_ddr_d2(31 downto 24) & data_art1_ddr_d2(7 downto 0) & data_art1_ddr_d2(15 downto 8);
 		end if;
 	end process;
 	 
 	process(clk_art2_x1)
 	begin
 		if(rising_edge(clk_art2_x1)) then
-			if(testmode(0) = '1') then
-				data_art2_ddr_d2_sw16 <= X"00000000";
-			elsif(testmode(1) = '1') then
-				--data_art2_ddr_d2_sw16 <= counter_testmode1_art2 & counter_testmode1_art2;
-				if(s_axis_tvalid_art_cc_fifo(2) = '1') then											 
-					--counter_testmode1_art2 <= counter_testmode1_art2 + 1;
-					data_art2_ddr_d2_sw16 <= data_art2_ddr_d2_sw16 + 1;
-				end if;
-			else
-				data_art2_ddr_d2_sw16 <= data_art2_ddr_d2(23 downto 16) & data_art2_ddr_d2(31 downto 24) & data_art2_ddr_d2(7 downto 0) & data_art2_ddr_d2(15 downto 8);
-				--counter_testmode1_art2 <= (others => '0');
-			end if;
+			data_art2_ddr_d2_sw16 <= data_art2_ddr_d2(23 downto 16) & data_art2_ddr_d2(31 downto 24) & data_art2_ddr_d2(7 downto 0) & data_art2_ddr_d2(15 downto 8);
 		end if;
 	end process;
 	
@@ -537,7 +505,7 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(0),
 			m_axis_tvalid => m_axis_art0l_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art0l_tdata,
+			m_axis_tdata => m_axis_art0l_tdata_real,
 			m_axis_tkeep => m_axis_art0l_tkeep,
 			m_axis_tlast => m_axis_art0l_tlast,
 			axis_prog_empty => axis_prog_empty_0l
@@ -556,7 +524,7 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(0),
 			m_axis_tvalid => m_axis_art0r_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art0r_tdata,
+			m_axis_tdata => m_axis_art0r_tdata_real,
 			m_axis_tkeep => m_axis_art0r_tkeep,
 			m_axis_tlast => m_axis_art0r_tlast,
 			axis_prog_empty => axis_prog_empty_0r
@@ -574,7 +542,7 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(1),
 			m_axis_tvalid => m_axis_art1l_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art1l_tdata,
+			m_axis_tdata => m_axis_art1l_tdata_real,
 			m_axis_tkeep => m_axis_art1l_tkeep,
 			m_axis_tlast => m_axis_art1l_tlast,
 			axis_prog_empty => axis_prog_empty_1l
@@ -592,7 +560,7 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(1),
 			m_axis_tvalid => m_axis_art1r_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art1r_tdata,
+			m_axis_tdata => m_axis_art1r_tdata_real,
 			m_axis_tkeep => m_axis_art1r_tkeep,
 			m_axis_tlast => m_axis_art1r_tlast,
 			axis_prog_empty => axis_prog_empty_1r
@@ -610,7 +578,7 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(2),
 			m_axis_tvalid => m_axis_art2l_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art2l_tdata,
+			m_axis_tdata => m_axis_art2l_tdata_real,
 			m_axis_tkeep => m_axis_art2l_tkeep,
 			m_axis_tlast => m_axis_art2l_tlast,
 			axis_prog_empty => axis_prog_empty_2l
@@ -628,12 +596,60 @@ end generate;
 			s_axis_tlast => s_axis_tlast_art_cc_fifo(2),
 			m_axis_tvalid => m_axis_art2r_tvalid_i,
 			m_axis_tready => all_ready,
-			m_axis_tdata => m_axis_art2r_tdata,
+			m_axis_tdata => m_axis_art2r_tdata_real,
 			m_axis_tkeep => m_axis_art2r_tkeep,
 			m_axis_tlast => m_axis_art2r_tlast,
 			axis_prog_empty => axis_prog_empty_2r
 		);
 
+	is_pattern <= testmode(0);
+	clr_pattern <= clr_reg(0);
+	
+
+	m_axis_art0l_tdata <= m_axis_art0l_tdata_real when is_pattern = '0' else m_axis_art0l_tdata_pattern;
+	m_axis_art0r_tdata <= m_axis_art0r_tdata_real when is_pattern = '0' else m_axis_art0r_tdata_pattern;
+	m_axis_art1l_tdata <= m_axis_art1l_tdata_real when is_pattern = '0' else m_axis_art1l_tdata_pattern;
+	m_axis_art1r_tdata <= m_axis_art1r_tdata_real when is_pattern = '0' else m_axis_art1r_tdata_pattern;
+	m_axis_art2l_tdata <= m_axis_art2l_tdata_real when is_pattern = '0' else m_axis_art2l_tdata_pattern;
+	m_axis_art2r_tdata <= m_axis_art2r_tdata_real when is_pattern = '0' else m_axis_art2r_tdata_pattern;
+
+	pattern_generator: process(m_axis_aclk)
+	begin
+		if(rising_edge(m_axis_aclk)) then
+			if((all_ready = '1' and m_axis_art0l_tvalid_i = '1') or clr_pattern = '1') then
+				if((pattern_step_cntr = pattern_trans_step-1) or clr_pattern = '1') then
+					if((pattern_cntr = pattern_trans_max-1) or clr_pattern = '1') then
+						m_axis_art0l_tdata_pattern <= pattern_initial_0r_01(15 downto 0);
+						m_axis_art0r_tdata_pattern <= pattern_initial_0r_01(31 downto 16);
+						m_axis_art1l_tdata_pattern <= pattern_initial_1r_1l(15 downto 0);
+						m_axis_art1r_tdata_pattern <= pattern_initial_1r_1l(31 downto 16);
+						m_axis_art2l_tdata_pattern <= pattern_initial_2r_21(15 downto 0);
+						m_axis_art2r_tdata_pattern <= pattern_initial_2r_21(31 downto 16);
+						pattern_cntr <= (others => '0');
+					else
+						--
+						m_axis_art0l_tdata_pattern(7 downto 0) <= m_axis_art0l_tdata_pattern(7 downto 0) + 1;
+						m_axis_art0r_tdata_pattern(7 downto 0) <= m_axis_art0r_tdata_pattern(7 downto 0) + 1;
+						m_axis_art1l_tdata_pattern(7 downto 0) <= m_axis_art1l_tdata_pattern(7 downto 0) + 1;
+						m_axis_art1r_tdata_pattern(7 downto 0) <= m_axis_art1r_tdata_pattern(7 downto 0) + 1;
+						m_axis_art2l_tdata_pattern(7 downto 0) <= m_axis_art2l_tdata_pattern(7 downto 0) + 1;
+						m_axis_art2r_tdata_pattern(7 downto 0) <= m_axis_art2r_tdata_pattern(7 downto 0) + 1;
+						--
+						m_axis_art0l_tdata_pattern(15 downto 8) <= m_axis_art0l_tdata_pattern(15 downto 8) + 1;
+						m_axis_art0r_tdata_pattern(15 downto 8) <= m_axis_art0r_tdata_pattern(15 downto 8) + 1;
+						m_axis_art1l_tdata_pattern(15 downto 8) <= m_axis_art1l_tdata_pattern(15 downto 8) + 1;
+						m_axis_art1r_tdata_pattern(15 downto 8) <= m_axis_art1r_tdata_pattern(15 downto 8) + 1;
+						m_axis_art2l_tdata_pattern(15 downto 8) <= m_axis_art2l_tdata_pattern(15 downto 8) + 1;
+						m_axis_art2r_tdata_pattern(15 downto 8) <= m_axis_art2r_tdata_pattern(15 downto 8) + 1;
+						pattern_cntr <= pattern_cntr + 1;
+					end if;
+					pattern_step_cntr <= (others => '0');
+				else
+					pattern_step_cntr <= pattern_step_cntr + 1; 
+				end if;
+			end if;
+		end if;
+	end process;
 -------------------------------------------------vv--  <-- It's Ok
 	m_axis_art0l_tvalid <= all_ready and m_axis_art0l_tvalid_i;
 	m_axis_art0r_tvalid <= all_ready and m_axis_art0l_tvalid_i;

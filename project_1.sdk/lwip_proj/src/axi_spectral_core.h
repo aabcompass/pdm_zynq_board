@@ -89,27 +89,7 @@ typedef struct
 #define REGW_SW_CTRL_OFFSET		0
 #define BIT_SW_COMMIT	1
 
-// data provider register description
-#define REGW_CTRL			0
-#define REGW_CFG			1
-#define REGW_TESTGEN		2
-#define REGW_NFRAMES		3
-#define REGW_FIFO_OCC_ART0	4
-#define REGW_FIFO_OCC_ART1	5
-#define REGW_FIFO_OCC_ART2	6
-#define REGR_ALARM			7
-#define REGW_TESTMODE		9
-#define REGW_INFINITE		10
-#define REGR_STATUS			16
 
-#define CMD_START_BIT_OFFSET		0
-#define CMD_START_INT_BIT_OFFSET	1
-#define CMD_RESET_TIMESTAMP2		8
-#define CMD_CLR_ALARM				9
-
-#define CFG_BIT_RUN_TIMESTAMP2		8
-
-#define BIT_TESTMODE_0				0
 
 // Custom AXIS switch register description
 #define REGW_SW_CTRL		0
