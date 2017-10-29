@@ -42,7 +42,7 @@
 	--pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
 
 ---------------------------------------
--- 5. This mode of data provider allows to verify whether the mixture between single integrated data. 
+-- 5. This mode of data provider allows to verify whether the mixture between double integrated data. 
 --    Also it is possible to check the integrators
 	--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
 	--pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
@@ -50,6 +50,14 @@
 	--pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
 	--pattern_trans_step => conv_std_logic_vector(128*128*32*6, 32),--: in std_logic_vector(31 downto 0);
 	--pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
+---------------------------------------
+-- 6. Debug
+--testmode => X"00000001",--: in std_logic_vector(31 downto 0);
+--pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
+--pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
+--pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
+--pattern_trans_step => conv_std_logic_vector(192, 32),--: in std_logic_vector(31 downto 0);
+--pattern_trans_max => conv_std_logic_vector(0, 32),--: in std_logic_vector(31 downto 0);
 
 
 library IEEE;
@@ -176,8 +184,8 @@ begin
 				pattern_initial_0r_01 => X"00000000",--: in std_logic_vector(31 downto 0);
 				pattern_initial_1r_1l => X"00000000",--: in std_logic_vector(31 downto 0);
 				pattern_initial_2r_21 => X"00000000",--: in std_logic_vector(31 downto 0);
-				pattern_trans_step => conv_std_logic_vector(128*32*6, 32),--: in std_logic_vector(31 downto 0);
-				pattern_trans_max => conv_std_logic_vector(128, 32),--: in std_logic_vector(31 downto 0);
+				pattern_trans_step => conv_std_logic_vector(192, 32),--: in std_logic_vector(31 downto 0);
+				pattern_trans_max => conv_std_logic_vector(0, 32),--: in std_logic_vector(31 downto 0);
 				-- params
 				infinite => infinite,--: in std_logic;
 				num_of_frames => conv_std_logic_vector(10, 21),--: in std_logic_vector(20 downto 0);

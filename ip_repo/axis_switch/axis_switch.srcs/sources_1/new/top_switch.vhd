@@ -202,12 +202,16 @@ architecture Behavioral of top_switch is
 	
 	signal delay, delay_cnt: std_logic_vector(15 downto 0) := (others => '0');
 	signal ready_bit : std_logic := '1';
+	signal pattern_checker_error : std_logic := '1';
 	
 	signal m_axis_tvalid_i, m_axis_tvalid_d2 : std_logic := '0';
 	signal m_packet_counter: std_logic_vector(23 downto 0) := (others => '0');
+	signal m_axis_tdata_i: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');
+	signal m_axis_tdata_i_d1: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');
 
 	attribute keep : string;
 	attribute keep of m_packet_counter : signal is "true";
+	attribute keep of pattern_checker_error : signal is "true";
 	
 begin
 
@@ -925,43 +929,62 @@ begin
 			if(is_started = '1') then
 				case sm_state is
 					when X"0" => 
-						m_axis_tdata <= s_axis_0_tdata;
+						m_axis_tdata_i <= s_axis_0_tdata;
 						m_axis_tvalid_i <= s_axis_0_tvalid and ready_vector(0);
 						m_axis_tlast <= s_axis_0_tlast;
 					when X"1" => 
-						m_axis_tdata <= s_axis_1_tdata;
+						m_axis_tdata_i <= s_axis_1_tdata;
 						m_axis_tvalid_i <= s_axis_1_tvalid and ready_vector(1);
 						m_axis_tlast <= s_axis_1_tlast;
 					when X"2" => 
-						m_axis_tdata <= s_axis_2_tdata;
+						m_axis_tdata_i <= s_axis_2_tdata;
 						m_axis_tvalid_i <= s_axis_2_tvalid and ready_vector(2);
 						m_axis_tlast <= s_axis_2_tlast;
 					when X"3" => 
-						m_axis_tdata <= s_axis_3_tdata;
+						m_axis_tdata_i <= s_axis_3_tdata;
 						m_axis_tvalid_i <= s_axis_3_tvalid and ready_vector(3);
 						m_axis_tlast <= s_axis_3_tlast;
 					when X"4" => 
-						m_axis_tdata <= s_axis_4_tdata;
+						m_axis_tdata_i <= s_axis_4_tdata;
 						m_axis_tvalid_i <= s_axis_4_tvalid and ready_vector(4);
 						m_axis_tlast <= s_axis_4_tlast;
 					when X"5" => 
-						m_axis_tdata <= s_axis_5_tdata;
+						m_axis_tdata_i <= s_axis_5_tdata;
 						m_axis_tvalid_i <= s_axis_5_tvalid and ready_vector(5);
 						m_axis_tlast <= s_axis_5_tlast;
 					when others => 
-						m_axis_tdata <= (others => '0');
+						m_axis_tdata_i <= (others => '0');
 						m_axis_tvalid_i <= '0';
 						m_axis_tlast <= '0';
 				end case;
 			else
-				m_axis_tdata <= (others => '0');
+				m_axis_tdata_i <= (others => '0');
 				m_axis_tvalid_i <= '0';
 				m_axis_tlast <= '0';
 			end if;
 		end if;
-	end process;
+	end process; 
 
 	m_axis_tvalid <= m_axis_tvalid_i;
+	m_axis_tdata <= m_axis_tdata_i;
+	
+	pattern_checker: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(m_axis_tvalid_i = '1') then
+				m_axis_tdata_i_d1 <= m_axis_tdata_i;			
+				if(m_axis_tdata_i = m_axis_tdata_i_d1) then
+					pattern_checker_error <= '0';
+				elsif(m_axis_tdata_i - m_axis_tdata_i_d1 = X"0606060606060606") then
+					pattern_checker_error <= '0';
+				elsif(m_axis_tdata_i_d1 - m_axis_tdata_i = X"1E1E1E1E1E1E1E1E") then
+					pattern_checker_error <= '0';
+				else
+					pattern_checker_error <= '1';
+				end if;
+			end if;
+		end if;
+	end process;
 	
 	m_packet_counter_pr: process(s_axis_aclk)
 	begin

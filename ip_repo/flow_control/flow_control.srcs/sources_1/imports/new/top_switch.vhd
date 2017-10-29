@@ -263,6 +263,7 @@ architecture Behavioral of axis_flow_control is
 	signal m_axis_tvalid_not_buffered : std_logic := '0';--=> s_axis_tvalid_not_buffered,
 	signal m_axis_tready_not_buffered : std_logic := '0';--=> s_axis_tready_not_buffered,
 	signal m_axis_tdata_not_buffered: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
+	signal m_axis_tdata_i: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
 
 	signal m_axis_tvalid_key, m_axis_tready_key, pass_intr: std_logic := '0';
 	
@@ -284,6 +285,15 @@ architecture Behavioral of axis_flow_control is
 	attribute keep of counter_tvalid_latch: signal is "true";  
 	attribute keep of tlast_counter: signal is "true";  
 	attribute keep of sm_state: signal is "true";  
+	attribute keep of m_axis_tdata_i: signal is "true";  
+	
+	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
+	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
+	signal pattern_checker_error : std_logic := '0';
+	attribute keep of pattern_checker_error: signal is "true";  
+	attribute keep of packet_cntr: signal is "true";  
+	attribute keep of data_gen: signal is "true";  
+
 
 begin
 
@@ -1143,7 +1153,7 @@ begin
 				m_axis_tvalid => m_axis_tvalid_key,
 				m_axis_tlast => m_axis_tlast_key,
 				m_axis_tready => m_axis_tready_key,
-				m_axis_tdata => m_axis_tdata,
+				m_axis_tdata => m_axis_tdata_i,
 				axis_data_count => axis_fifo_fc_count,
 				axis_wr_data_count => open,
 				axis_rd_data_count => open
@@ -1162,7 +1172,7 @@ begin
 				m_axis_tvalid => m_axis_tvalid_key,
 				m_axis_tlast => m_axis_tlast_key,
 				m_axis_tready => m_axis_tready_key,
-				m_axis_tdata => m_axis_tdata,
+				m_axis_tdata => m_axis_tdata_i,
 				axis_data_count => axis_fifo_fc_count,
 				axis_wr_data_count => open,
 				axis_rd_data_count => open
@@ -1258,5 +1268,37 @@ begin
 	-- output data switch
 	m_axis_tvalid <= m_axis_tvalid_key and pass_intr;
 	m_axis_tready_key <= m_axis_tready and pass_intr;
+	m_axis_tdata <= m_axis_tdata_i;
+
+output_pattern_generator_gen: if(C_AXIS_DWIDTH = 64) generate	
+
+begin
+	output_pattern_generator: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(m_axis_tvalid_key = '1' and pass_intr = '1' and m_axis_tready = '1') then
+				if(packet_cntr = 2304/8-1) then
+					for i in 0 to 7 loop
+						data_gen(7+8*i downto 8*i) <= data_gen(7+8*i downto 8*i) + 1;
+					end loop; 
+					packet_cntr <= (others => '0'); 
+				else
+					packet_cntr <= packet_cntr + 1;
+				end if;
+			end if;
+		end if;
+	end process;
+
+	output_pattern_checker: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(m_axis_tvalid_key = '1' and pass_intr = '1' and m_axis_tready = '1') then
+				if(m_axis_tdata_i /= data_gen) then
+					pattern_checker_error <= '1';
+				end if;
+			end if;
+		end if;
+	end process;
+end generate;
 		
 end Behavioral;

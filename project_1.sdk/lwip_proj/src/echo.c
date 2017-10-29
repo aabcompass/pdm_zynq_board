@@ -297,6 +297,12 @@ void ProcessUartCommands(struct netif *netif, char c)
 			if(i%4==0) xil_printf("\n\r%d.", i);
 			xil_printf("\t%08X",  *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+i*4));
 		}
+		print("\n\rXPAR_TOP_SWITCH_RAW_BASEADDR");
+		for(i=0;i<32;i++)
+		{
+			if(i%4==0) xil_printf("\n\r%d.", i);
+			xil_printf("\t%08X",  *(u32*)(XPAR_TOP_SWITCH_RAW_BASEADDR+i*4));
+		}
 		print("\n\rXPAR_AXIS_FLOW_CONTROL_L1_BASEADDR");
 		for(i=0;i<32;i++)
 		{
@@ -422,6 +428,18 @@ void ProcessUartCommands(struct netif *netif, char c)
 		if(num == 8) num = 127;
 		if(num == 9) num = 128;
 		xil_printf("num=%d\n\r", num);
+	}
+	else if(c == 'D')
+	{
+		SetDataProviderTestMode(num);
+	}
+	else if(c == 'd')
+	{
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = 1;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+		print("  ");
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+
 	}
 	else if(c == 'g')
 	{
