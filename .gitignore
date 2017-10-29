@@ -11,6 +11,7 @@
 !/*.sh
 !/*.bif
 !/BOOT.bin
+!/setup_ps.elf
 !/*.wcfg
 !/ip_repo/
 !/ip_hls/
