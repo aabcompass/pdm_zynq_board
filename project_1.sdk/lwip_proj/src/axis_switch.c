@@ -6,12 +6,13 @@
  */
 #include "xparameters.h"
 #include "axi_spectral_core.h"
+#include "axis_switch.h"
 
-#define FLOWCTRL_CTRL_REG	0
-#define FLOWCTRL_RESET_REG	1
-#define FLOWCTRL_DELAY_REG	2
-#define FLOWCTRL_GPI_6_REGS	16
-#define FLOWCTRL_TRAN_CNT	24
+//#define FLOWCTRL_CTRL_REG	0
+//#define FLOWCTRL_RESET_REG	1
+//#define FLOWCTRL_DELAY_REG	2
+//#define FLOWCTRL_GPI_6_REGS	16
+//#define FLOWCTRL_TRAN_CNT	24
 
 void AXISSW_conf()
 {
@@ -31,5 +32,5 @@ int GetSWSMState()
 
 int GetPacketCounter(UINTPTR baseaddr)
 {
-	return *(u32*)(XPAR_TOP_SWITCH_TST_BASEADDR + 4*REGW_PACKET_CNT);
+	return *(u32*)(XPAR_TOP_SWITCH_TST_BASEADDR + 4*REGR_PACKET_CNT);
 }

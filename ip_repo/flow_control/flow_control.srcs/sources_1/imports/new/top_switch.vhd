@@ -270,6 +270,7 @@ architecture Behavioral of axis_flow_control is
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter: std_logic_vector(15 downto 0) := (others => '0');
+	signal tlast_counter2: std_logic_vector(15 downto 0) := (others => '0');
 	
 	attribute keep : string;  
 	attribute keep of m_axis_tvalid_key: signal is "true";  
@@ -284,6 +285,7 @@ architecture Behavioral of axis_flow_control is
 	attribute keep of dma_length: signal is "true";  
 	attribute keep of counter_tvalid_latch: signal is "true";  
 	attribute keep of tlast_counter: signal is "true";  
+	attribute keep of tlast_counter2: signal is "true";  
 	attribute keep of sm_state: signal is "true";  
 	attribute keep of m_axis_tdata_i: signal is "true";  
 	
@@ -920,7 +922,7 @@ begin
 	slv_reg16 <= gpio_0;
 	slv_reg17 <= gpio_1;
 	slv_reg18 <= gpio_2;
-	slv_reg19 <= gpio_3;
+	slv_reg19(15 downto 0) <= tlast_counter2;
 	slv_reg20(15 downto 0) <= counter_tvalid_latch;
 	--slv_reg21 <= gpio_5;
 	slv_reg21 <= gtu_sig_counter_h;
@@ -1105,7 +1107,7 @@ begin
 --									led_cnt <= led_cnt + 1;
 --			end case;
 --		end if;
---	end process;
+--	end process; 
 
 	packet_size_verificator: process(s_axis_aclk)
 		variable state : integer range 0 to 2 := 0;
@@ -1300,5 +1302,18 @@ begin
 		end if;
 	end process;
 end generate;
+
+	tlast_counter_proc: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1') then
+				tlast_counter2 <= (others => '0');
+			else
+				if((m_axis_tvalid_key = '1') and (pass_intr = '1') and (m_axis_tready = '1') and (m_axis_tlast_i = '1')) then
+					tlast_counter2 <= tlast_counter2 + 1;
+				end if;
+			end if;
+		end if;
+	end process;
 		
 end Behavioral;
