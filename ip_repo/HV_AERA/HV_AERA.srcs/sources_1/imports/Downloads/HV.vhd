@@ -46,7 +46,7 @@ entity HV is
 					TEST                        : out std_logic_vector(31 downto 0)
         );
 end HV;
-
+ 
 architecture Behavioral of HV is
 
 signal clk_cnt										 : std_logic_vector(3 downto 0):=(others=>'0');

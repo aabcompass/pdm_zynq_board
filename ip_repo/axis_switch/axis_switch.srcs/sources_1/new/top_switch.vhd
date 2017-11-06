@@ -210,12 +210,16 @@ architecture Behavioral of top_switch is
 	signal m_axis_tdata_i_d1: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');
 	
 	signal m_axis_tlast_i: std_logic := '0';
+	signal tlast_counter: std_logic_vector(31 downto 0) := (others => '0');
 
 	attribute keep : string;
 	attribute keep of m_packet_counter : signal is "true";
 	attribute keep of pattern_checker_error : signal is "true";
-	
-		signal tlast_counter: std_logic_vector(31 downto 0) := (others => '0');
+	attribute keep of m_axis_tvalid_i : signal is "true";
+	attribute keep of m_axis_tlast_i : signal is "true";
+	attribute keep of m_axis_tready : signal is "true";
+	attribute keep of clear_error : signal is "true";
+	attribute keep of tlast_counter : signal is "true";
 	
 begin
 

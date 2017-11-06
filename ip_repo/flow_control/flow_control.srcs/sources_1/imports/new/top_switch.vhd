@@ -107,7 +107,7 @@ entity axis_flow_control is
   		S_AXI_RREADY	: in std_logic
   );
 end axis_flow_control;
-    
+     
 architecture Behavioral of axis_flow_control is
 
 	-- AXI4LITE signals
@@ -265,7 +265,8 @@ architecture Behavioral of axis_flow_control is
 	signal m_axis_tdata_not_buffered: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
 	signal m_axis_tdata_i: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
 
-	signal m_axis_tvalid_key, m_axis_tready_key, pass_intr: std_logic := '0';
+	signal m_axis_tvalid_key, m_axis_tready_key: std_logic := '0';
+	signal pass_intr: std_logic := '1';
 	
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
@@ -949,16 +950,16 @@ begin
 	m_axis_tvalid_not_buffered <= s_axis_tvalid and pass;
 	s_axis_tready <= '1';
 
---	transation_counter: process(s_axis_aclk)
---	begin
---		if(rising_edge(s_axis_aclk)) then
---			if(clr_trans_counter = '1' or clr_all = '1') then
---				trans_counter <= (others => '0');
---			elsif(s_axis_tvalid = '1') then
---				trans_counter <= trans_counter + 1;
---			end if;
---		end if;
---	end process;
+	transation_counter: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_trans_counter = '1' or clr_all = '1') then
+				trans_counter <= (others => '0');
+			elsif(s_axis_tvalid = '1') then
+				trans_counter <= trans_counter + 1;
+			end if;
+		end if;
+	end process;
 
 	trig_sm: process(s_axis_aclk)
 		variable state : integer range 0 to 4 := 0;
@@ -1026,44 +1027,44 @@ begin
 		end if;
 	end process;
 	
---	xpm_cdc_single_inst: xpm_cdc_single
---	generic map (
---		 DEST_SYNC_FF   => 4, -- integer; range: 2-10
---		 SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
---		 SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
---	)
---	port map (
---		 src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
---		 src_in   => gtu_sig,
---		 dest_clk => s_axis_aclk,
---		 dest_out => gtu_sig_d0
---	);	
+	xpm_cdc_single_inst: xpm_cdc_single
+	generic map (
+		 DEST_SYNC_FF   => 4, -- integer; range: 2-10
+		 SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+		 SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
+	)
+	port map (
+		 src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+		 src_in   => gtu_sig,
+		 dest_clk => s_axis_aclk,
+		 dest_out => gtu_sig_d0
+	);	
 	
---	gtu_sig_counter_process: process(s_axis_aclk)
---	begin
---		if(rising_edge(s_axis_aclk)) then
---			if(clr_all = '1') then
---				gtu_sig_counter_l <= (others => '0');
---				gtu_sig_counter_l_d1 <= (others => '0');
---				gtu_sig_counter_h <= (others => '0');
---				gtu_sig_counter_4dma <= (others => '0');
---			else
---				gtu_sig_d1 <= gtu_sig_d0;
---				if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
---					gtu_sig_counter_l <= gtu_sig_counter_l + 1;
---					gtu_sig_counter_l_d1 <= gtu_sig_counter_l;
---					if(gtu_sig_counter_l /= gtu_sig_counter_l_d1 and gtu_sig_counter_l = 0) then
---						gtu_sig_counter_h <= gtu_sig_counter_h + 1;
---					end if;
---					if(pass = '1') then
---						gtu_sig_counter_4dma <= gtu_sig_counter_4dma + 1;
---					elsif(release = '1') then
---						gtu_sig_counter_4dma <= (others => '0');
---					end if;
---				end if;
---			end if;
---		end if;
---	end process;
+	gtu_sig_counter_process: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1') then
+				gtu_sig_counter_l <= (others => '0');
+				gtu_sig_counter_l_d1 <= (others => '0');
+				gtu_sig_counter_h <= (others => '0');
+				gtu_sig_counter_4dma <= (others => '0');
+			else
+				gtu_sig_d1 <= gtu_sig_d0;
+				if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
+					gtu_sig_counter_l <= gtu_sig_counter_l + 1;
+					gtu_sig_counter_l_d1 <= gtu_sig_counter_l;
+					if(gtu_sig_counter_l /= gtu_sig_counter_l_d1 and gtu_sig_counter_l = 0) then
+						gtu_sig_counter_h <= gtu_sig_counter_h + 1;
+					end if;
+					if(pass = '1') then
+						gtu_sig_counter_4dma <= gtu_sig_counter_4dma + 1;
+					elsif(release = '1') then
+						gtu_sig_counter_4dma <= (others => '0');
+					end if;
+				end if;
+			end if;
+		end if;
+	end process;
 	
 --	int_trigger_generator_process: process(s_axis_aclk)
 --	begin
