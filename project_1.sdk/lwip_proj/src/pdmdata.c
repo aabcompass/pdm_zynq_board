@@ -23,7 +23,7 @@ uint32_t DataDMA__L2[N_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __at
 //uint16_t DataDMA_tst_L2[DMA_CYCLIC_BUF_SIZE] __attribute__ ((aligned (64)));
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
-volatile u32 current_buffer_L2 = 0;
+volatile u32 prev_buffer_L2 = 0, current_buffer_L2 = 0;
 volatile u32 buffer_L2_changed;
 
 
@@ -41,7 +41,7 @@ void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 	else if(data_type == DATA_TYPE_L2)
 		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2*N_OF_FRAMES_INT16_POLY_V0*N_OF_PIXEL_PER_PDM);
 	else if(data_type == DATA_TYPE_L3)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
+		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[prev_buffer_L2][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
 }
 
 void* GetZ_DATA_TYPE_SCI_ptr(int data_type) // 1 - L1, 2 - L2, 3 - L3
@@ -115,7 +115,7 @@ void CopyEventDataFreerun()
 	//L3 data
 	InvalidateCacheRanges(3);
 	memcpy(&zynqPacket.level3_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
-	addr = &DataDMA__L2[0][0][0];
+	addr = &DataDMA__L2[prev_buffer_L2][0][0];
 	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
 }
 
@@ -311,6 +311,7 @@ static void RxIntrHandlerL2(void *Callback)
 	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK) || (IrqStatus & XAXIDMA_IRQ_IOC_MASK))
 	{
 		dma_intr_counter_l2++;
+		prev_buffer_L2 = current_buffer_L2;
 		current_buffer_L2 = dma_intr_counter_l2%2;
 
 		DmaReset(AxiDmaInst);
