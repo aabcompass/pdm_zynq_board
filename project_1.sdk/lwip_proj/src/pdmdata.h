@@ -58,15 +58,15 @@ typedef struct
 //-----------------------------------------------------------------------------
 // Timestamp structure in binary format
 // Year 0=2017, 1=2018, 2=2019, 3=...
-typedef struct
-{
-	uint32_t TS_dword; // year(31:26) | month(25:22) | date(21:17) | hour(16:12) | min(11:6) | sec(5:0)
-	uint32_t gtu_cnt; // reserv(31:20) | gtu_cnt(19:0)
-} TimeStamp_natural;
+//typedef struct
+//{
+//	uint32_t TS_dword; // year(31:26) | month(25:22) | date(21:17) | hour(16:12) | min(11:6) | sec(5:0)
+//	uint32_t gtu_cnt; // reserv(31:20) | gtu_cnt(19:0)
+//} TimeStamp_natural;
 
 // Macros for a timestamp build
-#define BuildTimeStamp_TS_dword(year, month, date, hour, min, sec) \
-	(((year)<<26) | ((month)<<22) | ((date)<<17) | ((hour)<<12) | ((min)<<6) | (sec))
+//#define BuildTimeStamp_TS_dword(year, month, date, hour, min, sec) \
+//	(((year)<<26) | ((month)<<22) | ((date)<<17) | ((hour)<<12) | ((min)<<6) | (sec))
 
 //typedef struct
 //{
@@ -149,6 +149,8 @@ typedef struct
 {
 	// Unix timestamp
 	TimeStamp_dual ts;
+	// Flags
+	uint32_t trig_type;
 	// HVPS status
 	uint32_t hv_status;
 	// raw data (2.5 us GTU)
@@ -176,6 +178,8 @@ typedef struct
 {
 	// Unix timestamp
 	TimeStamp_dual ts;
+	// Flags
+	uint32_t trig_type;
 	// HVPS status
 	uint32_t hv_status;
 	// intergrated data
@@ -203,6 +207,8 @@ typedef struct
 {
 	// Unix timestamp
 	TimeStamp_dual ts;
+	// Flags
+	uint32_t trig_type;
 	// HVPS status
 	uint32_t hv_status;
 	// double integrated data
@@ -226,6 +232,12 @@ typedef struct
   Z_DATA_TYPE_SCI_L2_V2 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
   Z_DATA_TYPE_SCI_L3_V2 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
 } ZYNQ_PACKET;
+
+
+//Trigger types:
+#define TRIG_AUTO		0 /* Auto triggered data (in absence of others triggers)*/
+#define TRIG_SELF		1 /* Data triggered on trigger algorithm*/
+#define TRIG_EXT		2 /* Data triggered on external signal */
 
 
 #define INSTRUMENT_MODE_NONE			0
