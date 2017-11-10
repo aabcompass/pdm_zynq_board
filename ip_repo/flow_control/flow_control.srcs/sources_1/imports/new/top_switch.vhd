@@ -265,7 +265,7 @@ architecture Behavioral of axis_flow_control is
 	signal m_axis_tdata_not_buffered: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
 	signal m_axis_tdata_i: std_logic_vector(C_AXIS_DWIDTH-1 downto 0) := (others => '0');--=> s_axis_tdata_not_buffered,
 
-	signal m_axis_tvalid_key, m_axis_tready_key: std_logic := '0';
+	signal m_axis_tvalid_key, m_axis_tvalid_i, m_axis_tready_key: std_logic := '0';
 	signal pass_intr: std_logic := '1';
 	
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
@@ -1223,7 +1223,7 @@ begin
 				m_axis_tlast_allowed <= '0';
 			else
 				-- manage with dma_length_cntr
-				if(m_axis_tvalid_key = '1' and m_axis_tready = '1') then	
+				if(m_axis_tvalid_i = '1' and m_axis_tready = '1') then	
 					if(dma_length_cntr /= dma_length-1) then
 						dma_length_cntr <= dma_length_cntr + 1;
 					end if;	
@@ -1241,7 +1241,7 @@ begin
 
 	-- we have to block the transferring immediatelly after output TLAST	
 	pass_intr_former: process(s_axis_aclk)
-		variable state : integer range 0 to 2 := 0;
+		variable state : integer range 0 to 3 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1') then
@@ -1254,13 +1254,15 @@ begin
 											state := state + 1;
 										end if;
 					when 1 => if(restart_intr = '1') then
+											state := state + 1;
+										end if;
+					when 2 => if(restart_intr = '0') then
 											pass_intr <= '1';
 											state := state + 1;
 										end if;
-					when 2 =>	if(m_axis_tlast_i = '0') then
+					when 3 =>	if(m_axis_tlast_i = '0') then
 											state := 0;
 										end if;
-				
 				end case;
 			end if;
 		end if;
@@ -1269,7 +1271,8 @@ begin
 	m_axis_tlast <= m_axis_tlast_i;
 	
 	-- output data switch
-	m_axis_tvalid <= m_axis_tvalid_key and pass_intr;
+	m_axis_tvalid_i <= m_axis_tvalid_key and pass_intr;
+	m_axis_tvalid <= m_axis_tvalid_i;
 	m_axis_tready_key <= m_axis_tready and pass_intr;
 	m_axis_tdata <= m_axis_tdata_i;
 
