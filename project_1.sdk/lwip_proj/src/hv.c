@@ -37,7 +37,7 @@ int hv_n_tries_to_release[NUM_OF_HV*2] = {0, 0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 
 volatile int is_interrupt_pending = 0;
 
 //hvps_log - the database for events related to HVPS
-Z_DATA_TYPE_HVPS_LOG_V0 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
+Z_DATA_TYPE_HVPS_LOG_V1 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
 volatile u32 hvps_log_current_record = 0;
 
 
@@ -429,7 +429,7 @@ void SendLogToFTP()
 	if(hvps_log_current_record != 0)
 	{
 		sprintf(filename_str, FILENAME_HVLOG, filename_str_cntr++);
-		SendSpectrum2FTP((UINTPTR)(hvps_log.payload), hvps_log_current_record*sizeof(DATA_TYPE_HVPS_LOG_V0), filename_str);
+		SendSpectrum2FTP((UINTPTR)(hvps_log.payload), hvps_log_current_record*sizeof(DATA_TYPE_HVPS_LOG_V1), filename_str);
 	}
 	else
 	{

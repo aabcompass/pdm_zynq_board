@@ -91,7 +91,7 @@ u32 frame_buffer_art1[NUM_OF_PIXELS_PER_FRAME/4];
 extern SCurveStruct sCurveStruct;
 extern DebugSettings debugSettings;
 
-Z_DATA_TYPE_SCI_POLY_V5 packet_sci_poly __attribute__ ((aligned (256)));
+//Z_DATA_TYPE_SCI_POLY_V5 packet_sci_poly __attribute__ ((aligned (256)));
 
 
 
@@ -216,7 +216,7 @@ void TriggerService()
 			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
 			{
 				sprintf(filename_str, FILENAME_MODE_TRIGGER3, instrumentState.file_counter_l3++);
-				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V1), filename_str);
+				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V2), filename_str);
 			}
 			else if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_CONCAT)
 			{
@@ -351,8 +351,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 's')
 	{
 		//xil_printf("&data_dma_int16.data[0][0][0][0]=%08x\n\r", &data_dma_int16.data[0][0][0][0]);
-		xil_printf("&packet_sci_poly.payload.int32_data[0][0]=0x%08x\n\r", &packet_sci_poly.payload.int32_data[0][0]);
-		xil_printf("&packet_sci_poly=0x%08x\n\r", &packet_sci_poly);
+		//xil_printf("&packet_sci_poly.payload.int32_data[0][0]=0x%08x\n\r", &packet_sci_poly.payload.int32_data[0][0]);
+		//xil_printf("&packet_sci_poly=0x%08x\n\r", &packet_sci_poly);
 		xil_printf("GetArtixLoadState=0x%08x\n\r",  GetArtixLoadState());
 		xil_printf("locked = 0x%08x\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR));
 		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
@@ -417,10 +417,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		SetFTP_state(20);
 	}
-	else if(c == 'F')
-	{
-		SendSpectrum2FTP((char*)&packet_sci_poly, sizeof(packet_sci_poly), "testfile.tst");
-	}
+//	else if(c == 'F')
+//	{
+//		SendSpectrum2FTP((char*)&packet_sci_poly, sizeof(packet_sci_poly), "testfile.tst");
+//	}
 	else if(c >= '0' && c <= '9')
 	{
 		//SelectSwitch(0);

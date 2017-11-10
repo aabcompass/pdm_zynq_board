@@ -68,48 +68,43 @@ typedef struct
 #define BuildTimeStamp_TS_dword(year, month, date, hour, min, sec) \
 	(((year)<<26) | ((month)<<22) | ((date)<<17) | ((hour)<<12) | ((min)<<6) | (sec))
 
+//typedef struct
+//{
+//	uint64_t n_gtu;
+//} TimeStamp_symplified;
+
+
 typedef struct
 {
-	uint64_t n_gtu;
-} TimeStamp_symplified;
-
-//typedef struct
-//{
-//	uint64_t n_us;
-//} TimeStamp_Unix;
-
-// Structure for adjust/get time on/from Zynq
-//typedef struct
-//{
-//	ZynqBoardHeader zbh;
-//	TimeStamp_Unix ts;
-//} Z_TimeStamp_Unix;
+	uint32_t n_gtu;
+	uint32_t unix_time;
+} TimeStamp_dual;
 
 //-----------------------------------------------------------------------------
 // Scientific data types
 #define N_OF_FRAMES_RAW_POLY_V0		128
 #define N_OF_FRAMES_INT16_POLY_V0	128
 #define N_OF_FRAMES_INT32_POLY_V0	128
-
-typedef struct
-{
-	// symplified timestamp
-	TimeStamp_symplified ts;
-	// HVPS status
-	uint32_t hv_status;
-	// raw data (2.5 us GTU)
-	uint8_t raw_data [N_OF_FRAMES_RAW_POLY_V0][N_OF_PIXEL_PER_PDM];
-	// integrated data (320 us GTU)
-	uint16_t int16_data [N_OF_FRAMES_INT16_POLY_V0][N_OF_PIXEL_PER_PDM];
-	// double integrated data (~40 ms GTU)
-	uint32_t int32_data [N_OF_FRAMES_INT32_POLY_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_POLY_V5;
-
-typedef struct
-{
-	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_POLY_V5 payload;
-} Z_DATA_TYPE_SCI_POLY_V5;
+//
+//typedef struct
+//{
+//	// symplified timestamp
+//	TimeStamp_dual ts;
+//	// HVPS status
+//	uint32_t hv_status;
+//	// raw data (2.5 us GTU)
+//	uint8_t raw_data [N_OF_FRAMES_RAW_POLY_V0][N_OF_PIXEL_PER_PDM];
+//	// integrated data (320 us GTU)
+//	uint16_t int16_data [N_OF_FRAMES_INT16_POLY_V0][N_OF_PIXEL_PER_PDM];
+//	// double integrated data (~40 ms GTU)
+//	uint32_t int32_data [N_OF_FRAMES_INT32_POLY_V0][N_OF_PIXEL_PER_PDM];
+//} DATA_TYPE_SCI_POLY_V5;
+//
+//typedef struct
+//{
+//	ZynqBoardHeader zbh;
+//	DATA_TYPE_SCI_POLY_V5 payload;
+//} Z_DATA_TYPE_SCI_POLY_V5;
 
 //========================================
 //  Multievents triggering mode structures
@@ -153,12 +148,12 @@ typedef struct
 typedef struct
 {
 	// Unix timestamp
-	TimeStamp_symplified ts;
+	TimeStamp_dual ts;
 	// HVPS status
 	uint32_t hv_status;
 	// raw data (2.5 us GTU)
 	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L1_V1;
+} DATA_TYPE_SCI_L1_V2;
 
 // At the end of lifecycle Zynq packs DATA_TYPE_SCI_L1 structures in the structure Z_DATA_TYPE_SCI_L1 (with header)
 // and sends it to DP
@@ -166,8 +161,8 @@ typedef struct
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L1_V1 payload;
-} Z_DATA_TYPE_SCI_L1_V1;
+	DATA_TYPE_SCI_L1_V2 payload;
+} Z_DATA_TYPE_SCI_L1_V2;
 
 
 // If L2 occurred, Zynq makes:
@@ -180,12 +175,12 @@ typedef struct
 typedef struct
 {
 	// Unix timestamp
-	TimeStamp_symplified ts;
+	TimeStamp_dual ts;
 	// HVPS status
 	uint32_t hv_status;
 	// intergrated data
 	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L2_V1;
+} DATA_TYPE_SCI_L2_V2;
 
 // At the end of lifecycle Zynq packs DATA_TYPE_SCI_L2 structures in the structure Z_DATA_TYPE_SCI_L2 (with header)
 // and sends it to DP
@@ -193,8 +188,8 @@ typedef struct
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L2_V1 payload;
-} Z_DATA_TYPE_SCI_L2_V1;
+	DATA_TYPE_SCI_L2_V2 payload;
+} Z_DATA_TYPE_SCI_L2_V2;
 
 // L3 events are automatically generated at the end of lifecycle.  Zynq makes:
 // 1) the timestamp for this event,
@@ -207,18 +202,18 @@ typedef struct
 typedef struct
 {
 	// Unix timestamp
-	TimeStamp_symplified ts;
+	TimeStamp_dual ts;
 	// HVPS status
 	uint32_t hv_status;
 	// double integrated data
 	uint32_t int32_data[N_OF_FRAMES_L3_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L3_V1;
+} DATA_TYPE_SCI_L3_V2;
 
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L3_V1 payload;
-} Z_DATA_TYPE_SCI_L3_V1;
+	DATA_TYPE_SCI_L3_V2 payload;
+} Z_DATA_TYPE_SCI_L3_V2;
 
 /* zynq packet passed to the CPU every 5.24 s */
 /* 4718772 bytes */
@@ -227,9 +222,9 @@ typedef struct
 #define MAX_PACKETS_L3 1
 typedef struct
 {
-  Z_DATA_TYPE_SCI_L1_V1 level1_data[MAX_PACKETS_L1]; /* 294932 * 4 bytes */
-  Z_DATA_TYPE_SCI_L2_V1 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
-  Z_DATA_TYPE_SCI_L3_V1 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
+  Z_DATA_TYPE_SCI_L1_V2 level1_data[MAX_PACKETS_L1]; /* 294932 * 4 bytes */
+  Z_DATA_TYPE_SCI_L2_V2 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
+  Z_DATA_TYPE_SCI_L3_V2 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
 } ZYNQ_PACKET;
 
 
@@ -315,16 +310,16 @@ typedef struct
 
 typedef struct
 {
-	TimeStamp_symplified ts; //
+	TimeStamp_dual ts; //
 	uint32_t record_type;
 	uint32_t channels; // bit0,1 - ch0, bit2,3 - ch1, ..., bit16,17 - ch8
-} DATA_TYPE_HVPS_LOG_V0;
+} DATA_TYPE_HVPS_LOG_V1;
 
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_HVPS_LOG_V0 payload[HVPS_LOG_SIZE_NRECORDS];
-} Z_DATA_TYPE_HVPS_LOG_V0;
+	DATA_TYPE_HVPS_LOG_V1 payload[HVPS_LOG_SIZE_NRECORDS];
+} Z_DATA_TYPE_HVPS_LOG_V1;
 
 #pragma pack(pop) /* return to normal packing */
 
