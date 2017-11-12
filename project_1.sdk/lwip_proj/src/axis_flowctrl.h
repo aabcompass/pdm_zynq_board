@@ -10,32 +10,29 @@
 
 
 
-#define REGW_FLAGS					0
-#define REGW_CLR_FLAGS				1
-#define REGW_TRIG_DELAY				2
-#define REGW_EDGE_FLAGS				3
-#define REGW_RESET_ALARM			4
-#define REGW_TRIG_TST_GTU_H			5
-#define REGW_TRIG_TST_GTU_L			6
-#define REGW_PERIODIC_TRIG_PHASE	7
-#define REGW_DMA_LENGTH				8
+#define REGW_FLAGS					0 /* 3=periodic_trig_en 2=en_algo_trig  1=en_int_trig 0=is_started*/
+#define REGW_CLR_FLAGS				1 /* 3=restart_intr 2=clr_all 1=clear_error 0=clr_trans_counter*/
+#define REGW_TRIG_DELAY				2 /* the delay between trigger event and message about it*/
+#define REGW_EDGE_FLAGS				3 /* 1=trig_force 0=release */
+#define REGW_GTUS_PER_CYCLE			6 /* the number of GTUs in one cycles (5.24s in Mini-EUSO)*/
+#define REGW_PERIODIC_TRIG_PERIOD	7 /* to be upgraded*/
+#define REGW_DMA_LENGTH				8 /* number of AXIS transfers per interrupt*/
+#define REGW_NUM_OF_TRIG			9 /* 15:0 = number of triggers per cycle 5,24s*/
+#define REGW_UNIX_TIME				14
 
 #define REGR_GPIO_0			16
 #define REGR_GPIO_1			17
 #define REGR_GPIO_2			18
-#define REGR_TLAST_CNT2		19
-#define REGR_RESERV			20
-#define REGR_GTU_CNT_H_RND	21
-#define REGR_GTU_CNT_L_RND	22
-#define REGR_TRANS_CNT_LCH	23
-#define REGR_TRANS_COUNTER	24
-#define REGR_MAXIS_ALARM	25
-#define REGR_FC_SM_STATE	26
-#define REGR_GTU_CNT_H		27
-#define REGR_GTU_CNT_L		28
-#define REGR_GTU_TIMEST_H	29
-#define REGR_GTU_TIMEST_L	30
-#define REGR_GTU_CNT_4DMA	31
+#define REGR_TLAST_CNT2		19 /*total number of TLASTs which has been sent*/
+#define REGR_RESERV			20 /*4debug*/
+#define REGR_TRANS_CNT_LCH	23 /*?*/
+#define REGR_TRANS_COUNTER	24 /* the number of AXIS transactions after last clr_trans_counter or clr_all */
+#define REGR_MAXIS_ALARM	25 /* 0=m_axis_fifo_error if started */
+#define REGR_FC_SM_STATE	26 /*3:0=sm_state*/
+
+#define REGR_GTU_CNT		27 /*number of GTU after last GTU counter reset*/
+#define REGR_GTU_CNT_LCH	28 /*GTU counter timestamp for */
+#define REGR_TRIG_TYPE		29 /*TRIGGER_TYPES for each DMA bank*/
 
 
 #define SM_STATE_IDLE		0

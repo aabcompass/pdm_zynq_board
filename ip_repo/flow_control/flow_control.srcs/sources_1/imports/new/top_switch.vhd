@@ -16,7 +16,8 @@ entity axis_flow_control is
 		-- Width of S_AXI address bus
 		C_S_AXI_ADDR_WIDTH	: integer	:= 7;
 		C_AXIS_DWIDTH : integer := 64;
-		C_CNT_DWIDTH : integer := 32
+		C_CNT_DWIDTH : integer := 32;
+		C_FREQ : integer := 100000000
 	);
   Port ( 
   		-- in
@@ -178,7 +179,6 @@ architecture Behavioral of axis_flow_control is
 	signal release: std_logic := '0';
 	signal trig: std_logic := '0';
 	signal periodic_trig: std_logic := '0';
-	signal pass: std_logic := '0';
 
 	signal clear_error: std_logic := '0';
 	signal m_axis_fifo_error: std_logic := '0';
@@ -189,10 +189,8 @@ architecture Behavioral of axis_flow_control is
 	signal clr_trans_counter : std_logic := '0';
 	
 	signal gtu_sig_d0, gtu_sig_d1: std_logic := '0';
-	signal gtu_sig_counter_l, gtu_sig_counter_l_d1, gtu_sig_counter_h, gtu_sig_counter_4dma: std_logic_vector(31 downto 0) := (others => '0');
-	signal gtu_sig_counter_l_latch, gtu_sig_counter_h_latch : std_logic_vector(31 downto 0) := (others => '0');
+	signal gtu_sig_counter, gtu_sig_counter_latch: std_logic_vector(31 downto 0) := (others => '0');
 	
-	signal trig_test_gtu_time_l, trig_test_gtu_time_h : std_logic_vector(31 downto 0) := (others => '0');
 	signal periodic_trig_phase : std_logic_vector(20 downto 0) := (others => '0');
 	
 	signal led_cnt : std_logic_vector(23 downto 0) := (others => '0');
@@ -267,11 +265,14 @@ architecture Behavioral of axis_flow_control is
 
 	signal m_axis_tvalid_key, m_axis_tvalid_i, m_axis_tready_key: std_logic := '0';
 	signal pass_intr: std_logic := '1';
+	signal self_trig: std_logic := '1';
 	
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter2: std_logic_vector(15 downto 0) := (others => '0');
+	
+	signal trig_type: std_logic_vector(31 downto 0) := (others => '0');
 	
 	attribute keep : string;  
 	attribute keep of m_axis_tvalid_key: signal is "true";  
@@ -914,11 +915,13 @@ begin
 	release <= slv_reg3(0);
 	trig_force <= slv_reg3(1);  
 	
-	trig_test_gtu_time_h <= slv_reg5;
-	trig_test_gtu_time_l <= slv_reg6;
-	
+	n_gtus_per_cycle <= slv_reg6;	
 	periodic_trig_phase <= slv_reg7(20 downto 0);
 	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
+	number_of_triggers <= slv_reg9(15 downto 0);
+	periodic_trig_gtu_period <= slv_reg10;
+	unix_time_reg <= slv_reg14;
+
 
 	slv_reg16 <= gpio_0;
 	slv_reg17 <= gpio_1;
@@ -926,28 +929,26 @@ begin
 	slv_reg19(15 downto 0) <= tlast_counter2;
 	slv_reg20(15 downto 0) <= counter_tvalid_latch;
 	--slv_reg21 <= gpio_5;
-	slv_reg21 <= gtu_sig_counter_h;
-	slv_reg22 <= gtu_sig_counter_l and "11111111111000000000000000000000";
 	slv_reg23(C_CNT_DWIDTH-1 downto 0) <= trans_counter_latch;
 	slv_reg24(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
 	slv_reg25(0) <= m_axis_fifo_error; 
 	slv_reg26(3 downto 0) <= sm_state;
 	slv_reg26(16) <= pass_intr;
-	slv_reg27 <= gtu_sig_counter_h;
-	slv_reg28 <= gtu_sig_counter_l;
-	slv_reg29 <= gtu_sig_counter_h_latch;
-	slv_reg30 <= gtu_sig_counter_l_latch;
-	slv_reg31 <= gtu_sig_counter_4dma;
+	
+	slv_reg27 <= gtu_sig_counter;
+	slv_reg28 <= gtu_sig_counter_latch;
+	slv_reg29 <= trig_type;
+
+	
 
 
 --	trig_button_n <= not trig_button;
 --	i_debounce: debounce port map(s_axis_aclk, trig_button_n, trig_button_debounced);
 
---	trig <= ((trig0 or trig1 or trig2) and en_algo_trig) or (int_trig and en_int_trig) or (periodic_trig and periodic_trig_en) or trig_force or trig_button_debounced;
 
 	m_axis_tdata_not_buffered <= s_axis_tdata;
 	m_axis_tlast_not_buffered <= s_axis_tlast;
-	m_axis_tvalid_not_buffered <= s_axis_tvalid and pass;
+	m_axis_tvalid_not_buffered <= s_axis_tvalid;
 	s_axis_tready <= '1';
 
 	transation_counter: process(s_axis_aclk)
@@ -961,54 +962,139 @@ begin
 		end if;
 	end process;
 
-	trig_sm: process(s_axis_aclk)
-		variable state : integer range 0 to 4 := 0;
+	xpm_cdc_single_inst: xpm_cdc_single
+	generic map (
+		 DEST_SYNC_FF   => 4, -- integer; range: 2-10
+		 SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+		 SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
+	)
+	port map (
+		 src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+		 src_in   => gtu_sig,
+		 dest_clk => s_axis_aclk,
+		 dest_out => gtu_sig_d0
+	);	
+	
+	gtu_sig_counter_process: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then
-			if(clr_all = '1') then
-				state := 0;
-				trig_cnt <= (others => '0');
-				trans_counter_latch <= (others => '0');
-				gtu_sig_counter_l_latch <= (others => '0');
-				gtu_sig_counter_h_latch <= (others => '0');
-				pass <= '1';
+			if(clr_all = '1' or clr_gtu_cnt = '1') then
+				gtu_sig_counter <= (others => '0');
 			else
-				case state is
-					when 0 => if(trig = '1') then
-											state := state + 1;
-										end if;
-										pass <= '1';
-										sm_state <= X"0";
-					when 1 => if(trig_cnt = trig_delay) then
-											state := state + 1;
-											trig_cnt <= (others => '0');
-										elsif(s_axis_tvalid = '1') then
-											trig_cnt <= trig_cnt + 1;
-										end if;
-										pass <= '1';
-										sm_state <= X"1";
-					when 2 => if(s_axis_tlast = '1') then
-											state := state + 1;
-											trans_counter_latch <= trans_counter;
-											gtu_sig_counter_l_latch <= gtu_sig_counter_l;
-											gtu_sig_counter_h_latch <= gtu_sig_counter_h;
-											pass <= '0';
-										end if;
-										sm_state <= X"2";
-					when 3 => if(release = '1') then
-											state := state + 1;
-										end if;
-										pass <= '0';
-										sm_state <= X"3";
-					when 4 => if(release = '0') then
-											state := 0;
-										end if;
-										pass <= '0';
-										sm_state <= X"4";
-				end case;
+				gtu_sig_d1 <= gtu_sig_d0;
+				if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
+					gtu_sig_counter <= gtu_sig_counter + 1;
+				end if;
+			end if;
+		end if;
+	end process;	
+
+	one_second_pulse_process: process(s_axis_aclk) 
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if((one_second_cnt = C_FREQ-1) or (clr_all = '1')) then
+				one_second_cnt <= (others => '0'); 
+				one_second_pulse <= '1';
+			else
+				one_second_cnt <= one_second_cnt + 1;
+				one_second_pulse <= '0';
 			end if;
 		end if;
 	end process;
+
+	unix_time_process: process(s_axis_aclk) 
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(set_unix_time = '1') then
+				unix_time <= unix_time_reg;
+			elsif(one_second_pulse = '1') then
+				unix_time <= unix_time + 1;
+			end if;
+		end if;
+	end process;
+	
+	periodic_trig_gen: process(s_axis_aclk) 
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1' or clr_trig_service = '1') then
+				periodic_trig_gen_cnt <= (others => '0');
+				periodic_trig_gen_cnt2 <= (others => '0');
+			else
+				if(periodic_trig_gen_cnt2 < n_gtus_per_cycle) then
+					if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
+						if(periodic_trig_gen_cnt = periodic_trig_gtu_period) then
+							periodic_trig <= periodic_trig_en;
+							periodic_trig_gen_cnt <= (others => '0');
+						else
+							periodic_trig <= '0';
+							periodic_trig_gen_cnt <= periodic_trig_gen_cnt + 1;
+						end if;
+					else
+						periodic_trig <= '0';
+					end if;
+				else
+					periodic_trig <= '0';
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	
+	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
+	trig <= self_trig or (int_trig and en_int_trig) or periodic_trig or trig_force or trig_button_debounced;
+	
+	trig_service: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1' or clr_trig_service = '1') then
+				self_trig_cnt <= (others => '0');
+				periodic_trig_cnt <= (others => '0');
+				trig_delay_cnt <= (others => '0');
+				trig_type <= (others => '0');
+				trig_flag <= '0';
+				state := 0;
+			else
+				case state is
+					when 0 => if(trig = '1') then 
+											if(periodic_trig = '1') then
+												state := state + 1;
+											else
+												if(self_trig_cnt < number_of_triggers) then
+													state := state + 1;
+												end if;
+											end if;
+										end if;
+					when 1 => if(periodic_trig = '1') then
+											trig_type <= X"1";
+											periodic_trig_cnt <= periodic_trig_cnt + 1;
+										elsif(self_trig = '1') then
+											trig_type <= X"2";
+											self_trig_cnt <= self_trig_cnt + 1;
+										else
+											trig_type <= X"4";
+										end if;										
+										gtu_cnt_latch <= gtu_cnt;
+										unix_timestamp_latch <= unix_timestamp;
+										state := state + 1;										
+					when 2 => if(trig_delay_cnt = trig_delay) then
+											trig_flag <= '1';
+											state := state + 1;
+											trig_delay_cnt <= (others => '0');
+										elsif(s_axis_tvalid = '1') then
+											trig_delay_cnt <= trig_delay_cnt + 1;
+										end if;
+					when 3 => if(release = '1') then
+											trig_flag <= '0';
+											state := state + 1;
+										end if;
+					when 4 => if(release = '0') then
+											state := 0;
+										end if;										
+				end case; 
+			end if;
+		end if;
+	end process;
+
 
 	error_latcher: process(s_axis_aclk)
 		variable state : integer range 0 to 1 := 0;
@@ -1027,88 +1113,23 @@ begin
 		end if;
 	end process;
 	
-	xpm_cdc_single_inst: xpm_cdc_single
-	generic map (
-		 DEST_SYNC_FF   => 4, -- integer; range: 2-10
-		 SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
-		 SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
-	)
-	port map (
-		 src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
-		 src_in   => gtu_sig,
-		 dest_clk => s_axis_aclk,
-		 dest_out => gtu_sig_d0
-	);	
-	
-	gtu_sig_counter_process: process(s_axis_aclk)
+	trig_led_indicator: process(s_axis_aclk)
+		variable state : integer range 0 to 1 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
-			if(clr_all = '1') then
-				gtu_sig_counter_l <= (others => '0');
-				gtu_sig_counter_l_d1 <= (others => '0');
-				gtu_sig_counter_h <= (others => '0');
-				gtu_sig_counter_4dma <= (others => '0');
-			else
-				gtu_sig_d1 <= gtu_sig_d0;
-				if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
-					gtu_sig_counter_l <= gtu_sig_counter_l + 1;
-					gtu_sig_counter_l_d1 <= gtu_sig_counter_l;
-					if(gtu_sig_counter_l /= gtu_sig_counter_l_d1 and gtu_sig_counter_l = 0) then
-						gtu_sig_counter_h <= gtu_sig_counter_h + 1;
-					end if;
-					if(pass = '1') then
-						gtu_sig_counter_4dma <= gtu_sig_counter_4dma + 1;
-					elsif(release = '1') then
-						gtu_sig_counter_4dma <= (others => '0');
-					end if;
-				end if;
-			end if;
+			case state is
+				when 0 => if(trig = '1') then
+										trig_led <= '1';
+										state := state + 1;
+									end if;
+				when 1 => if(led_cnt = X"FFFFFF") then
+										trig_led <= '0';
+										state := state + 1;
+									end if;
+									led_cnt <= led_cnt + 1;
+			end case;
 		end if;
-	end process;
-	
---	int_trigger_generator_process: process(s_axis_aclk)
---	begin
---		if(rising_edge(s_axis_aclk)) then
---			if((gtu_sig_counter_l = trig_test_gtu_time_l) and (gtu_sig_counter_h = trig_test_gtu_time_h)) then
---				int_trig_d0 <= '1';
---			else
---				int_trig_d0 <= '0';
---			end if;
---			int_trig_d1 <= int_trig_d0;
---			int_trig <= int_trig_d0 and (not int_trig_d1);
---		end if;
---	end process;
-	
---	periodic_trig_generator: process(s_axis_aclk)
---	begin
---		if(rising_edge(s_axis_aclk)) then
---			if(gtu_sig_counter_l(20 downto 0) = periodic_trig_phase) then
---				periodic_trig_d0 <= '1';
---			else
---				periodic_trig_d0 <= '0';
---			end if;
---			periodic_trig_d1 <= periodic_trig_d0;
---			periodic_trig <= periodic_trig_d0 and (not periodic_trig_d1);
---		end if;
---	end process;
-	
---	trig_led_indicator: process(s_axis_aclk)
---		variable state : integer range 0 to 1 := 0;
---	begin
---		if(rising_edge(s_axis_aclk)) then
---			case state is
---				when 0 => if(trig = '1') then
---										trig_led <= '1';
---										state := state + 1;
---									end if;
---				when 1 => if(led_cnt = X"FFFFFF") then
---										trig_led <= '0';
---										state := state + 1;
---									end if;
---									led_cnt <= led_cnt + 1;
---			end case;
---		end if;
---	end process; 
+	end process; 
 
 	packet_size_verificator: process(s_axis_aclk)
 		variable state : integer range 0 to 2 := 0;
