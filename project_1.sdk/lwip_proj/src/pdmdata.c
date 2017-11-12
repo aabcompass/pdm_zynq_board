@@ -34,6 +34,27 @@ Z_DATA_TYPE_SCURVE_V1 scurvePacket;
 DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
+TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
+
+/*
+ *
+ * The ZYNQ boards memory management.
+ * MM cycle - 5.24 time interval
+ *   even cycles - 0, 2, 4, 6, 8 ...
+ *   odd cycles  - 1, 3, 5, 7, 9 ...
+ *
+ * DMA bank - memory area which currently is used for DMA transfer
+ *   There are 8 banks. 4 banks for even and 4 banks for odd
+ *   In the beginning of even cycle current banks = 0, in the beginning of odd cycle current banks = 4
+ *   On any trigger current bank is changing to next one.
+ *   Trigger events with their types are being sent from FlowControl IP cores.
+ *   Trigger event has: trigger type, memory address, n_gtu, unix_timestamp
+ *
+ */
+
+int N1=4, N2=4; // Maximum allowed triggers L1 and L2
+int current_bank_L1=0, current_bank_L2=0;
+
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
 	if(data_type == DATA_TYPE_L1)

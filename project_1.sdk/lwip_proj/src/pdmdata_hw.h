@@ -4,6 +4,8 @@
  *  Created on: Jan 30, 2017
  *      Author: alx
  */
+#include "xil_types.h"
+
 
 #ifndef SRC_PDMDATA_HW_H_
 #define SRC_PDMDATA_HW_H_
@@ -34,5 +36,15 @@ void InvalidateCacheRanges(int data_type); // 1 - L1, 2 - L2, 3 - L3
 void* GetZ_DATA_TYPE_SCI_ptr(int data_type); // 1 - L1, 2 - L2, 3 - L3
 int IsBufferL2Changed();
 
+typedef struct
+{
+	u32 trigger_type; //
+	u32 mem_addr;
+	u32 n_gtu;
+	u32 unix_timestamp;
+	u8 is_sent;
+} TriggerInfo;
+
+#define MAX_TRIGGERS_PER_CYCLE		4
 
 #endif /* SRC_PDMDATA_HW_H_ */
