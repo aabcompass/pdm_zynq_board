@@ -151,8 +151,8 @@ typedef struct
 	TimeStamp_dual ts;
 	// Flags
 	uint32_t trig_type;
-	// HVPS status
-	uint32_t hv_status;
+	// Cathode status
+	uint32_t cathode_status;
 	// raw data (2.5 us GTU)
 	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L1_V2;
@@ -180,8 +180,8 @@ typedef struct
 	TimeStamp_dual ts;
 	// Flags
 	uint32_t trig_type;
-	// HVPS status
-	uint32_t hv_status;
+	// Cathode status
+	uint32_t cathode_status;
 	// intergrated data
 	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L2_V2;
@@ -209,6 +209,8 @@ typedef struct
 	TimeStamp_dual ts;
 	// Flags
 	uint32_t trig_type;
+	// Cathode status
+	uint32_t cathode_status;
 	// HVPS status
 	uint32_t hv_status;
 	// double integrated data
