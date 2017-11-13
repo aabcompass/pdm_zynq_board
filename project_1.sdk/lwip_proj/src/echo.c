@@ -334,10 +334,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
 		xil_printf("is_test_mode=%d\n\r", is_test_mode);
 	}
-	else if(c == 'T')
-	{
-		SetTrigTstGtuTime_L1(1000LL);
-	}
 	else if(c == 'Y')
 	{
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_TRIG_FORCE;

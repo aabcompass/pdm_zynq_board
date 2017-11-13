@@ -184,12 +184,12 @@ architecture Behavioral of axis_flow_control is
 	signal m_axis_fifo_error: std_logic := '0';
 	
 	signal trans_counter, trans_counter_latch: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
-	signal trig_cnt: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
+	signal trig_delay_cnt: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
 	signal trig_delay: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
 	signal clr_trans_counter : std_logic := '0';
 	
 	signal gtu_sig_d0, gtu_sig_d1: std_logic := '0';
-	signal gtu_sig_counter, gtu_sig_counter_latch: std_logic_vector(31 downto 0) := (others => '0');
+	signal gtu_sig_counter, gtu_timestamp: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal periodic_trig_phase : std_logic_vector(20 downto 0) := (others => '0');
 	
@@ -207,9 +207,11 @@ architecture Behavioral of axis_flow_control is
 			result  : OUT STD_LOGIC); --debounced signal
 		END component;
 		
-	signal trig_button_debounced: std_logic;
-	signal trig_button_n: std_logic;
-	signal clr_all: std_logic;
+	signal trig_button_debounced: std_logic := '0';
+	signal trig_button_n: std_logic := '0';
+	signal clr_all: std_logic := '0';
+	signal clr_gtu_cnt: std_logic := '0';
+	signal clr_trig_service: std_logic := '0';
 	
 	signal restart_intr: std_logic;
 	
@@ -265,14 +267,25 @@ architecture Behavioral of axis_flow_control is
 
 	signal m_axis_tvalid_key, m_axis_tvalid_i, m_axis_tready_key: std_logic := '0';
 	signal pass_intr: std_logic := '1';
-	signal self_trig: std_logic := '1';
+	signal self_trig: std_logic := '0';
+	signal one_second_pulse: std_logic := '0';
+	signal set_unix_time: std_logic := '0';
+	signal trig_flag: std_logic := '0';
 	
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
 	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter2: std_logic_vector(15 downto 0) := (others => '0');
+	signal n_gtus_per_cycle: std_logic_vector(31 downto 0) := (others => '0');
+	signal number_of_triggers: std_logic_vector(15 downto 0) := (others => '0');
+	signal periodic_trig_cnt: std_logic_vector(15 downto 0) := (others => '0');
+	signal self_trig_cnt: std_logic_vector(15 downto 0) := (others => '0');
+	signal periodic_trig_gtu_period: std_logic_vector(31 downto 0) := (others => '0');
+	signal unix_time_reg, unix_time, unix_timestamp: std_logic_vector(31 downto 0) := (others => '0');
+	signal one_second_cnt: std_logic_vector(31 downto 0) := (others => '0');
+	signal periodic_trig_gen_cnt, periodic_trig_gen_cnt2: std_logic_vector(31 downto 0) := (others => '0');
 	
-	signal trig_type: std_logic_vector(31 downto 0) := (others => '0');
+	signal trig_type: std_logic_vector(3 downto 0) := (others => '0');
 	
 	attribute keep : string;  
 	attribute keep of m_axis_tvalid_key: signal is "true";  
@@ -909,11 +922,14 @@ begin
 	clear_error <= slv_reg1(1);
 	clr_all <= slv_reg1(2);
 	restart_intr <= slv_reg1(3);
+	clr_gtu_cnt <= slv_reg1(4);
+	clr_trig_service <= slv_reg1(5);
 	
 	trig_delay <= slv_reg2(C_CNT_DWIDTH-1 downto 0);
 
 	release <= slv_reg3(0);
-	trig_force <= slv_reg3(1);  
+	trig_force <= slv_reg3(1); 
+	set_unix_time <= slv_reg3(2); 
 	
 	n_gtus_per_cycle <= slv_reg6;	
 	periodic_trig_phase <= slv_reg7(20 downto 0);
@@ -933,11 +949,14 @@ begin
 	slv_reg24(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
 	slv_reg25(0) <= m_axis_fifo_error; 
 	slv_reg26(3 downto 0) <= sm_state;
-	slv_reg26(16) <= pass_intr;
+	slv_reg26(4) <= pass_intr;
+	slv_reg26(16) <= trig_flag;
 	
 	slv_reg27 <= gtu_sig_counter;
-	slv_reg28 <= gtu_sig_counter_latch;
-	slv_reg29 <= trig_type;
+	slv_reg28 <= gtu_timestamp;
+	slv_reg29(3 downto 0) <= trig_type;
+	slv_reg30 <= unix_timestamp;
+	slv_reg31 <= unix_time;
 
 	
 
@@ -1044,6 +1063,7 @@ begin
 	trig <= self_trig or (int_trig and en_int_trig) or periodic_trig or trig_force or trig_button_debounced;
 	
 	trig_service: process(s_axis_aclk)
+		variable state : integer range 0 to 4 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1' or clr_trig_service = '1') then
@@ -1073,8 +1093,8 @@ begin
 										else
 											trig_type <= X"4";
 										end if;										
-										gtu_cnt_latch <= gtu_cnt;
-										unix_timestamp_latch <= unix_timestamp;
+										gtu_timestamp <= gtu_sig_counter;
+										unix_timestamp <= unix_time;
 										state := state + 1;										
 					when 2 => if(trig_delay_cnt = trig_delay) then
 											trig_flag <= '1';
@@ -1124,7 +1144,7 @@ begin
 									end if;
 				when 1 => if(led_cnt = X"FFFFFF") then
 										trig_led <= '0';
-										state := state + 1;
+										state := 0; 
 									end if;
 									led_cnt <= led_cnt + 1;
 			end case;
@@ -1206,35 +1226,6 @@ begin
 
 	m_axis_tlast_i <= m_axis_tlast_allowed and m_axis_tlast_key;
 
---	m_axis_tlast_not_buffered_former: process(s_axis_aclk)
---	begin
---		if(rising_edge(s_axis_aclk)) then			
---			-- with restart_intr asserted, we close output data
---			if(restart_intr = '1' or clr_all = '1') then
---				dma_length_cntr <= (others => '0');
---				pass_intr <= '0';
---				m_axis_tlast_allowed <= '0';
---			else
---				-- manage with dma_length_cntr, pass_intr
---				if(m_axis_tvalid_key = '1' and m_axis_tready = '1') then	
---					if(dma_length_cntr /= dma_length-1) then
---						dma_length_cntr <= dma_length_cntr + 1;
---						pass_intr <= '1';
---					else
---						pass_intr <= '0'; -- close output data flow after valid m_axis_tlast_i, wait until restart_intr or clr_all
---					end if;	
---				end if;
---				-- assert m_axis_tlast_i according with counter
---				if(dma_length_cntr >= dma_length-10) then
---					m_axis_tlast_allowed <= '1';
---				else
---					m_axis_tlast_allowed <= '0';
---				end if;	
-					
---			end if;	
---		end if;
---	end process;
-	
 	tlast_allowed_former: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then			

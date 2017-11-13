@@ -6,6 +6,8 @@
 #include "hv.h"
 #include "ver.h"
 #include "pdmdp_err.h"
+#include "axis_flowctrl.h"
+
 
 u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
@@ -228,6 +230,24 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		HV_setCathodeVoltage(turn);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "settime %d",
+			&param0) == 1)
+	{
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_UNIX_TIME*4) =
+				*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_UNIX_TIME*4) = param0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_SET_UNIX_TIME;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
+
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "gettime", 7) == 0)
+	{
+		sprintf(reply, "%d\n\r", *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_UNIX_TIME*4));
+		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
 	else if(strncmp(p->payload, "hvps status gpio", 16) == 0)
 	{

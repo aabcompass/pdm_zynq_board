@@ -10,6 +10,7 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "C_S_AXI_ADDR_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_DATA_WIDTH" -parent ${Page_0}
 
+  ipgui::add_param $IPINST -name "C_FREQ"
 
 }
 
@@ -28,6 +29,15 @@ proc update_PARAM_VALUE.C_CNT_DWIDTH { PARAM_VALUE.C_CNT_DWIDTH } {
 
 proc validate_PARAM_VALUE.C_CNT_DWIDTH { PARAM_VALUE.C_CNT_DWIDTH } {
 	# Procedure called to validate C_CNT_DWIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.C_FREQ { PARAM_VALUE.C_FREQ } {
+	# Procedure called to update C_FREQ when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.C_FREQ { PARAM_VALUE.C_FREQ } {
+	# Procedure called to validate C_FREQ
 	return true
 }
 
@@ -96,5 +106,10 @@ proc update_MODELPARAM_VALUE.C_AXIS_DWIDTH { MODELPARAM_VALUE.C_AXIS_DWIDTH PARA
 proc update_MODELPARAM_VALUE.C_CNT_DWIDTH { MODELPARAM_VALUE.C_CNT_DWIDTH PARAM_VALUE.C_CNT_DWIDTH } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.C_CNT_DWIDTH}] ${MODELPARAM_VALUE.C_CNT_DWIDTH}
+}
+
+proc update_MODELPARAM_VALUE.C_FREQ { MODELPARAM_VALUE.C_FREQ PARAM_VALUE.C_FREQ } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.C_FREQ}] ${MODELPARAM_VALUE.C_FREQ}
 }
 

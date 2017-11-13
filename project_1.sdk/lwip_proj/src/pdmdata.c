@@ -125,98 +125,99 @@ void CopyEventDataFreerun()
 {
 	//L1 data
 	InvalidateCacheRanges(1);
-	memcpy(&zynqPacket.level1_data[0].payload.ts, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT_H*4), 8);
+	memcpy(&zynqPacket.level1_data[0].payload.ts.unix_time, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIMESTAMP*4), 4);
+	memcpy(&zynqPacket.level1_data[0].payload.ts.n_gtu, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4), 4);
 	void* addr = &DataDMA__Raw[0][0][0];
 	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
 	//L2 data
 	InvalidateCacheRanges(2);
-	memcpy(&zynqPacket.level2_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
+	memcpy(&zynqPacket.level2_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
 	addr = &DataDMA__L1[0][0][0];
 	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
 	//L3 data
 	InvalidateCacheRanges(3);
-	memcpy(&zynqPacket.level3_data[0].payload.ts, &zynqPacket.level1_data[0].payload.ts, 8);
+	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
 	addr = &DataDMA__L2[prev_buffer_L2][0][0];
 	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
 }
 
 // This function copies the data from DMA memory to ethernet structure
 // data_type is the data source type (L1, L2 or L3)
-void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
-{
-	print("\n\rCopyEventData: ");
-	if(data_type == DATA_TYPE_L1)
-	{
-		print("L1:");
-		// copy the timestamp
-		memcpy(&zynqPacket.level1_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
-		print("T");
-		// copy data
-		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_RAW;
-		xil_printf(":%d:", gtu_offset);
-//		// just for test
-//		void* addr2 = &DataDMA__Raw[0][0][0];
-//		memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data, addr2, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-		if(gtu_offset>=N_OF_FRAMES_L1_V0)
-		{
-			// calc address to copy from
-			void* addr = &DataDMA__Raw[0][gtu_offset-N_OF_FRAMES_L1_V0][0];
-			// copy the sci data
-			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-			print("S");
-		}
-		else
-		{
-			// calc address to copy from
-			void* addr = &DataDMA__Raw[0][N_FRAMES_DMA_RAW+gtu_offset-N_OF_FRAMES_L1_V0][0];
-			void* addr2 = &DataDMA__Raw[0][0][0];
-			// copy the sci data
-			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0] + (N_OF_FRAMES_L1_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, gtu_offset*N_OF_PIXEL_PER_PDM);
-			print("D2");
-			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, (N_OF_FRAMES_L1_V0 - gtu_offset)*N_OF_PIXEL_PER_PDM);
-			print("D1");
-		}
-	}
-	else if(data_type == DATA_TYPE_L2)
-	{
-		print("L2: ");
-		// copy the timestamp
-		memcpy(&zynqPacket.level2_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
-		print("T");
-		// copy data
-		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_L1;
-		xil_printf(":%d:", gtu_offset);
-		if(gtu_offset>=N_OF_FRAMES_L2_V0)
-		{
-			// calc address to copy from
-			void* addr = &DataDMA__L1[0][gtu_offset-N_OF_FRAMES_L2_V0][0];
-			// copy the sci data
-			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
-			print("S");
-		}
-		else
-		{
-			// calc address to copy from
-			void* addr = &DataDMA__L1[0][N_FRAMES_DMA_L1+gtu_offset-N_OF_FRAMES_L1_V0][0];
-			void* addr2 = &DataDMA__L1[0][0][0];
-			// copy the sci data
-			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM);
-			print("D1");
-			memcpy((char*)&zynqPacket.level2_data[0].payload.int16_data[0][0] + 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, 2*(gtu_offset)*N_OF_PIXEL_PER_PDM);
-			print("D2");
-		}
-	}
-	else if(data_type == DATA_TYPE_L3)
-	{
-		print("L3: ");
-		// copy the timestamp
-		memcpy(&zynqPacket.level3_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_H_RND*4, 8);
-		print("T");
-		memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], &DataDMA__L2[!current_buffer_L2][0][0], 4*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
-		print("S");
-	}
-	print("\n\r");
-}
+//void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
+//{
+//	print("\n\rCopyEventData: ");
+//	if(data_type == DATA_TYPE_L1)
+//	{
+//		print("L1:");
+//		// copy the timestamp
+//		memcpy(&zynqPacket.level1_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
+//		print("T");
+//		// copy data
+//		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_RAW;
+//		xil_printf(":%d:", gtu_offset);
+////		// just for test
+////		void* addr2 = &DataDMA__Raw[0][0][0];
+////		memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data, addr2, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
+//		if(gtu_offset>=N_OF_FRAMES_L1_V0)
+//		{
+//			// calc address to copy from
+//			void* addr = &DataDMA__Raw[0][gtu_offset-N_OF_FRAMES_L1_V0][0];
+//			// copy the sci data
+//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
+//			print("S");
+//		}
+//		else
+//		{
+//			// calc address to copy from
+//			void* addr = &DataDMA__Raw[0][N_FRAMES_DMA_RAW+gtu_offset-N_OF_FRAMES_L1_V0][0];
+//			void* addr2 = &DataDMA__Raw[0][0][0];
+//			// copy the sci data
+//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0] + (N_OF_FRAMES_L1_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, gtu_offset*N_OF_PIXEL_PER_PDM);
+//			print("D2");
+//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, (N_OF_FRAMES_L1_V0 - gtu_offset)*N_OF_PIXEL_PER_PDM);
+//			print("D1");
+//		}
+//	}
+//	else if(data_type == DATA_TYPE_L2)
+//	{
+//		print("L2: ");
+//		// copy the timestamp
+//		memcpy(&zynqPacket.level2_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
+//		print("T");
+//		// copy data
+//		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_L1;
+//		xil_printf(":%d:", gtu_offset);
+//		if(gtu_offset>=N_OF_FRAMES_L2_V0)
+//		{
+//			// calc address to copy from
+//			void* addr = &DataDMA__L1[0][gtu_offset-N_OF_FRAMES_L2_V0][0];
+//			// copy the sci data
+//			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
+//			print("S");
+//		}
+//		else
+//		{
+//			// calc address to copy from
+//			void* addr = &DataDMA__L1[0][N_FRAMES_DMA_L1+gtu_offset-N_OF_FRAMES_L1_V0][0];
+//			void* addr2 = &DataDMA__L1[0][0][0];
+//			// copy the sci data
+//			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM);
+//			print("D1");
+//			memcpy((char*)&zynqPacket.level2_data[0].payload.int16_data[0][0] + 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, 2*(gtu_offset)*N_OF_PIXEL_PER_PDM);
+//			print("D2");
+//		}
+//	}
+//	else if(data_type == DATA_TYPE_L3)
+//	{
+//		print("L3: ");
+//		// copy the timestamp
+//		memcpy(&zynqPacket.level3_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_H_RND*4, 8);
+//		print("T");
+//		memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], &DataDMA__L2[!current_buffer_L2][0][0], 4*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
+//		print("S");
+//	}
+//	print("\n\r");
+//}
 
 
 
