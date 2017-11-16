@@ -17,7 +17,7 @@
 #define REGW_GTUS_PER_CYCLE			6 /* the number of GTUs in one cycles (5.24s in Mini-EUSO)*/
 #define REGW_PERIODIC_TRIG_PERIOD	7 /* to be upgraded*/
 #define REGW_DMA_LENGTH				8 /* number of AXIS transfers per interrupt*/
-#define REGW_NUM_OF_TRIG			9 /* 15:0 = number of triggers per cycle 5,24s*/
+#define REGW_NUM_OF_TRIGS			9 /* 15:0 = number of triggers per cycle 5,24s*/
 #define REGW_UNIX_TIME				14
 
 #define REGR_GPIO_0					16

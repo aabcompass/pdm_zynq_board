@@ -35,6 +35,7 @@ DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
 TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
+int N1, N2;
 
 /*
  *
@@ -52,8 +53,19 @@ TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
  *
  */
 
-int N1=4, N2=4; // Maximum allowed triggers L1 and L2
+
 int current_bank_L1=0, current_bank_L2=0;
+
+void SetTime(u32 param0)
+{
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_UNIX_TIME*4) =
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_UNIX_TIME*4) = param0;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_SET_UNIX_TIME;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
+
+}
 
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
@@ -462,6 +474,7 @@ void DMA_init()
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize data_tst_l1!\n\r");
+
 
 
 

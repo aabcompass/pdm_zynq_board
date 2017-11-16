@@ -19,6 +19,12 @@ extern SCurveStruct sCurveStruct;
 extern InstrumentState instrumentState;
 DebugSettings debugSettings;
 
+void SetInstrumentMode(u32 mode)
+{
+	instrumentState.mode = mode;
+	if(mode != 0)
+		ResetGTUCounter();
+}
 
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
@@ -58,10 +64,20 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		strcat(ans_str, "\r\n");
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 	}
+	else if(sscanf(p->payload, "instrument mode %d %d",
+			&param, &param2) == 2)
+	{
+		SetInstrumentMode(param);
+		SetTime(param2);
+		char ok_eomess_str[] = "Ok\n\r";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		if(param == 0)
+			SendLogToFTP();
+	}
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
 	{
-		instrumentState.mode = param;
+		SetInstrumentMode(param);
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 		if(param == 0)
@@ -164,32 +180,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		sprintf(reply, "CurrentDAC=%d GatheringInProgress=%d\n\r", pSCurveStruct->current_dac_value, pSCurveStruct->is_scurve_being_gathered);
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-//	else if(strncmp(p->payload, "acq shot", 8) == 0)
-//	{
-//		u32 datasize = 0;
-//		char filename_str[20];
-//		sCurveStruct.accumulation = 1;
-//		//TODO//GetBurstFromAllArtix(scurve_buffer, &datasize);
-//		sprintf(filename_str, "fr_%08d.dat", frame_counter++);
-//		SendSpectrum2FTP(scurve_buffer, datasize, filename_str);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		//TODO !!! We must wait for operation complete !!!
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
-//	else if(sscanf(p->payload, "acq burst %d",
-//			&sCurveStruct.accumulation) == 1)
-//	{
-//		u32 datasize = 0;
-//		char filename_str[20];
-//		//TODO//GetBurstFromAllArtix(scurve_buffer, &datasize);
-//		sprintf(filename_str, "fr_%08d.dat", frame_counter++);
-//		SendSpectrum2FTP(scurve_buffer, datasize, filename_str);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		//TODO !!! We must wait for operation complete !!!
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
+	else if(sscanf(p->payload, "acq test %d", &param) == 1)
+	{
+		SetDataProviderTestMode(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+
+
 	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1)
 	{
 		debugSettings.current_thr = param;
@@ -231,16 +229,17 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(strncmp(p->payload, "hvps status gpio", 16) == 0)
+	{
+		HV_getStatus(turn);
+		sprintf(reply, "%x %x %x %x %x %x %x %x %x\n\r",
+				turn[0], turn[1], turn[2], turn[3], turn[4], turn[5], turn[6], turn[7], turn[8]);
+		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
 	else if(sscanf(p->payload, "settime %d",
 			&param0) == 1)
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_UNIX_TIME*4) =
-				*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_UNIX_TIME*4) = param0;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_SET_UNIX_TIME;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) =
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
-
+		SetTime(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
@@ -249,12 +248,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		sprintf(reply, "%d\n\r", *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_UNIX_TIME*4));
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(strncmp(p->payload, "hvps status gpio", 16) == 0)
+	else if(sscanf(p->payload, "mmg max_l1 %d",
+				&param0) == 1)
 	{
-		HV_getStatus(turn);
-		sprintf(reply, "%x %x %x %x %x %x %x %x %x\n\r",
-				turn[0], turn[1], turn[2], turn[3], turn[4], turn[5], turn[6], turn[7], turn[8]);
-		tcp_write(tpcb, reply, strlen(reply), 1);
+
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
 	}
 	else if(strncmp(p->payload, "exit", 4) == 0 || strncmp(p->payload, "quit", 4) == 0)
 	{
