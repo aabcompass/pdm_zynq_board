@@ -182,25 +182,12 @@ void TriggerService()
 		{
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) |= BIT_FC_IS_STARTED;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-			// configure flow control block according to INSTRUMENT_MODE_FREERUN
-			//FlowControlsClrUnset();
-			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
-			//		BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
-			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
-			//		BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0;
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+
 			trigger_sm_state = wait4trigger_state;
 		}
-//		else if(instrumentState.mode == INSTRUMENT_MODE_TRIGGERS)
-//		{
-//			// configure flow control block according to INSTRUMENT_MODE_TRIGGERS
-//			FlowControlsClrUnset();
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) =
-//					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG | BIT_FC_EN_ALGO_TRIG;
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) =
-//					BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG | BIT_FC_EN_ALGO_TRIG;
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-//			trigger_sm_state = wait4trigger_state;
-//		}
 		else if(instrumentState.mode == INSTRUMENT_MODE_NONE)
 		{
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
@@ -229,52 +216,10 @@ void TriggerService()
 			trigger_sm_state = wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}
-//		else if(*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGR_FC_SM_STATE)) == SM_STATE_ARMED)
-//		{
-//			xil_printf("L2 ARMED!\n\r");
-//			DmaResetN(2);
-//			InvalidateCacheRanges(DATA_TYPE_L2);
-//			CopyEventData(DATA_TYPE_L2);
-//			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
-//			{
-//				sprintf(filename_str, FILENAME_MODE_TRIGGER2, instrumentState.file_counter_l2++);
-//				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L2), sizeof(Z_DATA_TYPE_SCI_L2_V1), filename_str);
-//			}
-//			trigger_sm_state = wait4ftp_ready2;
-//
-//			what_trigger_armed = 2;
-//		}
-//		else if(*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGR_FC_SM_STATE)) == SM_STATE_ARMED)
-//		{
-//			xil_printf("L1 ARMED!\n\r");
-//			DmaResetN(1);
-//			InvalidateCacheRanges(DATA_TYPE_L1);
-//			CopyEventData(DATA_TYPE_L1);
-//			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
-//			{
-//				sprintf(filename_str, FILENAME_MODE_TRIGGER1, instrumentState.file_counter_l1++);
-//				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L1), sizeof(Z_DATA_TYPE_SCI_L1_V1), filename_str);
-//			}
-//			trigger_sm_state = wait4ftp_ready2;
-//			what_trigger_armed = 1;
-//		}
 		break;
 	case wait4ftp_ready2:
 		if(IsFTP_bin_idle())
 		{
-//			if(what_trigger_armed == 1)
-//			{
-//				DmaStartN(1);
-//				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
-//				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
-//			}
-//			else if(what_trigger_armed == 2)
-//			{
-//				DmaStartN(2);
-//				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = BIT_FC_RELEASE;
-//				*((u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + 4*REGW_EDGE_FLAGS)) = 0;
-//			}
-//			what_trigger_armed = 0;
 			// release trigger
 			trigger_sm_state = idle_state;
 		}

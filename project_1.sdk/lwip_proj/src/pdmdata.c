@@ -136,18 +136,18 @@ void PrintFirstElementsRaw()
 void CopyEventDataFreerun()
 {
 	//L1 data
-	InvalidateCacheRanges(1);
+	//InvalidateCacheRanges(1);
 	memcpy(&zynqPacket.level1_data[0].payload.ts.unix_time, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIMESTAMP*4), 4);
 	memcpy(&zynqPacket.level1_data[0].payload.ts.n_gtu, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4), 4);
 	void* addr = &DataDMA__Raw[0][0][0];
 	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
 	//L2 data
-	InvalidateCacheRanges(2);
+	//InvalidateCacheRanges(2);
 	memcpy(&zynqPacket.level2_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
 	addr = &DataDMA__L1[0][0][0];
 	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
 	//L3 data
-	InvalidateCacheRanges(3);
+	//InvalidateCacheRanges(3);
 	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
 	addr = &DataDMA__L2[prev_buffer_L2][0][0];
 	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
