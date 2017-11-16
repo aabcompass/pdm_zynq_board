@@ -181,7 +181,7 @@ architecture Behavioral of axis_flow_control is
 	signal periodic_trig: std_logic := '0';
 
 	signal clear_error: std_logic := '0';
-	signal m_axis_fifo_error: std_logic := '0';
+	signal m_axis_fifo_error: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal trans_counter, trans_counter_latch: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
 	signal trig_delay_cnt: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
@@ -947,7 +947,7 @@ begin
 	--slv_reg21 <= gpio_5;
 	slv_reg23(C_CNT_DWIDTH-1 downto 0) <= trans_counter_latch;
 	slv_reg24(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
-	slv_reg25(0) <= m_axis_fifo_error; 
+	slv_reg25 <= m_axis_fifo_error; 
 	slv_reg26(3 downto 0) <= sm_state;
 	slv_reg26(4) <= pass_intr;
 	slv_reg26(16) <= trig_flag;
@@ -1117,20 +1117,14 @@ begin
 
 
 	error_latcher: process(s_axis_aclk)
-		variable state : integer range 0 to 1 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
-			case state is
-				when 0 => if(is_started = '1' and m_axis_tready_not_buffered = '0') then
-										m_axis_fifo_error <= '1';
-										state := 1;
-									end if;
-				when 1 => if(clear_error = '1' or clr_all = '1') then
-										m_axis_fifo_error <= '0';
-										state := 0;
-									end if;
-			end case;
-		end if;
+			if(clear_error = '1' or clr_all = '1') then
+				m_axis_fifo_error <= (others => '0');
+			elsif(is_started = '1' and m_axis_tready_not_buffered = '0' and m_axis_tvalid_not_buffered = '1') then
+				m_axis_fifo_error <= m_axis_fifo_error + 1;
+			end if;
+	end if;
 	end process;
 	
 	trig_led_indicator: process(s_axis_aclk)
