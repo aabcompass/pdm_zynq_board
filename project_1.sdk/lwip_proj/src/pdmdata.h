@@ -85,6 +85,7 @@ typedef struct
 #define N_OF_FRAMES_RAW_POLY_V0		128
 #define N_OF_FRAMES_INT16_POLY_V0	128
 #define N_OF_FRAMES_INT32_POLY_V0	128
+
 //
 //typedef struct
 //{
@@ -134,6 +135,7 @@ typedef struct
 // Huge GTU = Big GTU * SCALE_GTU_BIG_PER_HUGE = 40.96 ms
 #define SCALE_GTU_HUGE_PER_LIFECYCLE	128
 // LifeCycle = Huge GTU * SCALE_GTU_HUGE_PER_LIFECYCLE = 5.24288 s
+#define N_FRAMES_PER_LIFECYCLE	(SCALE_GTU_SMALL_PER_BIG * SCALE_GTU_BIG_PER_HUGE * SCALE_GTU_HUGE_PER_LIFECYCLE)
 
 // Zynq board sends L1 frames, L2 frames and L3 frames separately
 

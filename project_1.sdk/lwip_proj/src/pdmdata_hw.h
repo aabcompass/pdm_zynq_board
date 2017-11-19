@@ -20,9 +20,13 @@
 #define N_FRAMES_DMA_L1			(N_OF_FRAMES_L2_V0*2)
 #define N_FRAMES_DMA_L2			(N_OF_FRAMES_L3_V0*1)
 
-#define N_BUFFERS_DMA_RAW		1
-#define N_BUFFERS_DMA_L1		1
-#define N_BUFFERS_DMA_L2		2
+#define N_ALT_BUFFERS				2
+
+#define N_TRIG_BUFFERS_DMA_RAW		8
+#define N_TRIG_BUFFERS_DMA_L1		8
+#define N_TRIG_BUFFERS_DMA_L2		1
+
+#define N_ALT_TRIG_BUFFERS			2
 
 //#define N_FRAMES_TST_DMA_L1		1
 //#define N_FRAMES_TST_DMA_L2		1
@@ -38,8 +42,7 @@ int IsBufferL2Changed();
 
 typedef struct
 {
-	u32 trigger_type; //
-	u32 mem_addr;
+	u32 trigger_type;
 	u32 n_gtu;
 	u32 unix_timestamp;
 	u8 is_sent;

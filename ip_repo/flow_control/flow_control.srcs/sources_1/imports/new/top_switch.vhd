@@ -273,7 +273,6 @@ architecture Behavioral of axis_flow_control is
 	signal trig_flag: std_logic := '0';
 	
 	signal counter_tvalid: std_logic_vector(15 downto 0) := (others => '0');
-	signal counter_tvalid_latch: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter: std_logic_vector(15 downto 0) := (others => '0');
 	signal tlast_counter2: std_logic_vector(15 downto 0) := (others => '0');
 	signal n_gtus_per_cycle: std_logic_vector(31 downto 0) := (others => '0');
@@ -286,8 +285,12 @@ architecture Behavioral of axis_flow_control is
 	signal periodic_trig_gen_cnt, periodic_trig_gen_cnt2: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal trig_type: std_logic_vector(3 downto 0) := (others => '0');
+	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
+	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
+	signal pattern_checker_error : std_logic := '0';
 	
-	attribute keep : string;  
+	attribute keep : string; 
+	 
 	attribute keep of m_axis_tvalid_key: signal is "true";  
 	attribute keep of m_axis_tready_key: signal is "true";  
 	attribute keep of pass_intr: signal is "true";  
@@ -298,15 +301,13 @@ architecture Behavioral of axis_flow_control is
 	attribute keep of axis_fifo_fc_count: signal is "true";  
 	attribute keep of dma_length_cntr: signal is "true";  
 	attribute keep of dma_length: signal is "true";  
-	attribute keep of counter_tvalid_latch: signal is "true";  
 	attribute keep of tlast_counter: signal is "true";  
 	attribute keep of tlast_counter2: signal is "true";  
 	attribute keep of sm_state: signal is "true";  
 	attribute keep of m_axis_tdata_i: signal is "true";  
-	
-	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
-	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
-	signal pattern_checker_error : std_logic := '0';
+	attribute keep of periodic_trig_gtu_period: signal is "true";  
+	attribute keep of periodic_trig_gen_cnt: signal is "true";  
+	attribute keep of periodic_trig: signal is "true";  
 	attribute keep of pattern_checker_error: signal is "true";  
 	attribute keep of packet_cntr: signal is "true";  
 	attribute keep of data_gen: signal is "true";  
@@ -419,8 +420,8 @@ begin
 	      slv_reg11 <= (others => '0');
 	      slv_reg12 <= (others => '0');
 	      slv_reg13 <= (others => '0');
-	      slv_reg14 <= (others => '0');
-	      slv_reg15 <= (others => '0');
+--	      slv_reg14 <= (others => '0');
+--	      slv_reg15 <= (others => '0');
 --	      slv_reg16 <= (others => '0');
 --	      slv_reg17 <= (others => '0');
 --	      slv_reg18 <= (others => '0');
@@ -553,22 +554,22 @@ begin
 	                slv_reg13(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
-	          when b"01110" =>
-	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-	                -- Respective byte enables are asserted as per write strobes                   
-	                -- slave registor 14
-	                slv_reg14(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
-	              end if;
-	            end loop;
-	          when b"01111" =>
-	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-	                -- Respective byte enables are asserted as per write strobes                   
-	                -- slave registor 15
-	                slv_reg15(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
-	              end if;
-	            end loop;
+--	          when b"01110" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 14
+--	                slv_reg14(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
+--	          when b"01111" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 15
+--	                slv_reg15(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
 --	          when b"10000" =>
 --	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 --	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
@@ -712,8 +713,8 @@ begin
 	            slv_reg11 <= slv_reg11;
 	            slv_reg12 <= slv_reg12;
 	            slv_reg13 <= slv_reg13;
-	            slv_reg14 <= slv_reg14;
-	            slv_reg15 <= slv_reg15;
+--	            slv_reg14 <= slv_reg14;
+--	            slv_reg15 <= slv_reg15;
 --	            slv_reg16 <= slv_reg16;
 --	            slv_reg17 <= slv_reg17;
 --	            slv_reg18 <= slv_reg18;
@@ -932,31 +933,25 @@ begin
 	set_unix_time <= slv_reg3(2); 
 	
 	n_gtus_per_cycle <= slv_reg6;	
-	periodic_trig_phase <= slv_reg7(20 downto 0);
+	periodic_trig_gtu_period <= slv_reg7;
 	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
 	number_of_triggers <= slv_reg9(15 downto 0);
-	periodic_trig_gtu_period <= slv_reg10;
-	unix_time_reg <= slv_reg14;
+	unix_time_reg <= slv_reg10;
+
+	slv_reg14(3 downto 0) <= sm_state;
+	slv_reg14(4) <= pass_intr;
+	slv_reg14(16) <= trig_flag;
+	slv_reg15 <= gtu_sig_counter;
+	slv_reg16(15 downto 0) <= tlast_counter2;
+	slv_reg17 <= unix_time;
+	slv_reg18(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
+	slv_reg19 <= m_axis_fifo_error; 
 
 
-	slv_reg16 <= gpio_0;
-	slv_reg17 <= gpio_1;
-	slv_reg18 <= gpio_2;
-	slv_reg19(15 downto 0) <= tlast_counter2;
-	slv_reg20(15 downto 0) <= counter_tvalid_latch;
-	--slv_reg21 <= gpio_5;
-	slv_reg23(C_CNT_DWIDTH-1 downto 0) <= trans_counter_latch;
-	slv_reg24(C_CNT_DWIDTH-1 downto 0) <= trans_counter;
-	slv_reg25 <= m_axis_fifo_error; 
-	slv_reg26(3 downto 0) <= sm_state;
-	slv_reg26(4) <= pass_intr;
-	slv_reg26(16) <= trig_flag;
 	
-	slv_reg27 <= gtu_sig_counter;
-	slv_reg28 <= gtu_timestamp;
-	slv_reg29(3 downto 0) <= trig_type;
-	slv_reg30 <= unix_timestamp;
-	slv_reg31 <= unix_time;
+	slv_reg20 <= gtu_timestamp;
+	slv_reg21(3 downto 0) <= trig_type;
+	slv_reg22 <= unix_timestamp;
 
 	
 
@@ -1145,29 +1140,6 @@ begin
 		end if;
 	end process; 
 
-	packet_size_verificator: process(s_axis_aclk)
-		variable state : integer range 0 to 2 := 0;
-	begin
-		if(rising_edge(s_axis_aclk)) then
-			case state is
-				when 0 =>
-					if(m_axis_tvalid_not_buffered = '1') then
-						counter_tvalid <= counter_tvalid + 1;
-					else
-						state := state + 1;
-					end if;
-				when 1 => 
-					counter_tvalid_latch <= counter_tvalid;
-					state := state + 1;
-				when 2 =>
-					if(m_axis_tvalid_not_buffered = '1') then
-						counter_tvalid <= conv_std_logic_vector(1, 16);
-						state := 0;
-					end if;
-			end case;
-		end if;
-	end process;
-
 	tlast_counter_verificator: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then
@@ -1274,7 +1246,7 @@ begin
 		end if;
 	end process;
 	
-	m_axis_tlast <= m_axis_tlast_i;
+	m_axis_tlast <= m_axis_tlast_i; 
 	
 	-- output data switch
 	m_axis_tvalid_i <= m_axis_tvalid_key and pass_intr;

@@ -293,9 +293,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 's')
 	{
-		//xil_printf("&data_dma_int16.data[0][0][0][0]=%08x\n\r", &data_dma_int16.data[0][0][0][0]);
-		//xil_printf("&packet_sci_poly.payload.int32_data[0][0]=0x%08x\n\r", &packet_sci_poly.payload.int32_data[0][0]);
-		//xil_printf("&packet_sci_poly=0x%08x\n\r", &packet_sci_poly);
 		xil_printf("GetArtixLoadState=0x%08x\n\r",  GetArtixLoadState());
 		xil_printf("locked = 0x%08x\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR));
 		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
@@ -310,9 +307,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
 		xil_printf("GetCurPosFC1()=%d\n\r", GetCurPosFC1());
-		xil_printf("GetGpio0FC1()=%d\n\r", GetGpio0FC1());
-		xil_printf("GetMaxisAlarmL1()=%d\n\r", GetMaxisAlarmL1());
-		xil_printf("GetMaxisAlarmL2()=%d\n\r", GetMaxisAlarmL2());
 		xil_printf("GetDMAIntrCounterN(0)=%d\n\r", GetDMAIntrCounterN(0));
 		xil_printf("GetDMAIntrCounterN(1)=%d\n\r", GetDMAIntrCounterN(1));
 		xil_printf("GetDMAIntrCounterN(2)=%d\n\r", GetDMAIntrCounterN(2));
@@ -322,7 +316,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("DMA RAW DEST=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_DESTADDR_OFFSET));
 		xil_printf("GetPacketCounter=0x%08x\n\r", GetPacketCounter(XPAR_TOP_SWITCH_TST_BASEADDR));
 		xil_printf("Data provider status = 0x%08x\n\r", *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS));
-		RxNEvents();
+		printMMVars();
 	}
 	else if(c == 'S')
 	{
@@ -400,14 +394,14 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'j')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+		//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 	}
 	else if(c == 'J')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+		//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0*2;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;

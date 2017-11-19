@@ -16,16 +16,19 @@
 
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_raw;
-uint8_t DataDMA__Raw[N_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint16_t DataDMA__L1[N_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint32_t DataDMA__L2[N_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-//uint8_t DataDMA_tst_L1[DMA_CYCLIC_BUF_SIZE] __attribute__ ((aligned (64)));
-//uint16_t DataDMA_tst_L2[DMA_CYCLIC_BUF_SIZE] __attribute__ ((aligned (64)));
+uint8_t DataDMA__Raw[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t DataDMA__L1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L1][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
-volatile u32 prev_buffer_L2 = 0, current_buffer_L2 = 0;
-volatile u32 buffer_L2_changed;
+volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
 
+volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
+volatile u32 prev_alt_trig_buffer_raw = 0, current_alt_trig_buffer_raw = 0;
+volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
+volatile u32 buffer_L2_changed;
+volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
+int N1, N2;
 
 extern InstrumentState instrumentState;
 
@@ -35,7 +38,7 @@ DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
 TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
-int N1, N2;
+
 
 /*
  *
@@ -56,6 +59,12 @@ int N1, N2;
 
 int current_bank_L1=0, current_bank_L2=0;
 
+void printMMVars()
+{
+	xil_printf("trig_counter_raw=%d\n\r", trig_counter_raw);
+	xil_printf("trig_counter_l1=%d\n\r", trig_counter_l1);
+}
+
 void SetTime(u32 param0)
 {
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_UNIX_TIME*4) =
@@ -69,12 +78,13 @@ void SetTime(u32 param0)
 
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
-	if(data_type == DATA_TYPE_L1)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1*N_OF_FRAMES_RAW_POLY_V0*N_OF_PIXEL_PER_PDM);
-	else if(data_type == DATA_TYPE_L2)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2*N_OF_FRAMES_INT16_POLY_V0*N_OF_PIXEL_PER_PDM);
-	else if(data_type == DATA_TYPE_L3)
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[prev_buffer_L2][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
+//TODO
+//	if(data_type == DATA_TYPE_L1)
+//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1*N_OF_FRAMES_RAW_POLY_V0*N_OF_PIXEL_PER_PDM);
+//	else if(data_type == DATA_TYPE_L2)
+//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2*N_OF_FRAMES_INT16_POLY_V0*N_OF_PIXEL_PER_PDM);
+//	else if(data_type == DATA_TYPE_L3)
+//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[prev_buffer_L2][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
 }
 
 void* GetZ_DATA_TYPE_SCI_ptr(int data_type) // 1 - L1, 2 - L2, 3 - L3
@@ -94,63 +104,68 @@ void* Get_ZYNQ_PACKET()
 
 void PrintFrame(int frame_num)
 {
-	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], sizeof(DataDMA__Raw));
-	for(i=0;i<N_OF_PIXEL_PER_PDM;i++)
-	{
-		xil_printf("i=%d\t[frame_num][i]=0x%02x\n\r", i, DataDMA__Raw[0][frame_num][i]);
-	}
+	//TODO
+//	int i;
+//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], sizeof(DataDMA__Raw));
+//	for(i=0;i<N_OF_PIXEL_PER_PDM;i++)
+//	{
+//		xil_printf("i=%d\t[frame_num][i]=0x%02x\n\r", i, DataDMA__Raw[0][frame_num][i]);
+//	}
 }
 
 void PrintFirstElementsL2(int section)
 {
-	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][section][0], 2304*4);
-	for(i=0;i<2304;i++)
-	{
-		xil_printf("DataDMA__L2[0][0][%d]=0x%06x\n\r", i, DataDMA__L2[0][section][i]);
-	}
+	//TODO
+//	int i;
+//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][section][0], 2304*4);
+//	for(i=0;i<2304;i++)
+//	{
+//		xil_printf("DataDMA__L2[0][0][%d]=0x%06x\n\r", i, DataDMA__L2[0][section][i]);
+//	}
 }
 
 void PrintFirstElementsL1()
 {
-	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2304*2);
-	for(i=0;i<2304;i++)
-	{
-		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
-	}
+//TODO
+//	int i;
+//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2304*2);
+//	for(i=0;i<2304;i++)
+//	{
+//		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
+//	}
 }
 
 void PrintFirstElementsRaw()
 {
-	int i;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 2304);
-	for(i=0;i<2304;i++)
-	{
-		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
-		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
-	}
+//TODO
+//	int i;
+//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 2304);
+//	for(i=0;i<2304;i++)
+//	{
+//		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
+//		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
+//	}
 }
 
 void CopyEventDataFreerun()
 {
-	//L1 data
-	//InvalidateCacheRanges(1);
-	memcpy(&zynqPacket.level1_data[0].payload.ts.unix_time, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIMESTAMP*4), 4);
-	memcpy(&zynqPacket.level1_data[0].payload.ts.n_gtu, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4), 4);
-	void* addr = &DataDMA__Raw[0][0][0];
-	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-	//L2 data
-	//InvalidateCacheRanges(2);
-	memcpy(&zynqPacket.level2_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
-	addr = &DataDMA__L1[0][0][0];
-	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
-	//L3 data
-	//InvalidateCacheRanges(3);
-	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
-	addr = &DataDMA__L2[prev_buffer_L2][0][0];
-	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
+	//TODO
+//	//L1 data
+//	//InvalidateCacheRanges(1);
+//	memcpy(&zynqPacket.level1_data[0].payload.ts.unix_time, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIMESTAMP*4), 4);
+//	memcpy(&zynqPacket.level1_data[0].payload.ts.n_gtu, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4), 4);
+//	void* addr = &DataDMA__Raw[0][0][0];
+//	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
+//	//L2 data
+//	//InvalidateCacheRanges(2);
+//	memcpy(&zynqPacket.level2_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
+//	addr = &DataDMA__L1[0][0][0];
+//	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
+//	//L3 data
+//	//InvalidateCacheRanges(3);
+//	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
+//	addr = &DataDMA__L2[prev_buffer_L2][0][0];
+//	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
 }
 
 // This function copies the data from DMA memory to ethernet structure
@@ -258,25 +273,20 @@ void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
 
 void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 {
-	//int status;
-	//XAxiDma_Reset(&dma_raw);
 	XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
 	XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
-	//if(status)	print("Error in XAxiDma_SimpleTransfer dma_raw!\n\r");
 }
 
 
-void DmaStartN(int n) //1 - L1, 2 - L2, 3 - L3
+void DmaStartN(int n_dma, int n_trig_buffer) //1 - L1, 2 - L2, 3 - L3
 {
-	if(n == 1)
-		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
-	else if(n == 2)
-		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+	if(n_dma == 1)
+		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_raw][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
+	else if(n_dma == 2)
+		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+	else if(n_dma == 3)
+		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 }
-//void DmaAllStart()
-//{
-//}
-
 
 static void RxIntrHandlerRaw(void *Callback)
 {
@@ -290,19 +300,33 @@ static void RxIntrHandlerRaw(void *Callback)
 	/* Acknowledge pending interrupts */
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
-	/*Interrupt on Error because we are using overflow*/
-	//if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
+	// maybe it is not needed
+	DmaReset(AxiDmaInst);
+
+	// check whether trigger
+	if(CheckTrigger(1))
 	{
-		DmaReset(AxiDmaInst);
-
-		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
-		dma_intr_counter_raw++;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
-		//print("x");
-
-		return;
+		triggerInfo[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
+		triggerInfo[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU(1);
+		triggerInfo[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType(1);
+		triggerInfo[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp(1);
+		ReleaseTrigger(1);
+		// Change current trigger buffer to the next one
+		if(current_trigbuf_raw < N1)
+			current_trigbuf_raw++;
+		trig_counter_raw++;
 	}
+
+	DmaStartN(1, current_trigbuf_raw);
+	dma_intr_counter_raw++;
+	prev_alt_trig_buffer_raw = current_alt_trig_buffer_raw;
+
+	if(N_ALT_TRIG_BUFFERS > 1)
+		current_alt_trig_buffer_raw = dma_intr_counter_raw%2;
+	FlowControlClrIntr(1);
+	//print("x");
+
+	return;
 }
 
 static void RxIntrHandlerL1(void *Callback)
@@ -317,17 +341,17 @@ static void RxIntrHandlerL1(void *Callback)
 	/* Acknowledge pending interrupts */
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
-	//if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK))
-	{
-		DmaReset(AxiDmaInst);
-		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
-		dma_intr_counter_l1++;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
-		//print("y");
+	DmaReset(AxiDmaInst);
+	//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[current_alt_buffer][current_trigbuf_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+	DmaStartN(2, current_trigbuf_l1);
+	dma_intr_counter_l1++;
+	prev_alt_trig_buffer_l1 = current_alt_trig_buffer_l1;
+	if(N_ALT_TRIG_BUFFERS > 1)
+		current_alt_trig_buffer_l1 = dma_intr_counter_l1%2;
 
-		return;
-	}
+	FlowControlClrIntr(2);	//print("y");
+
+	return;
 }
 
 static void RxIntrHandlerL2(void *Callback)
@@ -345,11 +369,12 @@ static void RxIntrHandlerL2(void *Callback)
 	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK) || (IrqStatus & XAXIDMA_IRQ_IOC_MASK))
 	{
 		dma_intr_counter_l2++;
-		prev_buffer_L2 = current_buffer_L2;
-		current_buffer_L2 = dma_intr_counter_l2%2;
-
+		prev_alt_buffer = current_alt_buffer;
+		current_alt_buffer = dma_intr_counter_l2%2;
+		ResetTriggerService();
 		DmaReset(AxiDmaInst);
-		DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L2[current_buffer_L2][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
+		//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L2[current_buffer_L2][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
+		DmaStartN(3, 0);
 		buffer_L2_changed = 1;
 		print("z");
 
@@ -457,19 +482,20 @@ void DMA_init()
 	status = XAxiDma_CfgInitialize(&dma_raw, CfgPtr_raw);
 	//xil_printf("dma_raw.RegBase=0x%08x\n\r", dma_raw.RegBase);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_raw !\n\r");
-	DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
-	//status = XAxiDma_SelectCyclicMode(&dma_raw, XAXIDMA_DEVICE_TO_DMA, TRUE);
-	//if(status)	print("Error in XAxiDma_SelectCyclicMode dma_raw!\n\r");
+	//DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
+	DmaStartN(1, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&dma_l1, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l1!\n\r");
-	DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+	//DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+	DmaStartN(2, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L2_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&dma_l2, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l2!\n\r");
-	DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[0][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
+	//DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[0][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
+	DmaStartN(3, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
@@ -583,12 +609,12 @@ void ScurveService()
 			//Print in order to delay for a short time
 			print("-->");
 			//Invalidate DCache Range
-			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
 			//now we are expecting 1 double integrated GTU in L3 array
 			if(instrumentState.is_simple_packets == 0)
-				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[current_alt_buffer][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			else
-				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[current_alt_buffer][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			//check whether  current_dac_value is OK
 			if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
 			{
