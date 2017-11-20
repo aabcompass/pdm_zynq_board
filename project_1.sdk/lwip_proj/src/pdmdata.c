@@ -59,6 +59,36 @@ TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
 
 int current_bank_L1=0, current_bank_L2=0;
 
+void PrintTriggerInfo()
+{
+	int i, j;
+	print("Trigger info:\n\r");
+	for(i=0;i<2;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+					i,
+					j,
+					triggerInfo[i][j].trigger_type,
+					triggerInfo[i][j].n_gtu,
+					triggerInfo[i][j].unix_timestamp,
+					triggerInfo[i][j].is_sent ? "sent" : "pending");
+		}
+	}
+	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
+}
+
+void ClearTriggerInfo(int half)
+{
+	int j;
+	for(j=0;j<4;j++)
+	{
+		triggerInfo[half][j].trigger_type = 0;
+		triggerInfo[half][j].is_sent = 0;
+	}
+}
+
 void printMMVars()
 {
 	xil_printf("trig_counter_raw=%d\n\r", trig_counter_raw);
@@ -371,11 +401,14 @@ static void RxIntrHandlerL2(void *Callback)
 		dma_intr_counter_l2++;
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;
-		ResetTriggerService();
+
 		DmaReset(AxiDmaInst);
 		//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L2[current_buffer_L2][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
 		DmaStartN(3, 0);
+		current_trigbuf_raw = 0; current_trigbuf_l1 = 0;
 		buffer_L2_changed = 1;
+		ClearTriggerInfo(current_alt_buffer);
+		ResetTriggerService();
 		print("z");
 
 		return;

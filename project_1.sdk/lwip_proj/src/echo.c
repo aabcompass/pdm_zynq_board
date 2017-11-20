@@ -320,7 +320,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'S')
 	{
-		instrumentState.is_simple_packets = 1;
+		PrintTriggerInfo();
 	}
 //	else if(c == 'c')
 //	{
