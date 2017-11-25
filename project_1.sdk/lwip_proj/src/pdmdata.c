@@ -165,16 +165,18 @@ void PrintFirstElementsL1()
 //	}
 }
 
-void PrintFirstElementsRaw()
+void PrintFirstElementsRaw(int num)
 {
-//TODO
-//	int i;
-//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 2304);
-//	for(i=0;i<2304;i++)
-//	{
-//		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
-//		xil_printf("%02x  ", DataDMA__Raw[0][0][i]);
-//	}
+
+	int i;
+	static int alt_buffer = 0;
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[alt_buffer%2][num][0][0][0], 2304);
+	for(i=0;i<2304;i++)
+	{
+		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
+		xil_printf("%02x  ", DataDMA__Raw[alt_buffer%2][num][0][0][i]);
+	}
+	alt_buffer++;
 }
 
 void CopyEventDataFreerun()

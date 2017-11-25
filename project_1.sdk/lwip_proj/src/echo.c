@@ -336,11 +336,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'R')
 	{
-		PrintFirstElementsL2(num);
+		PrintFirstElementsL2();
 	}
 	else if(c == 'Q')
 	{
-		PrintFirstElementsRaw();
+		PrintFirstElementsRaw(num);
 	}
 	else if(c == '+')
 	{
@@ -362,8 +362,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		//SelectSwitch(0);
 		num = c - '0';
-		if(num == 8) num = 127;
-		if(num == 9) num = 128;
 		xil_printf("num=%d\n\r", num);
 	}
 	else if(c == 'D')
