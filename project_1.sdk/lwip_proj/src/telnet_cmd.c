@@ -95,63 +95,6 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
-
-	//	else if(strncmp(p->payload, "acq start", 9) == 0)
-//	{
-//		GetFrameFromOneArtix(frame_buffer);
-//		SendSpectrum2FTP(frame_buffer, sizeof(frame_buffer), "data_from_2ecasic.dat");
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
-//	else if(strncmp(p->payload, "acq shot", 8) == 0)
-//	{
-//		GetFrameFromAllArtix(frame_buffer_all_pdm);
-//		char filename_str[20];
-//		sprintf(filename_str, "fr_%08d.dat", frame_counter++);
-//		SendSpectrum2FTP(frame_buffer_all_pdm, sizeof(frame_buffer_all_pdm), filename_str);
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
-//	else if(strncmp(p->payload, "acq bunch", 9) == 0)
-//	{
-//		Get128FramesFromOneArtix1(scurve_buffer, NUM_OF_PIXELS_PER_FRAME/3/4*FRAMES_PER_BUNCH);
-//		SendSpectrum2FTP(scurve_buffer, sizeof(scurve_buffer));
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
-//	else if(strncmp(p->payload, "acq scurve", 10) == 0)
-//	{
-//		u32 datasize = 0;
-//		char filename_str[20];
-//		GetSCurveFromOneArtix1(scurve_buffer, &datasize);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		sprintf(filename_str, "sc_%08d.dat", scurve_counter++);
-//		SendSpectrum2FTP(scurve_buffer, datasize, filename_str);
-//		//TODO !!! We must wait for operation complete !!!
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
-//	else if(strncmp(p->payload, "acq tcp", 7) == 0)
-//	{
-//		//for(i=0;i<2304;i++)
-//		//	scurve_buffer[i]=i;
-//		StartGatherOneFrameFromArtix();
-//		//TODO//GetFrameFromAllArtix(scurve_buffer);
-//		ret = tcp_write(tpcb, scurve_buffer, 2304, 1);
-//		xil_printf("tcp_write returns %d\n\r", ret);
-//	}
-//	else if(strncmp(p->payload, "acq sc_pdm", 10) == 0)
-//	{
-//		u32 datasize = 0;
-//		char filename_str[20];
-//		GetSCurveFromAllArtix(scurve_buffer, &datasize);
-//		xil_printf("datasize=%d\n\r", datasize);
-//		sprintf(filename_str, "sc_%08d.dat", scurve_counter++);
-//		SendSpectrum2FTP(scurve_buffer, datasize, filename_str);
-//		//TODO !!! We must wait for operation complete !!!
-//		char str[] = "Ok\n\r";
-//		tcp_write(tpcb, str, sizeof(str), 1);
-//	}
 	else if(sscanf(p->payload, "acq scurve %d %d %d %d",
 			&param0,
 			&param1,

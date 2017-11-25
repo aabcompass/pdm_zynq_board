@@ -209,7 +209,7 @@ void TriggerService()
 			}
 			else if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_CONCAT)
 			{
-				CopyEventDataFreerun();
+				CopyEventData();
 				sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 				SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
 			}

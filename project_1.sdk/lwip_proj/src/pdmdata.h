@@ -146,6 +146,11 @@ typedef struct
 // 4) records the (N_OF_FRAMES_L1 / 2) raw data frames preserved after L1 event
 // Then Zynq collects this data in the DATA_TYPE_SCI_L1 structure and holds it until the end of current lifecycle
 
+// Trigger types
+#define TRIG_TYPE_PERIODIC	1 /* Occurred every 5.24 s */
+#define TRIG_TYPE_SELF		2 /* Issued by Trigger block*/
+#define TRIG_TYPE_AUTO		4 /**/
+
 
 typedef struct
 {
@@ -154,7 +159,7 @@ typedef struct
 	// Flags
 	uint32_t trig_type;
 	// Cathode status
-	uint32_t cathode_status;
+	uint8_t cathode_status[12];
 	// raw data (2.5 us GTU)
 	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L1_V2;
@@ -183,7 +188,7 @@ typedef struct
 	// Flags
 	uint32_t trig_type;
 	// Cathode status
-	uint32_t cathode_status;
+	uint8_t cathode_status[12];
 	// intergrated data
 	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
 } DATA_TYPE_SCI_L2_V2;
@@ -212,7 +217,7 @@ typedef struct
 	// Flags
 	uint32_t trig_type;
 	// Cathode status
-	uint32_t cathode_status;
+	uint8_t cathode_status[12];
 	// HVPS status
 	uint32_t hv_status;
 	// double integrated data

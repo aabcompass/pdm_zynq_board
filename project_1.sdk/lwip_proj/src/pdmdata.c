@@ -18,7 +18,7 @@ XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_raw;
 uint8_t DataDMA__Raw[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 uint16_t DataDMA__L1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L1][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
 volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
@@ -28,7 +28,7 @@ volatile u32 prev_alt_trig_buffer_raw = 0, current_alt_trig_buffer_raw = 0;
 volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_L2_changed;
 volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
-int N1, N2;
+int N1=4, N2=4, N3=1;
 
 extern InstrumentState instrumentState;
 
@@ -37,8 +37,9 @@ Z_DATA_TYPE_SCURVE_V1 scurvePacket;
 DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
-TriggerInfo triggerInfoL1[2][MAX_TRIGGERS_PER_CYCLE], triggerInfoL2[2][MAX_TRIGGERS_PER_CYCLE];
-
+TriggerInfo triggerInfoL1[2][MAX_TRIGGERS_PER_CYCLE];
+TriggerInfo triggerInfoL2[2][MAX_TRIGGERS_PER_CYCLE];
+TriggerInfo triggerInfoL3[2][1];
 
 /*
  *
@@ -148,16 +149,6 @@ void* Get_ZYNQ_PACKET()
 	return &zynqPacket;
 }
 
-void PrintFrame(int frame_num)
-{
-	//TODO
-//	int i;
-//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], sizeof(DataDMA__Raw));
-//	for(i=0;i<N_OF_PIXEL_PER_PDM;i++)
-//	{
-//		xil_printf("i=%d\t[frame_num][i]=0x%02x\n\r", i, DataDMA__Raw[0][frame_num][i]);
-//	}
-}
 
 void PrintFirstElementsL2(int section)
 {
@@ -197,8 +188,52 @@ void PrintFirstElementsRaw(int num)
 	alt_buffer++;
 }
 
-void CopyEventDataFreerun()
+void memcpy_invalidate(void* p_dst, void* p_src, u32 len_bytes)
 {
+	Xil_DCacheInvalidateRange(p_src, len_bytes);
+	memcpy(p_dst, p_src, len_bytes);
+}
+
+void CopyEventData()
+{
+	int i;
+	//copy D1
+	for(i=0;i<N1;i++)
+	{
+			zynqPacket.level1_data[i].payload.trig_type = triggerInfoL1[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoL1[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoL1[prev_alt_buffer][i].unix_timestamp;
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][0][0][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
+	}
+	//copy D2
+	for(i=0;i<N2;i++)
+	{
+			zynqPacket.level2_data[i].payload.trig_type = triggerInfoL2[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoL2[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoL2[prev_alt_buffer][i].unix_timestamp;
+			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
+					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
+	}
+	for(i=0;i<N3;i++)
+	{
+			zynqPacket.level3_data[i].payload.trig_type = triggerInfoL3[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoL3[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoL3[prev_alt_buffer][i].unix_timestamp;
+			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
+					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
+	}
+
+	//copy D3
+
+
+}
+
+//void CopyEventDataFreerun()
+//{
 	//TODO
 //	//L1 data
 //	//InvalidateCacheRanges(1);
@@ -216,7 +251,7 @@ void CopyEventDataFreerun()
 //	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
 //	addr = &DataDMA__L2[prev_buffer_L2][0][0];
 //	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
-}
+//}
 
 // This function copies the data from DMA memory to ethernet structure
 // data_type is the data source type (L1, L2 or L3)
@@ -335,7 +370,7 @@ void DmaStartN(int n_dma, int n_trig_buffer) //1 - L1, 2 - L2, 3 - L3
 	else if(n_dma == 2)
 		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 	else if(n_dma == 3)
-		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 }
 
 static void RxIntrHandlerRaw(void *Callback)
@@ -436,18 +471,21 @@ static void RxIntrHandlerL2(void *Callback)
 	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK) || (IrqStatus & XAXIDMA_IRQ_IOC_MASK))
 	{
 		dma_intr_counter_l2++;
+
+		triggerInfoL3[current_alt_buffer][0].is_sent = 0;
+		triggerInfoL3[current_alt_buffer][0].n_gtu = GetNGTU();
+		triggerInfoL3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
+		triggerInfoL3[current_alt_buffer][0].trigger_type = TRIG_TYPE_AUTO;
+
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;
-
 		DmaReset(AxiDmaInst);
-		//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L2[current_buffer_L2][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
 		DmaStartN(3, 0);
 		current_trigbuf_raw = 0; current_trigbuf_l1 = 0;
 		buffer_L2_changed = 1;
 		ClearTriggerInfo(current_alt_buffer);
 		ResetTriggerService();
 		print("z");
-
 		return;
 	}
 }
@@ -544,7 +582,6 @@ void DMA_init()
 
 	XStatus status = 0;
 	XAxiDma_Config *CfgPtr;
-	//print("DMA_init\n\r");
 	CfgPtr_raw = XAxiDma_LookupConfig(XPAR_AXI_DMA_RAW_DEVICE_ID);
 	if (!CfgPtr_raw) {
 		xil_printf("No config found for %d\r\n", XPAR_AXI_DMA_RAW_DEVICE_ID);
@@ -552,31 +589,21 @@ void DMA_init()
 	status = XAxiDma_CfgInitialize(&dma_raw, CfgPtr_raw);
 	//xil_printf("dma_raw.RegBase=0x%08x\n\r", dma_raw.RegBase);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_raw !\n\r");
-	//DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[0][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
 	DmaStartN(1, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&dma_l1, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l1!\n\r");
-	//DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 	DmaStartN(2, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L2_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&dma_l2, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l2!\n\r");
-	//DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[0][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L2);
 	DmaStartN(3, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize data_tst_l1!\n\r");
-
-
-
-
-//	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L2_DEVICE_ID);
-//	status = XAxiDma_CfgInitialize(&dma_tst_l2, CfgPtr);
-//	if(status)	print("Error in XAxiDma_CfgInitialize dma_tst_l2!\n\r");
 }
 
 
@@ -679,12 +706,12 @@ void ScurveService()
 			//Print in order to delay for a short time
 			print("-->");
 			//Invalidate DCache Range
-			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
 			//now we are expecting 1 double integrated GTU in L3 array
 			if(instrumentState.is_simple_packets == 0)
-				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[current_alt_buffer][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			else
-				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[current_alt_buffer][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			//check whether  current_dac_value is OK
 			if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
 			{

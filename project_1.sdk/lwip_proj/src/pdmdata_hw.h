@@ -35,9 +35,8 @@
 
 #define DMA_TST_BUF_SIZE	60000000 /*60 Meg*/
 
-void CopyEventData(int data_type); // 1 - L1, 2 - L2, 3 - L3
-void InvalidateCacheRanges(int data_type); // 1 - L1, 2 - L2, 3 - L3
-void* GetZ_DATA_TYPE_SCI_ptr(int data_type); // 1 - L1, 2 - L2, 3 - L3
+//void InvalidateCacheRanges(int data_type); // 1 - L1, 2 - L2, 3 - L3
+//void* GetZ_DATA_TYPE_SCI_ptr(int data_type); // 1 - L1, 2 - L2, 3 - L3
 int IsBufferL2Changed();
 
 typedef struct

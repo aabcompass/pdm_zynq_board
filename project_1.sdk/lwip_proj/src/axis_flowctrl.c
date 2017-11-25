@@ -10,18 +10,15 @@
 #include "pdmdata.h"
 #include "pdmdata_hw.h"
 
-int N1=4, N2=4; // Maximum allowed triggers L1 and L2
 
 void Set_N1(int value)
 {
-	N1 = value;
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS*4) = N1;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
 }
 
 void Set_N2(int value)
 {
-	N2 = value;
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS*4) = N2;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
 }
 
 void FlowControlsClr()
@@ -101,6 +98,16 @@ u32 GetUnixTimestamp(int n) //1=raw, 2==L1
 	return 0;
 }
 
+u32 GetUnixTime() //1=raw, 2==L1
+{
+		return *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIME*4);
+}
+
+
+u32 GetNGTU() //1=raw, 2==L1
+{
+		return *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4);
+}
 
 void FlowControlClrIntr(int n) //1=raw, 2==L1
 {
