@@ -1036,7 +1036,7 @@ begin
 			else
 				if(periodic_trig_gen_cnt2 < n_gtus_per_cycle) then
 					if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
-						if(periodic_trig_gen_cnt = periodic_trig_gtu_period) then
+						if(periodic_trig_gen_cnt = periodic_trig_gtu_period-1) then
 							periodic_trig <= periodic_trig_en;
 							periodic_trig_gen_cnt <= (others => '0');
 						else
