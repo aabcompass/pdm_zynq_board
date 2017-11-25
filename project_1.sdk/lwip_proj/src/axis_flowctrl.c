@@ -117,8 +117,6 @@ void FlowControlClrIntr(int n) //1=raw, 2==L1
 }
 void FlowControlInit()
 {
-
-
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_GTUS_PER_CYCLE*4) =
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_GTUS_PER_CYCLE*4) = N_FRAMES_PER_LIFECYCLE;
 
@@ -141,5 +139,6 @@ void FlowControlInit()
 
 	//reset flow control cores
 	FlowControlsClr();
-
+	// reset time to zero
+	SetTime(0);
 }

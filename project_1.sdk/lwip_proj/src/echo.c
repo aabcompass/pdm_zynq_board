@@ -322,17 +322,13 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		PrintTriggerInfo();
 	}
-//	else if(c == 'c')
-//	{
-//		regs_clr_intr();
-//	}
 	else if(c == 'p')
 	{
 		systemSettings.isPrinting = !systemSettings.isPrinting;
 	}
 	else if(c == 'P')
 	{
-		PrintFirstElementsL1();
+		PrintFirstElementsL1(num);
 	}
 	else if(c == 'R')
 	{

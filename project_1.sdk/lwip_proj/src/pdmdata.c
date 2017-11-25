@@ -37,7 +37,7 @@ Z_DATA_TYPE_SCURVE_V1 scurvePacket;
 DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
-TriggerInfo triggerInfo[2][MAX_TRIGGERS_PER_CYCLE];
+TriggerInfo triggerInfoL1[2][MAX_TRIGGERS_PER_CYCLE], triggerInfoL2[2][MAX_TRIGGERS_PER_CYCLE];
 
 
 /*
@@ -62,7 +62,7 @@ int current_bank_L1=0, current_bank_L2=0;
 void PrintTriggerInfo()
 {
 	int i, j;
-	print("Trigger info:\n\r");
+	print("Trigger info L1:\n\r");
 	for(i=0;i<2;i++)
 	{
 		for(j=0;j<4;j++)
@@ -70,10 +70,24 @@ void PrintTriggerInfo()
 			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
 					i,
 					j,
-					triggerInfo[i][j].trigger_type,
-					triggerInfo[i][j].n_gtu,
-					triggerInfo[i][j].unix_timestamp,
-					triggerInfo[i][j].is_sent ? "sent" : "pending");
+					triggerInfoL1[i][j].trigger_type,
+					triggerInfoL1[i][j].n_gtu,
+					triggerInfoL1[i][j].unix_timestamp,
+					triggerInfoL1[i][j].is_sent ? "sent" : "pending");
+		}
+	}
+	print("Trigger info L2:\n\r");
+	for(i=0;i<2;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+					i,
+					j,
+					triggerInfoL2[i][j].trigger_type,
+					triggerInfoL2[i][j].n_gtu,
+					triggerInfoL2[i][j].unix_timestamp,
+					triggerInfoL2[i][j].is_sent ? "sent" : "pending");
 		}
 	}
 	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
@@ -84,8 +98,10 @@ void ClearTriggerInfo(int half)
 	int j;
 	for(j=0;j<4;j++)
 	{
-		triggerInfo[half][j].trigger_type = 0;
-		triggerInfo[half][j].is_sent = 0;
+		triggerInfoL1[half][j].trigger_type = 0;
+		triggerInfoL1[half][j].is_sent = 0;
+		triggerInfoL2[half][j].trigger_type = 0;
+		triggerInfoL2[half][j].is_sent = 0;
 	}
 }
 
@@ -154,15 +170,17 @@ void PrintFirstElementsL2(int section)
 //	}
 }
 
-void PrintFirstElementsL1()
+void PrintFirstElementsL1(int num)
 {
-//TODO
-//	int i;
-//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2304*2);
-//	for(i=0;i<2304;i++)
-//	{
-//		xil_printf("DataDMA__L1[0][0][%d]=0x%04x\n\r", i, DataDMA__L1[0][0][i]);
-//	}
+	int i;
+	static int alt_buffer = 0;
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[alt_buffer%2][num][0][0][0], 2304*sizeof(u16));
+	for(i=0;i<2304;i++)
+	{
+		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
+		xil_printf("%02x  ", DataDMA__L1[alt_buffer%2][num][0][0][i]);
+	}
+	alt_buffer++;
 }
 
 void PrintFirstElementsRaw(int num)
@@ -338,10 +356,10 @@ static void RxIntrHandlerRaw(void *Callback)
 	// check whether trigger
 	if(CheckTrigger(1))
 	{
-		triggerInfo[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
-		triggerInfo[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU(1);
-		triggerInfo[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType(1);
-		triggerInfo[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp(1);
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU(1);
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType(1);
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp(1);
 		ReleaseTrigger(1);
 		// Change current trigger buffer to the next one
 		if(current_trigbuf_raw < N1)
@@ -363,6 +381,8 @@ static void RxIntrHandlerRaw(void *Callback)
 
 static void RxIntrHandlerL1(void *Callback)
 {
+
+
 	u32 IrqStatus;
 	//int TimeOut;
 	XAxiDma *AxiDmaInst = (XAxiDma *)Callback;
@@ -374,6 +394,20 @@ static void RxIntrHandlerL1(void *Callback)
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
 	DmaReset(AxiDmaInst);
+	// check whether trigger
+	if(CheckTrigger(2))
+	{
+		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].is_sent = 0;
+		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].n_gtu = GetTrigNGTU(2);
+		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].trigger_type = GetTrigType(2);
+		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].unix_timestamp = GetUnixTimestamp(2);
+		ReleaseTrigger(2);
+		// Change current trigger buffer to the next one
+		if(current_trigbuf_l1 < N2)
+			current_trigbuf_l1++;
+		trig_counter_l1++;
+	}
+
 	//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[current_alt_buffer][current_trigbuf_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 	DmaStartN(2, current_trigbuf_l1);
 	dma_intr_counter_l1++;
@@ -384,6 +418,7 @@ static void RxIntrHandlerL1(void *Callback)
 	FlowControlClrIntr(2);	//print("y");
 
 	return;
+
 }
 
 static void RxIntrHandlerL2(void *Callback)
