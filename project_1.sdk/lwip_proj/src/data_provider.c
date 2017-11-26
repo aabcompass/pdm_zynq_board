@@ -7,6 +7,7 @@
 #include "data_provider.h"
 #include "xparameters.h"
 #include "xil_types.h"
+#include "pdmdata.h"
 
 void WaitDataProviderIdle()
 {
@@ -98,4 +99,30 @@ void SetDataProviderTestMode(int mode)
 	print("Ok\n\r");
 	if(mode != DATA_PROV_TEST_MODE_ECASIC)
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CLR) = 0;
+}
+
+void Provide(u32 len)
+{
+	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = len;
+	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+}
+
+void ProvideAndCheck()
+{
+	int i;
+	Provide(N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0);
+	print("Waiting for D3 interrupt\n\r");
+	for(i=0;i<10000;i++)
+	{
+		if(IsBufferL2Changed())
+			break;
+		if((i/100)%4 == 0)      print("----/----\r");
+		else if((i/100)%4 == 1) print("----|----\r");
+		else if((i/100)%4 == 2) print("----\----\r");
+		else if((i/100)%4 == 3) print("----|----\r");
+	}
+	xil_printf("DMAIntrCounterRaw=%d\n\r", GetDMAIntrCounterN(0));
+	xil_printf("DMAIntrCounterL1=%d\n\r", GetDMAIntrCounterN(1));
+	xil_printf("DMAIntrCounterL2=%d\n\r", GetDMAIntrCounterN(2));
 }

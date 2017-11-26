@@ -9,6 +9,7 @@
 #define SRC_PDMDATA_H_
 
 #include <stdint.h>
+#include "pdmdata.h"
 
 // Constants
 
