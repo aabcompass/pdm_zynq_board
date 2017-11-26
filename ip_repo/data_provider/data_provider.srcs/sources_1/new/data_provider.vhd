@@ -406,7 +406,8 @@ begin
 										state := state + 1;	
 										counter_frames <= counter_frames - 1;	
 									elsif(infinite_d1 = '1') then	
-										state := state + 1;								
+										state := state + 1;
+										counter_frames <= counter_frames - 1;									
 									end if;																
 									s_axis_tlast_art_cc_fifo(i) <= '0';
 									s_axis_tvalid_art_cc_fifo(i) <= '0';
@@ -664,7 +665,7 @@ end generate;
 		variable state : integer range 0 to 1 := 0;
 		variable cnt : integer range 0 to 191 := 0;
 	begin
-		if(rising_edge(m_axis_aclk)) then
+		if(rising_edge(m_axis_aclk)) then 
 			case state is
 				when 0 => if(atleast_one_empty = '0') then
 										state := state + 1;
