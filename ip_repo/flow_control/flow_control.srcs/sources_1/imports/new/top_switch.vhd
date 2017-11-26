@@ -107,7 +107,7 @@ entity axis_flow_control is
     		-- accept the read data and response information.
   		S_AXI_RREADY	: in std_logic
   );
-end axis_flow_control;
+end axis_flow_control; 
      
 architecture Behavioral of axis_flow_control is
 
@@ -1066,7 +1066,7 @@ begin
 				periodic_trig_cnt <= (others => '0');
 				trig_delay_cnt <= (others => '0');
 				trig_type <= (others => '0');
-				trig_flag <= '0';
+				trig_flag <= '0';  
 				state := 0;
 			else
 				case state is

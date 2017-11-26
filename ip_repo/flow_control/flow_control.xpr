@@ -35,13 +35,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="7"/>
-    <Option Name="WTModelSimExportSim" Val="7"/>
-    <Option Name="WTQuestaExportSim" Val="7"/>
-    <Option Name="WTIesExportSim" Val="7"/>
-    <Option Name="WTVcsExportSim" Val="7"/>
-    <Option Name="WTRivieraExportSim" Val="7"/>
-    <Option Name="WTActivehdlExportSim" Val="7"/>
+    <Option Name="WTXSimExportSim" Val="9"/>
+    <Option Name="WTModelSimExportSim" Val="9"/>
+    <Option Name="WTQuestaExportSim" Val="9"/>
+    <Option Name="WTIesExportSim" Val="9"/>
+    <Option Name="WTVcsExportSim" Val="9"/>
+    <Option Name="WTRivieraExportSim" Val="9"/>
+    <Option Name="WTActivehdlExportSim" Val="9"/>
   </Configuration>
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
@@ -88,19 +88,6 @@
         <Option Name="SrcSet" Val="sources_1"/>
       </Config>
     </FileSet>
-    <FileSet Name="axis_fifo_fc" Type="BlockSrcs" RelSrcDir="$PSRCDIR/axis_fifo_fc">
-      <File Path="$PSRCDIR/sources_1/ip/axis_fifo_fc/axis_fifo_fc.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="axis_fifo_fc"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="axis_fifo_fc_32" Type="BlockSrcs" RelSrcDir="$PSRCDIR/axis_fifo_fc_32">
       <File Path="$PSRCDIR/sources_1/ip/axis_fifo_fc_32/axis_fifo_fc_32.xci">
         <FileInfo>
@@ -111,6 +98,19 @@
       </File>
       <Config>
         <Option Name="TopModule" Val="axis_fifo_fc_32"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="axis_fifo_fc" Type="BlockSrcs" RelSrcDir="$PSRCDIR/axis_fifo_fc">
+      <File Path="$PSRCDIR/sources_1/ip/axis_fifo_fc/axis_fifo_fc.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="axis_fifo_fc"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -144,14 +144,14 @@
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="axis_fifo_fc_synth_1" Type="Ft3:Synth" SrcSet="axis_fifo_fc" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/axis_fifo_fc_synth_1" IncludeInArchive="true">
+    <Run Id="axis_fifo_fc_32_synth_1" Type="Ft3:Synth" SrcSet="axis_fifo_fc_32" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc_32" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/axis_fifo_fc_32_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="axis_fifo_fc_32_synth_1" Type="Ft3:Synth" SrcSet="axis_fifo_fc_32" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc_32" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/axis_fifo_fc_32_synth_1" IncludeInArchive="true">
+    <Run Id="axis_fifo_fc_synth_1" Type="Ft3:Synth" SrcSet="axis_fifo_fc" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/axis_fifo_fc_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
@@ -172,7 +172,7 @@
         <Step Id="write_bitstream"/>
       </Strategy>
     </Run>
-    <Run Id="axis_fifo_fc_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc" Description="Default settings for Implementation." SynthRun="axis_fifo_fc_synth_1" IncludeInArchive="false">
+    <Run Id="axis_fifo_fc_32_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc_32" Description="Default settings for Implementation." SynthRun="axis_fifo_fc_32_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
@@ -186,7 +186,7 @@
         <Step Id="write_bitstream"/>
       </Strategy>
     </Run>
-    <Run Id="axis_fifo_fc_32_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc_32" Description="Default settings for Implementation." SynthRun="axis_fifo_fc_32_synth_1" IncludeInArchive="false">
+    <Run Id="axis_fifo_fc_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="axis_fifo_fc" Description="Default settings for Implementation." SynthRun="axis_fifo_fc_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>

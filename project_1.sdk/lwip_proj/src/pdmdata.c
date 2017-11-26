@@ -91,8 +91,23 @@ void PrintTriggerInfo()
 					triggerInfoL2[i][j].is_sent ? "sent" : "pending");
 		}
 	}
+	print("Trigger info L3:\n\r");
+	for(i=0;i<2;i++)
+	{
+		for(j=0;j<1;j++)
+		{
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+					i,
+					j,
+					triggerInfoL3[i][j].trigger_type,
+					triggerInfoL3[i][j].n_gtu,
+					triggerInfoL3[i][j].unix_timestamp,
+					triggerInfoL3[i][j].is_sent ? "sent" : "pending");
+		}
+	}
 	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
 }
+
 
 void ClearTriggerInfo(int half)
 {

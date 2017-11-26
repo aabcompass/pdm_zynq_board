@@ -202,17 +202,9 @@ void TriggerService()
 		if(IsBufferL2Changed())
 		{
 			xil_printf("BufferL2Changed!\n\r");
-			if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_SEPARATED)
-			{
-				sprintf(filename_str, FILENAME_MODE_TRIGGER3, instrumentState.file_counter_l3++);
-				SendSpectrum2FTP((char*)GetZ_DATA_TYPE_SCI_ptr(DATA_TYPE_L3), sizeof(Z_DATA_TYPE_SCI_L3_V2), filename_str);
-			}
-			else if(instrumentState.ftp_files_mode == INSTRUMENT_FTPFILES_CONCAT)
-			{
-				CopyEventData();
-				sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
-				SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
-			}
+			CopyEventData();
+			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
+			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
 			trigger_sm_state = wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}
