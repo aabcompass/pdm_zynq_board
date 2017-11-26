@@ -129,8 +129,6 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-
-
 	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1)
 	{
 		debugSettings.current_thr = param;

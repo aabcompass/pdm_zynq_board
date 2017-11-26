@@ -214,6 +214,24 @@ architecture Behavioral of axis_flow_control is
 	signal clr_trig_service: std_logic := '0';
 	
 	signal restart_intr: std_logic;
+
+	COMPONENT axis_data_fifo_extra
+		PORT (
+			s_axis_aresetn : IN STD_LOGIC;
+			s_axis_aclk : IN STD_LOGIC;
+			s_axis_tvalid : IN STD_LOGIC;
+			s_axis_tready : OUT STD_LOGIC;
+			s_axis_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+			s_axis_tlast : IN STD_LOGIC;
+			m_axis_tvalid : OUT STD_LOGIC;
+			m_axis_tready : IN STD_LOGIC;
+			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+			m_axis_tlast : OUT STD_LOGIC;
+			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
+	END COMPONENT;
 	
 	COMPONENT axis_fifo_fc
 		PORT (
@@ -288,6 +306,9 @@ architecture Behavioral of axis_flow_control is
 	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
 	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
 	signal pattern_checker_error : std_logic := '0';
+	
+	signal m_axis_tvalid_extra, m_axis_tready_extra, m_axis_tlast_extra: std_logic := '0';
+	signal m_axis_tdata_extra : std_logic_vector(63 downto 0) := (others => '0');
 	
 	attribute keep : string; 
 	 
@@ -1152,14 +1173,32 @@ begin
 
 
 	axis_fifo_fc_64_gen: if(C_AXIS_DWIDTH = 64) generate
-		i_axis_fifo_fc : axis_fifo_fc
+
+			i_axis_fifo_fc_extra : axis_data_fifo_extra
 			PORT MAP (
 				s_axis_aresetn => s_axis_aresetn,
 				s_axis_aclk => s_axis_aclk,
 				s_axis_tvalid => m_axis_tvalid_not_buffered,
-				s_axis_tlast => m_axis_tlast_not_buffered,
 				s_axis_tready => m_axis_tready_not_buffered,
 				s_axis_tdata => m_axis_tdata_not_buffered,
+				s_axis_tlast => m_axis_tlast_not_buffered,
+				m_axis_tvalid => m_axis_tvalid_extra,
+				m_axis_tready => m_axis_tready_extra,
+				m_axis_tdata => m_axis_tdata_extra,
+				m_axis_tlast => m_axis_tlast_extra,
+				axis_data_count => open,
+				axis_wr_data_count => open,
+				axis_rd_data_count => open
+			);
+  
+		i_axis_fifo_fc : axis_fifo_fc
+			PORT MAP (
+				s_axis_aresetn => s_axis_aresetn,
+				s_axis_aclk => s_axis_aclk,
+				s_axis_tvalid => m_axis_tvalid_extra,
+				s_axis_tlast => m_axis_tlast_extra,
+				s_axis_tready => m_axis_tready_extra,
+				s_axis_tdata => m_axis_tdata_extra,
 				m_axis_tvalid => m_axis_tvalid_key,
 				m_axis_tlast => m_axis_tlast_key,
 				m_axis_tready => m_axis_tready_key,
