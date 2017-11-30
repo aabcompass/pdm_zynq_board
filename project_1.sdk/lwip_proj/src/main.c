@@ -255,8 +255,8 @@ int main()
 	start_test_data_provider();
 	print("DMA initialization...\n\r");
 	DMA_init();
-	print("Event FIFO initialization...\n\r");
-	XLlFifoEventsInit();
+//	print("Event FIFO initialization...\n\r");
+//	XLlFifoEventsInit();
 	print("Scurve data initialization...\n\r");
 	ScurveDataInit();
 	print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
@@ -279,7 +279,6 @@ int main()
 		ftp_config_sm();
 		TriggerService();
 		ScurveService();
-		//xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
 		HVInterruptService();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))
 		{

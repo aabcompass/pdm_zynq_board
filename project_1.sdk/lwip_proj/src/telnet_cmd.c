@@ -189,10 +189,17 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		sprintf(reply, "%d\n\r", *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_UNIX_TIME*4));
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(sscanf(p->payload, "mmg max_l1 %d",
+	else if(sscanf(p->payload, "mmg N1 %d",
 				&param0) == 1)
 	{
-
+		Set_N1(param0);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "mmg N2 %d",
+				&param0) == 1)
+	{
+		Set_N2(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}

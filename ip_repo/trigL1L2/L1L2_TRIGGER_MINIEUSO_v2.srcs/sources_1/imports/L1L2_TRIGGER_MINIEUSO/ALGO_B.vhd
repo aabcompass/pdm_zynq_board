@@ -34,34 +34,18 @@ USE ieee.std_logic_unsigned.ALL;
 --use UNISIM.VComponents.all;
 
 entity ALGO_B is port (
-	CLOCK_200			:	in	std_logic;
+	S00_AXIS_ACLK			:	in	std_logic;
+	S01_AXIS_ACLK			:	in	std_logic;
 	---------------------------MINIEUSO-------------------
-	DATA			    :	in	std_logic_vector(15 downto 0);
-	FRAME			    :	in	std_logic;
+	S00_AXIS_TDATA			    :	in	std_logic_vector(7 downto 0);
+	S00_AXIS_TVALID			    :	in	std_logic;
+	S00_AXIS_TREADY			    :	out	std_logic := '1';
+	------------------------------------------------------
+	S01_AXIS_TDATA			    :	in	std_logic_vector(7 downto 0);
+	S01_AXIS_TVALID			    :	in	std_logic;
+	S01_AXIS_TREADY			    :	out	std_logic := '1';	
 	------------------------------------------------------
 	L1_EVENT            :   out std_logic--;
---	L2_EVENT            :   out std_logic;
---	------------------------------------------------------
---	--AXI4 Stream FIFO L1
---	s_aresetn_L1		:	in	std_logic;
---	m_aclk_L1 			:	in	std_logic;
---	m_axis_tvalid_L1 	:	out	std_logic;
---	m_axis_tready_L1	: 	in	std_logic;
---    m_axis_tdata_L1	    : 	out	std_logic_vector(31 downto 0);
---    m_axis_tlast_L1     :   out std_logic;
---    --AXI4 Stream FIFO DATA OUT L2
---    s_aresetn_L2        :   in  std_logic;
---    m_aclk_L2           :   in  std_logic;
---    m_axis_tvalid_L2    :   out std_logic;
---    m_axis_tready_L2    :   in  std_logic;
---    m_axis_tdata_L2     :   out std_logic_vector(31 downto 0);
---    m_axis_tlast_L2     :   out std_logic;
---    --AXI4 Stream FIFO (COMMAND IN L2)
---    s_aclk_cmd          :   IN STD_LOGIC;
---    s_aresetn_cmd       :   IN STD_LOGIC;
---    s_axis_tvalid_cmd   :   IN STD_LOGIC;
---    s_axis_tready_cmd   :   OUT STD_LOGIC;
---    s_axis_tdata_cmd    :   IN STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 	
 end ALGO_B;
@@ -119,74 +103,41 @@ component format_converter is
            frame_out : out STD_LOGIC);
 end component;
 
---component L2
---    port (
---	   CLOCK_L2			    :	in	std_logic;
---	   --Data INPUT for L2
---	   rd_clk_l1            :   out  std_logic;
---	   empty_sum_fifo_l1    :   in   std_logic;
---       rd_en_sum_fifo_l1    :   out  std_logic;
---       dout_sum_fifo_l1     :   in   std_logic_vector(239 downto 0);
---       --AXI4 Stream FIFO (DATA OUT)
---       s_aresetn            :   in   std_logic;
---       m_aclk               :   in   std_logic;
---       m_axis_tvalid        :   out  std_logic;
---       m_axis_tready        :   in   std_logic;
---       m_axis_tdata         :   out  std_logic_vector(31 downto 0);
---       m_axis_tlast         :   out  std_logic;
---       --AXI4 Stream FIFO (COMMAND IN)
---       s_aclk_cmd           :   IN STD_LOGIC;
---       s_aresetn_cmd        :   IN STD_LOGIC;
---       s_axis_tvalid_cmd    :   IN STD_LOGIC;
---       s_axis_tready_cmd    :   OUT STD_LOGIC;
---       s_axis_tdata_cmd     :   IN STD_LOGIC_VECTOR(31 DOWNTO 0);
---       --L2 EVENT
---       L2_event             :   out std_logic
---	   );	
---end component L2;
 
 	signal DATA_conv: std_logic_vector(15 downto 0);
 	signal FRAME_conv: std_logic;
 
 begin
 
---MMCM_CLK_L1L2 : MMCM_CLK
---   port map ( 
---   -- Clock in ports
---   clk_in1  => CLOCK_200,
---  -- Clock out ports  
---   clk_out1 => CLOCK,
---   clk_out2 => CLOCK_L2              
--- );
 
 
 i_format_converter_h : format_converter 
-    Port map( clk 	=> CLOCK_200,--: in STD_LOGIC;
-           datain 	=> DATA(15 downto 8),--: in STD_LOGIC_VECTOR (7 downto 0);
+    Port map( clk 	=> S00_AXIS_ACLK,--: in STD_LOGIC;
+           datain 	=> S00_AXIS_TDATA,--: in STD_LOGIC_VECTOR (7 downto 0);
            dataout 	=> DATA_conv(15 downto 8),--: out STD_LOGIC_VECTOR (7 downto 0);
-           frame_in 	=> FRAME,--: in STD_LOGIC;
+           frame_in 	=> S00_AXIS_TVALID,--: in STD_LOGIC;
            frame_out 	=> FRAME_conv--: out STD_LOGIC);
 	);
 
 i_format_converter_l : format_converter 
-    Port map( clk 	=> CLOCK_200,--: in STD_LOGIC;
-           datain 	=> DATA(7 downto 0),--: in STD_LOGIC_VECTOR (7 downto 0);
+    Port map( clk 	=> S01_AXIS_ACLK,--: in STD_LOGIC;
+           datain 	=> S01_AXIS_TDATA,--: in STD_LOGIC_VECTOR (7 downto 0);
            dataout 	=> DATA_conv(7 downto 0),--: out STD_LOGIC_VECTOR (7 downto 0);
-           frame_in 	=> FRAME,--: in STD_LOGIC;
+           frame_in 	=> S01_AXIS_TVALID,--: in STD_LOGIC;
            frame_out 	=> open--: out STD_LOGIC);
 	);
 
 
-L1_TRIGGER : L1
+	L1_TRIGGER : L1
     port map (
-    CLOCK               => CLOCK_200,
+    CLOCK               => S00_AXIS_ACLK,
     DATA                => DATA_conv,
     FRAME               => FRAME_conv,
     L1_EVENT            => L1_EVENT,
     ------------------------------------------------------
     --AXI4 Stream FIFO
     s_aresetn           => '1',--s_aresetn_L1,
-    m_aclk              => CLOCK_200,--m_aclk_L1,
+    m_aclk              => S00_AXIS_ACLK,--m_aclk_L1,
     m_axis_tvalid       => open,--m_axis_tvalid_L1,
     m_axis_tready       => '1',--m_axis_tready_L1,
     m_axis_tdata        => open,--m_axis_tdata_L1,
@@ -198,27 +149,5 @@ L1_TRIGGER : L1
     dout_sum_fifo_l1    => dout_sum_fifo_l1
     );
     
---L2_TRIGGER : L2
---    port map (
---    CLOCK_L2            => CLOCK_L2,
---    rd_clk_l1           => rd_clk_l1,
---    empty_sum_fifo_l1   => empty_sum_fifo_l1,
---    rd_en_sum_fifo_l1   => rd_en_sum_fifo_l1,
---    dout_sum_fifo_l1    => dout_sum_fifo_l1,
---    --AXI4 Stream FIFO
---    s_aresetn           => s_aresetn_L2,
---    m_aclk              => m_aclk_L2,
---    m_axis_tvalid       => m_axis_tvalid_L2,
---    m_axis_tready       => m_axis_tready_L2,
---    m_axis_tdata        => m_axis_tdata_L2,
---    m_axis_tlast        => m_axis_tlast_L2,
---    --AXI4 Stream FIFO (COMMAND IN)
---    s_aclk_cmd          => s_aclk_cmd,
---    s_aresetn_cmd       => s_aresetn_cmd,
---    s_axis_tvalid_cmd   => s_axis_tvalid_cmd,
---    s_axis_tready_cmd   => s_axis_tready_cmd,
---    s_axis_tdata_cmd    => s_axis_tdata_cmd,
---    L2_event            => L2_event
---    );
 				
 end Behavioral;

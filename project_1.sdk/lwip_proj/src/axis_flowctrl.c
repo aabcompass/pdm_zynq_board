@@ -11,15 +11,6 @@
 #include "pdmdata_hw.h"
 
 
-void Set_N1(int value)
-{
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
-}
-
-void Set_N2(int value)
-{
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
-}
 
 void FlowControlsClr()
 {

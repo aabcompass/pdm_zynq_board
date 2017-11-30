@@ -60,6 +60,19 @@ TriggerInfo triggerInfoL3[2][1];
 
 int current_bank_L1=0, current_bank_L2=0;
 
+void Set_N1(int value)
+{
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
+	N1 = value;
+}
+
+void Set_N2(int value)
+{
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS*4) = value;
+	N2 = value;
+}
+
+
 void PrintTriggerInfo()
 {
 	int i, j;
