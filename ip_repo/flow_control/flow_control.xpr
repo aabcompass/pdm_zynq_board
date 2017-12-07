@@ -173,9 +173,7 @@
     </Run>
     <Run Id="axis_data_fifo_extra_synth_1" Type="Ft3:Synth" SrcSet="axis_data_fifo_extra" Part="xc7z030ffg676-2" ConstrsSet="axis_data_fifo_extra" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/axis_data_fifo_extra_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -224,9 +222,7 @@
     </Run>
     <Run Id="axis_data_fifo_extra_impl_1" Type="Ft2:EntireDesign" Part="xc7z030ffg676-2" ConstrsSet="axis_data_fifo_extra" Description="Default settings for Implementation." SynthRun="axis_data_fifo_extra_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

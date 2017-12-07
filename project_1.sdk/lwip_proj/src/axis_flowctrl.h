@@ -14,6 +14,7 @@
 #define REGW_CLR_FLAGS				1 /* 5=clr_trig_service 4=clr_gtu_cnt 3=restart_intr 2=clr_all 1=clear_error 0=clr_trans_counter*/
 #define REGW_TRIG_DELAY				2 /* the delay between trigger event and message about it*/
 #define REGW_EDGE_FLAGS				3 /* 2=set_unix_time 1=trig_force 0=release */
+#define REGW_INT_TRIG_GTU_TIME		5 /* Time time for the programmable trigger */
 #define REGW_GTUS_PER_CYCLE			6 /* the number of GTUs in one cycles (5.24s in Mini-EUSO)*/
 #define REGW_PERIODIC_TRIG_PERIOD	7 /* Period of periodic trigger (in GTUs)*/
 #define REGW_DMA_LENGTH				8 /* number of AXIS transfers per interrupt*/

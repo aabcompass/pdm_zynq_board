@@ -301,6 +301,7 @@ architecture Behavioral of axis_flow_control is
 	signal unix_time_reg, unix_time, unix_timestamp: std_logic_vector(31 downto 0) := (others => '0');
 	signal one_second_cnt: std_logic_vector(31 downto 0) := (others => '0');
 	signal periodic_trig_gen_cnt, periodic_trig_gen_cnt2: std_logic_vector(31 downto 0) := (others => '0');
+	signal int_trig_gen_cnt, int_trig_gtu_time: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal trig_type: std_logic_vector(3 downto 0) := (others => '0');
 	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
@@ -953,6 +954,7 @@ begin
 	trig_force <= slv_reg3(1); 
 	set_unix_time <= slv_reg3(2); 
 	
+	int_trig_gtu_time <= slv_reg5; 
 	n_gtus_per_cycle <= slv_reg6;	
 	periodic_trig_gtu_period <= slv_reg7;
 	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
@@ -1074,9 +1076,37 @@ begin
 		end if;
 	end process;
 	
+
+	int_trig_gen: process(s_axis_aclk) 
+		variable state : integer range 0 to 1 := 0;
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1' or clr_trig_service = '1') then
+				int_trig_gen_cnt <= (others => '0');
+				state := 0;
+			else
+				case state is
+					when 0 => 
+						if(periodic_trig_gen_cnt2 < n_gtus_per_cycle) then
+								if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
+									if(int_trig_gen_cnt = int_trig_gtu_time-1) then
+										int_trig <= en_int_trig;
+										state := state + 1;
+									else
+										int_trig <= '0';
+										int_trig_gen_cnt <= int_trig_gen_cnt + 1;
+									end if;
+								end if;
+							end if;
+						when 1 =>
+							int_trig <= '0';
+				end case;
+			end if;
+		end if;
+	end process;
 	
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
-	trig <= self_trig or (int_trig and en_int_trig) or periodic_trig or trig_force or trig_button_debounced;
+	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced;
 	
 	trig_service: process(s_axis_aclk)
 		variable state : integer range 0 to 4 := 0;
@@ -1191,7 +1221,7 @@ begin
 				axis_rd_data_count => open
 			);
   
-		i_axis_fifo_fc : axis_fifo_fc
+			i_axis_fifo_fc : axis_fifo_fc
 			PORT MAP (
 				s_axis_aresetn => s_axis_aresetn,
 				s_axis_aclk => s_axis_aclk,
