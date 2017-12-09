@@ -190,9 +190,9 @@ void TriggerService()
 		}
 		else if(instrumentState.mode == INSTRUMENT_MODE_INTTRIG)
 		{
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+1000;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_INT_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 1000;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
 			trigger_sm_state = wait4trigger_state;
 		}
@@ -210,7 +210,11 @@ void TriggerService()
 		if(IsBufferL2Changed())
 		{
 			xil_printf("BufferL2Changed!\n\r");
-			CopyEventData();
+			if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
+				CopyEventData();
+			else
+				CopyEventData_trig();
+
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
 			trigger_sm_state = wait4ftp_ready2;

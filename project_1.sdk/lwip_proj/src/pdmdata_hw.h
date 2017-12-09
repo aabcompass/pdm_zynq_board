@@ -20,6 +20,8 @@
 #define N_FRAMES_DMA_L1			(N_OF_FRAMES_L2_V0*2)
 #define N_FRAMES_DMA_L2			(N_OF_FRAMES_L3_V0*1)
 
+#define TRIGGER_DATA_OFFSET			64 /*in GTU*/
+
 #define N_ALT_BUFFERS				2
 
 #define N_TRIG_BUFFERS_DMA_RAW		8
@@ -45,6 +47,7 @@ typedef struct
 	u32 n_gtu;
 	u32 unix_timestamp;
 	u8 is_sent;
+	u32 n_intr;
 } TriggerInfo;
 
 #define MAX_TRIGGERS_PER_CYCLE		4

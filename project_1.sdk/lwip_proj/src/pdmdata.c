@@ -28,6 +28,7 @@ volatile u32 prev_alt_trig_buffer_raw = 0, current_alt_trig_buffer_raw = 0;
 volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_L2_changed;
 volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
+volatile u32 trigbuf_raw_change_delayed = 0;
 int N1=4, N2=4, N3=1;
 
 extern InstrumentState instrumentState;
@@ -81,12 +82,13 @@ void PrintTriggerInfo()
 	{
 		for(j=0;j<4;j++)
 		{
-			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%s\n\r",
 					i,
 					j,
 					triggerInfoL1[i][j].trigger_type,
 					triggerInfoL1[i][j].n_gtu,
 					triggerInfoL1[i][j].unix_timestamp,
+					triggerInfoL1[i][j].n_intr,
 					triggerInfoL1[i][j].is_sent ? "sent" : "pending");
 		}
 	}
@@ -207,11 +209,11 @@ void PrintFirstElementsRaw(int num)
 
 	int i;
 	static int alt_buffer = 0;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[alt_buffer%2][num][0][0][0], 2304);
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[alt_buffer%2][num][1][0][0], 2304);
 	for(i=0;i<2304;i++)
 	{
 		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
-		xil_printf("%02x  ", DataDMA__Raw[alt_buffer%2][num][0][0][i]);
+		xil_printf("%02x  ", DataDMA__Raw[alt_buffer%2][num][1][0][i]);
 	}
 	alt_buffer++;
 }
@@ -245,6 +247,7 @@ void CopyEventData()
 					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
 	}
+	//copy D3
 	for(i=0;i<N3;i++)
 	{
 			zynqPacket.level3_data[i].payload.trig_type = triggerInfoL3[prev_alt_buffer][i].trigger_type;
@@ -254,112 +257,86 @@ void CopyEventData()
 					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
 	}
-
-	//copy D3
-
-
 }
 
-//void CopyEventDataFreerun()
-//{
-	//TODO
-//	//L1 data
-//	//InvalidateCacheRanges(1);
-//	memcpy(&zynqPacket.level1_data[0].payload.ts.unix_time, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_UNIX_TIMESTAMP*4), 4);
-//	memcpy(&zynqPacket.level1_data[0].payload.ts.n_gtu, (void*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT*4), 4);
-//	void* addr = &DataDMA__Raw[0][0][0];
-//	memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-//	//L2 data
-//	//InvalidateCacheRanges(2);
-//	memcpy(&zynqPacket.level2_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
-//	addr = &DataDMA__L1[0][0][0];
-//	memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, sizeof(uint16_t)*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
-//	//L3 data
-//	//InvalidateCacheRanges(3);
-//	memcpy(&zynqPacket.level3_data[0].payload.ts.n_gtu, &zynqPacket.level1_data[0].payload.ts.n_gtu, 4);
-//	addr = &DataDMA__L2[prev_buffer_L2][0][0];
-//	memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], addr, sizeof(uint32_t)*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
-//}
+void CopyEventData_trig()
+{
+	int i;
+	u32 gtu_addr, gtu_addr_cross, gtu_n_cross_l, gtu_n_cross_r;
+	//copy D1
+	for(i=0;i<N1;i++)
+	{
+		// copy the metadata to zynqPacket
+		zynqPacket.level1_data[i].payload.trig_type = triggerInfoL1[prev_alt_buffer][i].trigger_type;
+		zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoL1[prev_alt_buffer][i].n_gtu;
+		zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoL1[prev_alt_buffer][i].unix_timestamp;
+		// calculate the address of trigger event (in GTUs)
+		gtu_addr = triggerInfoL1[prev_alt_buffer][i].n_gtu % N_FRAMES_DMA_RAW;
 
-// This function copies the data from DMA memory to ethernet structure
-// data_type is the data source type (L1, L2 or L3)
-//void CopyEventData(int data_type) // 1 - L1, 2 - L2, 3 - L3
-//{
-//	print("\n\rCopyEventData: ");
-//	if(data_type == DATA_TYPE_L1)
-//	{
-//		print("L1:");
-//		// copy the timestamp
-//		memcpy(&zynqPacket.level1_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
-//		print("T");
-//		// copy data
-//		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_RAW;
-//		xil_printf(":%d:", gtu_offset);
-////		// just for test
-////		void* addr2 = &DataDMA__Raw[0][0][0];
-////		memcpy(&Z_DATA_TYPE_SCI_L1.payload.raw_data, addr2, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-//		if(gtu_offset>=N_OF_FRAMES_L1_V0)
-//		{
-//			// calc address to copy from
-//			void* addr = &DataDMA__Raw[0][gtu_offset-N_OF_FRAMES_L1_V0][0];
-//			// copy the sci data
-//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, N_OF_FRAMES_L1_V0*N_OF_PIXEL_PER_PDM);
-//			print("S");
-//		}
-//		else
-//		{
-//			// calc address to copy from
-//			void* addr = &DataDMA__Raw[0][N_FRAMES_DMA_RAW+gtu_offset-N_OF_FRAMES_L1_V0][0];
-//			void* addr2 = &DataDMA__Raw[0][0][0];
-//			// copy the sci data
-//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0] + (N_OF_FRAMES_L1_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, gtu_offset*N_OF_PIXEL_PER_PDM);
-//			print("D2");
-//			memcpy(&zynqPacket.level1_data[0].payload.raw_data[0][0], addr, (N_OF_FRAMES_L1_V0 - gtu_offset)*N_OF_PIXEL_PER_PDM);
-//			print("D1");
-//		}
-//	}
-//	else if(data_type == DATA_TYPE_L2)
-//	{
-//		print("L2: ");
-//		// copy the timestamp
-//		memcpy(&zynqPacket.level2_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_TIMEST_H*4, 8);
-//		print("T");
-//		// copy data
-//		u32 gtu_offset = *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_4DMA*4) % N_FRAMES_DMA_L1;
-//		xil_printf(":%d:", gtu_offset);
-//		if(gtu_offset>=N_OF_FRAMES_L2_V0)
-//		{
-//			// calc address to copy from
-//			void* addr = &DataDMA__L1[0][gtu_offset-N_OF_FRAMES_L2_V0][0];
-//			// copy the sci data
-//			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM);
-//			print("S");
-//		}
-//		else
-//		{
-//			// calc address to copy from
-//			void* addr = &DataDMA__L1[0][N_FRAMES_DMA_L1+gtu_offset-N_OF_FRAMES_L1_V0][0];
-//			void* addr2 = &DataDMA__L1[0][0][0];
-//			// copy the sci data
-//			memcpy(&zynqPacket.level2_data[0].payload.int16_data[0][0], addr, 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM);
-//			print("D1");
-//			memcpy((char*)&zynqPacket.level2_data[0].payload.int16_data[0][0] + 2*(N_OF_FRAMES_L2_V0-gtu_offset)*N_OF_PIXEL_PER_PDM, addr2, 2*(gtu_offset)*N_OF_PIXEL_PER_PDM);
-//			print("D2");
-//		}
-//	}
-//	else if(data_type == DATA_TYPE_L3)
-//	{
-//		print("L3: ");
-//		// copy the timestamp
-//		memcpy(&zynqPacket.level3_data[0].payload.ts, XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_H_RND*4, 8);
-//		print("T");
-//		memcpy(&zynqPacket.level3_data[0].payload.int32_data[0][0], &DataDMA__L2[!current_buffer_L2][0][0], 4*N_OF_FRAMES_L3_V0*N_OF_PIXEL_PER_PDM);
-//		print("S");
-//	}
-//	print("\n\r");
-//}
-
-
+		/*
+		 * If the data around trigger is not edge crossed by DMA page. In this case one pass copy is used.
+		 */
+		if(gtu_addr >= TRIGGER_DATA_OFFSET && (gtu_addr + TRIGGER_DATA_OFFSET - TRIGGER_DATA_OFFSET < N_FRAMES_DMA_RAW))
+		{
+			xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][gtu_addr-TRIGGER_DATA_OFFSET][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
+		}
+		/*
+		 * If the data around trigger is  crossed by left side DMA page.
+		 */
+		else if(gtu_addr < TRIGGER_DATA_OFFSET)
+		{
+			gtu_addr_cross = N_FRAMES_DMA_RAW + gtu_addr - TRIGGER_DATA_OFFSET;
+			gtu_n_cross_l = TRIGGER_DATA_OFFSET - gtu_addr;
+			gtu_n_cross_r = N_OF_FRAMES_L1_V0 - gtu_n_cross_l;
+			// two pass copying. 1st part from the end of alt trig buffer
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][!prev_alt_trig_buffer_raw][gtu_addr_cross][0],
+					N_OF_PIXEL_PER_PDM * gtu_n_cross_l);
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[gtu_n_cross_l][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][0][0],
+					N_OF_PIXEL_PER_PDM * gtu_n_cross_r);
+		}
+		/*
+		 * If the data around trigger is  crossed by left side DMA page.
+		 */
+		else if(gtu_addr + TRIGGER_DATA_OFFSET - TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
+		{
+			gtu_addr_cross = gtu_addr;
+			gtu_n_cross_l = N_FRAMES_DMA_RAW - gtu_addr;
+			gtu_n_cross_r = N_OF_FRAMES_L1_V0 - gtu_n_cross_l;
+			// two pass copying. 1st part from the end of alt trig buffer
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][gtu_addr_cross][0],
+					N_OF_PIXEL_PER_PDM * gtu_n_cross_l);
+			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[gtu_n_cross_l][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][!prev_alt_trig_buffer_raw][0][0],
+					N_OF_PIXEL_PER_PDM * gtu_n_cross_r);
+		}
+	}
+	//copy D2
+	for(i=0;i<N2;i++)
+	{
+			zynqPacket.level2_data[i].payload.trig_type = triggerInfoL2[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoL2[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoL2[prev_alt_buffer][i].unix_timestamp;
+			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
+					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
+	}
+	//copy D3
+	for(i=0;i<N3;i++)
+	{
+			zynqPacket.level3_data[i].payload.trig_type = triggerInfoL3[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoL3[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoL3[prev_alt_buffer][i].unix_timestamp;
+			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
+					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
+					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
+	}
+}
 
 void DmaReset(XAxiDma* pdma)
 {
@@ -417,16 +394,31 @@ static void RxIntrHandlerRaw(void *Callback)
 	DmaReset(AxiDmaInst);
 
 	// check whether trigger
-	if(CheckTrigger(1))
+	if(trigbuf_raw_change_delayed)
 	{
+		trigbuf_raw_change_delayed = 0;
+		current_trigbuf_raw++;
+	}
+	else if(CheckTrigger(1))
+	{
+		// unfortunately xil_printf results to fifo overflow!
+		// don't use it here
+		//xil_printf("++ %d\n\r", current_trigbuf_raw);
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU(1);
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType(1);
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp(1);
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_intr = dma_intr_counter_raw;
 		ReleaseTrigger(1);
 		// Change current trigger buffer to the next one
 		if(current_trigbuf_raw < N1)
-			current_trigbuf_raw++;
+		{
+			u32 gtu_addr = GetTrigNGTU(1) % N_FRAMES_DMA_RAW;
+			if(gtu_addr + TRIGGER_DATA_OFFSET - TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
+				trigbuf_raw_change_delayed = 1;
+			else
+				current_trigbuf_raw++;
+		}
 		trig_counter_raw++;
 	}
 
