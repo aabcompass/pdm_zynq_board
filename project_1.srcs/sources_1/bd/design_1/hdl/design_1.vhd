@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Thu Nov 30 18:51:14 2017
+--Date        : Sat Dec  9 16:33:49 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -2962,9 +2962,11 @@ entity m05_couplers_imp_1H9VHZJ is
     M_ACLK : in STD_LOGIC;
     M_ARESETN : in STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXI_araddr : out STD_LOGIC;
+    M_AXI_arprot : out STD_LOGIC;
     M_AXI_arready : in STD_LOGIC;
     M_AXI_arvalid : out STD_LOGIC;
     M_AXI_awaddr : out STD_LOGIC;
+    M_AXI_awprot : out STD_LOGIC;
     M_AXI_awready : in STD_LOGIC;
     M_AXI_awvalid : out STD_LOGIC;
     M_AXI_bready : out STD_LOGIC;
@@ -2981,9 +2983,11 @@ entity m05_couplers_imp_1H9VHZJ is
     S_ACLK : in STD_LOGIC;
     S_ARESETN : in STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_araddr : in STD_LOGIC;
+    S_AXI_arprot : in STD_LOGIC;
     S_AXI_arready : out STD_LOGIC;
     S_AXI_arvalid : in STD_LOGIC;
     S_AXI_awaddr : in STD_LOGIC;
+    S_AXI_awprot : in STD_LOGIC;
     S_AXI_awready : out STD_LOGIC;
     S_AXI_awvalid : in STD_LOGIC;
     S_AXI_bready : in STD_LOGIC;
@@ -3002,9 +3006,11 @@ end m05_couplers_imp_1H9VHZJ;
 
 architecture STRUCTURE of m05_couplers_imp_1H9VHZJ is
   signal m05_couplers_to_m05_couplers_ARADDR : STD_LOGIC;
+  signal m05_couplers_to_m05_couplers_ARPROT : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_ARREADY : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_ARVALID : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_AWADDR : STD_LOGIC;
+  signal m05_couplers_to_m05_couplers_AWPROT : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_AWREADY : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_AWVALID : STD_LOGIC;
   signal m05_couplers_to_m05_couplers_BREADY : STD_LOGIC;
@@ -3020,8 +3026,10 @@ architecture STRUCTURE of m05_couplers_imp_1H9VHZJ is
   signal m05_couplers_to_m05_couplers_WVALID : STD_LOGIC;
 begin
   M_AXI_araddr <= m05_couplers_to_m05_couplers_ARADDR;
+  M_AXI_arprot <= m05_couplers_to_m05_couplers_ARPROT;
   M_AXI_arvalid <= m05_couplers_to_m05_couplers_ARVALID;
   M_AXI_awaddr <= m05_couplers_to_m05_couplers_AWADDR;
+  M_AXI_awprot <= m05_couplers_to_m05_couplers_AWPROT;
   M_AXI_awvalid <= m05_couplers_to_m05_couplers_AWVALID;
   M_AXI_bready <= m05_couplers_to_m05_couplers_BREADY;
   M_AXI_rready <= m05_couplers_to_m05_couplers_RREADY;
@@ -3037,9 +3045,11 @@ begin
   S_AXI_rvalid <= m05_couplers_to_m05_couplers_RVALID;
   S_AXI_wready <= m05_couplers_to_m05_couplers_WREADY;
   m05_couplers_to_m05_couplers_ARADDR <= S_AXI_araddr;
+  m05_couplers_to_m05_couplers_ARPROT <= S_AXI_arprot;
   m05_couplers_to_m05_couplers_ARREADY <= M_AXI_arready;
   m05_couplers_to_m05_couplers_ARVALID <= S_AXI_arvalid;
   m05_couplers_to_m05_couplers_AWADDR <= S_AXI_awaddr;
+  m05_couplers_to_m05_couplers_AWPROT <= S_AXI_awprot;
   m05_couplers_to_m05_couplers_AWREADY <= M_AXI_awready;
   m05_couplers_to_m05_couplers_AWVALID <= S_AXI_awvalid;
   m05_couplers_to_m05_couplers_BREADY <= S_AXI_bready;
@@ -11809,9 +11819,11 @@ entity design_1_inst_interconnect_200MHz_0 is
     M05_ACLK : in STD_LOGIC;
     M05_ARESETN : in STD_LOGIC_VECTOR ( 0 to 0 );
     M05_AXI_araddr : out STD_LOGIC;
+    M05_AXI_arprot : out STD_LOGIC;
     M05_AXI_arready : in STD_LOGIC;
     M05_AXI_arvalid : out STD_LOGIC;
     M05_AXI_awaddr : out STD_LOGIC;
+    M05_AXI_awprot : out STD_LOGIC;
     M05_AXI_awready : in STD_LOGIC;
     M05_AXI_awvalid : out STD_LOGIC;
     M05_AXI_bready : out STD_LOGIC;
@@ -12057,9 +12069,11 @@ architecture STRUCTURE of design_1_inst_interconnect_200MHz_0 is
   signal m04_couplers_to_inst_interconnect_200MHz_WSTRB : STD_LOGIC;
   signal m04_couplers_to_inst_interconnect_200MHz_WVALID : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_ARADDR : STD_LOGIC;
+  signal m05_couplers_to_inst_interconnect_200MHz_ARPROT : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_ARREADY : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_ARVALID : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_AWADDR : STD_LOGIC;
+  signal m05_couplers_to_inst_interconnect_200MHz_AWPROT : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_AWREADY : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_AWVALID : STD_LOGIC;
   signal m05_couplers_to_inst_interconnect_200MHz_BREADY : STD_LOGIC;
@@ -12182,9 +12196,11 @@ architecture STRUCTURE of design_1_inst_interconnect_200MHz_0 is
   signal xbar_to_m04_couplers_WSTRB : STD_LOGIC_VECTOR ( 19 downto 16 );
   signal xbar_to_m04_couplers_WVALID : STD_LOGIC_VECTOR ( 4 to 4 );
   signal xbar_to_m05_couplers_ARADDR : STD_LOGIC_VECTOR ( 191 downto 160 );
+  signal xbar_to_m05_couplers_ARPROT : STD_LOGIC_VECTOR ( 17 downto 15 );
   signal xbar_to_m05_couplers_ARREADY : STD_LOGIC;
   signal xbar_to_m05_couplers_ARVALID : STD_LOGIC_VECTOR ( 5 to 5 );
   signal xbar_to_m05_couplers_AWADDR : STD_LOGIC_VECTOR ( 191 downto 160 );
+  signal xbar_to_m05_couplers_AWPROT : STD_LOGIC_VECTOR ( 17 downto 15 );
   signal xbar_to_m05_couplers_AWREADY : STD_LOGIC;
   signal xbar_to_m05_couplers_AWVALID : STD_LOGIC_VECTOR ( 5 to 5 );
   signal xbar_to_m05_couplers_BREADY : STD_LOGIC_VECTOR ( 5 to 5 );
@@ -12198,8 +12214,8 @@ architecture STRUCTURE of design_1_inst_interconnect_200MHz_0 is
   signal xbar_to_m05_couplers_WREADY : STD_LOGIC;
   signal xbar_to_m05_couplers_WSTRB : STD_LOGIC_VECTOR ( 23 downto 20 );
   signal xbar_to_m05_couplers_WVALID : STD_LOGIC_VECTOR ( 5 to 5 );
-  signal NLW_xbar_m_axi_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 17 downto 0 );
-  signal NLW_xbar_m_axi_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 17 downto 0 );
+  signal NLW_xbar_m_axi_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal NLW_xbar_m_axi_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 5 downto 0 );
   signal NLW_xbar_m_axi_wstrb_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
 begin
   M00_ACLK_1 <= M00_ACLK;
@@ -12264,8 +12280,10 @@ begin
   M05_ACLK_1 <= M05_ACLK;
   M05_ARESETN_1(0) <= M05_ARESETN(0);
   M05_AXI_araddr <= m05_couplers_to_inst_interconnect_200MHz_ARADDR;
+  M05_AXI_arprot <= m05_couplers_to_inst_interconnect_200MHz_ARPROT;
   M05_AXI_arvalid <= m05_couplers_to_inst_interconnect_200MHz_ARVALID;
   M05_AXI_awaddr <= m05_couplers_to_inst_interconnect_200MHz_AWADDR;
+  M05_AXI_awprot <= m05_couplers_to_inst_interconnect_200MHz_AWPROT;
   M05_AXI_awvalid <= m05_couplers_to_inst_interconnect_200MHz_AWVALID;
   M05_AXI_bready <= m05_couplers_to_inst_interconnect_200MHz_BREADY;
   M05_AXI_rready <= m05_couplers_to_inst_interconnect_200MHz_RREADY;
@@ -12580,9 +12598,11 @@ m05_couplers: entity work.m05_couplers_imp_1H9VHZJ
       M_ACLK => M05_ACLK_1,
       M_ARESETN(0) => M05_ARESETN_1(0),
       M_AXI_araddr => m05_couplers_to_inst_interconnect_200MHz_ARADDR,
+      M_AXI_arprot => m05_couplers_to_inst_interconnect_200MHz_ARPROT,
       M_AXI_arready => m05_couplers_to_inst_interconnect_200MHz_ARREADY,
       M_AXI_arvalid => m05_couplers_to_inst_interconnect_200MHz_ARVALID,
       M_AXI_awaddr => m05_couplers_to_inst_interconnect_200MHz_AWADDR,
+      M_AXI_awprot => m05_couplers_to_inst_interconnect_200MHz_AWPROT,
       M_AXI_awready => m05_couplers_to_inst_interconnect_200MHz_AWREADY,
       M_AXI_awvalid => m05_couplers_to_inst_interconnect_200MHz_AWVALID,
       M_AXI_bready => m05_couplers_to_inst_interconnect_200MHz_BREADY,
@@ -12599,9 +12619,11 @@ m05_couplers: entity work.m05_couplers_imp_1H9VHZJ
       S_ACLK => inst_interconnect_200MHz_ACLK_net,
       S_ARESETN(0) => inst_interconnect_200MHz_ARESETN_net(0),
       S_AXI_araddr => xbar_to_m05_couplers_ARADDR(160),
+      S_AXI_arprot => xbar_to_m05_couplers_ARPROT(15),
       S_AXI_arready => xbar_to_m05_couplers_ARREADY,
       S_AXI_arvalid => xbar_to_m05_couplers_ARVALID(5),
       S_AXI_awaddr => xbar_to_m05_couplers_AWADDR(160),
+      S_AXI_awprot => xbar_to_m05_couplers_AWPROT(15),
       S_AXI_awready => xbar_to_m05_couplers_AWREADY,
       S_AXI_awvalid => xbar_to_m05_couplers_AWVALID(5),
       S_AXI_bready => xbar_to_m05_couplers_BREADY(5),
@@ -12690,7 +12712,7 @@ xbar: component design_1_xbar_1
       m_axi_araddr(95 downto 64) => xbar_to_m02_couplers_ARADDR(95 downto 64),
       m_axi_araddr(63 downto 32) => xbar_to_m01_couplers_ARADDR(63 downto 32),
       m_axi_araddr(31 downto 0) => xbar_to_m00_couplers_ARADDR(31 downto 0),
-      m_axi_arprot(17 downto 15) => NLW_xbar_m_axi_arprot_UNCONNECTED(17 downto 15),
+      m_axi_arprot(17 downto 15) => xbar_to_m05_couplers_ARPROT(17 downto 15),
       m_axi_arprot(14 downto 12) => xbar_to_m04_couplers_ARPROT(14 downto 12),
       m_axi_arprot(11 downto 9) => xbar_to_m03_couplers_ARPROT(11 downto 9),
       m_axi_arprot(8 downto 6) => xbar_to_m02_couplers_ARPROT(8 downto 6),
@@ -12713,7 +12735,7 @@ xbar: component design_1_xbar_1
       m_axi_awaddr(95 downto 64) => xbar_to_m02_couplers_AWADDR(95 downto 64),
       m_axi_awaddr(63 downto 32) => xbar_to_m01_couplers_AWADDR(63 downto 32),
       m_axi_awaddr(31 downto 0) => xbar_to_m00_couplers_AWADDR(31 downto 0),
-      m_axi_awprot(17 downto 15) => NLW_xbar_m_axi_awprot_UNCONNECTED(17 downto 15),
+      m_axi_awprot(17 downto 15) => xbar_to_m05_couplers_AWPROT(17 downto 15),
       m_axi_awprot(14 downto 12) => xbar_to_m04_couplers_AWPROT(14 downto 12),
       m_axi_awprot(11 downto 9) => xbar_to_m03_couplers_AWPROT(11 downto 9),
       m_axi_awprot(8 downto 6) => xbar_to_m02_couplers_AWPROT(8 downto 6),
@@ -14694,100 +14716,6 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_top_switch_raw_0;
-  component design_1_axis_flow_control_0_0 is
-  port (
-    s_axis_aclk : in STD_LOGIC;
-    s_axis_aresetn : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tready : out STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
-    s_axis_tlast : in STD_LOGIC;
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tready : in STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
-    m_axis_tlast : out STD_LOGIC;
-    trig0 : in STD_LOGIC;
-    trig1 : in STD_LOGIC;
-    trig2 : in STD_LOGIC;
-    trig_button : in STD_LOGIC;
-    trig_led : out STD_LOGIC;
-    gtu_sig : in STD_LOGIC;
-    gpio_0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_1 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_2 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_3 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_4 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_5 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_ACLK : in STD_LOGIC;
-    S_AXI_ARESETN : in STD_LOGIC;
-    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_AWVALID : in STD_LOGIC;
-    S_AXI_AWREADY : out STD_LOGIC;
-    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S_AXI_WVALID : in STD_LOGIC;
-    S_AXI_WREADY : out STD_LOGIC;
-    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_BVALID : out STD_LOGIC;
-    S_AXI_BREADY : in STD_LOGIC;
-    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_ARVALID : in STD_LOGIC;
-    S_AXI_ARREADY : out STD_LOGIC;
-    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_RVALID : out STD_LOGIC;
-    S_AXI_RREADY : in STD_LOGIC
-  );
-  end component design_1_axis_flow_control_0_0;
-  component design_1_axis_flow_control_L2_0 is
-  port (
-    s_axis_aclk : in STD_LOGIC;
-    s_axis_aresetn : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tready : out STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axis_tlast : in STD_LOGIC;
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tready : in STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    m_axis_tlast : out STD_LOGIC;
-    trig0 : in STD_LOGIC;
-    trig1 : in STD_LOGIC;
-    trig2 : in STD_LOGIC;
-    trig_button : in STD_LOGIC;
-    trig_led : out STD_LOGIC;
-    gtu_sig : in STD_LOGIC;
-    gpio_0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_1 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_2 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_3 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_4 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    gpio_5 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_ACLK : in STD_LOGIC;
-    S_AXI_ARESETN : in STD_LOGIC;
-    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_AWVALID : in STD_LOGIC;
-    S_AXI_AWREADY : out STD_LOGIC;
-    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S_AXI_WVALID : in STD_LOGIC;
-    S_AXI_WREADY : out STD_LOGIC;
-    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_BVALID : out STD_LOGIC;
-    S_AXI_BREADY : in STD_LOGIC;
-    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_ARVALID : in STD_LOGIC;
-    S_AXI_ARREADY : out STD_LOGIC;
-    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_RVALID : out STD_LOGIC;
-    S_AXI_RREADY : in STD_LOGIC
-  );
-  end component design_1_axis_flow_control_L2_0;
   component design_1_axi_data_provider_0_0 is
   port (
     clk_art0_x1 : in STD_LOGIC;
@@ -14893,6 +14821,100 @@ architecture STRUCTURE of design_1 is
     L1_EVENT : out STD_LOGIC
   );
   end component design_1_ALGO_B_0_2;
+  component design_1_axis_flow_control_0_0 is
+  port (
+    s_axis_aclk : in STD_LOGIC;
+    s_axis_aresetn : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tready : out STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
+    s_axis_tlast : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tready : in STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    m_axis_tlast : out STD_LOGIC;
+    trig0 : in STD_LOGIC;
+    trig1 : in STD_LOGIC;
+    trig2 : in STD_LOGIC;
+    trig_button : in STD_LOGIC;
+    trig_led : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
+    gpio_0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_1 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_2 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_3 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_4 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_5 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_ACLK : in STD_LOGIC;
+    S_AXI_ARESETN : in STD_LOGIC;
+    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_AWVALID : in STD_LOGIC;
+    S_AXI_AWREADY : out STD_LOGIC;
+    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S_AXI_WVALID : in STD_LOGIC;
+    S_AXI_WREADY : out STD_LOGIC;
+    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_BVALID : out STD_LOGIC;
+    S_AXI_BREADY : in STD_LOGIC;
+    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_ARVALID : in STD_LOGIC;
+    S_AXI_ARREADY : out STD_LOGIC;
+    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_RVALID : out STD_LOGIC;
+    S_AXI_RREADY : in STD_LOGIC
+  );
+  end component design_1_axis_flow_control_0_0;
+  component design_1_axis_flow_control_L2_0 is
+  port (
+    s_axis_aclk : in STD_LOGIC;
+    s_axis_aresetn : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tready : out STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axis_tlast : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tready : in STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    m_axis_tlast : out STD_LOGIC;
+    trig0 : in STD_LOGIC;
+    trig1 : in STD_LOGIC;
+    trig2 : in STD_LOGIC;
+    trig_button : in STD_LOGIC;
+    trig_led : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
+    gpio_0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_1 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_2 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_3 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_4 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio_5 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_ACLK : in STD_LOGIC;
+    S_AXI_ARESETN : in STD_LOGIC;
+    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_AWVALID : in STD_LOGIC;
+    S_AXI_AWREADY : out STD_LOGIC;
+    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S_AXI_WVALID : in STD_LOGIC;
+    S_AXI_WREADY : out STD_LOGIC;
+    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_BVALID : out STD_LOGIC;
+    S_AXI_BREADY : in STD_LOGIC;
+    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_ARVALID : in STD_LOGIC;
+    S_AXI_ARREADY : out STD_LOGIC;
+    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_RVALID : out STD_LOGIC;
+    S_AXI_RREADY : in STD_LOGIC
+  );
+  end component design_1_axis_flow_control_L2_0;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -15963,8 +15985,10 @@ architecture STRUCTURE of design_1 is
   signal NLW_inst_interconnect_200MHz_M04_AXI_wstrb_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M04_AXI_wvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_araddr_UNCONNECTED : STD_LOGIC;
+  signal NLW_inst_interconnect_200MHz_M05_AXI_arprot_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_arvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_awaddr_UNCONNECTED : STD_LOGIC;
+  signal NLW_inst_interconnect_200MHz_M05_AXI_awprot_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_awvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_bready_UNCONNECTED : STD_LOGIC;
   signal NLW_inst_interconnect_200MHz_M05_AXI_rready_UNCONNECTED : STD_LOGIC;
@@ -18078,9 +18102,11 @@ inst_interconnect_200MHz: entity work.design_1_inst_interconnect_200MHz_0
       M05_ACLK => processing_system7_0_FCLK_CLK1,
       M05_ARESETN(0) => rst_processing_system7_0_200M_peripheral_aresetn(0),
       M05_AXI_araddr => NLW_inst_interconnect_200MHz_M05_AXI_araddr_UNCONNECTED,
+      M05_AXI_arprot => NLW_inst_interconnect_200MHz_M05_AXI_arprot_UNCONNECTED,
       M05_AXI_arready => '0',
       M05_AXI_arvalid => NLW_inst_interconnect_200MHz_M05_AXI_arvalid_UNCONNECTED,
       M05_AXI_awaddr => NLW_inst_interconnect_200MHz_M05_AXI_awaddr_UNCONNECTED,
+      M05_AXI_awprot => NLW_inst_interconnect_200MHz_M05_AXI_awprot_UNCONNECTED,
       M05_AXI_awready => '0',
       M05_AXI_awvalid => NLW_inst_interconnect_200MHz_M05_AXI_awvalid_UNCONNECTED,
       M05_AXI_bready => NLW_inst_interconnect_200MHz_M05_AXI_bready_UNCONNECTED,

@@ -188,6 +188,14 @@ void TriggerService()
 
 			trigger_sm_state = wait4trigger_state;
 		}
+		else if(instrumentState.mode == INSTRUMENT_MODE_INTTRIG)
+		{
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_INT_TRIG;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 1000;
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
+			trigger_sm_state = wait4trigger_state;
+		}
 		else if(instrumentState.mode == INSTRUMENT_MODE_NONE)
 		{
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
