@@ -390,7 +390,6 @@ static void RxIntrHandlerRaw(void *Callback)
 	/* Acknowledge pending interrupts */
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
-	// maybe it is not needed
 	DmaReset(AxiDmaInst);
 
 	// check whether trigger
