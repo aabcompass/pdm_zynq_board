@@ -48,6 +48,7 @@ typedef struct
 	u32 unix_timestamp;
 	u8 is_sent;
 	u32 n_intr;
+	u32 alt_trig_buffer;
 } TriggerInfo;
 
 #define MAX_TRIGGERS_PER_CYCLE		4

@@ -24,7 +24,7 @@ volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter
 volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
 
 volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
-volatile u32 prev_alt_trig_buffer_raw = 0, current_alt_trig_buffer_raw = 0;
+volatile u32 current_alt_trig_buffer_raw = 0;
 volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_L2_changed;
 volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
@@ -82,13 +82,14 @@ void PrintTriggerInfo()
 	{
 		for(j=0;j<4;j++)
 		{
-			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%s\n\r",
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
 					triggerInfoL1[i][j].trigger_type,
 					triggerInfoL1[i][j].n_gtu,
 					triggerInfoL1[i][j].unix_timestamp,
 					triggerInfoL1[i][j].n_intr,
+					triggerInfoL1[i][j].alt_trig_buffer,
 					triggerInfoL1[i][j].is_sent ? "sent" : "pending");
 		}
 	}
@@ -263,6 +264,7 @@ void CopyEventData_trig()
 {
 	int i;
 	u32 gtu_addr, gtu_addr_cross, gtu_n_cross_l, gtu_n_cross_r;
+	u32 alt_trig_buffer;
 	//copy D1
 	for(i=0;i<N1;i++)
 	{
@@ -272,6 +274,7 @@ void CopyEventData_trig()
 		zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoL1[prev_alt_buffer][i].unix_timestamp;
 		// calculate the address of trigger event (in GTUs)
 		gtu_addr = triggerInfoL1[prev_alt_buffer][i].n_gtu % N_FRAMES_DMA_RAW;
+		alt_trig_buffer = (triggerInfoL1[prev_alt_buffer][i].n_gtu / N_FRAMES_DMA_RAW) % 2;
 
 		/*
 		 * If the data around trigger is not edge crossed by DMA page. In this case one pass copy is used.
@@ -280,7 +283,7 @@ void CopyEventData_trig()
 		{
 			xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);
 			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
-					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][gtu_addr-TRIGGER_DATA_OFFSET][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][alt_trig_buffer][gtu_addr-TRIGGER_DATA_OFFSET][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
 		}
 		/*
@@ -293,26 +296,26 @@ void CopyEventData_trig()
 			gtu_n_cross_r = N_OF_FRAMES_L1_V0 - gtu_n_cross_l;
 			// two pass copying. 1st part from the end of alt trig buffer
 			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
-					&DataDMA__Raw[prev_alt_buffer%2][i][!prev_alt_trig_buffer_raw][gtu_addr_cross][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][!alt_trig_buffer][gtu_addr_cross][0],
 					N_OF_PIXEL_PER_PDM * gtu_n_cross_l);
 			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[gtu_n_cross_l][0],
-					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][alt_trig_buffer][0][0],
 					N_OF_PIXEL_PER_PDM * gtu_n_cross_r);
 		}
 		/*
 		 * If the data around trigger is  crossed by left side DMA page.
 		 */
-		else if(gtu_addr + TRIGGER_DATA_OFFSET - TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
+		else if(gtu_addr + TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
 		{
 			gtu_addr_cross = gtu_addr;
 			gtu_n_cross_l = N_FRAMES_DMA_RAW - gtu_addr;
 			gtu_n_cross_r = N_OF_FRAMES_L1_V0 - gtu_n_cross_l;
 			// two pass copying. 1st part from the end of alt trig buffer
 			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
-					&DataDMA__Raw[prev_alt_buffer%2][i][prev_alt_trig_buffer_raw][gtu_addr_cross][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][alt_trig_buffer][gtu_addr_cross][0],
 					N_OF_PIXEL_PER_PDM * gtu_n_cross_l);
 			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[gtu_n_cross_l][0],
-					&DataDMA__Raw[prev_alt_buffer%2][i][!prev_alt_trig_buffer_raw][0][0],
+					&DataDMA__Raw[prev_alt_buffer%2][i][!alt_trig_buffer][0][0],
 					N_OF_PIXEL_PER_PDM * gtu_n_cross_r);
 		}
 	}
@@ -408,12 +411,13 @@ static void RxIntrHandlerRaw(void *Callback)
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType(1);
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp(1);
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_intr = dma_intr_counter_raw;
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].alt_trig_buffer = current_alt_trig_buffer_raw;
 		ReleaseTrigger(1);
 		// Change current trigger buffer to the next one
 		if(current_trigbuf_raw < N1)
 		{
 			u32 gtu_addr = GetTrigNGTU(1) % N_FRAMES_DMA_RAW;
-			if(gtu_addr + TRIGGER_DATA_OFFSET - TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
+			if(gtu_addr + TRIGGER_DATA_OFFSET >= N_FRAMES_DMA_RAW)
 				trigbuf_raw_change_delayed = 1;
 			else
 				current_trigbuf_raw++;
@@ -421,12 +425,13 @@ static void RxIntrHandlerRaw(void *Callback)
 		trig_counter_raw++;
 	}
 
-	DmaStartN(1, current_trigbuf_raw);
 	dma_intr_counter_raw++;
-	prev_alt_trig_buffer_raw = current_alt_trig_buffer_raw;
 
 	if(N_ALT_TRIG_BUFFERS > 1)
 		current_alt_trig_buffer_raw = dma_intr_counter_raw%2;
+
+	DmaStartN(1, current_trigbuf_raw);
+
 	FlowControlClrIntr(1);
 	//print("x");
 
