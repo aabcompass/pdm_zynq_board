@@ -209,7 +209,7 @@ void TriggerService()
 	case wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
-			xil_printf("BufferL2Changed!\n\r");
+			//xil_printf("BufferL2Changed!\n\r");
 			if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
 				CopyEventData();
 			else

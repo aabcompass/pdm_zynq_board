@@ -453,7 +453,7 @@ void ftp_data_sm()
 			{
 				//BuildStorFTPCMD(0, file_counter, stor_ftp_cmd);
 				//stor_ftp_cmd[22] = filename_counter;
-				xil_printf("Filename = %s", filename);
+				//xil_printf("Filename = %s", filename);
 				strcpy(stor_ftp_cmd, "STOR ");
 				strcat(stor_ftp_cmd, filename);
 				strcat(stor_ftp_cmd, "\r\n");
