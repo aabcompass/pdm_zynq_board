@@ -103,6 +103,13 @@ static char filename[50];
 char scan_addr_info[50];
 
 
+static int program_counter, program_counter_d1, program_counter_d2 = 0;
+
+void IncProgramCounter()
+{
+	program_counter++;
+}
+
 static int
 SendFTPcmd(char* str)//transfer_ftpctrl_data()
 {
@@ -494,13 +501,7 @@ void ftp_data_sm()
 				}
 				else
 				{
-					//if(open_new_file)
-					//{
-					//	open_new_file = 0;
 					ftp_state = tcp_data_close_state;
-					//}
-					//else
-					//	ftp_state = spectrum_wait_state;
 				}
 			}
 			break;
@@ -541,6 +542,8 @@ void ftp_data_sm()
 			ret = tcp_close(ftpctrl_connected_pcb);
 			if(ret) xil_printf("tcp_close ctrl returns %d\n\r", ret);
 			ftp_state = idle_state;
+			xil_printf("%d %d\n\r", program_counter - program_counter_d1, program_counter - program_counter_d2);
+			program_counter_d2 = program_counter;
 			break;
 		case complete_state:
 			break;
@@ -595,6 +598,8 @@ void SendSpectrum2FTP(u32* spectrum_addr_param, u32 nbytes, char* filename_param
 		open_new_file = 1;
 		spectrum_bytes_counter = 0;
 	}
+	//xil_printf("%d>", program_counter);
+	program_counter_d1 = program_counter;
 }
 
 

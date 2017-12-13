@@ -410,9 +410,9 @@ void HV_addLog(u32 record_type, char* message, u32 channels)
 		hvps_log.payload[hvps_log_current_record].ts.n_gtu = *(u64*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGR_HVHK_GTU_CNT_L);
 		hvps_log.payload[hvps_log_current_record].record_type = record_type;
 		hvps_log.payload[hvps_log_current_record].channels = channels;
-		xil_printf("HVPS rec%04d GTU%08x \t%s\t(0x%08x)\n\r",
-				hvps_log_current_record,
-				hvps_log.payload[hvps_log_current_record].ts.n_gtu, message, channels);
+//		xil_printf("HVPS rec%04d GTU%08x \t%s\t(0x%08x)\n\r",
+//				hvps_log_current_record,
+//				hvps_log.payload[hvps_log_current_record].ts.n_gtu, message, channels);
 		hvps_log_current_record++;
 	}
 }
@@ -534,8 +534,8 @@ void HVInterruptHundler(void *Callback)
 	exp1_gpinten = getRegister(EXP1, GPINTEN);
 	exp2_gpinten = getRegister(EXP2, GPINTEN);
 	exp3_gpinten = getRegister(EXP3, GPINTEN);
-	xil_printf("INTF=0x%02x\n\r", exp2_intf);
-	xil_printf("INTCAP=0x%02x\n\r", exp2_intcap);
+	//xil_printf("INTF=0x%02x\n\r", exp2_intf);
+	//xil_printf("INTCAP=0x%02x\n\r", exp2_intcap);
 
 	// turn off corresponding interrupt lines
 	if(exp1_intf)

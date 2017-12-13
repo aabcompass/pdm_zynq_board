@@ -71,8 +71,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		SetTime(param2);
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		if(param == 0)
-			SendLogToFTP();
+		//if(param == 0)
+		//	SendLogToFTP();
 	}
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
@@ -80,8 +80,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		SetInstrumentMode(param);
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		if(param == 0)
-			SendLogToFTP();
+		//if(param == 0)
+		//	SendLogToFTP();
 	}
 	else if(strncmp(p->payload, "instrument start", 16) == 0)
 	{
