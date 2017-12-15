@@ -38,6 +38,7 @@ entity axis_flow_control is
   		trig0 : in std_logic;
   		trig1 : in std_logic;
   		trig2 : in std_logic;
+  		trig_4led: out std_logic;
   		trig_button: in std_logic;
   		
   		trig_led: out std_logic := '0';
@@ -1366,5 +1367,7 @@ end generate;
 			end if;
 		end if;
 	end process;
+	
+	trig_4led <= trig0 or trig1 or trig2;
 		
 end Behavioral;

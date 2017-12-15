@@ -224,3 +224,12 @@ set_property PULLUP true [get_ports trig_button]
 
 set_property PACKAGE_PIN Y17 [get_ports {trig_button_gnd[0]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {trig_button_gnd[0]}]
+
+set_property PACKAGE_PIN A8 [get_ports trig_L1_4led]
+set_property PACKAGE_PIN J9 [get_ports trig_L2_4led]
+set_property IOSTANDARD LVCMOS15 [get_ports trig_L1_4led]
+set_property IOSTANDARD LVCMOS15 [get_ports trig_L2_4led]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets u_ila_0_FCLK_CLK0]

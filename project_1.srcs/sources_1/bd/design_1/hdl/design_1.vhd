@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Dec 13 15:08:22 2017
+--Date        : Fri Dec 15 20:19:29 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -12979,12 +12979,14 @@ entity design_1 is
     sr_ck_pc_art : out STD_LOGIC;
     sr_in_pc : out STD_LOGIC_VECTOR ( 5 downto 0 );
     sr_rstb_pc : out STD_LOGIC;
+    trig_L1_4led : out STD_LOGIC;
+    trig_L2_4led : out STD_LOGIC;
     trig_button : in STD_LOGIC;
     trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=138,numReposBlks=106,numNonXlnxBlks=10,numHierBlks=32,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=2,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=137,numReposBlks=105,numNonXlnxBlks=10,numHierBlks=32,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=2,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -14513,11 +14515,6 @@ architecture STRUCTURE of design_1 is
     s00_axi_rready : in STD_LOGIC
   );
   end component design_1_hv_hk_v1_0_0_0;
-  component design_1_xlconstant_2_0 is
-  port (
-    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
-  );
-  end component design_1_xlconstant_2_0;
   component design_1_axis_data_fifo_0_0 is
   port (
     s_axis_aresetn : in STD_LOGIC;
@@ -14836,6 +14833,7 @@ architecture STRUCTURE of design_1 is
     trig0 : in STD_LOGIC;
     trig1 : in STD_LOGIC;
     trig2 : in STD_LOGIC;
+    trig_4led : out STD_LOGIC;
     trig_button : in STD_LOGIC;
     trig_led : out STD_LOGIC;
     gtu_sig : in STD_LOGIC;
@@ -14883,6 +14881,7 @@ architecture STRUCTURE of design_1 is
     trig0 : in STD_LOGIC;
     trig1 : in STD_LOGIC;
     trig2 : in STD_LOGIC;
+    trig_4led : out STD_LOGIC;
     trig_button : in STD_LOGIC;
     trig_led : out STD_LOGIC;
     gtu_sig : in STD_LOGIC;
@@ -15370,10 +15369,12 @@ architecture STRUCTURE of design_1 is
   signal axis_flow_control_0_m_axis_TREADY : STD_LOGIC;
   signal axis_flow_control_0_m_axis_TVALID : STD_LOGIC;
   signal axis_flow_control_0_trig_led : STD_LOGIC;
+  signal axis_flow_control_L1_trig_4led : STD_LOGIC;
   signal axis_flow_control_L2_m_axis_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_flow_control_L2_m_axis_TLAST : STD_LOGIC;
   signal axis_flow_control_L2_m_axis_TREADY : STD_LOGIC;
   signal axis_flow_control_L2_m_axis_TVALID : STD_LOGIC;
+  signal axis_flow_control_L2_trig_4led : STD_LOGIC;
   signal axis_flow_control_L2_trig_led : STD_LOGIC;
   signal clk_art_1_1_CLK_N : STD_LOGIC;
   signal clk_art_1_1_CLK_P : STD_LOGIC;
@@ -16034,7 +16035,6 @@ architecture STRUCTURE of design_1 is
   signal NLW_top_switch_raw_m_axis_event_tlast_UNCONNECTED : STD_LOGIC;
   signal NLW_top_switch_raw_m_axis_event_tvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_top_switch_raw_m_axis_event_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal NLW_xlconstant_2_dout_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
   CLK_HV_n <= HV_AERA_IP_0_CLK_HV_n;
   CLK_HV_p <= HV_AERA_IP_0_CLK_HV_p;
@@ -16084,6 +16084,8 @@ begin
   sr_ck_pc_art <= spaciroc3_sc_0_sr_ck_pc;
   sr_in_pc(5 downto 0) <= spaciroc3_sc_0_sr_in_pc(5 downto 0);
   sr_rstb_pc <= spaciroc3_sc_0_sr_rstb_pc;
+  trig_L1_4led <= axis_flow_control_L1_trig_4led;
+  trig_L2_4led <= axis_flow_control_L2_trig_4led;
   trig_button_1 <= trig_button;
   trig_button_gnd(0) <= xlconstant_1_dout(0);
   user_led(0) <= util_vector_logic_0_Res(0);
@@ -17544,6 +17546,7 @@ axis_flow_control_L1: component design_1_axis_flow_control_0_0
       trig0 => algo_b_conv_0_L1_EVENT,
       trig1 => ALGO_B_2_L1_EVENT,
       trig2 => ALGO_B_1_L1_EVENT,
+      trig_4led => axis_flow_control_L1_trig_4led,
       trig_button => trig_button_1,
       trig_led => axis_flow_control_0_trig_led
     );
@@ -17590,6 +17593,7 @@ axis_flow_control_L2: component design_1_axis_flow_control_L2_0
       trig0 => xlslice_0_Dout(0),
       trig1 => xlslice_0_Dout(0),
       trig2 => xlslice_0_Dout(0),
+      trig_4led => axis_flow_control_L2_trig_4led,
       trig_button => trig_button_1,
       trig_led => axis_flow_control_L2_trig_led
     );
@@ -18648,10 +18652,6 @@ xlconcat_1: component design_1_xlconcat_1_0
 xlconstant_1: component design_1_xlconstant_1_0
      port map (
       dout(0) => xlconstant_1_dout(0)
-    );
-xlconstant_2: component design_1_xlconstant_2_0
-     port map (
-      dout(0) => NLW_xlconstant_2_dout_UNCONNECTED(0)
     );
 xlslice_0: component design_1_xlslice_0_0
      port map (

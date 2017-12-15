@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Dec 13 15:08:23 2017
+--Date        : Fri Dec 15 20:19:29 2017
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -78,6 +78,8 @@ entity design_1_wrapper is
     sr_ck_pc_art : out STD_LOGIC;
     sr_in_pc : out STD_LOGIC_VECTOR ( 5 downto 0 );
     sr_rstb_pc : out STD_LOGIC;
+    trig_L1_4led : out STD_LOGIC;
+    trig_L2_4led : out STD_LOGIC;
     trig_button : in STD_LOGIC;
     trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 )
@@ -131,8 +133,8 @@ architecture STRUCTURE of design_1_wrapper is
     CLK_HV_n : out STD_LOGIC;
     DATA_HV_p : out STD_LOGIC;
     DATA_HV_n : out STD_LOGIC;
-    sr_ck_pc : out STD_LOGIC;
     sr_ck_pc_art : out STD_LOGIC;
+    sr_ck_pc : out STD_LOGIC;
     sr_rstb_pc : out STD_LOGIC;
     select_sc_probe_pc : out STD_LOGIC;
     resetb_pc : out STD_LOGIC;
@@ -158,7 +160,9 @@ architecture STRUCTURE of design_1_wrapper is
     data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
     trig_button : in STD_LOGIC;
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 );
-    trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 )
+    trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
+    trig_L1_4led : out STD_LOGIC;
+    trig_L2_4led : out STD_LOGIC
   );
   end component design_1;
   component IOBUF is
@@ -261,6 +265,8 @@ design_1_i: component design_1
       sr_ck_pc_art => sr_ck_pc_art,
       sr_in_pc(5 downto 0) => sr_in_pc(5 downto 0),
       sr_rstb_pc => sr_rstb_pc,
+      trig_L1_4led => trig_L1_4led,
+      trig_L2_4led => trig_L2_4led,
       trig_button => trig_button,
       trig_button_gnd(0) => trig_button_gnd(0),
       user_led(0) => user_led(0)
