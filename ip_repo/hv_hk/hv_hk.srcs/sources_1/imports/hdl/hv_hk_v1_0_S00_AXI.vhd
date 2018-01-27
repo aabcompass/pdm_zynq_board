@@ -25,7 +25,6 @@ entity hv_hk_v1_0_S00_AXI is
 		sck_n, mosi_n, cs_exp_n, cs_dac_n: out std_logic;
 		miso_p, intr_p: in std_logic;
 		miso_n, intr_n: in std_logic;
-		hv_led: out std_logic;
 		intr_out: out std_logic;
 		--
 		gtu_sig: in std_logic; 	
@@ -178,7 +177,6 @@ architecture arch_imp of hv_hk_v1_0_S00_AXI is
 							 miso : in STD_LOGIC;
 							 cs_exp : out STD_LOGIC := '1';
 							 cs_dac : out STD_LOGIC := '1';
-							 hv_led: out std_logic;
 							 intr: in std_logic;
 							 -- control if
 							 start : in STD_LOGIC;
@@ -815,7 +813,6 @@ begin
 						 miso => miso,--: in STD_LOGIC;
 						 cs_exp => cs_exp,--: out STD_LOGIC := '1';
 						 cs_dac => cs_dac,--: out STD_LOGIC := '1';
-						 hv_led => hv_led,
 						 intr => intr,
 						 -- control if
 						 start => slv_reg0(0),--: in STD_LOGIC;

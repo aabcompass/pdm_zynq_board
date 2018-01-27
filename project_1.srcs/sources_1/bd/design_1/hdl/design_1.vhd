@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Fri Dec 15 20:19:29 2017
+--Date        : Sat Jan 27 22:34:34 2018
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -12929,6 +12929,8 @@ entity design_1 is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
+    Ext_sync_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    Ext_sync_out : out STD_LOGIC_VECTOR ( 1 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -12962,7 +12964,6 @@ entity design_1 is
     frame_art0 : in STD_LOGIC;
     frame_art1 : in STD_LOGIC;
     frame_art2 : in STD_LOGIC;
-    hv_led : out STD_LOGIC;
     intr_n : in STD_LOGIC;
     intr_p : in STD_LOGIC;
     loadb_sc_pc : out STD_LOGIC;
@@ -12986,7 +12987,7 @@ entity design_1 is
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=137,numReposBlks=105,numNonXlnxBlks=10,numHierBlks=32,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=2,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=138,numReposBlks=106,numNonXlnxBlks=10,numHierBlks=32,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=2,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -13227,7 +13228,8 @@ architecture STRUCTURE of design_1 is
     In1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In2 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In3 : in STD_LOGIC_VECTOR ( 12 downto 0 );
-    In4 : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    In4 : in STD_LOGIC_VECTOR ( 13 downto 0 );
+    In5 : in STD_LOGIC_VECTOR ( 1 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_xlconcat_0_0;
@@ -14475,46 +14477,6 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_xlconstant_1_0;
-  component design_1_hv_hk_v1_0_0_0 is
-  port (
-    sck_p : out STD_LOGIC;
-    sck_n : out STD_LOGIC;
-    mosi_p : out STD_LOGIC;
-    mosi_n : out STD_LOGIC;
-    cs_exp_p : out STD_LOGIC;
-    cs_exp_n : out STD_LOGIC;
-    cs_dac_p : out STD_LOGIC;
-    cs_dac_n : out STD_LOGIC;
-    miso_p : in STD_LOGIC;
-    miso_n : in STD_LOGIC;
-    intr_p : in STD_LOGIC;
-    intr_n : in STD_LOGIC;
-    hv_led : out STD_LOGIC;
-    intr_out : out STD_LOGIC;
-    gtu_sig : in STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component design_1_hv_hk_v1_0_0_0;
   component design_1_axis_data_fifo_0_0 is
   port (
     s_axis_aresetn : in STD_LOGIC;
@@ -14914,6 +14876,51 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_L2_0;
+  component design_1_xlslice_1_0 is
+  port (
+    Din : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    Dout : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  end component design_1_xlslice_1_0;
+  component design_1_hv_hk_v1_0_0_0 is
+  port (
+    sck_p : out STD_LOGIC;
+    sck_n : out STD_LOGIC;
+    mosi_p : out STD_LOGIC;
+    mosi_n : out STD_LOGIC;
+    cs_exp_p : out STD_LOGIC;
+    cs_exp_n : out STD_LOGIC;
+    cs_dac_p : out STD_LOGIC;
+    cs_dac_n : out STD_LOGIC;
+    miso_p : in STD_LOGIC;
+    miso_n : in STD_LOGIC;
+    intr_p : in STD_LOGIC;
+    intr_n : in STD_LOGIC;
+    intr_out : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC
+  );
+  end component design_1_hv_hk_v1_0_0_0;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -14927,6 +14934,7 @@ architecture STRUCTURE of design_1 is
   signal HV_AERA_IP_0_DATA_HV_p : STD_LOGIC;
   signal HV_AERA_IP_0_GTU_HV_n : STD_LOGIC;
   signal HV_AERA_IP_0_GTU_HV_p : STD_LOGIC;
+  signal In5_1 : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal S01_AXI_1_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal S01_AXI_1_AWBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal S01_AXI_1_AWCACHE : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -15028,6 +15036,7 @@ architecture STRUCTURE of design_1 is
   signal axi_fifo_mm_s_1_AXI_STR_TXD_TLAST : STD_LOGIC;
   signal axi_fifo_mm_s_1_AXI_STR_TXD_TREADY : STD_LOGIC;
   signal axi_fifo_mm_s_1_AXI_STR_TXD_TVALID : STD_LOGIC;
+  signal axi_gpio_0_gpio2_io_o : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARCACHE : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -15398,7 +15407,6 @@ architecture STRUCTURE of design_1 is
   signal hv_hk_v1_0_0_cs_dac_p : STD_LOGIC;
   signal hv_hk_v1_0_0_cs_exp_n : STD_LOGIC;
   signal hv_hk_v1_0_0_cs_exp_p : STD_LOGIC;
-  signal hv_hk_v1_0_0_hv_led : STD_LOGIC;
   signal hv_hk_v1_0_0_intr_out : STD_LOGIC;
   signal hv_hk_v1_0_0_mosi_n : STD_LOGIC;
   signal hv_hk_v1_0_0_mosi_p : STD_LOGIC;
@@ -15844,6 +15852,7 @@ architecture STRUCTURE of design_1 is
   signal xlconcat_1_dout : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal xlconstant_1_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xlslice_0_Dout : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal xlslice_1_Dout : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0r_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art1l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -15861,7 +15870,6 @@ architecture STRUCTURE of design_1 is
   signal NLW_axi_dma_tst_L1_m_axis_mm2s_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal NLW_axi_fifo_mm_s_1_interrupt_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_fifo_mm_s_1_mm2s_prmry_reset_out_n_UNCONNECTED : STD_LOGIC;
-  signal NLW_axi_gpio_0_gpio2_io_o_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_axi_quad_spi_0_io0_t_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_quad_spi_0_io1_o_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_quad_spi_0_io1_t_UNCONNECTED : STD_LOGIC;
@@ -16044,8 +16052,10 @@ begin
   CLK_IN1_D_1_CLK_P <= clk_art_0_clk_p;
   DATA_HV_n <= HV_AERA_IP_0_DATA_HV_n;
   DATA_HV_p <= HV_AERA_IP_0_DATA_HV_p;
+  Ext_sync_out(1 downto 0) <= xlslice_1_Dout(1 downto 0);
   GTU_HV_n <= HV_AERA_IP_0_GTU_HV_n;
   GTU_HV_p <= HV_AERA_IP_0_GTU_HV_p;
+  In5_1(1 downto 0) <= Ext_sync_in(1 downto 0);
   artx_conf_cclk <= axi_quad_spi_0_sck_o;
   artx_conf_data <= axi_quad_spi_0_io0_o;
   artx_done_1 <= artx_done;
@@ -16067,7 +16077,6 @@ begin
   frame_art0_1 <= frame_art0;
   frame_art1_1 <= frame_art1;
   frame_art2_1 <= frame_art2;
-  hv_led <= hv_hk_v1_0_0_hv_led;
   intr_n_1 <= intr_n;
   intr_p_1 <= intr_p;
   loadb_sc_pc <= spaciroc3_sc_0_loadb_sc_pc;
@@ -16458,7 +16467,7 @@ axi_fifo_mm_s_1: component design_1_axi_fifo_mm_s_1_0
     );
 axi_gpio_0: component design_1_axi_gpio_0_0
      port map (
-      gpio2_io_o(31 downto 0) => NLW_axi_gpio_0_gpio2_io_o_UNCONNECTED(31 downto 0),
+      gpio2_io_o(31 downto 0) => axi_gpio_0_gpio2_io_o(31 downto 0),
       gpio_io_i(31 downto 0) => xlconcat_0_dout(31 downto 0),
       s_axi_aclk => processing_system7_0_FCLK_CLK0,
       s_axi_araddr(8 downto 0) => processing_system7_0_axi_periph_M03_AXI_ARADDR(8 downto 0),
@@ -17625,7 +17634,6 @@ hv_hk_v1_0_0: component design_1_hv_hk_v1_0_0_0
       cs_exp_n => hv_hk_v1_0_0_cs_exp_n,
       cs_exp_p => hv_hk_v1_0_0_cs_exp_p,
       gtu_sig => axi_data_provider_0_gtu_sig,
-      hv_led => hv_hk_v1_0_0_hv_led,
       intr_n => intr_n_1,
       intr_out => hv_hk_v1_0_0_intr_out,
       intr_p => intr_p_1,
@@ -18638,7 +18646,8 @@ xlconcat_0: component design_1_xlconcat_0_0
       In1(0) => clk_wiz_3_locked,
       In2(0) => clk_wiz_2_locked,
       In3(12 downto 0) => B"0000000000000",
-      In4(15 downto 0) => B"0000000000000000",
+      In4(13 downto 0) => B"00000000000000",
+      In5(1 downto 0) => In5_1(1 downto 0),
       dout(31 downto 0) => xlconcat_0_dout(31 downto 0)
     );
 xlconcat_1: component design_1_xlconcat_1_0
@@ -18657,5 +18666,10 @@ xlslice_0: component design_1_xlslice_0_0
      port map (
       Din(31 downto 0) => l2_trigger_0_trig_data(31 downto 0),
       Dout(0) => xlslice_0_Dout(0)
+    );
+xlslice_1: component design_1_xlslice_1_0
+     port map (
+      Din(31 downto 0) => axi_gpio_0_gpio2_io_o(31 downto 0),
+      Dout(1 downto 0) => xlslice_1_Dout(1 downto 0)
     );
 end STRUCTURE;

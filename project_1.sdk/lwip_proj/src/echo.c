@@ -305,8 +305,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 's')
 	{
+		static int incr_var = 0;
 		xil_printf("GetArtixLoadState=0x%08x\n\r",  GetArtixLoadState());
 		xil_printf("locked = 0x%08x\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR));
+		*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
 		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
 		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
 		xil_printf("trigger_sm_state = %d\n\r", trigger_sm_state);

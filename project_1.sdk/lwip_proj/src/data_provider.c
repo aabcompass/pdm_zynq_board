@@ -119,7 +119,7 @@ void ProvideAndCheck()
 			break;
 		if((i/100)%4 == 0)      print("----/----\r");
 		else if((i/100)%4 == 1) print("----|----\r");
-		else if((i/100)%4 == 2) print("----\----\r");
+		else if((i/100)%4 == 2) print("----\\----\r");
 		else if((i/100)%4 == 3) print("----|----\r");
 	}
 	xil_printf("DMAIntrCounterRaw=%d\n\r", GetDMAIntrCounterN(0));

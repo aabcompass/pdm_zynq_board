@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Fri Dec 15 20:19:29 2017
+--Date        : Sat Jan 27 22:34:34 2018
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -32,6 +32,8 @@ entity design_1_wrapper is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
+    Ext_sync_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    Ext_sync_out : out STD_LOGIC_VECTOR ( 1 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -61,7 +63,6 @@ entity design_1_wrapper is
     frame_art0 : in STD_LOGIC;
     frame_art1 : in STD_LOGIC;
     frame_art2 : in STD_LOGIC;
-    hv_led : out STD_LOGIC;
     intr_n : in STD_LOGIC;
     intr_p : in STD_LOGIC;
     loadb_sc_pc : out STD_LOGIC;
@@ -153,7 +154,6 @@ architecture STRUCTURE of design_1_wrapper is
     miso_n : in STD_LOGIC;
     intr_p : in STD_LOGIC;
     intr_n : in STD_LOGIC;
-    hv_led : out STD_LOGIC;
     frame_art0 : in STD_LOGIC;
     frame_art2 : in STD_LOGIC;
     data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -162,7 +162,9 @@ architecture STRUCTURE of design_1_wrapper is
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 );
     trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     trig_L1_4led : out STD_LOGIC;
-    trig_L2_4led : out STD_LOGIC
+    trig_L2_4led : out STD_LOGIC;
+    Ext_sync_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    Ext_sync_out : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   end component design_1;
   component IOBUF is
@@ -215,6 +217,8 @@ design_1_i: component design_1
       DDR_ras_n => DDR_ras_n,
       DDR_reset_n => DDR_reset_n,
       DDR_we_n => DDR_we_n,
+      Ext_sync_in(1 downto 0) => Ext_sync_in(1 downto 0),
+      Ext_sync_out(1 downto 0) => Ext_sync_out(1 downto 0),
       FIXED_IO_ddr_vrn => FIXED_IO_ddr_vrn,
       FIXED_IO_ddr_vrp => FIXED_IO_ddr_vrp,
       FIXED_IO_mio(53 downto 0) => FIXED_IO_mio(53 downto 0),
@@ -248,7 +252,6 @@ design_1_i: component design_1
       frame_art0 => frame_art0,
       frame_art1 => frame_art1,
       frame_art2 => frame_art2,
-      hv_led => hv_led,
       intr_n => intr_n,
       intr_p => intr_p,
       loadb_sc_pc => loadb_sc_pc,

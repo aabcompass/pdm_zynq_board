@@ -15,7 +15,6 @@ entity spi_if is
            cs_exp : out STD_LOGIC := '1';
            cs_dac : out STD_LOGIC := '1';
            intr: in std_logic;
-           hv_led: out std_logic;
            -- control if
            start : in STD_LOGIC;
            exp_not_dac: in std_logic;
@@ -52,8 +51,6 @@ architecture Behavioral of spi_if is
 	attribute keep of sck_i: signal is "true";  	
 
 begin
-
-	hv_led <= intr;
 
 	sm_exps: process(clk)
 		variable state : integer range 0 to 9 := 0;
