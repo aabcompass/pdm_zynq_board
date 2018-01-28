@@ -18,7 +18,7 @@
 #define REGW_GTUS_PER_CYCLE			6 /* the number of GTUs in one cycles (5.24s in Mini-EUSO)*/
 #define REGW_PERIODIC_TRIG_PERIOD	7 /* Period of periodic trigger (in GTUs)*/
 #define REGW_DMA_LENGTH				8 /* number of AXIS transfers per interrupt*/
-#define REGW_NUM_OF_TRIGS			9 /* 15:0 = number of triggers per cycle 5,24s*/
+#define REGW_NUM_OF_TRIGS_FLAGS2	9 /* 15:0 = number of triggers per cycle 5,24s*/
 #define REGW_UNIX_TIME				10
 
 #define REGR_FC_SM_STATE			14 /*16=trig_flag 4=pass_intr 3:0=sm_state*/
@@ -60,5 +60,7 @@
 #define BIT_FC_SET_UNIX_TIME	(1<<2)
 
 #define BIT_FC_IS_TRIGGER		(1<<16)
+
+#define BIT_FC_IS_TRIGGER_LED	(1<<16)
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

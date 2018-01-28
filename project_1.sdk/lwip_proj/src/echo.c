@@ -287,11 +287,13 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 't')
 	{
-		static int is_test_mode = 0;
-		is_test_mode = !is_test_mode;
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
-		xil_printf("is_test_mode=%d\n\r", is_test_mode);
+		// TURN ON THE TRIG LED
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
+		//static int is_test_mode = 0;
+		//is_test_mode = !is_test_mode;
+		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
+		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
+		//xil_printf("is_test_mode=%d\n\r", is_test_mode);
 	}
 	else if(c == 'Y')
 	{
@@ -305,10 +307,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 's')
 	{
-		static int incr_var = 0;
 		xil_printf("GetArtixLoadState=0x%08x\n\r",  GetArtixLoadState());
 		xil_printf("locked = 0x%08x\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR));
-		*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
+		// static int incr_var = 0;
+		// for external trigger i/o check
+		// *(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
 		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
 		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
 		xil_printf("trigger_sm_state = %d\n\r", trigger_sm_state);

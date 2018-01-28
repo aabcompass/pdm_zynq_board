@@ -176,10 +176,9 @@ architecture Behavioral of axis_flow_control is
 
 	signal is_started: std_logic := '0';
 	signal en_int_trig, en_algo_trig, periodic_trig_en: std_logic := '0';
-	signal periodic_trig_d0, periodic_trig_d1: std_logic := '0';
 	signal release: std_logic := '0';
 	signal trig: std_logic := '0';
-	signal periodic_trig: std_logic := '0';
+	signal periodic_trig, periodic_trig_d1: std_logic := '0';
 
 	signal clear_error: std_logic := '0';
 	signal m_axis_fifo_error: std_logic_vector(31 downto 0) := (others => '0');
@@ -286,7 +285,7 @@ architecture Behavioral of axis_flow_control is
 
 	signal m_axis_tvalid_key, m_axis_tvalid_i, m_axis_tready_key: std_logic := '0';
 	signal pass_intr: std_logic := '1';
-	signal self_trig: std_logic := '0';
+	signal self_trig, self_trig_d1: std_logic := '0';
 	signal one_second_pulse: std_logic := '0';
 	signal set_unix_time: std_logic := '0';
 	signal trig_flag: std_logic := '0';
@@ -308,6 +307,8 @@ architecture Behavioral of axis_flow_control is
 	signal data_gen : std_logic_vector(63 downto 0) := X"0000000000000000";
 	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
 	signal pattern_checker_error : std_logic := '0';
+	
+	signal en_trig_led : std_logic := '0';
 	
 	signal m_axis_tvalid_extra, m_axis_tready_extra, m_axis_tlast_extra: std_logic := '0';
 	signal m_axis_tdata_extra : std_logic_vector(63 downto 0) := (others => '0');
@@ -960,6 +961,7 @@ begin
 	periodic_trig_gtu_period <= slv_reg7;
 	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
 	number_of_triggers <= slv_reg9(15 downto 0);
+	en_trig_led <= slv_reg9(16);
 	unix_time_reg <= slv_reg10;
 
 	slv_reg14(3 downto 0) <= sm_state;
@@ -1077,6 +1079,9 @@ begin
 		end if;
 	end process;
 	
+	periodic_trig_d1 <= periodic_trig when rising_edge(s_axis_aclk);
+	self_trig_d1 <= self_trig when rising_edge(s_axis_aclk);
+	
 
 	int_trig_gen: process(s_axis_aclk) 
 		variable state : integer range 0 to 1 := 0;
@@ -1131,10 +1136,10 @@ begin
 												end if;
 											end if;
 										end if;
-					when 1 => if(periodic_trig = '1') then
+					when 1 => if(periodic_trig_d1 = '1') then
 											trig_type <= X"1";
 											periodic_trig_cnt <= periodic_trig_cnt + 1;
-										elsif(self_trig = '1') then
+										elsif(self_trig_d1 = '1') then
 											trig_type <= X"2";
 											self_trig_cnt <= self_trig_cnt + 1;
 										else
@@ -1180,7 +1185,7 @@ begin
 		if(rising_edge(s_axis_aclk)) then
 			case state is
 				when 0 => if(trig = '1') then
-										trig_led <= '1';
+										trig_led <= en_trig_led;
 										state := state + 1;
 									end if;
 				when 1 => if(led_cnt = X"FFFFFF") then
