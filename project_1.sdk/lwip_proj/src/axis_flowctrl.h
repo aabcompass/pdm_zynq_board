@@ -44,9 +44,11 @@
 #define GetNlifeCycle() 		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGR_GTU_CNT_L*4))
 
 #define BIT_FC_IS_STARTED		(1<<0)
-#define BIT_FC_EN_INT_TRIG		(1<<1)
+
+#define BIT_FC_EN_PERIODIC_TRIG	(1<<1)
 #define BIT_FC_EN_ALGO_TRIG		(1<<2)
-#define BIT_FC_EN_PERIODIC_TRIG	(1<<3)
+#define BIT_FC_EN_INT_TRIG		(1<<3)
+#define BIT_FC_EN_EXT_TRIG		(1<<4)
 
 #define BIT_FC_CLR_TRANS_CNT	(1<<0) /* Just for DBG*/
 #define BIT_FC_CLR_ERROR		(1<<1) /* Just for DBG*/
@@ -62,5 +64,7 @@
 #define BIT_FC_IS_TRIGGER		(1<<16)
 
 #define BIT_FC_IS_TRIGGER_LED	(1<<16)
+#define BIT_FC_EN_TRIG_OUT		(1<<17)
+#define BIT_FC_TRIG_OUT_FORCE	(1<<18)
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

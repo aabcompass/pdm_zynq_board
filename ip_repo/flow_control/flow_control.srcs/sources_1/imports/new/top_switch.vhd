@@ -43,6 +43,9 @@ entity axis_flow_control is
   		
   		trig_led: out std_logic := '0';
   		
+  		trig_ext_in: in std_logic;
+  		trig_out: out std_logic;
+  		
   		gtu_sig: in std_logic; 	
   		
   		gpio_0, gpio_1, gpio_2, gpio_3, gpio_4, gpio_5: in std_logic_vector(31 downto 0) := (others => '0');
@@ -175,7 +178,7 @@ architecture Behavioral of axis_flow_control is
 	signal sm_state: std_logic_vector(3 downto 0) := "0000";
 
 	signal is_started: std_logic := '0';
-	signal en_int_trig, en_algo_trig, periodic_trig_en: std_logic := '0';
+	signal en_int_trig, en_algo_trig, periodic_trig_en, en_ext_trig: std_logic := '0';
 	signal release: std_logic := '0';
 	signal trig: std_logic := '0';
 	signal periodic_trig, periodic_trig_d1: std_logic := '0';
@@ -193,7 +196,7 @@ architecture Behavioral of axis_flow_control is
 	
 	signal periodic_trig_phase : std_logic_vector(20 downto 0) := (others => '0');
 	
-	signal led_cnt : std_logic_vector(23 downto 0) := (others => '0');
+	signal led_cnt, trig_out_cnt : std_logic_vector(23 downto 0) := (others => '0');
 	signal dma_length, dma_length_cntr : std_logic_vector(19 downto 0) := (others => '0');
 	
 	signal int_trig_d0, int_trig_d1, int_trig, trig_force : std_logic := '0';
@@ -308,7 +311,8 @@ architecture Behavioral of axis_flow_control is
 	signal packet_cntr: std_logic_vector(8 downto 0) := (others => '0');
 	signal pattern_checker_error : std_logic := '0';
 	
-	signal en_trig_led : std_logic := '0';
+	signal en_trig_led, en_trig_out, trig_out_pulse, trig_out_force : std_logic := '0';
+	signal trig_ext_in_sync : std_logic := '0';
 	
 	signal m_axis_tvalid_extra, m_axis_tready_extra, m_axis_tlast_extra: std_logic := '0';
 	signal m_axis_tdata_extra : std_logic_vector(63 downto 0) := (others => '0');
@@ -937,11 +941,25 @@ begin
 
 ----------------------- 
 
+	
+xpm_cdc_extsync_inst: xpm_cdc_single
+  generic map (
+     DEST_SYNC_FF   => 4, -- integer; range: 2-10
+     SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+     SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
+  )
+  port map (
+     src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+     src_in   => trig_ext_in,
+     dest_clk => s_axis_aclk,
+     dest_out => trig_ext_in_sync
+  );
 
 	is_started <= slv_reg0(0);
-	en_int_trig <= slv_reg0(1);
+	periodic_trig_en <= slv_reg0(1);
 	en_algo_trig <= slv_reg0(2);
-	periodic_trig_en <= slv_reg0(3);
+	en_int_trig <= slv_reg0(3);
+	en_ext_trig <= slv_reg0(4);
 	
 	clr_trans_counter <= slv_reg1(0);
 	clear_error <= slv_reg1(1);
@@ -962,10 +980,14 @@ begin
 	dma_length <= slv_reg8(19 downto 0); -- number of dma transfers after which tlast signal will be formed
 	number_of_triggers <= slv_reg9(15 downto 0);
 	en_trig_led <= slv_reg9(16);
+	en_trig_out <= slv_reg9(17);
+	trig_out_force <= slv_reg9(18);
+
 	unix_time_reg <= slv_reg10;
 
 	slv_reg14(3 downto 0) <= sm_state;
 	slv_reg14(4) <= pass_intr;
+	slv_reg14(5) <= trig_ext_in_sync;
 	slv_reg14(16) <= trig_flag;
 	slv_reg15 <= gtu_sig_counter;
 	slv_reg16(15 downto 0) <= tlast_counter2;
@@ -1094,25 +1116,25 @@ begin
 				case state is
 					when 0 => 
 						if(periodic_trig_gen_cnt2 < n_gtus_per_cycle) then
-								if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
-									if(int_trig_gen_cnt = int_trig_gtu_time-1) then
-										int_trig <= en_int_trig;
-										state := state + 1;
-									else
-										int_trig <= '0';
-										int_trig_gen_cnt <= int_trig_gen_cnt + 1;
-									end if;
+							if(gtu_sig_d0 = '1' and gtu_sig_d1 = '0') then
+								if(int_trig_gen_cnt = int_trig_gtu_time-1) then
+									int_trig <= en_int_trig;
+									state := state + 1;
+								else 
+									int_trig <= '0';
+									int_trig_gen_cnt <= int_trig_gen_cnt + 1;
 								end if;
 							end if;
-						when 1 =>
-							int_trig <= '0';
+						end if;
+					when 1 =>
+						int_trig <= '0';
 				end case;
 			end if;
 		end if;
 	end process;
 	
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
-	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced;
+	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or (trig_ext_in_sync and en_ext_trig);
 	
 	trig_service: process(s_axis_aclk)
 		variable state : integer range 0 to 4 := 0;
@@ -1196,6 +1218,26 @@ begin
 			end case;
 		end if;
 	end process; 
+
+	trig_out_process: process(s_axis_aclk)
+		variable state : integer range 0 to 1 := 0;
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			case state is
+				when 0 => if(trig = '1') then
+										trig_out_pulse <= '1';
+										state := state + 1;
+									end if;
+				when 1 => if(trig_out_cnt = X"FF") then
+										trig_out_pulse <= '0';
+										state := 0; 
+									end if;
+									trig_out_cnt <= trig_out_cnt + 1;
+			end case;
+		end if;
+	end process; 
+
+	trig_out <= (trig_out_force or trig_out_pulse) and en_trig_out;
 
 	tlast_counter_verificator: process(s_axis_aclk)
 	begin

@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sun Jan 28 01:30:42 2018
+--Date        : Sun Jan 28 21:30:19 2018
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.3 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -32,8 +32,6 @@ entity design_1_wrapper is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
-    Ext_sync_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    Ext_sync_out : out STD_LOGIC_VECTOR ( 1 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -83,6 +81,8 @@ entity design_1_wrapper is
     trig_L2_4led : out STD_LOGIC;
     trig_button : in STD_LOGIC;
     trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
+    trig_ext_in : in STD_LOGIC;
+    trig_out : out STD_LOGIC;
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
 end design_1_wrapper;
@@ -134,8 +134,8 @@ architecture STRUCTURE of design_1_wrapper is
     CLK_HV_n : out STD_LOGIC;
     DATA_HV_p : out STD_LOGIC;
     DATA_HV_n : out STD_LOGIC;
-    sr_ck_pc_art : out STD_LOGIC;
     sr_ck_pc : out STD_LOGIC;
+    sr_ck_pc_art : out STD_LOGIC;
     sr_rstb_pc : out STD_LOGIC;
     select_sc_probe_pc : out STD_LOGIC;
     resetb_pc : out STD_LOGIC;
@@ -163,8 +163,8 @@ architecture STRUCTURE of design_1_wrapper is
     trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     trig_L1_4led : out STD_LOGIC;
     trig_L2_4led : out STD_LOGIC;
-    Ext_sync_in : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    Ext_sync_out : out STD_LOGIC_VECTOR ( 1 downto 0 )
+    trig_out : out STD_LOGIC;
+    trig_ext_in : in STD_LOGIC
   );
   end component design_1;
   component IOBUF is
@@ -217,8 +217,6 @@ design_1_i: component design_1
       DDR_ras_n => DDR_ras_n,
       DDR_reset_n => DDR_reset_n,
       DDR_we_n => DDR_we_n,
-      Ext_sync_in(1 downto 0) => Ext_sync_in(1 downto 0),
-      Ext_sync_out(1 downto 0) => Ext_sync_out(1 downto 0),
       FIXED_IO_ddr_vrn => FIXED_IO_ddr_vrn,
       FIXED_IO_ddr_vrp => FIXED_IO_ddr_vrp,
       FIXED_IO_mio(53 downto 0) => FIXED_IO_mio(53 downto 0),
@@ -272,6 +270,8 @@ design_1_i: component design_1
       trig_L2_4led => trig_L2_4led,
       trig_button => trig_button,
       trig_button_gnd(0) => trig_button_gnd(0),
+      trig_ext_in => trig_ext_in,
+      trig_out => trig_out,
       user_led(0) => user_led(0)
     );
 end STRUCTURE;
