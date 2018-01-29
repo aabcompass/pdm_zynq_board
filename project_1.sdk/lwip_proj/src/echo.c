@@ -216,8 +216,8 @@ void TriggerService()
 		if(instrumentState.mode != 0)
 		{
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) &= ~BIT_FC_EN_ALGO_TRIG;
+			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
+			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) &= ~BIT_FC_EN_ALGO_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
@@ -235,7 +235,7 @@ void TriggerService()
 	case wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
-			//xil_printf("BufferL2Changed!\n\r");
+			// xil_printf("BufferL2Changed!\n\r");
 			if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
 				CopyEventData();
 			else

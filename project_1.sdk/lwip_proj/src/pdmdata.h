@@ -248,6 +248,7 @@ typedef struct
 #define TRIG_AUTO		0 /* Auto triggered data (in absence of others triggers)*/
 #define TRIG_SELF		1 /* Data triggered on trigger algorithm*/
 #define TRIG_EXT		2 /* Data triggered on external signal */
+#define TRIG_OTHERS		4 /* Other trigger types */
 
 
 #define INSTRUMENT_MODE_NONE			0

@@ -312,7 +312,7 @@ architecture Behavioral of axis_flow_control is
 	signal pattern_checker_error : std_logic := '0';
 	
 	signal en_trig_led, en_trig_out, trig_out_pulse, trig_out_force : std_logic := '0';
-	signal trig_ext_in_sync : std_logic := '0';
+	signal trig_ext_in_sync, trig_ext_in_sync_d1 : std_logic := '0';
 	
 	signal m_axis_tvalid_extra, m_axis_tready_extra, m_axis_tlast_extra: std_logic := '0';
 	signal m_axis_tdata_extra : std_logic_vector(63 downto 0) := (others => '0');
@@ -1103,6 +1103,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	
 	periodic_trig_d1 <= periodic_trig when rising_edge(s_axis_aclk);
 	self_trig_d1 <= self_trig when rising_edge(s_axis_aclk);
+	trig_ext_in_sync_d1 <= trig_ext_in_sync when rising_edge(s_axis_aclk);
 	
 
 	int_trig_gen: process(s_axis_aclk) 
@@ -1159,11 +1160,13 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											end if;
 										end if;
 					when 1 => if(periodic_trig_d1 = '1') then
-											trig_type <= X"1";
+											trig_type <= X"0";
 											periodic_trig_cnt <= periodic_trig_cnt + 1;
 										elsif(self_trig_d1 = '1') then
-											trig_type <= X"2";
+											trig_type <= X"1";
 											self_trig_cnt <= self_trig_cnt + 1;
+										elsif(trig_ext_in_sync_d1 = '1') then
+											trig_type <= X"2";
 										else
 											trig_type <= X"4";
 										end if;										
