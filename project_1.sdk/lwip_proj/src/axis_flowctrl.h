@@ -57,8 +57,10 @@
 #define BIT_FC_CLR_GTU_CNT		(1<<4) /* GTU cnt must be reset at the beginning of every measurement */
 #define BIT_FC_CLR_TRIG_SERVICE (1<<5) /* trig service must be reset at the beginning of every cycle */
 
+#define BIT_FC_TRIG_IMMEDIATE	(1<<16)
+
 #define BIT_FC_RELEASE			(1<<0)
-#define BIT_FC_TRIG_FORCE		(1<<1)
+//#define BIT_FC_TRIG_FORCE		(1<<1) // OBSOLETE
 #define BIT_FC_SET_UNIX_TIME	(1<<2)
 
 #define BIT_FC_IS_TRIGGER		(1<<16)

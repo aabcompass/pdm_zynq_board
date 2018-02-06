@@ -245,14 +245,15 @@ typedef struct
 
 
 //Trigger types:
-#define TRIG_AUTO		0 /* Auto triggered data (in absence of others triggers)*/
 #define TRIG_SELF		1 /* Data triggered on trigger algorithm*/
 #define TRIG_EXT		2 /* Data triggered on external signal */
-#define TRIG_OTHERS		4 /* Other trigger types */
+#define TRIG_IMMEDIATE	3 /* Data triggered on UART or TCP command*/
+#define TRIG_AUTO		4 /* Auto (periodic) triggered data (in absence of others triggers)*/
+#define TRIG_OTHERS		8 /* Other trigger types */
 
 
 #define INSTRUMENT_MODE_NONE			0
-#define INSTRUMENT_MODE_OLD_PROTOCOL	1
+#define INSTRUMENT_MODE_IMMEDIATE		1
 #define INSTRUMENT_MODE_FREERUN			2
 #define INSTRUMENT_MODE_TRIGGERS		3
 #define INSTRUMENT_MODE_INTTRIG			4

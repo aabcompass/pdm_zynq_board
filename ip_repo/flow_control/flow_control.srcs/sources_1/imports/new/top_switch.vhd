@@ -181,6 +181,7 @@ architecture Behavioral of axis_flow_control is
 	signal en_int_trig, en_algo_trig, periodic_trig_en, en_ext_trig: std_logic := '0';
 	signal release: std_logic := '0';
 	signal trig: std_logic := '0';
+	signal trig_immediate, trig_immediate_d1: std_logic := '0';
 	signal periodic_trig, periodic_trig_d1: std_logic := '0';
 
 	signal clear_error: std_logic := '0';
@@ -967,6 +968,8 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	restart_intr <= slv_reg1(3);
 	clr_gtu_cnt <= slv_reg1(4);
 	clr_trig_service <= slv_reg1(5);
+	 
+	trig_immediate <= slv_reg1(16);
 	
 	trig_delay <= slv_reg2(C_CNT_DWIDTH-1 downto 0);
 
@@ -1104,8 +1107,8 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	periodic_trig_d1 <= periodic_trig when rising_edge(s_axis_aclk);
 	self_trig_d1 <= self_trig when rising_edge(s_axis_aclk);
 	trig_ext_in_sync_d1 <= trig_ext_in_sync when rising_edge(s_axis_aclk);
+	trig_immediate_d1 <= trig_immediate when rising_edge(s_axis_aclk);
 	
-
 	int_trig_gen: process(s_axis_aclk) 
 		variable state : integer range 0 to 1 := 0;
 	begin
@@ -1135,7 +1138,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process;
 	
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
-	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or (trig_ext_in_sync and en_ext_trig);
+	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or (trig_ext_in_sync and en_ext_trig) or trig_immediate;
 	
 	trig_service: process(s_axis_aclk)
 		variable state : integer range 0 to 4 := 0;
@@ -1149,6 +1152,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 				trig_flag <= '0';  
 				state := 0;
 			else
+				sm_state <= conv_std_logic_vector(state, 4);
 				case state is
 					when 0 => if(trig = '1') then 
 											if(periodic_trig = '1') then
@@ -1160,15 +1164,17 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											end if;
 										end if;
 					when 1 => if(periodic_trig_d1 = '1') then
-											trig_type <= X"0";
+											trig_type <= X"4";
 											periodic_trig_cnt <= periodic_trig_cnt + 1;
 										elsif(self_trig_d1 = '1') then
 											trig_type <= X"1";
 											self_trig_cnt <= self_trig_cnt + 1;
 										elsif(trig_ext_in_sync_d1 = '1') then
 											trig_type <= X"2";
+										elsif(trig_immediate_d1 = '1') then
+											trig_type <= X"3";
 										else
-											trig_type <= X"4";
+											trig_type <= X"8";
 										end if;										
 										gtu_timestamp <= gtu_sig_counter;
 										unix_timestamp <= unix_time;

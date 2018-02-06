@@ -216,7 +216,7 @@ void TriggerService()
 		if(instrumentState.mode != 0)
 		{
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
 			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) &= ~BIT_FC_EN_ALGO_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
@@ -236,9 +236,9 @@ void TriggerService()
 		if(IsBufferL2Changed())
 		{
 			// xil_printf("BufferL2Changed!\n\r");
-			if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
-				CopyEventData();
-			else
+			//if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
+			//	CopyEventData();
+			//else
 				CopyEventData_trig();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
@@ -313,11 +313,23 @@ void ProcessUartCommands(struct netif *netif, char c)
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
 		//xil_printf("is_test_mode=%d\n\r", is_test_mode);
 	}
-	else if(c == 'Y')
+	else if(c == 'T')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_TRIG_FORCE;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
+	else if(c == 'r')
+	{
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+	}
+//	else if(c == 'Y')
+//	{
+//		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_TRIG_FORCE;
+//		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
+//	}
 	else if(c == 'y')
 	{
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_RELEASE;
