@@ -47,7 +47,7 @@
 
 #define BIT_FC_EN_PERIODIC_TRIG	(1<<1)
 #define BIT_FC_EN_ALGO_TRIG		(1<<2)
-#define BIT_FC_EN_INT_TRIG		(1<<3)
+#define BIT_FC_EN_IMM_TRIG		(1<<3)
 #define BIT_FC_EN_EXT_TRIG		(1<<4)
 
 #define BIT_FC_CLR_TRANS_CNT	(1<<0) /* Just for DBG*/

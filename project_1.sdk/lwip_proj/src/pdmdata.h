@@ -244,12 +244,20 @@ typedef struct
 } ZYNQ_PACKET;
 
 
-//Trigger types:
+//Enables trigger types in the FlowControl block
+#define BIT_FC_EN_PERIODIC_TRIG	(1<<1)
+#define BIT_FC_EN_ALGO_TRIG		(1<<2)
+#define BIT_FC_EN_IMM_TRIG		(1<<3)
+#define BIT_FC_EN_EXT_TRIG		(1<<4)
+
+//Trigger types in data out files :
 #define TRIG_SELF		1 /* Data triggered on trigger algorithm*/
 #define TRIG_EXT		2 /* Data triggered on external signal */
 #define TRIG_IMMEDIATE	3 /* Data triggered on UART or TCP command*/
 #define TRIG_AUTO		4 /* Auto (periodic) triggered data (in absence of others triggers)*/
 #define TRIG_OTHERS		8 /* Other trigger types */
+
+
 
 
 #define INSTRUMENT_MODE_NONE			0
