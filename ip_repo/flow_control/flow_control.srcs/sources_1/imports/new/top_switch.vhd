@@ -1104,11 +1104,6 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 		end if;
 	end process;
 	
-	periodic_trig_d1 <= periodic_trig when rising_edge(s_axis_aclk);
-	self_trig_d1 <= self_trig when rising_edge(s_axis_aclk);
-	trig_ext_in_sync_d1 <= trig_ext_in_sync when rising_edge(s_axis_aclk);
-	trig_immediate_d1 <= trig_immediate when rising_edge(s_axis_aclk);
-	
 	int_trig_gen: process(s_axis_aclk) 
 		variable state : integer range 0 to 1 := 0;
 	begin
@@ -1140,6 +1135,11 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
 	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or (trig_ext_in_sync and en_ext_trig) or trig_immediate;
 	
+	periodic_trig_d1 <= periodic_trig when rising_edge(s_axis_aclk);
+	self_trig_d1 <= self_trig when rising_edge(s_axis_aclk);
+	trig_ext_in_sync_d1 <= trig_ext_in_sync when rising_edge(s_axis_aclk);
+	trig_immediate_d1 <= trig_immediate when rising_edge(s_axis_aclk);
+	 
 	trig_service: process(s_axis_aclk)
 		variable state : integer range 0 to 4 := 0;
 	begin
@@ -1155,12 +1155,12 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 				sm_state <= conv_std_logic_vector(state, 4);
 				case state is
 					when 0 => if(trig = '1') then 
-											if(periodic_trig = '1') then
-												state := state + 1;
-											else
+											if(self_trig = '1') then
 												if(self_trig_cnt < number_of_triggers) then
 													state := state + 1;
 												end if;
+											else
+												state := state + 1;
 											end if;
 										end if;
 					when 1 => if(periodic_trig_d1 = '1') then
