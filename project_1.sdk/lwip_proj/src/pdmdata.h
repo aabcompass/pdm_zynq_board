@@ -246,11 +246,12 @@ typedef struct
 
 
 //Trigger types in data out files :
+#define TRIG_NONE		0 /* No trigger occurred. No data preserved*/
 #define TRIG_PERIODIC	1 /* Auto (periodic) triggered data (in absence of others triggers)*/
 #define TRIG_SELF		2 /* Data triggered on trigger algorithm*/
 #define TRIG_IMMEDIATE	3 /* Data triggered on UART or TCP command*/
 #define TRIG_EXT		4 /* Data triggered on external signal */
-#define TRIG_OTHERS		8 /* Other trigger types */
+#define TRIG_OTHERS		8 /* Other trigger types (for future)*/
 
 //Enables trigger types in the FlowControl block
 #define BIT_FC_EN_PERIODIC_TRIG	(1<<TRIG_PERIODIC)
