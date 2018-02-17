@@ -1164,15 +1164,15 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											end if;
 										end if;
 					when 1 => if(periodic_trig_d1 = '1') then
-											trig_type <= X"4";
+											trig_type <= X"1";
 											periodic_trig_cnt <= periodic_trig_cnt + 1;
 										elsif(self_trig_d1 = '1') then
-											trig_type <= X"1";
-											self_trig_cnt <= self_trig_cnt + 1;
-										elsif(trig_ext_in_sync_d1 = '1') then
 											trig_type <= X"2";
+											self_trig_cnt <= self_trig_cnt + 1;
 										elsif(trig_immediate_d1 = '1') then
-											trig_type <= X"3";
+												trig_type <= X"3";
+										elsif(trig_ext_in_sync_d1 = '1') then
+											trig_type <= X"4";
 										else
 											trig_type <= X"8";
 										end if;										
