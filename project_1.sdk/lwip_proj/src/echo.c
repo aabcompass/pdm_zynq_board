@@ -146,8 +146,6 @@ void StartGatherOneFrameFromArtix()
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = 1;
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-	//*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + GPIO_OUTPUT_REG_OFFSET) = (1<<CMD_START_BIT_OFFSET | 1<<NUMFRAMES_BIT_OFFSET);
-	//*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + GPIO_OUTPUT_REG_OFFSET) = 0;
 }
 
 void StartGatherNBunchFromArtix(int N)
@@ -156,21 +154,15 @@ void StartGatherNBunchFromArtix(int N)
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N;
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-	//*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + GPIO_OUTPUT_REG_OFFSET) = (1<<CMD_START_BIT_OFFSET | 128<<NUMFRAMES_BIT_OFFSET);
-	//*(u32*)(XPAR_AXI_GPIO_0_BASEADDR + GPIO_OUTPUT_REG_OFFSET) = 0;
 }
 
-//void PrintFrameBuffer(int num)
-//{
-//	int i;
-//	for(i=0;i<num;i++)
-//		xil_printf("%d:\t0x%08x\n\r", i, frame_buffer_art1[i]);
-//}
+
 
 void TriggerService()
 {
 	int i, offset;
 	char* ptr;
+	static u32 prev_mode = 0;
 
 	char filename_str[20];
 	static int what_trigger_armed = 0; // 1- L1, 2 - L2, 3 - L3
@@ -178,68 +170,34 @@ void TriggerService()
 	switch(trigger_sm_state)
 	{
 	case idle_state:
-//		if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
-//		{
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) |= BIT_FC_IS_STARTED;
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-////			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0;
-////			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-////			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-//
-//			trigger_sm_state = wait4trigger_state;
-//		}
-//		else if(instrumentState.mode == INSTRUMENT_MODE_TRIGGERS)
-//		{
-//			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_ALGO_TRIG;
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-//			trigger_sm_state = wait4trigger_state;
-//		}
-//		else if(instrumentState.mode == INSTRUMENT_MODE_INTTRIG)
-//		{
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_INT_TRIG;
-//			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-//			trigger_sm_state = wait4trigger_state;
-//		}
-//		else if(instrumentState.mode == INSTRUMENT_MODE_NONE)
-//		{
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
-//
-//			//FlowControlsClrSet();
-//			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = 0;
-//			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = 0;
-//			//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
-//		}
 		if(instrumentState.mode != 0)
 		{
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			//*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) &= ~BIT_FC_EN_ALGO_TRIG;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 
 			trigger_sm_state = wait4trigger_state;
 		}
-		else
+		else if((instrumentState.mode == 0) && (prev_mode != 0))
 		{
+			// stop command was received
+			trigger_sm_state = wait4trigger_state;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
 		}
+		else
+		{
+			// do nothing
+		}
+
+		prev_mode = instrumentState.mode;
 
 		break;
 	case wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
-			// xil_printf("BufferL2Changed!\n\r");
-			//if(instrumentState.mode == INSTRUMENT_MODE_FREERUN)
-			//	CopyEventData();
-			//else
-				CopyEventData_trig();
+			CopyEventData_trig();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
@@ -515,16 +473,6 @@ int transfer_data() {
 	return 0;
 }
 
-
-
-//void PrintSpacirocConfVector()
-//{
-//	int i;
-//	for(i=0;i<SIZEOF_SPACIROC_CONF_VECTOR;i++)
-//		xil_printf("i=%d data=0x%08x\n\r", i, spaciroc_configuration_vector[i]);
-//}
-
-
 err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
                                struct pbuf *p, err_t err)
 {
@@ -539,23 +487,11 @@ err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 	/* indicate that the packet has been received */
 	tcp_recved(tpcb, p->len);
 
-	/* echo back the payload */
-	/* in this case, we assume that the payload is < TCP_SND_BUF */
-//	if (tcp_sndbuf(tpcb) > p->len) {
-//		err = tcp_write(tpcb, p->payload, p->len, 1);
-//	} else
-//		xil_printf("no space in tcp_sndbuf\n\r");
 
 	xil_printf("p->len=%d\n\r", p->len);
 	for(i=0;i<p->len/4; i++)
 		printf("array(%d)=%08x\n\r", i, __bswap_constant_32(*(u32*)(p->payload+4*i)));
 
-	//memcpy(spaciroc_configuration_vector, p->payload, SIZEOF_SPACIROC_CONF_VECTOR*4);
-	//PrintSpacirocConfVector();
-
-	//spaciroc_configuration_vector[10] = 75<<16;
-
-	//LoadSpacirocConfigurationVector();
 
 
 	/* free the received pbuf */

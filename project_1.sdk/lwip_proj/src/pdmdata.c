@@ -100,12 +100,14 @@ void PrintTriggerInfo()
 	{
 		for(j=0;j<4;j++)
 		{
-			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
 					triggerInfoL2[i][j].trigger_type,
 					triggerInfoL2[i][j].n_gtu,
 					triggerInfoL2[i][j].unix_timestamp,
+					triggerInfoL2[i][j].n_intr,
+					triggerInfoL2[i][j].alt_trig_buffer,
 					triggerInfoL2[i][j].is_sent ? "sent" : "pending");
 		}
 	}
@@ -114,12 +116,14 @@ void PrintTriggerInfo()
 	{
 		for(j=0;j<1;j++)
 		{
-			xil_printf("%d.%d\t%x\t%08d\t%08d\t%s\n\r",
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
 					triggerInfoL3[i][j].trigger_type,
 					triggerInfoL3[i][j].n_gtu,
 					triggerInfoL3[i][j].unix_timestamp,
+					triggerInfoL3[i][j].n_intr,
+					triggerInfoL3[i][j].alt_trig_buffer,
 					triggerInfoL3[i][j].is_sent ? "sent" : "pending");
 		}
 	}
@@ -320,16 +324,21 @@ void CopyEventData_trig()
 					&DataDMA__Raw[prev_alt_buffer%2][i][!alt_trig_buffer][0][0],
 					N_OF_PIXEL_PER_PDM * gtu_n_cross_r);
 		}
+		// Mark the trigger as copied (sent)
+		triggerInfoL1[prev_alt_buffer][i].is_sent = 1;
 	}
 	//copy D2
 	for(i=0;i<N2;i++)
 	{
+			//TODO prev_alt_buffer has not been set !!!
 			zynqPacket.level2_data[i].payload.trig_type = triggerInfoL2[prev_alt_buffer][i].trigger_type;
 			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoL2[prev_alt_buffer][i].n_gtu;
 			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoL2[prev_alt_buffer][i].unix_timestamp;
 			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
 					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
+			// Mark the trigger as copied (sent)
+			triggerInfoL2[prev_alt_buffer][i].is_sent = 1;
 	}
 	//copy D3
 	for(i=0;i<N3;i++)
@@ -340,6 +349,9 @@ void CopyEventData_trig()
 			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
 					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
+			// Mark the trigger as copied (sent)
+			triggerInfoL3[prev_alt_buffer][i].is_sent = 1;
+
 	}
 }
 
