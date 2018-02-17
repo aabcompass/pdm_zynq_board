@@ -55,7 +55,7 @@
 #include "hv.h"
 #include "xparameters.h"
 
-#include "pdmdata.h"
+#include "minieuso_pdmdata.h"
 #include "pdmdata_hw.h"
 
 #include "xscurve_adder.h"

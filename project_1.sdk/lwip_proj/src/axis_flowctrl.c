@@ -7,7 +7,7 @@
 #include "axis_flowctrl.h"
 #include "xparameters.h"
 #include "xbasic_types.h"
-#include "pdmdata.h"
+#include "minieuso_pdmdata.h"
 #include "pdmdata_hw.h"
 
 

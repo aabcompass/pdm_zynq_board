@@ -10,7 +10,7 @@
 #include "xil_printf.h"
 #include "pdmdp_err.h"
 #include "xscugic.h"
-#include "pdmdata.h"
+#include "minieuso_pdmdata.h"
 
 // hv_turned_on_user - represents for each HV channel is it switched on by user or not.
 // LSB bit represents channel0, etc...

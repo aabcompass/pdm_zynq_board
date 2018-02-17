@@ -7,7 +7,7 @@
 #include "data_provider.h"
 #include "xparameters.h"
 #include "xil_types.h"
-#include "pdmdata.h"
+#include "minieuso_pdmdata.h"
 
 void WaitDataProviderIdle()
 {

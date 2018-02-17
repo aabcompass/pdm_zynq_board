@@ -10,7 +10,7 @@
 #ifndef SRC_PDMDATA_HW_H_
 #define SRC_PDMDATA_HW_H_
 
-#include "pdmdata.h"
+#include "minieuso_pdmdata.h"
 
 #define DATA_TYPE_L1	1
 #define DATA_TYPE_L2	2
