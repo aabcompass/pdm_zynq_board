@@ -216,6 +216,14 @@ void TriggerService()
 }
 
 
+void TrgImmediate()
+{
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+}
+
 void ProcessUartCommands(struct netif *netif, char c)
 {
 	int i, j, k, occupancy;//, cc_fifo_occupancy0, cc_fifo_occupancy1, cc_fifo_occupancy2;
@@ -273,10 +281,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'T')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+		TrgImmediate();
 	}
 	else if(c == 'r')
 	{
