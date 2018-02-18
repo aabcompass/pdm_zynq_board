@@ -301,6 +301,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 		// for external trigger i/o check
 		// *(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
 		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
+		xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
+
 		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
 		xil_printf("trigger_sm_state = %d\n\r", trigger_sm_state);
 

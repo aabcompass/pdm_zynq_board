@@ -389,6 +389,13 @@ int buf_sz;
 static int idle_state_counter = 0;
 static char filename_counter = 0x30;
 
+int keepalive_cnt = 0;
+
+int Get_keepalive_cnt()
+{
+	return keepalive_cnt;
+}
+
 void ftp_data_sm()
 {
 	int ret;
@@ -458,9 +465,8 @@ void ftp_data_sm()
 		case stor_state:
 			if(spectrum_nbytes)
 			{
-				//BuildStorFTPCMD(0, file_counter, stor_ftp_cmd);
-				//stor_ftp_cmd[22] = filename_counter;
-				//xil_printf("Filename = %s", filename);
+				keepalive_cnt = 0;
+
 				strcpy(stor_ftp_cmd, "STOR ");
 				strcat(stor_ftp_cmd, filename);
 				strcat(stor_ftp_cmd, "\r\n");
@@ -470,6 +476,15 @@ void ftp_data_sm()
 					filename_counter++;
 					ftp_state = buffer_wait_state;
 				}
+			}
+			else if(keepalive_cnt > 20000000) /*~7 sec*/
+			{
+				keepalive_cnt = 0;
+				SendFTPcmd("NOOP\r\n");
+			}
+			else
+			{
+				keepalive_cnt++;
 			}
 			// uncomment these lines if you want to alive connection
 			break;
