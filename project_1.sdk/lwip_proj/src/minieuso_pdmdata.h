@@ -206,18 +206,7 @@ typedef struct
 
 
 
-//#define INSTRUMENT_MODE_NONE			0
-//#define INSTRUMENT_MODE_IMMEDIATE		1
-//#define INSTRUMENT_MODE_FREERUN			2
-//#define INSTRUMENT_MODE_TRIGGERS		3
-//#define INSTRUMENT_MODE_INTTRIG			4
-//
-//#define INSTRUMENT_FTPFILES_CONCAT		0
-//#define INSTRUMENT_FTPFILES_SEPARATED	1
-//
-//#define FILENAME_MODE_TRIGGER1 	"frm_tr1_%08d.dat"
-//#define FILENAME_MODE_TRIGGER2 	"frm_tr2_%08d.dat"
-//#define FILENAME_MODE_TRIGGER3 	"frm_tr3_%08d.dat"
+
 #define FILENAME_SCURVE	 		"scurve_%08d.dat"
 #define FILENAME_CONCATED		"frm_cc_%08d.dat"
 #define FILENAME_HVLOG			"hv_%08d.dat"
