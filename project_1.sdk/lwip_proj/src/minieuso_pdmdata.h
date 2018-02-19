@@ -10,6 +10,8 @@
 
 #include <stdint.h>
 
+#define MINIEUSO_ZYNQ_VER_STRING "v1.5.2"
+
 // Constants
 
 #define N_OF_PIXELS_PER_PMT		64 /* number of pixel on PMT */

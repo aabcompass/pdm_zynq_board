@@ -4,7 +4,6 @@
 #include "axi_spectral_core.h"
 #include <string.h>
 #include "hv.h"
-#include "ver.h"
 #include "pdmdp_err.h"
 #include "axis_flowctrl.h"
 
@@ -60,7 +59,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		strcat(ans_str, " ");
 		strcat(ans_str, __TIME__);
 		strcat(ans_str, " ");
-		strcat(ans_str, VER_STRING);
+		strcat(ans_str, MINIEUSO_ZYNQ_VER_STRING);
 		strcat(ans_str, "\r\n");
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 	}
