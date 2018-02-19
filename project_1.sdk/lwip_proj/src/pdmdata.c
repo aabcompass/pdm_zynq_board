@@ -513,7 +513,7 @@ static void RxIntrHandlerL2(void *Callback)
 		triggerInfoL3[current_alt_buffer][0].is_sent = 0;
 		triggerInfoL3[current_alt_buffer][0].n_gtu = GetNGTU();
 		triggerInfoL3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
-		triggerInfoL3[current_alt_buffer][0].trigger_type = TRIG_TYPE_AUTO;
+		triggerInfoL3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
 
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;

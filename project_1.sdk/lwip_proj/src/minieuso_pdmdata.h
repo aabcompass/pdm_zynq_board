@@ -55,23 +55,6 @@ typedef struct
 #define DATA_TYPE_HV_DACS		60  /* HV DACs values*/
 #define DATA_TYPE_HV_STATUS		61  /* HV status */
 
-//-----------------------------------------------------------------------------
-// Timestamp structure in binary format
-// Year 0=2017, 1=2018, 2=2019, 3=...
-//typedef struct
-//{
-//	uint32_t TS_dword; // year(31:26) | month(25:22) | date(21:17) | hour(16:12) | min(11:6) | sec(5:0)
-//	uint32_t gtu_cnt; // reserv(31:20) | gtu_cnt(19:0)
-//} TimeStamp_natural;
-
-// Macros for a timestamp build
-//#define BuildTimeStamp_TS_dword(year, month, date, hour, min, sec) \
-//	(((year)<<26) | ((month)<<22) | ((date)<<17) | ((hour)<<12) | ((min)<<6) | (sec))
-
-//typedef struct
-//{
-//	uint64_t n_gtu;
-//} TimeStamp_symplified;
 
 
 typedef struct
@@ -86,39 +69,6 @@ typedef struct
 #define N_OF_FRAMES_INT16_POLY_V0	128
 #define N_OF_FRAMES_INT32_POLY_V0	128
 
-//
-//typedef struct
-//{
-//	// symplified timestamp
-//	TimeStamp_dual ts;
-//	// HVPS status
-//	uint32_t hv_status;
-//	// raw data (2.5 us GTU)
-//	uint8_t raw_data [N_OF_FRAMES_RAW_POLY_V0][N_OF_PIXEL_PER_PDM];
-//	// integrated data (320 us GTU)
-//	uint16_t int16_data [N_OF_FRAMES_INT16_POLY_V0][N_OF_PIXEL_PER_PDM];
-//	// double integrated data (~40 ms GTU)
-//	uint32_t int32_data [N_OF_FRAMES_INT32_POLY_V0][N_OF_PIXEL_PER_PDM];
-//} DATA_TYPE_SCI_POLY_V5;
-//
-//typedef struct
-//{
-//	ZynqBoardHeader zbh;
-//	DATA_TYPE_SCI_POLY_V5 payload;
-//} Z_DATA_TYPE_SCI_POLY_V5;
-
-//========================================
-//  Multievents triggering mode structures
-//========================================
-
-//// Absolute maximum number of registered L1 events.
-//// Also maximum number of registered events can be limited via parameters.
-//#define NMAX_OF_L1_EVENTS_PER_LIFECYCLE		4
-//// Absolute maximum number of registered L2 events.
-//// Also maximum number of registered events can be limited via parameters.
-//#define NMAX_OF_L2_EVENTS_PER_LIFECYCLE		4
-//// Absolute maximum number of registered L3 events. Always = 1.
-//#define NMAX_OF_L3_EVENTS_PER_LIFECYCLE		1
 
 // Number of small GTU frames recorded with L1 event
 #define N_OF_FRAMES_L1_V0	128
@@ -145,12 +95,6 @@ typedef struct
 // 3) gathers the (N_OF_FRAMES_L1 / 2) raw data frames preserved before L1 event
 // 4) records the (N_OF_FRAMES_L1 / 2) raw data frames preserved after L1 event
 // Then Zynq collects this data in the DATA_TYPE_SCI_L1 structure and holds it until the end of current lifecycle
-
-// Trigger types
-#define TRIG_TYPE_PERIODIC	1 /* Occurred every 5.24 s */
-#define TRIG_TYPE_SELF		2 /* Issued by Trigger block*/
-#define TRIG_TYPE_AUTO		4 /**/
-
 
 typedef struct
 {
