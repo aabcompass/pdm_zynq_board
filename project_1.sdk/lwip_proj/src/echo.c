@@ -200,7 +200,7 @@ void TriggerService()
 			CopyEventData_trig();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
-			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(ZYNQ_PACKET), filename_str);
+			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
 			trigger_sm_state = wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}

@@ -33,7 +33,7 @@ int N1=4, N2=4, N3=1;
 
 extern InstrumentState instrumentState;
 
-ZYNQ_PACKET zynqPacket;
+DATA_TYPE_SCI_ALLTRG_V1 zynqPacket;
 Z_DATA_TYPE_SCURVE_V1 scurvePacket;
 DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
