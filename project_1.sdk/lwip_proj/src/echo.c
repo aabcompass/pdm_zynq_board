@@ -467,8 +467,8 @@ void SetDefaultParameters()
 	debugSettings.current_thr = 0;
 	SetDefaultSCParameters();
 
-	instrumentState.mode = INSTRUMENT_MODE_NONE;
-	instrumentState.ftp_files_mode = INSTRUMENT_FTPFILES_CONCAT;
+	//instrumentState.mode = INSTRUMENT_MODE_NONE;
+	//instrumentState.ftp_files_mode = INSTRUMENT_FTPFILES_CONCAT;
 	instrumentState.file_counter_l1 = 0;
 	instrumentState.file_counter_l2 = 0;
 	instrumentState.file_counter_l3 = 0;
