@@ -333,6 +333,7 @@ architecture Behavioral of axis_flow_control is
 	attribute keep of tlast_counter: signal is "true";  
 	attribute keep of tlast_counter2: signal is "true";  
 	attribute keep of sm_state: signal is "true";  
+	attribute keep of trig_type: signal is "true";  
 	attribute keep of m_axis_tdata_i: signal is "true";  
 	attribute keep of periodic_trig_gtu_period: signal is "true";  
 	attribute keep of periodic_trig_gen_cnt: signal is "true";  
