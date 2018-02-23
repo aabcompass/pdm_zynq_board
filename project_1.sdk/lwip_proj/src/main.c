@@ -277,7 +277,7 @@ int main()
 		transfer_data();
 		ftp_data_sm();
 		ftp_config_sm();
-		TriggerService();
+		DataPathSM();
 		ScurveService();
 		HVInterruptService();
 		IncProgramCounter();

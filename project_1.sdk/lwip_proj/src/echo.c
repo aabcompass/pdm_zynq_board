@@ -96,10 +96,10 @@ extern DebugSettings debugSettings;
 
 
 static enum  {
-	idle_state = 10,
-	wait4trigger_state=100,
-	wait4ftp_ready2=120
-	} trigger_sm_state = idle_state;
+	datapath_idle_state = 10,
+	datapath_wait4trigger_state=100,
+	datapath_wait4ftp_ready2=120
+	} datapath_sm_state = datapath_idle_state;
 
 u8 spaciroc_slow_data[30000];
 int current_hvdac_value = 0;
@@ -156,9 +156,7 @@ void StartGatherNBunchFromArtix(int N)
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 }
 
-
-
-void TriggerService()
+void DataPathSM()
 {
 	int i, offset;
 	char* ptr;
@@ -166,10 +164,10 @@ void TriggerService()
 
 	char filename_str[20];
 	static int what_trigger_armed = 0; // 1- L1, 2 - L2, 3 - L3
-	if(systemSettings.isPrinting) xil_printf("#%d", trigger_sm_state);
-	switch(trigger_sm_state)
+	if(systemSettings.isPrinting) xil_printf("#%d", datapath_sm_state);
+	switch(datapath_sm_state)
 	{
-	case idle_state:
+	case datapath_idle_state:
 		if(instrumentState.mode != 0)
 		{
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
@@ -178,12 +176,12 @@ void TriggerService()
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
 
-			trigger_sm_state = wait4trigger_state;
+			datapath_sm_state = datapath_wait4trigger_state;
 		}
 		else if((instrumentState.mode == 0) && (prev_mode != 0))
 		{
 			// stop command was received
-			trigger_sm_state = wait4trigger_state;
+			datapath_sm_state = datapath_wait4trigger_state;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 0;
 		}
 		else
@@ -194,22 +192,22 @@ void TriggerService()
 		prev_mode = instrumentState.mode;
 
 		break;
-	case wait4trigger_state:
+	case datapath_wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
 			CopyEventData_trig();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
-			trigger_sm_state = wait4ftp_ready2;
+			datapath_sm_state = datapath_wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}
 		break;
-	case wait4ftp_ready2:
+	case datapath_wait4ftp_ready2:
 		if(IsFTP_bin_idle())
 		{
 			// release trigger
-			trigger_sm_state = idle_state;
+			datapath_sm_state = datapath_idle_state;
 		}
 		break;
 	}
@@ -309,7 +307,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
 
 		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
-		xil_printf("trigger_sm_state = %d\n\r", trigger_sm_state);
+		xil_printf("datapath_sm_state = %d\n\r", datapath_sm_state);
 
 		xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
 
