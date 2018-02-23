@@ -278,6 +278,7 @@ int main()
 		ftp_data_sm();
 		ftp_config_sm();
 		DataPathSM();
+		StopSM();
 		ScurveService();
 		HVInterruptService();
 		IncProgramCounter();

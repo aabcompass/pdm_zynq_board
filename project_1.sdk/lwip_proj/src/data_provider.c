@@ -20,6 +20,11 @@ void WaitDataProviderIdle()
 		print("Data_provider is stalled\n\r");
 }
 
+int IsDataProviding()
+{
+	return *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007;
+}
+
 void SetDataProviderTestMode(int mode)
 {
 	print("Waiting for data provider idle state.\n\r");

@@ -77,6 +77,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			&param) == 1)
 	{
 		SetInstrumentMode(param);
+		RunStopping();
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 		//if(param == 0)

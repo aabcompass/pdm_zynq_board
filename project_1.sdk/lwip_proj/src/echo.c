@@ -101,7 +101,13 @@ static enum  {
 	datapath_wait4ftp_ready2=120
 	} datapath_sm_state = datapath_idle_state;
 
-u8 spaciroc_slow_data[30000];
+static enum  {
+	stop_sm_idle = 10,
+	wait4data_provider_stop=100,
+	stop_sm_stopped=120
+	} stop_sm_state = stop_sm_idle;
+
+//u8 spaciroc_slow_data[30000];
 int current_hvdac_value = 0;
 
 #define DDR_BASE_ADDR 		XPAR_PS7_DDR_0_S_AXI_BASEADDR
@@ -155,6 +161,31 @@ void StartGatherNBunchFromArtix(int N)
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 }
+
+void RunStopping()
+{
+	stop_sm_state = wait4data_provider_stop;
+}
+
+void StopSM()
+{
+	switch(stop_sm_state)
+	{
+	case stop_sm_idle:
+		break;
+	case wait4data_provider_stop:
+		if(!IsDataProviding())
+		{
+			stop_sm_state = stop_sm_stopped;
+		}
+		break;
+	case stop_sm_stopped:
+		SendLogToFTP();
+		SetDataProviderTestMode(0);
+		stop_sm_state = stop_sm_idle;
+	}
+}
+
 
 void DataPathSM()
 {
