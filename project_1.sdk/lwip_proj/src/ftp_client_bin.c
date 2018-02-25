@@ -557,7 +557,7 @@ void ftp_data_sm()
 			ret = tcp_close(ftpctrl_connected_pcb);
 			if(ret) xil_printf("tcp_close ctrl returns %d\n\r", ret);
 			ftp_state = idle_state;
-			xil_printf("%d %d\n\r", program_counter - program_counter_d1, program_counter - program_counter_d2);
+			//xil_printf("%d %d\n\r", program_counter - program_counter_d1, program_counter - program_counter_d2);
 			program_counter_d2 = program_counter;
 			break;
 		case complete_state:

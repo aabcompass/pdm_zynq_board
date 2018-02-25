@@ -183,6 +183,7 @@ void StopSM()
 	case stop_sm_stopped:
 		SendLogToFTP();
 		SetDataProviderTestMode(0);
+		PrnAllRegs();
 		stop_sm_state = stop_sm_idle;
 	}
 }
@@ -228,6 +229,7 @@ void DataPathSM()
 		if(IsBufferL2Changed())
 		{
 			CopyEventData_trig();
+			PrintTriggerInfo();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
@@ -254,6 +256,42 @@ void TrgImmediate()
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 }
 
+void PrnAllRegs()
+{
+	int i;
+	print("\n\r");
+	print("\n\rXPAR_AXI_DATA_PROVIDER_0_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+i*4));
+	}
+	print("\n\rXPAR_TOP_SWITCH_RAW_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_TOP_SWITCH_RAW_BASEADDR+i*4));
+	}
+	print("\n\rXPAR_AXIS_FLOW_CONTROL_L1_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR+i*4));
+	}
+	print("\n\rXPAR_AXIS_FLOW_CONTROL_L2_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR+i*4));
+	}
+	print("\n\rXPAR_HV_HK_V1_0_0_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
+	}
+}
+
 void ProcessUartCommands(struct netif *netif, char c)
 {
 	int i, j, k, occupancy;//, cc_fifo_occupancy0, cc_fifo_occupancy1, cc_fifo_occupancy2;
@@ -263,37 +301,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 
 	if(c == '*')
 	{
-		print("\n\r");
-		print("\n\rXPAR_AXI_DATA_PROVIDER_0_BASEADDR");
-		for(i=0;i<32;i++)
-		{
-			if(i%4==0) xil_printf("\n\r%d.", i);
-			xil_printf("\t%08X",  *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+i*4));
-		}
-		print("\n\rXPAR_TOP_SWITCH_RAW_BASEADDR");
-		for(i=0;i<32;i++)
-		{
-			if(i%4==0) xil_printf("\n\r%d.", i);
-			xil_printf("\t%08X",  *(u32*)(XPAR_TOP_SWITCH_RAW_BASEADDR+i*4));
-		}
-		print("\n\rXPAR_AXIS_FLOW_CONTROL_L1_BASEADDR");
-		for(i=0;i<32;i++)
-		{
-			if(i%4==0) xil_printf("\n\r%d.", i);
-			xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR+i*4));
-		}
-		print("\n\rXPAR_AXIS_FLOW_CONTROL_L2_BASEADDR");
-		for(i=0;i<32;i++)
-		{
-			if(i%4==0) xil_printf("\n\r%d.", i);
-			xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR+i*4));
-		}
-		print("\n\rXPAR_HV_HK_V1_0_0_BASEADDR");
-		for(i=0;i<32;i++)
-		{
-			if(i%4==0) xil_printf("\n\r%d.", i);
-			xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
-		}
+		PrnAllRegs();
 	}
 	else if(c == 'h')
 	{

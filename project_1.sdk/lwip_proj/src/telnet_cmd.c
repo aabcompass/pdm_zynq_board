@@ -44,7 +44,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	print("TCP: ");
 	for(i=0; i<p->len; i++)
 		xil_printf("%c", *(char*)(p->payload+i));
-
+	print("\r");
 	if(strncmp(p->payload, "help", 4) == 0)
 	{
 		char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
@@ -78,7 +78,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		SetTime(param2);
 		DateTime dateTime;
 		convertUnixTimeToDate(param2, &dateTime);
-		xil_printf("%d=%s\n\r", param2, formatDate(&dateTime, 0));
+		xil_printf("%s\n\r", formatDate(&dateTime, 0));
 
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
