@@ -201,6 +201,9 @@ int main()
 	IP4_ADDR(&gw,      192, 168,   7,  254);
 #endif	
 
+	xil_printf("MINIEUSO_ZYNQ_VER_STRING = %s\n\r", MINIEUSO_ZYNQ_VER_STRING);
+
+
 	print("Starting TCP/IP stack...\n\r");
 	lwip_init();
 

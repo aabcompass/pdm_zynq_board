@@ -7,6 +7,8 @@
 #include "pdmdp_err.h"
 #include "axis_flowctrl.h"
 
+#include "unix_date_time.h"
+
 
 u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
@@ -25,6 +27,7 @@ void SetInstrumentMode(u32 mode)
 		ResetGTUCounter();
 }
 
+
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
 	u8 str_len=0; char reply[128];
@@ -37,6 +40,11 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	double double_param, double_param2, double_param3;
 	int ret;
 	int turn[NUM_OF_HV];
+	// print command
+	print("TCP: ");
+	for(i=0; i<p->len; i++)
+		xil_printf("%c", *(char*)(p->payload+i));
+
 	if(strncmp(p->payload, "help", 4) == 0)
 	{
 		char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
@@ -68,6 +76,10 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		SetInstrumentMode(param);
 		SetTime(param2);
+		DateTime dateTime;
+		convertUnixTimeToDate(param2, &dateTime);
+		xil_printf("%d=%s\n\r", param2, formatDate(&dateTime, 0));
+
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 		//if(param == 0)
