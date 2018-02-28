@@ -49,12 +49,14 @@
       <Filter Type="Srcs"/>
       <File Path="$PSRCDIR/sources_1/new/data_provider.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/hdl/axi_data_provider_v1_0_S00_AXI.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../../../ip_repo/axi_data_provider_1.0/hdl/axi_data_provider_v1_0_S00_AXI.vhd"/>
           <Attr Name="ImportTime" Val="1483011036"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -63,6 +65,7 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/hdl/axi_data_provider_v1_0.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../../../ip_repo/axi_data_provider_1.0/hdl/axi_data_provider_v1_0.vhd"/>
           <Attr Name="ImportTime" Val="1483011036"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -74,7 +77,6 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="axi_data_provider_v1_0"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
@@ -96,6 +98,7 @@
       <Filter Type="Srcs"/>
       <File Path="$PSRCDIR/sim_1/new/data_provider_tb.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>

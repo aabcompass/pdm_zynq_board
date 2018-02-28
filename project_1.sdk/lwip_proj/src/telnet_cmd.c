@@ -221,6 +221,22 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(strncmp(p->payload, "updatefw start", 14) == 0)
+	{
+		StartUpdateFW();
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "updatefw status", 15) == 0)
+	{
+		param = IsFW_updated();
+		char str1[] = "1\n\r";
+		char str0[] = "0\n\r";
+		if(param)
+			tcp_write(tpcb, str1, sizeof(str1), 1);
+		else
+			tcp_write(tpcb, str0, sizeof(str0), 1);
+	}
 	else if(strncmp(p->payload, "exit", 4) == 0 || strncmp(p->payload, "quit", 4) == 0)
 	{
 		tcp_close(tpcb);

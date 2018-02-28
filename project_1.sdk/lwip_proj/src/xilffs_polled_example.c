@@ -123,6 +123,54 @@ int ReadSpacirocConfiguration(char * data, int* size)
 	return XST_SUCCESS;
 }
 
+int remove_BOOT_bin()
+{
+	FRESULT Res;
+	Res = f_unlink("BOOT.bin");
+	if (Res) {
+		xil_printf("f_open returns %d\n\r", Res);
+		return XST_FAILURE;
+	}
+	print("File removed\n\r");
+	return XST_SUCCESS;
+}
+
+int WriteFileToSDCard(char * data, int size, char * filename)
+{
+	FRESULT Res;
+	FILINFO fno;
+	UINT NumBytesWrite;
+
+	xil_printf("WriteFileToSDCard %s bytes: %d\n\r", filename, size);
+
+	Res = f_open(&fil, filename, FA_CREATE_ALWAYS | FA_WRITE);
+	if (Res) {
+		xil_printf("f_open returns %d\n\r", Res);
+		return XST_FAILURE;
+	}
+
+	Res = f_lseek(&fil, 0);
+	if (Res) {
+		xil_printf("f_lseek returns %d\n\r", Res);
+		return XST_FAILURE;
+	}
+
+	Res = f_write(&fil, (void*)data, size,
+			&NumBytesWrite);
+	if (Res) {
+		xil_printf("f_write returns %d\n\r", Res);
+		return XST_FAILURE;
+	}
+
+	Res = f_close(&fil);
+	if (Res) {
+		xil_printf("f_close returns %d\n\r", Res);
+		return XST_FAILURE;
+	}
+
+	print("File created\n\r");
+	return XST_SUCCESS;
+}
 
 int ReadArtixBitstream(char * data, int* size)
 {

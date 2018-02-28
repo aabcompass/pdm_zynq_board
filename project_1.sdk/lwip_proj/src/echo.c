@@ -93,7 +93,7 @@ extern SCurveStruct sCurveStruct;
 extern DebugSettings debugSettings;
 
 //Z_DATA_TYPE_SCI_POLY_V5 packet_sci_poly __attribute__ ((aligned (256)));
-
+char boot_bin_buf[10000000];
 
 
 static enum  {
@@ -107,6 +107,14 @@ static enum  {
 	wait4data_provider_stop=100,
 	stop_sm_stopped=120
 	} stop_sm_state = stop_sm_idle;
+
+
+static enum  {
+	update_idle = 10,
+	update_start = 20,
+	update_wait4ftp_retr=100,
+	update_finished=120
+	} update_sm_state = update_idle;
 
 //u8 spaciroc_slow_data[30000];
 int current_hvdac_value = 0;
@@ -247,6 +255,38 @@ void DataPathSM()
 	}
 }
 
+void UpdateFW_SM()
+{
+	switch(update_sm_state)
+	{
+	case update_idle:
+		break;
+	case update_start:
+		ReadFile("RETR BOOT.bin\r\n", boot_bin_buf);
+		update_sm_state = update_wait4ftp_retr;
+		break;
+	case update_wait4ftp_retr:
+		if(IsRetrComplete())
+		{
+			WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
+			update_sm_state = update_finished;
+		}
+		break;
+	case update_finished:
+		break;
+	}
+}
+
+void StartUpdateFW()
+{
+	update_sm_state = update_start;
+}
+
+int IsFW_updated()
+{
+	return (update_sm_state == update_finished);
+}
+
 
 void TrgImmediate()
 {
@@ -347,6 +387,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
 
 		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
+		xil_printf("GetFileSize() = %d\n\r", GetFileSize());
 		xil_printf("datapath_sm_state = %d\n\r", datapath_sm_state);
 
 		xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
@@ -473,10 +514,14 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		ProvideTestDataL1();
 	}
-//	else if(c == 'u')
-//	{
-//		RxReceiveAndPrint();
-//	}
+	else if(c == '%')
+	{
+		remove_BOOT_bin();
+	}
+	else if(c == 'w')
+	{
+		WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
+	}
 	else if(c == 'x')
 	{
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) ^= (1<<BIT_TESTMODE_0);

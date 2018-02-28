@@ -442,9 +442,9 @@ void ftp_config_sm()
 //				if(receive_buffer[i] == '\n')
 //					print("\r");
 //			}
-			xil_printf("receive_buffer_offset=%d\n\r", receive_buffer_offset);
-			print("Test region:");
-			xil_printf("Error in %d\n\r", test_file((u16*)receive_buffer, receive_buffer_offset/2));
+//			xil_printf("receive_buffer_offset=%d\n\r", receive_buffer_offset);
+//			print("Test region:");
+//			xil_printf("Error in %d\n\r", test_file((u16*)receive_buffer, receive_buffer_offset/2));
 			break;
 		case complete_state:
 			break;
@@ -469,6 +469,16 @@ void ReadFile(char* fnm, char* data)
 int GetFTP_ini_State()
 {
 	return ftp_state;
+}
+
+int IsRetrComplete()
+{
+	return (ftp_state == complete_state);
+}
+
+int GetFileSize()
+{
+	return receive_buffer_offset;
 }
 
 int IsSettingsObtained()
