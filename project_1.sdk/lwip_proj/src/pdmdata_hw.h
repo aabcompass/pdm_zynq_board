@@ -16,7 +16,7 @@
 #define DATA_TYPE_L2	2
 #define DATA_TYPE_L3	3
 
-#define N_FRAMES_DMA_RAW		(N_OF_FRAMES_L1_V0*16)
+#define N_FRAMES_DMA_RAW		 N_OF_FRAMES_L1_V0
 #define N_FRAMES_DMA_L1			(N_OF_FRAMES_L2_V0*2)
 #define N_FRAMES_DMA_L2			(N_OF_FRAMES_L3_V0*1)
 
@@ -24,7 +24,7 @@
 
 #define N_ALT_BUFFERS				2
 
-#define N_TRIG_BUFFERS_DMA_RAW		8
+#define N_TRIG_BUFFERS_DMA_RAW		16
 #define N_TRIG_BUFFERS_DMA_L1		8
 #define N_TRIG_BUFFERS_DMA_L2		1
 

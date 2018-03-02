@@ -253,7 +253,8 @@ int main()
 	print("Switch initialization...\n\r");
 	AXISSW_conf();
 	print("Flow control initialization...\n\r");
-	FlowControlInit();
+	FlowControlInit_D1();
+	FlowControlInit_D2();
 	print("Starting test data provider\n\r");
 	start_test_data_provider();
 	print("DMA initialization...\n\r");
@@ -262,8 +263,8 @@ int main()
 //	XLlFifoEventsInit();
 	print("Scurve data initialization...\n\r");
 	ScurveDataInit();
-	print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
-	ProvideAndCheck();
+	//print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
+	//ProvideAndCheck();
 
 	/* receive and process packets */
 	while (1) {

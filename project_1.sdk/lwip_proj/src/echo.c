@@ -51,7 +51,8 @@
 #include "axi_spectral_core.h"
 #include "swap.h"
 #include "slow_control.h"
-#include "axis_flowctrl.h"
+#include "axis_flowctrl_d1.h"
+#include "axis_flowctrl_d2.h"
 #include "hv.h"
 #include "xparameters.h"
 
@@ -350,7 +351,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 't')
 	{
 		// TURN ON THE TRIG LED
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
 		//static int is_test_mode = 0;
 		//is_test_mode = !is_test_mode;
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
@@ -424,10 +425,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		PrintFirstElementsL2();
 	}
-	else if(c == 'Q')
-	{
-		PrintFirstElementsRaw(num);
-	}
 	else if(c == '+')
 	{
 		xil_printf("num=%d\n\r", ++num);
@@ -469,12 +466,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		print("  ");
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 
-	}
-	else if(c == 'G')
-	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_FRAMES_DMA_RAW;
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
 	}
 	else if(c == 'j')
 	{

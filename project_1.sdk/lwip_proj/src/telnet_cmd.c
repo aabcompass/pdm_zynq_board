@@ -5,7 +5,9 @@
 #include <string.h>
 #include "hv.h"
 #include "pdmdp_err.h"
-#include "axis_flowctrl.h"
+#include "axis_flowctrl_d1.h"
+#include "axis_flowctrl_d2.h"
+
 
 #include "unix_date_time.h"
 
@@ -24,7 +26,10 @@ void SetInstrumentMode(u32 mode)
 {
 	instrumentState.mode = mode;
 	if(mode != 0)
-		ResetGTUCounter();
+	{
+		ResetGTUCounter_D1();
+		ResetGTUCounter_D2();
+	}
 }
 
 
