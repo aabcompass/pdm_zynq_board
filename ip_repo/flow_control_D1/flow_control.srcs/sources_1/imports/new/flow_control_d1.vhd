@@ -54,6 +54,7 @@ entity flow_control_d1 is
   		num_of_gtus_after_trig: IN STD_LOGIC_VECTOR(15 downto 0);  --8
   		trig_flags2: IN STD_LOGIC_VECTOR(31 downto 0);  --9
   		unix_time_reg: IN STD_LOGIC_VECTOR(31 downto 0);  --10
+  		tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000";
   		
   		status: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
   		gtu_sig_counter: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
@@ -94,6 +95,7 @@ architecture Behavioral of flow_control_d1 is
 	signal m_axis_tlast_cnt : std_logic_vector(15 downto 0) := (others => '0');
 	
 	signal int_trig_d0, int_trig_d1, int_trig, trig_force : std_logic := '0';
+	
 
 	component debounce IS
 		GENERIC(
@@ -495,11 +497,14 @@ xpm_cdc_extsync_inst: xpm_cdc_single
   		elsif(s_axis_tlast = '1' and s_axis_tvalid = '1') then
   			if(tlast_remover_cnt = "101") then
   				tlast_remover_cnt <= "000";
-  				pass_tlast <= '1';
   			else
   				tlast_remover_cnt <= tlast_remover_cnt + 1; 
-  				pass_tlast <= '0';
   			end if;
+  			if(tlast_remover_cnt = tlast_remover_phase) then
+  				pass_tlast <= '1';
+  			else
+  				pass_tlast <= '0';
+  			end if; 
   		end if;	
   	end if;
   end process;

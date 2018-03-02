@@ -12,7 +12,7 @@ entity axis_flow_control_d1 is
 		C_S00_AXI_DATA_WIDTH	: integer	:= 32;
 		C_S00_AXI_ADDR_WIDTH	: integer	:= 7;
 		-- Width of S_AXI data bus
-		C_S_AXI_DATA_WIDTH	: integer	:= 64;
+		C_S_AXI_DATA_WIDTH	: integer	:= 32;
 		-- Width of S_AXI address bus
 		C_S_AXI_ADDR_WIDTH	: integer	:= 7;
 		C_AXIS_DWIDTH : integer := 64;
@@ -223,6 +223,7 @@ architecture Behavioral of axis_flow_control_d1 is
 				num_of_gtus_after_trig: IN STD_LOGIC_VECTOR(15 downto 0);  --8
 				trig_flags2: IN STD_LOGIC_VECTOR(31 downto 0);  --9
 				unix_time_reg: IN STD_LOGIC_VECTOR(31 downto 0);  --10
+				tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000";
 				
 				status: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
 				gtu_sig_counter: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
@@ -883,6 +884,7 @@ begin
 				num_of_gtus_after_trig => slv_reg8(15 downto 0),--: IN STD_LOGIC_VECTOR(15 downto 0);  --8
 				trig_flags2 => slv_reg9,--: IN STD_LOGIC_VECTOR(31 downto 0);  --9
 				unix_time_reg => slv_reg10,--: IN STD_LOGIC_VECTOR(31 downto 0);  --10
+				tlast_remover_phase => slv_reg11(2 downto 0),
 				
 				status => slv_reg14,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
 				gtu_sig_counter => slv_reg15,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --15

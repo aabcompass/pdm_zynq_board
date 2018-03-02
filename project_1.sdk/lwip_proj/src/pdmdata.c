@@ -27,6 +27,7 @@ volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
 volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
 volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_L2_changed;
+volatile u32 buffer_L2_changed2;
 volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
 
 int N1=4, N2=4, N3=1;
@@ -58,6 +59,14 @@ TriggerInfo triggerInfoL3[2][1];
  *
  */
 
+void PrintD1_1stElements()
+{
+	int i, j;
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_RAW*N_FRAMES_DMA_RAW*N_OF_PIXEL_PER_PDM);
+	for(j=0;j<2;j++)
+		for(i=0;i<4;i++)
+			xil_printf("DataDMA__Raw[%d][%d][0][0]=0x%02x\n\r", j, i, DataDMA__Raw[j][i][0][0]);
+}
 
 int current_bank_L1=0, current_bank_L2=0;
 
@@ -271,6 +280,7 @@ void CopyEventData_trig()
 	int i;
 	u32 gtu_addr, gtu_addr_cross, gtu_n_cross_l, gtu_n_cross_r;
 	u32 alt_trig_buffer;
+	print("c");
 	//copy D1
 	for(i=0;i<N1;i++)
 	{
@@ -344,8 +354,11 @@ void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
 
 void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 {
+	u32 ret;
 	XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
-	XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
+	ret=XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
+	if(ret != XST_SUCCESS)
+		print("XAxiDma_SimpleTransfer returns nonzero!\n\r");
 }
 
 
@@ -457,16 +470,21 @@ static void RxIntrHandlerL2(void *Callback)
 		triggerInfoL3[current_alt_buffer][0].n_gtu = GetNGTU();
 		triggerInfoL3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
 		triggerInfoL3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
-
+		// change current_alt_buffer & prev_alt_buffer
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;
+		// Change DMA D1 pointer to zero
+		DmaReset(&dma_raw);
+		DmaStartN(1, 0);
+		// Restart DMA D3
 		DmaReset(AxiDmaInst);
 		DmaStartN(3, 0);
 		current_trigbuf_raw = 0; current_trigbuf_l1 = 0;
-		buffer_L2_changed = 1;
 		ClearTriggerInfo(current_alt_buffer);
 		ResetTriggerService_D2();
 		print("z");
+		buffer_L2_changed = 1;
+		buffer_L2_changed2 = 1;
 		return;
 	}
 }
@@ -477,6 +495,19 @@ int IsBufferL2Changed()
 	if(buffer_L2_changed)
 	{
 		buffer_L2_changed = 0;
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int IsBufferL2Changed2()
+{
+	if(buffer_L2_changed2)
+	{
+		buffer_L2_changed2 = 0;
 		return 1;
 	}
 	else

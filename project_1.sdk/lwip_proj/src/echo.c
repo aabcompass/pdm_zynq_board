@@ -106,6 +106,7 @@ static enum  {
 static enum  {
 	stop_sm_idle = 10,
 	wait4data_provider_stop=100,
+	wait4interruptD3=110,
 	stop_sm_stopped=120
 	} stop_sm_state = stop_sm_idle;
 
@@ -185,9 +186,11 @@ void StopSM()
 		break;
 	case wait4data_provider_stop:
 		if(!IsDataProviding())
-		{
+			stop_sm_state = wait4interruptD3;
+		break;
+	case wait4interruptD3:
+		if(IsBufferL2Changed2())
 			stop_sm_state = stop_sm_stopped;
-		}
 		break;
 	case stop_sm_stopped:
 		SendLogToFTP();
@@ -419,11 +422,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'P')
 	{
-		PrintFirstElementsL1(num);
-	}
-	else if(c == 'R')
-	{
-		PrintFirstElementsL2();
+		PrintD1_1stElements();
+		//PrintFirstElementsL1(num);
 	}
 	else if(c == '+')
 	{
@@ -435,7 +435,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'f')
 	{
-		SetFTP_state(20);
+		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_TLAST_REMOVER_PHASE*4)) = num;
+
+		//SetFTP_state(20);
 	}
 //	else if(c == 'F')
 //	{
