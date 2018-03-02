@@ -264,7 +264,7 @@ int main()
 	print("Scurve data initialization...\n\r");
 	ScurveDataInit();
 	//print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
-	//ProvideAndCheck();
+	ProvideAndCheck();
 
 	/* receive and process packets */
 	while (1) {
