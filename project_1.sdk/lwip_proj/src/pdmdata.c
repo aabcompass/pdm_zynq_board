@@ -673,6 +673,10 @@ int StartScurveGathering(u32 start_dac_value, u32 step_dac_value, u32 stop_dac_v
 	sCurveStruct.scurve_counter = 0;
 	memset(&scurvePacket.payload, 0xFF, sizeof(scurvePacket.payload));
 	memset(&scurvePacket4MatLab, 0, sizeof(scurvePacket4MatLab));
+	// set instrument mode in cores to zero (just 'started')
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+
 	return ERR_OK;
 }
 
