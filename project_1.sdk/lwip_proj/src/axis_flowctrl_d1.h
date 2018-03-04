@@ -32,6 +32,7 @@
 #define REGR_TRIG_TYPE				21 /*3:0=TRIGGER_TYPES*/
 #define REGR_UNIX_TIMESTAMP			22 /*unix_timestamp*/
 #define REGR_MAXIS_TRANS_CNT		23
+#define REGR_MAXIS_ACCEPTED_CNT		24
 
 #define SM_STATE_IDLE		0
 #define SM_STATE_ARMED		3

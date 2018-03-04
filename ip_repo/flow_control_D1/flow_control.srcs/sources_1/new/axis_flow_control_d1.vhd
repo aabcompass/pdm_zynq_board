@@ -233,7 +233,8 @@ architecture Behavioral of axis_flow_control_d1 is
 				gtu_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --20
 				trig_type: OUT STD_LOGIC_VECTOR(3 downto 0); --21
 				unix_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --22
-				maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --23
+				maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --23
+				maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --24
 		);
 	end component;  
 
@@ -894,7 +895,8 @@ begin
 				gtu_timestamp => slv_reg20,--: OUT STD_LOGIC_VECTOR(31 downto 0); --20
 				trig_type => slv_reg21(3 downto 0),--: OUT STD_LOGIC_VECTOR(3 downto 0); --21
 				unix_timestamp => slv_reg22,--: OUT STD_LOGIC_VECTOR(31 downto 0); --22
-				maxis_trans_cnt => slv_reg23--: OUT STD_LOGIC_VECTOR(31 downto 0) --23
+				maxis_trans_cnt => slv_reg23,--: OUT STD_LOGIC_VECTOR(31 downto 0) --23
+				maxis_accepted_cnt => slv_reg24 
 		);
 		
 end Behavioral;

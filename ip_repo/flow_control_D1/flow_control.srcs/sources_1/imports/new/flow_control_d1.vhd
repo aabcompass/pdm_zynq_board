@@ -64,7 +64,8 @@ entity flow_control_d1 is
   		gtu_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --20
   		trig_type: OUT STD_LOGIC_VECTOR(3 downto 0); --21
   		unix_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --22
-  		maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --23
+  		maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --23
+  		maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --24
   );
 end flow_control_d1;  
      
@@ -165,6 +166,22 @@ architecture Behavioral of flow_control_d1 is
 			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 		);
 	END COMPONENT;
+
+	COMPONENT fifo4dma
+		PORT (
+			s_axis_aresetn : IN STD_LOGIC;
+			s_axis_aclk : IN STD_LOGIC;
+			s_axis_tvalid : IN STD_LOGIC;
+			s_axis_tready : OUT STD_LOGIC;
+			s_axis_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+			m_axis_tvalid : OUT STD_LOGIC;
+			m_axis_tready : IN STD_LOGIC;
+			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		);
+	END COMPONENT;
 	
 	signal axis_fifo_fc_count: std_logic_vector(31 downto 0) := (others => '0');
 	
@@ -197,6 +214,7 @@ architecture Behavioral of flow_control_d1 is
 	
 	signal s_axis_tvalid_d1, s_axis_tlast_d1: std_logic := '0';
 	signal s_axis_tdata_d1: std_logic_vector(63 downto 0) := (others => '0');
+	signal m_axis_tdata_buf: std_logic_vector(63 downto 0) := (others => '0');
 
   signal tlast_remover_cnt: std_logic_vector(2 downto 0) := "000";
 	signal clr_tlast_remover: std_logic := '0';
@@ -204,11 +222,14 @@ architecture Behavioral of flow_control_d1 is
 	signal m_axis_tready_sink: std_logic := '0';
 	signal fifo_half: std_logic := '0';
 	signal m_axis_tvalid_i: std_logic := '0';
+	signal m_axis_tready_buf: std_logic := '0';
+	signal m_axis_tvalid_buf: std_logic := '0';
 	
 	signal trans_counter_i: std_logic_vector(C_CNT_DWIDTH-1 downto 0) := (others => '0');
 	signal gtu_sig_counter_i: std_logic_vector(31 downto 0) := (others => '0');
 	signal unix_time_i: std_logic_vector(31 downto 0) := (others => '0');
 	signal maxis_trans_cnt_i: std_logic_vector(31 downto 0) := (others => '0');
+	signal maxis_accepted_cnt_i: std_logic_vector(31 downto 0) := (others => '0');
 
 
 	attribute keep : string; 
@@ -526,15 +547,16 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 		m_axis_tvalid => m_axis_tvalid_key,
 		m_axis_tlast => m_axis_tlast_key,
 		m_axis_tready => m_axis_tready_key,
-		m_axis_tdata => m_axis_tdata,
+		m_axis_tdata => m_axis_tdata_buf,
 		axis_data_count => axis_fifo_fc_count,
 		axis_wr_data_count => open,
 		axis_rd_data_count => open
 	);
 
-	m_axis_tready_key <= m_axis_tready and (pass or m_axis_tready_sink);
+	--m_axis_tready_key <= m_axis_tready_buf and (pass or m_axis_tready_sink);
+	m_axis_tready_key <= (pass or m_axis_tready_sink);
 	m_axis_tvalid_i <= m_axis_tvalid_key and pass;
-	m_axis_tvalid <= m_axis_tvalid_i;
+	m_axis_tvalid_buf <= m_axis_tvalid_i;
 	--m_axis_tlast <= m_axis_tlast_key and pass;
 
 	comparator: process(s_axis_aclk)
@@ -594,11 +616,34 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	maxis_trans_cnt_process: process(s_axis_aclk)
 		begin
 		if(rising_edge(s_axis_aclk)) then
-			if(m_axis_tready = '1' and m_axis_tvalid_i = '1') then
+			-- here we count all transfers accepted from DMA
+			if(m_axis_tready_buf = '1' and m_axis_tvalid_i = '1') then
+				maxis_accepted_cnt_i <= maxis_accepted_cnt_i + 1;
+			end if;
+			-- here we count all transfers, whether accepted or not
+			if(m_axis_tvalid_i = '1') then
 				maxis_trans_cnt_i <= maxis_trans_cnt_i + 1;
 			end if;
 		end if; 	
 	end process;
 	maxis_trans_cnt <= maxis_trans_cnt_i;
+	maxis_accepted_cnt <= maxis_accepted_cnt_i;
+	
+	
+	i_fifo4dma : fifo4dma
+	  PORT MAP (
+	    s_axis_aresetn => s_axis_aresetn,
+	    s_axis_aclk => s_axis_aclk,
+	    s_axis_tvalid => m_axis_tvalid_buf,
+	    s_axis_tready => m_axis_tready_buf,
+	    s_axis_tdata => m_axis_tdata_buf,
+	    m_axis_tvalid => m_axis_tvalid,
+	    m_axis_tready => m_axis_tready,
+	    m_axis_tdata => m_axis_tdata,
+	    axis_data_count => open,
+	    axis_wr_data_count => open,
+	    axis_rd_data_count => open
+	  );
+
 		
 end Behavioral;
