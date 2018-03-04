@@ -402,7 +402,7 @@ static void RxIntrHandlerRaw(void *Callback)
 	dma_intr_counter_raw++;
 
 	DmaStartN(1, current_trigbuf_raw);
-	print("x");
+	//print("x");
 
 	return;
 }
@@ -444,7 +444,7 @@ static void RxIntrHandlerL1(void *Callback)
 		current_alt_trig_buffer_l1 = dma_intr_counter_l1%2;
 
 	FlowControlClrIntr_D2(2);	//print("y");
-	print("y");
+	//print("y");
 
 	return;
 
