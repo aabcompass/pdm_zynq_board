@@ -100,6 +100,7 @@ char boot_bin_buf[10000000];
 static enum  {
 	datapath_idle_state = 10,
 	datapath_wait4trigger_state=100,
+	//datapath_checkFTPready_state=110,
 	datapath_wait4ftp_ready2=120
 	} datapath_sm_state = datapath_idle_state;
 
@@ -215,10 +216,10 @@ void DataPathSM()
 	case datapath_idle_state:
 		if(instrumentState.mode != 0)
 		{
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
 
 			datapath_sm_state = datapath_wait4trigger_state;
@@ -249,6 +250,12 @@ void DataPathSM()
 			what_trigger_armed = 3;
 		}
 		break;
+//	case datapath_checkFTPready_state:
+//		if(!IsFTP_bin_idle())
+//		{
+//			print("\n\r!!! FTP isn't ready !!!\n\r");
+//		}
+//		datapath_sm_state = datapath_wait4ftp_ready2;
 	case datapath_wait4ftp_ready2:
 		if(IsFTP_bin_idle())
 		{
@@ -294,10 +301,10 @@ int IsFW_updated()
 
 void TrgImmediate()
 {
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_TRIG_IMMEDIATE;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 }
 
 void PrnAllRegs()
@@ -320,13 +327,13 @@ void PrnAllRegs()
 	for(i=0;i<32;i++)
 	{
 		if(i%4==0) xil_printf("\n\r%d.", i);
-		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR+i*4));
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR+i*4));
 	}
 	print("\n\rXPAR_AXIS_FLOW_CONTROL_L2_BASEADDR");
 	for(i=0;i<32;i++)
 	{
 		if(i%4==0) xil_printf("\n\r%d.", i);
-		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR+i*4));
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR+i*4));
 	}
 	print("\n\rXPAR_HV_HK_V1_0_0_BASEADDR");
 	for(i=0;i<32;i++)
@@ -354,7 +361,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 't')
 	{
 		// TURN ON THE TRIG LED
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
 		//static int is_test_mode = 0;
 		//is_test_mode = !is_test_mode;
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
@@ -367,8 +374,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'r')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
 	}
 //	else if(c == 'Y')
 //	{
@@ -377,8 +384,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 //	}
 	else if(c == 'y')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_RELEASE;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_RELEASE;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
 	}
 	else if(c == 's')
 	{
@@ -435,7 +442,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'f')
 	{
-		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_TLAST_REMOVER_PHASE*4)) = num;
+		(*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_TLAST_REMOVER_PHASE*4)) = num;
 
 		//SetFTP_state(20);
 	}
@@ -495,13 +502,13 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'c')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
 	else if(c == 'C')
 	{
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_ALL;
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_ALL;
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
 	else if(c == 'U')
 	{

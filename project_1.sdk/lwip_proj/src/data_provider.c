@@ -122,10 +122,7 @@ void ProvideAndCheck()
 	{
 		if(IsBufferL2Changed())
 			break;
-		if((i/100)%4 == 0)      print("----/----\r");
-		else if((i/100)%4 == 1) print("----|----\r");
-		else if((i/100)%4 == 2) print("----\\----\r");
-		else if((i/100)%4 == 3) print("----|----\r");
+		print("--------->");
 	}
 	xil_printf("DMAIntrCounterRaw=%d\n\r", GetDMAIntrCounterN(0));
 	xil_printf("DMAIntrCounterL1=%d\n\r", GetDMAIntrCounterN(1));
