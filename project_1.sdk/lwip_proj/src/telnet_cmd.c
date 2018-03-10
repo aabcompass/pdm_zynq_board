@@ -206,6 +206,32 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		sprintf(reply, "%d\n\r", *(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGR_UNIX_TIME*4));
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
+	else if(strncmp(p->payload, "trig event_log start", 20) == 0)
+	{
+		DMA_events_log_start();
+		StartEventsLog();
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "trig event_log stop", 19) == 0)
+	{
+		u32 num_of_records;
+		char str_ok[] = "Ok\n\r";
+		char str_err[] = "Error 100\n\r"; //ERR_FTP_CLIENT_IS_BUSY
+		if(!IsFTP_bin_idle())
+		{
+			tcp_write(tpcb, str_err, sizeof(str_err), 1);
+		}
+		else
+		{
+			num_of_records = StopEventsLog();
+			Inject16Events2DMA();
+			ResetDMATrigEventLog();
+			SendSpectrum2FTP(Get_DataDMA_events_L1_ptr_and_invalidate(num_of_records),
+					num_of_records*sizeof(int), "event_log.bin");
+			tcp_write(tpcb, str_ok, sizeof(str_ok), 1);
+		}
+	}
 	else if(strncmp(p->payload, "trg", 3) == 0)
 	{
 		TrgImmediate();

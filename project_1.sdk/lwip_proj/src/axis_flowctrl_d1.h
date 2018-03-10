@@ -33,6 +33,7 @@
 #define REGR_UNIX_TIMESTAMP			22 /*unix_timestamp*/
 #define REGR_MAXIS_TRANS_CNT		23
 #define REGR_MAXIS_ACCEPTED_CNT		24
+#define REGR_TRIG_ALL_CNT			25
 
 #define SM_STATE_IDLE		0
 #define SM_STATE_ARMED		3
@@ -50,23 +51,27 @@
 
 
 
-#define BIT_FC_CLR_TRANS_CNT	(1<<0) /* Just for DBG*/
-#define BIT_FC_CLR_ERROR		(1<<1) /* Just for DBG*/
-#define BIT_FC_CLR_ALL			(1<<2) /* Just for DBG. Clear all except unix time*/
-#define BIT_FC_CLR_INTR			(1<<3) /* Int must be cleared after every interrupt*/
-#define BIT_FC_CLR_GTU_CNT		(1<<4) /* GTU cnt must be reset at the beginning of every measurement */
-#define BIT_FC_CLR_TRIG_SERVICE (1<<5) /* trig service must be reset at the beginning of every cycle */
+#define BIT_FC_CLR_TRANS_CNT			(1<<0) /* Just for DBG*/
+#define BIT_FC_CLR_ERROR				(1<<1) /* Just for DBG*/
+#define BIT_FC_CLR_ALL					(1<<2) /* Just for DBG. Clear all except unix time*/
+#define BIT_FC_CLR_INTR					(1<<3) /* Int must be cleared after every interrupt*/
+#define BIT_FC_CLR_GTU_CNT				(1<<4) /* GTU cnt must be reset at the beginning of every measurement */
+#define BIT_FC_CLR_TRIG_SERVICE			(1<<5) /* trig service must be reset at the beginning of every cycle */
 
-#define BIT_FC_TRIG_IMMEDIATE	(1<<16)
+#define BIT_FC_TRIG_IMMEDIATE			(1<<16)
+#define BIT_FC_INJECT_16_EVENTS_4DMA	(1<<17)
 
-#define BIT_FC_RELEASE			(1<<0)
-//#define BIT_FC_TRIG_FORCE		(1<<1) // OBSOLETE
-#define BIT_FC_SET_UNIX_TIME	(1<<2)
+#define BIT_FC_RELEASE					(1<<0)
+//#define BIT_FC_TRIG_FORCE				(1<<1) // OBSOLETE
+#define BIT_FC_SET_UNIX_TIME			(1<<2)
 
-#define BIT_FC_IS_TRIGGER		(1<<16)
+#define BIT_FC_IS_TRIGGER				(1<<16)
 
-#define BIT_FC_IS_TRIGGER_LED	(1<<16)
-#define BIT_FC_EN_TRIG_OUT		(1<<17)
-#define BIT_FC_TRIG_OUT_FORCE	(1<<18)
+#define BIT_FC_IS_TRIGGER_LED			(1<<16)
+#define BIT_FC_EN_TRIG_OUT				(1<<17)
+#define BIT_FC_TRIG_OUT_FORCE			(1<<18)
+#define BIT_FC_TRIG_EVENTS_LOG_EN		(1<<19)
+#define BIT_FC_TRIG_EVENTS_TLAST_STATIC	(1<<20)
+
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

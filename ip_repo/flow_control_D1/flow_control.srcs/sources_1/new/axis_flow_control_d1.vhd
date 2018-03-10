@@ -36,6 +36,12 @@ entity axis_flow_control_d1 is
   		m_axis_tkeep : OUT STD_LOGIC_VECTOR(C_AXIS_DWIDTH/8-1 DOWNTO 0) := (others => '1');
   		m_axis_tlast : OUT STD_LOGIC := '0';
   		
+				-- out events
+  		m_axis_events_tvalid : OUT STD_LOGIC;
+  		m_axis_events_tlast : OUT STD_LOGIC;
+  		m_axis_events_tready : IN STD_LOGIC;
+  		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+ 
   		trig0 : in std_logic;
   		trig1 : in std_logic;
   		trig2 : in std_logic;
@@ -113,7 +119,7 @@ entity axis_flow_control_d1 is
   );
 end axis_flow_control_d1;  
      
-architecture Behavioral of axis_flow_control_d1 is
+architecture Behavioral of axis_flow_control_d1 is 
 
 	-- AXI4LITE signals
 	signal axi_awaddr	: std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
@@ -192,12 +198,18 @@ architecture Behavioral of axis_flow_control_d1 is
 				s_axis_tdata : IN STD_LOGIC_VECTOR(C_AXIS_DWIDTH-1 DOWNTO 0);
 				s_axis_tlast : IN STD_LOGIC;
 				
-				-- out
+				-- out data
 				m_axis_tvalid : OUT STD_LOGIC;
 				m_axis_tready : IN STD_LOGIC;
 				m_axis_tdata : OUT STD_LOGIC_VECTOR(C_AXIS_DWIDTH-1 DOWNTO 0);
 				m_axis_tkeep : OUT STD_LOGIC_VECTOR(C_AXIS_DWIDTH/8-1 DOWNTO 0) := (others => '1');
 				m_axis_tlast : OUT STD_LOGIC := '0';
+				
+				-- out events
+				m_axis_events_tvalid : OUT STD_LOGIC;
+				m_axis_events_tlast : OUT STD_LOGIC;
+				m_axis_events_tready : IN STD_LOGIC;
+				m_axis_events_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 				
 				trig0 : in std_logic;
 				trig1 : in std_logic;
@@ -234,7 +246,8 @@ architecture Behavioral of axis_flow_control_d1 is
 				trig_type: OUT STD_LOGIC_VECTOR(3 downto 0); --21
 				unix_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --22
 				maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --23
-				maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --24
+				maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --24
+				trig_all_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --25
 		);
 	end component;  
 
@@ -861,6 +874,13 @@ begin
 				m_axis_tkeep  => m_axis_tkeep,--: OUT STD_LOGIC_VECTOR(C_AXIS_DWIDTH/8-1 DOWNTO 0) := (others => '1');
 				m_axis_tlast  => m_axis_tlast,--: OUT STD_LOGIC := '0';
 				
+				-- out events
+				m_axis_events_tvalid   => m_axis_events_tvalid,--: OUT STD_LOGIC;
+				m_axis_events_tlast   => m_axis_events_tlast,--: OUT STD_LOGIC;
+				m_axis_events_tready   => m_axis_events_tready,--: IN STD_LOGIC;
+				m_axis_events_tdata   => m_axis_events_tdata,--: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+
 				trig0  => trig0,--: in std_logic;
 				trig1  => trig1,--: in std_logic;
 				trig2  => trig2,--: in std_logic;
@@ -896,7 +916,8 @@ begin
 				trig_type => slv_reg21(3 downto 0),--: OUT STD_LOGIC_VECTOR(3 downto 0); --21
 				unix_timestamp => slv_reg22,--: OUT STD_LOGIC_VECTOR(31 downto 0); --22
 				maxis_trans_cnt => slv_reg23,--: OUT STD_LOGIC_VECTOR(31 downto 0) --23
-				maxis_accepted_cnt => slv_reg24 
+				maxis_accepted_cnt => slv_reg24, 
+				trig_all_cnt => slv_reg25
 		);
 		
 end Behavioral;

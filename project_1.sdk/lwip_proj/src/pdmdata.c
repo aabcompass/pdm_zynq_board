@@ -21,6 +21,7 @@ uint8_t  DataDMA__Raw[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N
 uint16_t DataDMA__L1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L1][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
+
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
 volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
 
@@ -362,6 +363,7 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 }
 
 
+
 void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 {
 	if(n_dma == 1)
@@ -616,7 +618,12 @@ void DMA_init()
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
 	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize data_tst_l1!\n\r");
+
+
 }
+
+
+
 
 
 u32 GetDMAIntrCounterN(int n)

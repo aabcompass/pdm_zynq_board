@@ -30,10 +30,7 @@
 
 #define N_ALT_TRIG_BUFFERS			2
 
-//#define N_FRAMES_TST_DMA_L1		1
-//#define N_FRAMES_TST_DMA_L2		1
-
-//#define N_SECTIONS				16
+#define N_EVENTS_L1		1048576			/*Number of events registered with L1 trigger*/
 
 #define DMA_TST_BUF_SIZE	60000000 /*60 Meg*/
 

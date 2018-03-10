@@ -259,6 +259,7 @@ int main()
 	start_test_data_provider();
 	print("DMA initialization...\n\r");
 	DMA_init();
+	DMA_events_log_init();
 //	print("Event FIFO initialization...\n\r");
 //	XLlFifoEventsInit();
 	print("Scurve data initialization...\n\r");
