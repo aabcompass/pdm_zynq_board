@@ -32,9 +32,8 @@ entity flow_control_d1 is
  		  
  		  -- out events
 			m_axis_events_tvalid : OUT STD_LOGIC;
-			m_axis_events_tlast : OUT STD_LOGIC;
   		m_axis_events_tready : IN STD_LOGIC;
-  		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+  		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
   		
   		trig0 : in std_logic;
   		trig1 : in std_logic;
@@ -199,10 +198,10 @@ architecture Behavioral of flow_control_d1 is
 			s_axis_aclk : IN STD_LOGIC;
 			s_axis_tvalid : IN STD_LOGIC;
 			s_axis_tready : OUT STD_LOGIC;
-			s_axis_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+			s_axis_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
 			m_axis_tvalid : OUT STD_LOGIC;
 			m_axis_tready : IN STD_LOGIC;
-			m_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
 			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
@@ -259,6 +258,8 @@ architecture Behavioral of flow_control_d1 is
 	signal maxis_accepted_cnt_i: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal inject_16_events_cnt: std_logic_vector(3 downto 0) := (others => '0');
+	signal trig_type_i: std_logic_vector(3 downto 0) := (others => '0');
+	signal s_axis_events_tdata: std_logic_vector(63 downto 0) := (others => '0');
 	signal inject_16_events: std_logic := '0';
 	signal cmd_inject_16_events, cmd_inject_16_events_d0, cmd_inject_16_events_d1: std_logic := '0';
 
@@ -333,12 +334,12 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	set_unix_time <= flags2(2); 
 
 
+
 	number_of_triggers <= trig_flags2(15 downto 0);
 	en_trig_led <= trig_flags2(16);
 	en_trig_out <= trig_flags2(17);
 	trig_out_force <= trig_flags2(18);
 	trig_events_log_en <= trig_flags2(19);
-	m_axis_events_tlast <= trig_flags2(20);
 
 
 	status(3 downto 0) <= sm_state;
@@ -511,7 +512,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1' or clr_trig_service = '1') then
 				trig_cnt <= (others => '0');
-				trig_type <= (others => '0');
+				trig_type_i <= (others => '0');
 				trig_latch <= '0';		
 				state := 0;
 			else
@@ -526,18 +527,19 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 												state := state + 1;
 											end if;
 										end if;
+										trig_type_i <= (others => '0');
 					when 1 => if(periodic_trig_latch = '1') then
-											trig_type <= X"1";
+											trig_type_i <= X"1";
 										elsif(self_trig_latch = '1') then
-											trig_type <= X"2";
+											trig_type_i <= X"2";
 											trig_cnt <= trig_cnt + 1;
 										elsif(trig_immediate_latch = '1') then
-											trig_type <= X"3";
+											trig_type_i <= X"3";
 										elsif(ext_trig_latch = '1') then
-											trig_type <= X"4";
+											trig_type_i <= X"4";
 											trig_cnt <= trig_cnt + 1;
 										else
-											trig_type <= X"8";
+											trig_type_i <= X"8";
 										end if;							
 										trig_latch <= '1';		
 										gtu_timestamp <= gtu_sig_counter_i;
@@ -554,6 +556,8 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 			end if;
 		end if;
 	end process;
+	
+	trig_type <= trig_type_i;
 
 
   -- this process removes all tlast except every 6th.
@@ -713,6 +717,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process;
 
 	trig_event <= (trig_front and trig_events_log_en) or inject_16_events;
+	s_axis_events_tdata <= gtu_sig_counter_i & X"0001000" & trig_type_i;
 
 	i_fifo4gtu_events : fifo4gtu_events
 		PORT MAP (
@@ -720,7 +725,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 			s_axis_aclk => s_axis_aclk,
 			s_axis_tvalid => trig_event,
 			s_axis_tready => open,
-			s_axis_tdata => gtu_sig_counter_i,
+			s_axis_tdata => s_axis_events_tdata,--gtu_sig_counter_i,
 			m_axis_tvalid => m_axis_events_tvalid,
 			m_axis_tready => m_axis_events_tready,
 			m_axis_tdata => m_axis_events_tdata,

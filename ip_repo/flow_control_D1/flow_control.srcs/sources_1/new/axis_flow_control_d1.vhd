@@ -38,9 +38,8 @@ entity axis_flow_control_d1 is
   		
 				-- out events
   		m_axis_events_tvalid : OUT STD_LOGIC;
-  		m_axis_events_tlast : OUT STD_LOGIC;
   		m_axis_events_tready : IN STD_LOGIC;
-  		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+  		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
  
   		trig0 : in std_logic;
   		trig1 : in std_logic;
@@ -117,7 +116,7 @@ entity axis_flow_control_d1 is
     		-- accept the read data and response information.
   		S_AXI_RREADY	: in std_logic
   );
-end axis_flow_control_d1;  
+end axis_flow_control_d1;   
      
 architecture Behavioral of axis_flow_control_d1 is 
 
@@ -207,9 +206,8 @@ architecture Behavioral of axis_flow_control_d1 is
 				
 				-- out events
 				m_axis_events_tvalid : OUT STD_LOGIC;
-				m_axis_events_tlast : OUT STD_LOGIC;
 				m_axis_events_tready : IN STD_LOGIC;
-				m_axis_events_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+				m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
 				
 				trig0 : in std_logic;
 				trig1 : in std_logic;
@@ -876,7 +874,6 @@ begin
 				
 				-- out events
 				m_axis_events_tvalid   => m_axis_events_tvalid,--: OUT STD_LOGIC;
-				m_axis_events_tlast   => m_axis_events_tlast,--: OUT STD_LOGIC;
 				m_axis_events_tready   => m_axis_events_tready,--: IN STD_LOGIC;
 				m_axis_events_tdata   => m_axis_events_tdata,--: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 

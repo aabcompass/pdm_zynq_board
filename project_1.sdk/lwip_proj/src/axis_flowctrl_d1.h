@@ -71,7 +71,6 @@
 #define BIT_FC_EN_TRIG_OUT				(1<<17)
 #define BIT_FC_TRIG_OUT_FORCE			(1<<18)
 #define BIT_FC_TRIG_EVENTS_LOG_EN		(1<<19)
-#define BIT_FC_TRIG_EVENTS_TLAST_STATIC	(1<<20)
 
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

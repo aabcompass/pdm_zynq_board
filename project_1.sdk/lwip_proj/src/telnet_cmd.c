@@ -228,7 +228,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			Inject16Events2DMA();
 			ResetDMATrigEventLog();
 			SendSpectrum2FTP(Get_DataDMA_events_L1_ptr_and_invalidate(num_of_records),
-					num_of_records*sizeof(int), "event_log.bin");
+					num_of_records*sizeof(DATA_TYPE_EVENTS_LOG), "event_log.bin");
 			tcp_write(tpcb, str_ok, sizeof(str_ok), 1);
 		}
 	}

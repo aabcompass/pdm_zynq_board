@@ -11,7 +11,7 @@
 
 XAxiDma dma_events_l1;
 
-uint32_t DataDMA_events_L1[N_EVENTS_L1] __attribute__ ((aligned (64)));
+DATA_TYPE_EVENTS_LOG DataDMA_events_L1[N_EVENTS_L1] __attribute__ ((aligned (64)));
 
 void ResetDMATrigEventLog()
 {
@@ -37,7 +37,7 @@ void DMA_events_log_start()
 {
 	u32 ret;
 	XAxiDma_IntrEnable(&dma_events_l1, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
-	ret=XAxiDma_SimpleTransfer(&dma_events_l1, (UINTPTR)&DataDMA_events_L1[0], N_EVENTS_L1, XAXIDMA_DEVICE_TO_DMA); // in bytes
+	ret=XAxiDma_SimpleTransfer(&dma_events_l1, (UINTPTR)&DataDMA_events_L1[0], N_EVENTS_L1*sizeof(DATA_TYPE_EVENTS_LOG), XAXIDMA_DEVICE_TO_DMA); // in bytes
 	if(ret != XST_SUCCESS)
 		print("XAxiDma_SimpleTransfer returns nonzero!\n\r");
 
@@ -55,7 +55,5 @@ void Print_DataDMA_events_L1(u32 num)
 	int i;
 	Xil_DCacheInvalidateRange(&DataDMA_events_L1[0], sizeof(DataDMA_events_L1)/*num*sizeof(u32)*/);
 	for(i=0; i<num; i++)
-	{
-		xil_printf("0x%08x\n\r", DataDMA_events_L1[i]);
-	}
+		xil_printf("0x%08x\n\r", DataDMA_events_L1[i].trig_level, DataDMA_events_L1[i].trig_type, DataDMA_events_L1[i].timestamp_gtu);
 }

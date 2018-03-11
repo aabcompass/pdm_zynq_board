@@ -289,6 +289,15 @@ typedef struct
 	DATA_TYPE_HVPS_LOG_V1 payload[HVPS_LOG_SIZE_NRECORDS];
 } Z_DATA_TYPE_HVPS_LOG_V1;
 
+typedef struct
+{
+	uint8_t trig_type; // TRIG_PERIODIC=1,TRIG_SELF=2,TRIG_IMMEDIATE=3,TRIG_EXT=4
+	uint8_t reserv_0;
+	uint8_t trig_level; //L1=1, L2=2
+	uint8_t reserv_1;
+	uint32_t timestamp_gtu;
+} DATA_TYPE_EVENTS_LOG;
+
 #pragma pack(pop) /* return to normal packing */
 
 #endif /* SRC_PDMDATA_H_ */
