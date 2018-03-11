@@ -96,3 +96,15 @@ void FlowControlInit_D2()
 	// reset time to zero
 	SetTime(0);
 }
+
+void StartEventsLog_L2()
+{
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_TRIG_EVENTS_LOG_EN;
+}
+
+int StopEventsLog_L2() // returns the number of collected events
+{
+	u32 num = *(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGR_TRIG_ALL_CNT*4);
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) &= ~BIT_FC_TRIG_EVENTS_LOG_EN;
+	return num;
+}

@@ -30,6 +30,7 @@
 #define REGR_GTU_TIMESTAMP			20 /*GTU counter timestamp*/
 #define REGR_TRIG_TYPE				21 /*3:0=TRIGGER_TYPES*/
 #define REGR_UNIX_TIMESTAMP			22 /*unix_timestamp*/
+#define REGR_TRIG_ALL_CNT			25
 
 #define SM_STATE_IDLE		0
 #define SM_STATE_ARMED		3
@@ -65,5 +66,6 @@
 #define BIT_FC_IS_TRIGGER_LED	(1<<16)
 #define BIT_FC_EN_TRIG_OUT		(1<<17)
 #define BIT_FC_TRIG_OUT_FORCE	(1<<18)
+#define BIT_FC_TRIG_EVENTS_LOG_EN		(1<<19)
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

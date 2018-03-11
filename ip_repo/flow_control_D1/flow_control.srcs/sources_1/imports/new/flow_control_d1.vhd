@@ -85,7 +85,7 @@ architecture Behavioral of flow_control_d1 is
 	signal ext_trig: std_logic := '0';
 	signal trig, trig_d1, trig_d2, trig_front: std_logic := '0';
 	signal trig_immediate, trig_immediate_latch: std_logic := '0';
-	signal periodic_trig, periodic_trig_latch: std_logic := '0';
+	signal periodic_trig, periodic_trig_latch: std_logic := '0'; 
 
 	signal clear_error: std_logic := '0';
 	
@@ -522,13 +522,15 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											if(self_trig = '1' or ext_trig = '1') then
 												if(trig_cnt < number_of_triggers) then
 													state := state + 1;
+													trig_type_i <= (others => '0');
 												end if;
 											else
 												state := state + 1;
+												trig_type_i <= (others => '0');
 											end if;
 										end if;
-										trig_type_i <= (others => '0');
-					when 1 => if(periodic_trig_latch = '1') then
+					when 1 => 
+										if(periodic_trig_latch = '1') then
 											trig_type_i <= X"1";
 										elsif(self_trig_latch = '1') then
 											trig_type_i <= X"2";

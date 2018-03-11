@@ -5,12 +5,12 @@ proc init_gui { IPINST } {
   set Page_0 [ipgui::add_page $IPINST -name "Page 0"]
   ipgui::add_param $IPINST -name "C_AXIS_DWIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_CNT_DWIDTH" -parent ${Page_0}
+  ipgui::add_param $IPINST -name "C_FREQ" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S00_AXI_ADDR_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S00_AXI_DATA_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_ADDR_WIDTH" -parent ${Page_0}
   ipgui::add_param $IPINST -name "C_S_AXI_DATA_WIDTH" -parent ${Page_0}
 
-  ipgui::add_param $IPINST -name "C_FREQ"
 
 }
 
