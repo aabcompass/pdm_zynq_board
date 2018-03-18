@@ -483,6 +483,7 @@ static void RxIntrHandlerL2(void *Callback)
 		DmaStartN(3, 0);
 		current_trigbuf_raw = 0; current_trigbuf_l1 = 0;
 		ClearTriggerInfo(current_alt_buffer);
+		ResetTriggerService_D1(); // added in v1.8.1
 		ResetTriggerService_D2();
 		print("z");
 		buffer_L2_changed = 1;
