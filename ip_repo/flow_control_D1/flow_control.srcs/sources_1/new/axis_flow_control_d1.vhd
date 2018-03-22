@@ -233,7 +233,8 @@ architecture Behavioral of axis_flow_control_d1 is
 				num_of_gtus_after_trig: IN STD_LOGIC_VECTOR(15 downto 0);  --8
 				trig_flags2: IN STD_LOGIC_VECTOR(31 downto 0);  --9
 				unix_time_reg: IN STD_LOGIC_VECTOR(31 downto 0);  --10
-				tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000";
+				tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000"; --11
+				trigger_relax_time: IN std_logic_vector(23 downto 0) := X"000000"; --12
 				
 				status: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
 				gtu_sig_counter: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
@@ -903,6 +904,7 @@ begin
 				trig_flags2 => slv_reg9,--: IN STD_LOGIC_VECTOR(31 downto 0);  --9
 				unix_time_reg => slv_reg10,--: IN STD_LOGIC_VECTOR(31 downto 0);  --10
 				tlast_remover_phase => slv_reg11(2 downto 0),
+				trigger_relax_time => slv_reg12(23 downto 0),
 				
 				status => slv_reg14,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
 				gtu_sig_counter => slv_reg15,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --15

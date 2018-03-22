@@ -270,13 +270,13 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc_art</spirit:name>
+          <spirit:name>sr_ck_pc</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc</spirit:name>
+          <spirit:name>sr_ck_pc_art</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
@@ -1370,14 +1370,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axis_flow_control_D1</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="axis_flow_control_d1" spirit:vendor="user.org" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_flow_control_d1_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="C_FREQ">200000000</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>axis_switch_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axis_switch" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
@@ -1389,6 +1381,14 @@
         <spirit:componentRef spirit:library="ip" spirit:name="axis_clock_converter" spirit:vendor="xilinx.com" spirit:version="1.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_clock_converter_6_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>axis_flow_control_D1</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="axis_flow_control_d1" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_flow_control_d1_0_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="C_FREQ">200000000</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -1986,6 +1986,9 @@
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="s_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="S_AXI_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="s_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ACLK"/>
@@ -2006,9 +2009,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="s_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="S_AXI_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="s_axis_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>processing_system7_0_FCLK_RESET0_N</spirit:name>
@@ -2059,6 +2059,9 @@
         <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="s_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="S_AXI_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M01_ARESETN"/>
@@ -2077,9 +2080,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="s_axis_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_flow_control_D2" spirit:portRef="S_AXI_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="s_axis_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>rst_processing_system7_0_50M_interconnect_aresetn</spirit:name>
@@ -2150,8 +2150,8 @@
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_ck_pc</spirit:name>
         <spirit:internalPortReference spirit:componentRef="spaciroc3_sc_0" spirit:portRef="sr_ck_pc"/>
-        <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
         <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
+        <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_rstb_pc</spirit:name>
@@ -2333,6 +2333,8 @@
         <spirit:internalPortReference spirit:componentRef="ALGO_B_1" spirit:portRef="S01_AXIS_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_dma_events_L1" spirit:portRef="s_axi_lite_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_dma_events_L1" spirit:portRef="m_axi_s2mm_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_switch_0" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ACLK"/>
@@ -2348,8 +2350,6 @@
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S02_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="s_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="S_AXI_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axis_switch_0" spirit:portRef="aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="m_axis_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L9_axis_data_count</spirit:name>
@@ -2427,6 +2427,8 @@
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="top_switch_raw" spirit:portRef="S_AXI_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_dma_events_L1" spirit:portRef="axi_resetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_switch_0" spirit:portRef="aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="m_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S01_ARESETN"/>
@@ -2440,8 +2442,6 @@
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S02_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="S_AXI_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axis_switch_0" spirit:portRef="aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="m_axis_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconcat_1_dout</spirit:name>

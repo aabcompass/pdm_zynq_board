@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sun Mar 11 21:27:20 2018
+--Date        : Thu Mar 22 22:45:23 2018
 --Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.4 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -15086,6 +15086,34 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_L2_0;
+  component design_1_axis_switch_0_0 is
+  port (
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axis_tready : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 127 downto 0 );
+    m_axis_tvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    m_axis_tready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    s_req_suppress : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_decode_err : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  end component design_1_axis_switch_0_0;
+  component design_1_axis_clock_converter_6_0 is
+  port (
+    s_axis_aresetn : in STD_LOGIC;
+    m_axis_aresetn : in STD_LOGIC;
+    s_axis_aclk : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tready : out STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
+    m_axis_aclk : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tready : in STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 )
+  );
+  end component design_1_axis_clock_converter_6_0;
   component design_1_axis_flow_control_d1_0_0 is
   port (
     s_axis_aclk : in STD_LOGIC;
@@ -15134,34 +15162,6 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_d1_0_0;
-  component design_1_axis_switch_0_0 is
-  port (
-    aclk : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axis_tready : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 127 downto 0 );
-    m_axis_tvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    m_axis_tready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
-    s_req_suppress : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_decode_err : out STD_LOGIC_VECTOR ( 1 downto 0 )
-  );
-  end component design_1_axis_switch_0_0;
-  component design_1_axis_clock_converter_6_0 is
-  port (
-    s_axis_aresetn : in STD_LOGIC;
-    m_axis_aresetn : in STD_LOGIC;
-    s_axis_aclk : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tready : out STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
-    m_axis_aclk : in STD_LOGIC;
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tready : in STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 )
-  );
-  end component design_1_axis_clock_converter_6_0;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );

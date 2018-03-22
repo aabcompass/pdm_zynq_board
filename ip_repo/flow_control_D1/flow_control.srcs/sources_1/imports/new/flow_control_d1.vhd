@@ -50,7 +50,7 @@ entity flow_control_d1 is
   		--regs
   		flags: IN STD_LOGIC_VECTOR(31 downto 0); --0 
   		clr_flags: IN STD_LOGIC_VECTOR(31 downto 0); --1 
-  		trig_delay: IN STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --2
+  		trig_delay: IN STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --2 UNUSED
   		flags2: IN STD_LOGIC_VECTOR(31 downto 0);	     --3
   		fifo_thr: IN STD_LOGIC_VECTOR(15 downto 0); --4
   		int_trig_gtu_time: IN STD_LOGIC_VECTOR(31 downto 0);  --5
@@ -59,7 +59,9 @@ entity flow_control_d1 is
   		num_of_gtus_after_trig: IN STD_LOGIC_VECTOR(15 downto 0);  --8
   		trig_flags2: IN STD_LOGIC_VECTOR(31 downto 0);  --9
   		unix_time_reg: IN STD_LOGIC_VECTOR(31 downto 0);  --10
-  		tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000";
+  		tlast_remover_phase: IN std_logic_vector(2 downto 0) := "000"; --11
+  		trigger_relax_time: IN std_logic_vector(23 downto 0) := X"000000"; --12
+
   		
   		status: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
   		gtu_sig_counter: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
@@ -262,6 +264,8 @@ architecture Behavioral of flow_control_d1 is
 	signal s_axis_events_tdata: std_logic_vector(63 downto 0) := (others => '0');
 	signal inject_16_events: std_logic := '0';
 	signal cmd_inject_16_events, cmd_inject_16_events_d0, cmd_inject_16_events_d1: std_logic := '0';
+	
+	signal trigger_relax_time_cnt: std_logic_vector(23 downto 0) := (others => '0');
 
 
 	attribute keep : string; 
@@ -507,7 +511,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process; 
 	 
 	trig_service: process(s_axis_aclk)
-		variable state : integer range 0 to 3 := 0;
+		variable state : integer range 0 to 4 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1' or clr_trig_service = '1') then
@@ -552,7 +556,13 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 										end if;
 					when 3 => if(trig_latch_clr = '1') then
 											trig_latch <= '0';
+											state := state + 1;
+										end if;
+					when 4 => if(trigger_relax_time_cnt = trigger_relax_time) then
 											state := 0;
+											trigger_relax_time_cnt <= (others => '0');
+										else
+											trigger_relax_time_cnt <= trigger_relax_time_cnt + 1;
 										end if;
 				end case; 
 			end if;

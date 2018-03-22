@@ -12,7 +12,7 @@
 
 #define REGW_FLAGS					0 /* 3=periodic_trig_en 2=en_algo_trig  1=en_int_trig 0=is_started*/
 #define REGW_CLR_FLAGS				1 /* 5=clr_trig_service 4=clr_gtu_cnt 3=restart_intr 2=clr_all 1=clear_error 0=clr_trans_counter*/
-#define REGW_TRIG_DELAY				2 /* the delay between trigger event and message about it*/
+#define REGW_TRIG_DELAY				2 /* the delay between trigger event and message about it*/ //trig_delay UNUSED
 #define REGW_EDGE_FLAGS				3 /* 2=set_unix_time 1=trig_force 0=release */
 #define REGW_D1_FIFO_THR			4 /* fifo_thr in HDL*/
 #define REGW_INT_TRIG_GTU_TIME		5 /* Time time for the programmable trigger */
@@ -22,6 +22,7 @@
 #define REGW_NUM_OF_TRIGS_FLAGS2	9 /* 15:0 = number of triggers per cycle 5,24s*/
 #define REGW_UNIX_TIME				10
 #define REGW_TLAST_REMOVER_PHASE	11
+#define REGW_TRIGGER_RELAX_TIME		12 /*  */
 
 #define REGR_FC_SM_STATE			14 /*16=trig_flag 4=pass_intr 3:0=sm_state*/
 #define REGR_GTU_CNT				15 /*number of GTU after last GTU counter reset*/
