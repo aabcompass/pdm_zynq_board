@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
   <source>
-    <originFiles name="l2_trigger.h" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/l2_trigger/cpp_code/v9/l2_trigger.h"/>
-    <originFiles name="l2_trigger.cpp" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/l2_trigger/cpp_code/v9/l2_trigger.cpp"/>
+    <originFiles name="l2_trigger.cpp" path="/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.cpp"/>
+    <originFiles name="l2_trigger.h" path="/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.h"/>
   </source>
   <testbench>
-    <originFiles name="l2_trigger_test.cpp" path="/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/l2_trigger/cpp_code/v9/l2_trigger_test.cpp"/>
+    <originFiles name="l2_trigger_test.cpp" path="/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger_test.cpp"/>
   </testbench>
 </autopilotfilemapping:AutoPilotFileMapping>

@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Thu Mar 22 22:45:23 2018
---Host        : alx-HP-ENVY-Notebook running 64-bit Ubuntu 16.04.4 LTS
+--Date        : Tue Apr 17 21:55:15 2018
+--Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.4 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -14589,50 +14589,6 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component design_1_xlconcat_1_0;
-  component design_1_l2_trigger_0_0 is
-  port (
-    trig_data_ap_vld : out STD_LOGIC;
-    s_axi_CTRL_BUS_AWADDR : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    s_axi_CTRL_BUS_AWVALID : in STD_LOGIC;
-    s_axi_CTRL_BUS_AWREADY : out STD_LOGIC;
-    s_axi_CTRL_BUS_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axi_CTRL_BUS_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s_axi_CTRL_BUS_WVALID : in STD_LOGIC;
-    s_axi_CTRL_BUS_WREADY : out STD_LOGIC;
-    s_axi_CTRL_BUS_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axi_CTRL_BUS_BVALID : out STD_LOGIC;
-    s_axi_CTRL_BUS_BREADY : in STD_LOGIC;
-    s_axi_CTRL_BUS_ARADDR : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    s_axi_CTRL_BUS_ARVALID : in STD_LOGIC;
-    s_axi_CTRL_BUS_ARREADY : out STD_LOGIC;
-    s_axi_CTRL_BUS_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axi_CTRL_BUS_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axi_CTRL_BUS_RVALID : out STD_LOGIC;
-    s_axi_CTRL_BUS_RREADY : in STD_LOGIC;
-    ap_clk : in STD_LOGIC;
-    ap_rst_n : in STD_LOGIC;
-    interrupt : out STD_LOGIC;
-    in_stream_TVALID : in STD_LOGIC;
-    in_stream_TREADY : out STD_LOGIC;
-    in_stream_TDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    in_stream_TDEST : in STD_LOGIC_VECTOR ( 5 downto 0 );
-    in_stream_TKEEP : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    in_stream_TSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    in_stream_TUSER : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    in_stream_TLAST : in STD_LOGIC_VECTOR ( 0 to 0 );
-    in_stream_TID : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    out_stream_TVALID : out STD_LOGIC;
-    out_stream_TREADY : in STD_LOGIC;
-    out_stream_TDATA : out STD_LOGIC_VECTOR ( 63 downto 0 );
-    out_stream_TDEST : out STD_LOGIC_VECTOR ( 5 downto 0 );
-    out_stream_TKEEP : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    out_stream_TSTRB : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    out_stream_TUSER : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    out_stream_TLAST : out STD_LOGIC_VECTOR ( 0 to 0 );
-    out_stream_TID : out STD_LOGIC_VECTOR ( 4 downto 0 );
-    trig_data : out STD_LOGIC_VECTOR ( 31 downto 0 )
-  );
-  end component design_1_l2_trigger_0_0;
   component design_1_util_vector_logic_0_0 is
   port (
     Op1 : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -15162,6 +15118,52 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_d1_0_0;
+  component design_1_l2_trigger_0_0 is
+  port (
+    trig_data_ap_vld : out STD_LOGIC;
+    trig_pixel_ap_vld : out STD_LOGIC;
+    s_axi_CTRL_BUS_AWADDR : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    s_axi_CTRL_BUS_AWVALID : in STD_LOGIC;
+    s_axi_CTRL_BUS_AWREADY : out STD_LOGIC;
+    s_axi_CTRL_BUS_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_CTRL_BUS_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axi_CTRL_BUS_WVALID : in STD_LOGIC;
+    s_axi_CTRL_BUS_WREADY : out STD_LOGIC;
+    s_axi_CTRL_BUS_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_CTRL_BUS_BVALID : out STD_LOGIC;
+    s_axi_CTRL_BUS_BREADY : in STD_LOGIC;
+    s_axi_CTRL_BUS_ARADDR : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    s_axi_CTRL_BUS_ARVALID : in STD_LOGIC;
+    s_axi_CTRL_BUS_ARREADY : out STD_LOGIC;
+    s_axi_CTRL_BUS_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_CTRL_BUS_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_CTRL_BUS_RVALID : out STD_LOGIC;
+    s_axi_CTRL_BUS_RREADY : in STD_LOGIC;
+    ap_clk : in STD_LOGIC;
+    ap_rst_n : in STD_LOGIC;
+    interrupt : out STD_LOGIC;
+    in_stream_TVALID : in STD_LOGIC;
+    in_stream_TREADY : out STD_LOGIC;
+    in_stream_TDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    in_stream_TDEST : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    in_stream_TKEEP : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    in_stream_TSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    in_stream_TUSER : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    in_stream_TLAST : in STD_LOGIC_VECTOR ( 0 to 0 );
+    in_stream_TID : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    out_stream_TVALID : out STD_LOGIC;
+    out_stream_TREADY : in STD_LOGIC;
+    out_stream_TDATA : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    out_stream_TDEST : out STD_LOGIC_VECTOR ( 5 downto 0 );
+    out_stream_TKEEP : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    out_stream_TSTRB : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    out_stream_TUSER : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    out_stream_TLAST : out STD_LOGIC_VECTOR ( 0 to 0 );
+    out_stream_TID : out STD_LOGIC_VECTOR ( 4 downto 0 );
+    trig_data : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    trig_pixel : out STD_LOGIC_VECTOR ( 31 downto 0 )
+  );
+  end component design_1_l2_trigger_0_0;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -16285,10 +16287,12 @@ architecture STRUCTURE of design_1 is
   signal NLW_inst_interconnect_200MHz_M05_AXI_wvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_l2_trigger_0_interrupt_UNCONNECTED : STD_LOGIC;
   signal NLW_l2_trigger_0_trig_data_ap_vld_UNCONNECTED : STD_LOGIC;
+  signal NLW_l2_trigger_0_trig_pixel_ap_vld_UNCONNECTED : STD_LOGIC;
   signal NLW_l2_trigger_0_in_stream_TKEEP_UNCONNECTED : STD_LOGIC_VECTOR ( 3 to 3 );
   signal NLW_l2_trigger_0_in_stream_TSTRB_UNCONNECTED : STD_LOGIC_VECTOR ( 3 to 3 );
   signal NLW_l2_trigger_0_out_stream_TKEEP_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal NLW_l2_trigger_0_out_stream_TSTRB_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal NLW_l2_trigger_0_trig_pixel_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_processing_system7_0_S_AXI_HP0_RACOUNT_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_processing_system7_0_S_AXI_HP0_RCOUNT_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal NLW_processing_system7_0_S_AXI_HP0_WACOUNT_UNCONNECTED : STD_LOGIC_VECTOR ( 5 downto 0 );
@@ -18566,10 +18570,10 @@ l2_trigger_0: component design_1_l2_trigger_0_0
       out_stream_TSTRB(7 downto 0) => NLW_l2_trigger_0_out_stream_TSTRB_UNCONNECTED(7 downto 0),
       out_stream_TUSER(1 downto 0) => l2_trigger_0_out_stream_TUSER(1 downto 0),
       out_stream_TVALID => l2_trigger_0_out_stream_TVALID,
-      s_axi_CTRL_BUS_ARADDR(4 downto 0) => inst_interconnect_100MHz_M01_AXI_ARADDR(4 downto 0),
+      s_axi_CTRL_BUS_ARADDR(5 downto 0) => inst_interconnect_100MHz_M01_AXI_ARADDR(5 downto 0),
       s_axi_CTRL_BUS_ARREADY => inst_interconnect_100MHz_M01_AXI_ARREADY,
       s_axi_CTRL_BUS_ARVALID => inst_interconnect_100MHz_M01_AXI_ARVALID,
-      s_axi_CTRL_BUS_AWADDR(4 downto 0) => inst_interconnect_100MHz_M01_AXI_AWADDR(4 downto 0),
+      s_axi_CTRL_BUS_AWADDR(5 downto 0) => inst_interconnect_100MHz_M01_AXI_AWADDR(5 downto 0),
       s_axi_CTRL_BUS_AWREADY => inst_interconnect_100MHz_M01_AXI_AWREADY,
       s_axi_CTRL_BUS_AWVALID => inst_interconnect_100MHz_M01_AXI_AWVALID,
       s_axi_CTRL_BUS_BREADY => inst_interconnect_100MHz_M01_AXI_BREADY,
@@ -18584,7 +18588,9 @@ l2_trigger_0: component design_1_l2_trigger_0_0
       s_axi_CTRL_BUS_WSTRB(3 downto 0) => inst_interconnect_100MHz_M01_AXI_WSTRB(3 downto 0),
       s_axi_CTRL_BUS_WVALID => inst_interconnect_100MHz_M01_AXI_WVALID,
       trig_data(31 downto 0) => l2_trigger_0_trig_data(31 downto 0),
-      trig_data_ap_vld => NLW_l2_trigger_0_trig_data_ap_vld_UNCONNECTED
+      trig_data_ap_vld => NLW_l2_trigger_0_trig_data_ap_vld_UNCONNECTED,
+      trig_pixel(31 downto 0) => NLW_l2_trigger_0_trig_pixel_UNCONNECTED(31 downto 0),
+      trig_pixel_ap_vld => NLW_l2_trigger_0_trig_pixel_ap_vld_UNCONNECTED
     );
 processing_system7_0: component design_1_processing_system7_0_0
      port map (

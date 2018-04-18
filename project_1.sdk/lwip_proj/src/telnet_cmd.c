@@ -10,7 +10,9 @@
 
 
 #include "unix_date_time.h"
+#include "xl2_trigger.h"
 
+extern XL2_trigger l2trigger;
 
 u32 frame_buffer[N_OF_PIXEL_PER_PDM/3/4];
 u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
@@ -211,6 +213,18 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		DMA_events_log_start();
 		StartEventsLog_L1();
 		StartEventsLog_L2();
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "trig n_bg %d",&param0) == 1)
+	{
+		XL2_trigger_Set_N_BG(&l2trigger, param0);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "trig low_thresh %d",&param0) == 1)
+	{
+		XL2_trigger_Set_LOW_THRESH(&l2trigger, param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
