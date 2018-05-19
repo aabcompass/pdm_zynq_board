@@ -701,61 +701,50 @@ void ScurveService()
 	static u32 scurve_filename_counter = 0;
 	if(sCurveStruct.is_scurve_being_gathered)
 	{
-		if(sCurveStruct.step_dac_value == 8)
+		LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
+		delay(5);
+		//start acquisition for 128*128 GTUs
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+		//TODO !!! большой костыль !!! Почему-то нужно дополнительно выдавать N_OF_FRAMES_RAW_POLY_V0 данных. Непонятно, почему...
+		if(sCurveStruct.scurve_counter == 0)
 		{
-			LoadSameDataToSlowControl2(sCurveStruct.current_dac_value);
-			delay(5);
-			//start acquisition for 128*128 GTUs
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-			//TODO !!! большой костыль !!!
-			if(sCurveStruct.scurve_counter == 0)
-			{
-				//wait for data_provider to be in idle_state
-				for(i=0;i<10000000;i++)
-					if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
-						break;
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-				*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-			}
 			//wait for data_provider to be in idle_state
 			for(i=0;i<10000000;i++)
 				if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
 					break;
-			if(i==10000000)
-				print("Data_provider is stalled\n\r");
-			delay(50);
-			//Print in order to delay for a short time
-			print("-->");
-			//Invalidate DCache Range
-			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
-			//now we are expecting 1 double integrated GTU in L3 array
-			if(instrumentState.is_simple_packets == 0)
-				memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0], &DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
-			else
-				memcpy(&scurvePacket4MatLab.int32_data[sCurveStruct.scurve_counter][0], &DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter][0], sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
-			//check whether  current_dac_value is OK
-			if(sCurveStruct.current_dac_value >= NMAX_OF_THESHOLDS)
-			{
-				print("\n\rWrong s-curve address!!\n\r");
-				return;
-			}
-			sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
-			sCurveStruct.scurve_counter++;
-			if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
-			{
-				sCurveStruct.is_scurve_being_gathered = 0;
-				sprintf(filename_str, FILENAME_SCURVE, scurve_filename_counter++);
-				if(instrumentState.is_simple_packets == 0)
-					SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
-				else
-					SendSpectrum2FTP((char*)&scurvePacket4MatLab, sizeof(DATA_TYPE_SCURVE_4MATLAB), filename_str);
-			}
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+		}
+		//wait for data_provider to be in idle_state
+		for(i=0;i<10000000;i++)
+			if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
+				break;
+		if(i==10000000)
+			print("Data_provider is stalled\n\r");
+		delay(50);
+		//Print in order to delay for a short time
+		print("-->");
+		//Invalidate DCache Range
+		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
+		//now we are expecting 1 double integrated GTU in L3 array
+		memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0],
+				&DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter%N_FRAMES_DMA_L2][0],
+				sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
+		sCurveStruct.scurve_counter++;
+		if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)
+		{
+			xil_printf("Stop gathering S-Curve. current_dac_value=%d\n\r", sCurveStruct.current_dac_value);
+			sCurveStruct.is_scurve_being_gathered = 0;
+			sprintf(filename_str, FILENAME_SCURVE, scurve_filename_counter++);
+			SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
 		}
 	}
 }
+
 
 void ScurveDataInit()
 {
