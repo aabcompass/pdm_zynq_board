@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_repo/flow_control_D2/flow_control.xpr">
+<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/flow_control_D2/flow_control.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="696955b0bcb5467788dd4adbdeed8d7f"/>
@@ -54,34 +54,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events.xml"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="synth/fifo4gtu_events.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events/fifo4gtu_events.xdc"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1.vhd"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="blk_mem_gen_v8_3_3/hdl/blk_mem_gen_v8_3.vhd"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="blk_mem_gen_v8_3_3/hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events_sim_netlist.vhdl"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events_sim_netlist.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events_stub.vhdl"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events_stub.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="sim/fifo4gtu_events.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_rfs.vhd"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_data_fifo_v1_1_10/hdl/verilog/axis_data_fifo_v1_1_axis_data_fifo.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo_generator_v13_1_1/hdl/fifo_generator_v13_1_rfs.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_vector2axis.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_axis2vector.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_aclken_converter_wrapper.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_util_aclken_converter.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_mux_enc.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events.vho"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo4gtu_events.veo"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_data_fifo_v1_1_10/doc/axis_data_fifo_v1_1_changelog.txt"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="fifo_generator_v13_1_1/simulation/fifo_generator_vlog_beh.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_0_axis_infrastructure.vh"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_clock_synchronizer.v"/>
-        <CompFileExtendedInfo CompFileName="fifo4gtu_events.xci" FileRelPathName="axis_infrastructure_v1_1_0/hdl/verilog/axis_infrastructure_v1_1_cdc_handshake.v"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/top_switch.vhd">
         <FileInfo>

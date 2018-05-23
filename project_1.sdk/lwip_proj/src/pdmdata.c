@@ -172,7 +172,6 @@ void SetTime(u32 param0)
 
 void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
 {
-//TODO
 //	if(data_type == DATA_TYPE_L1)
 //		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1*N_OF_FRAMES_RAW_POLY_V0*N_OF_PIXEL_PER_PDM);
 //	else if(data_type == DATA_TYPE_L2)
