@@ -198,7 +198,6 @@ void* Get_ZYNQ_PACKET()
 
 void PrintFirstElementsL2(int section)
 {
-	//TODO
 //	int i;
 //	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[0][section][0], 2304*4);
 //	for(i=0;i<2304;i++)
@@ -220,60 +219,11 @@ void PrintFirstElementsL1(int num)
 	alt_buffer++;
 }
 
-//void PrintFirstElementsRaw(int num)
-//{
-//
-//	int i;
-//	static int alt_buffer = 0;
-//	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[alt_buffer%2][num][1][0][0], 2304);
-//	for(i=0;i<2304;i++)
-//	{
-//		if(i%16 == 0) xil_printf("\n\r%02d: ", i);
-//		xil_printf("%02x  ", DataDMA__Raw[alt_buffer%2][num][1][0][i]);
-//	}
-//	alt_buffer++;
-//}
-
 void memcpy_invalidate(void* p_dst, void* p_src, u32 len_bytes)
 {
 	Xil_DCacheInvalidateRange(p_src, len_bytes);
 	memcpy(p_dst, p_src, len_bytes);
 }
-
-//void CopyEventData()
-//{
-//	int i;
-//	//copy D1
-//	for(i=0;i<N1;i++)
-//	{
-//			zynqPacket.level1_data[i].payload.trig_type = triggerInfoL1[prev_alt_buffer][i].trigger_type;
-//			zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoL1[prev_alt_buffer][i].n_gtu;
-//			zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoL1[prev_alt_buffer][i].unix_timestamp;
-//			memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
-//					&DataDMA__Raw[prev_alt_buffer%2][i][0][0][0],
-//					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
-//	}
-//	//copy D2
-//	for(i=0;i<N2;i++)
-//	{
-//			zynqPacket.level2_data[i].payload.trig_type = triggerInfoL2[prev_alt_buffer][i].trigger_type;
-//			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoL2[prev_alt_buffer][i].n_gtu;
-//			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoL2[prev_alt_buffer][i].unix_timestamp;
-//			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
-//					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
-//					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
-//	}
-//	//copy D3
-//	for(i=0;i<N3;i++)
-//	{
-//			zynqPacket.level3_data[i].payload.trig_type = triggerInfoL3[prev_alt_buffer][i].trigger_type;
-//			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoL3[prev_alt_buffer][i].n_gtu;
-//			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoL3[prev_alt_buffer][i].unix_timestamp;
-//			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
-//					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
-//					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
-//	}
-//}
 
 void CopyEventData_trig()
 {
@@ -298,7 +248,7 @@ void CopyEventData_trig()
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
 
 
-		xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);
+		//xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);
 		// Mark the trigger as copied (sent)
 		triggerInfoL1[prev_alt_buffer][i].is_sent = 1;
 	}
@@ -352,10 +302,10 @@ void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
 }
 
 
-void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
+void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
 {
 	u32 ret;
-	XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
+	if(is_dma) XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
 	ret=XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
 	if(ret != XST_SUCCESS)
 		print("XAxiDma_SimpleTransfer returns nonzero!\n\r");
@@ -366,31 +316,33 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length )
 void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 {
 	if(n_dma == 1)
-		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW);
+		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
 	else if(n_dma == 2)
-		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 	else if(n_dma == 3)
-		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
+		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 }
 
-static void RxIntrHandlerRaw(void *Callback)
+void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 {
 	u32 IrqStatus;
-	//int TimeOut;
-	XAxiDma *AxiDmaInst = (XAxiDma *)Callback;
-
-	/* Read pending interrupts */
+/*
+	 Read pending interrupts
 	IrqStatus = XAxiDma_IntrGetIrq(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA);
 
-	/* Acknowledge pending interrupts */
+	 Acknowledge pending interrupts
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
-	DmaReset(AxiDmaInst);
+	DmaReset(AxiDmaInst);*/
+	print("x");
+	//return if transfer is not completed
+	if(XAxiDma_Busy(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA)) return;
 
 	// check whether trigger
 	if(current_trigbuf_raw < N1)
 	{
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
+		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_dma_error = IsD1DMA_error();
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU_L1();
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType_L1();
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp_L1();
@@ -402,10 +354,17 @@ static void RxIntrHandlerRaw(void *Callback)
 
 	dma_intr_counter_raw++;
 
+	D1_release();
+
 	DmaStartN(1, current_trigbuf_raw);
-	//print("x");
 
 	return;
+}
+
+void L1_trigger_service()
+{
+	//if(IsD1Triggered())
+	//	RxIntrHandlerRaw(&dma_raw);
 }
 
 static void RxIntrHandlerL1(void *Callback)
@@ -523,8 +482,8 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 	int Result;
 
 
-	XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR,
-					0x90, 0x3);
+//	XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR,
+//					0x90, 0x3);
 	XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_AXI_DMA_L1_S2MM_INTROUT_INTR,
 					0x98, 0x3);
 	XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_AXI_DMA_L2_S2MM_INTROUT_INTR,
@@ -534,11 +493,11 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 	 * Connect the interrupt handler that will be called when an
 	 * interrupt occurs for the device.
 	 */
-	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR,
+	/*Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR,
 				 (Xil_ExceptionHandler)RxIntrHandlerRaw, &dma_raw);
 	if (Result != XST_SUCCESS) {
 		print("Error XScuGic_Connect\n\r");
-	}
+	}*/
 	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_L1_S2MM_INTROUT_INTR,
 				 (Xil_ExceptionHandler)RxIntrHandlerL1, &dma_l1);
 	if (Result != XST_SUCCESS) {
@@ -551,7 +510,7 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 	}
 
 	/* Enable the interrupt for the GPIO device.*/
-	XScuGic_Enable(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR);
+	/*XScuGic_Enable(pIntc, XPAR_FABRIC_AXI_DMA_RAW_S2MM_INTROUT_INTR);*/
 	XScuGic_Enable(pIntc, XPAR_FABRIC_AXI_DMA_L1_S2MM_INTROUT_INTR);
 	XScuGic_Enable(pIntc, XPAR_FABRIC_AXI_DMA_L2_S2MM_INTROUT_INTR);
 

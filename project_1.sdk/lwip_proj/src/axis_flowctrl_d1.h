@@ -73,5 +73,7 @@
 #define BIT_FC_TRIG_OUT_FORCE			(1<<18)
 #define BIT_FC_TRIG_EVENTS_LOG_EN		(1<<19)
 
+#define BIT_FC_STATUS_DMA_ERROR			(1<<18)
+
 
 #endif /* SRC_AXIS_FLOWCTRL_H_ */

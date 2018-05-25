@@ -242,7 +242,7 @@ void DataPathSM()
 		if(IsBufferL2Changed())
 		{
 			CopyEventData_trig();
-			PrintTriggerInfo();
+			//PrintTriggerInfo();
 
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
 			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);

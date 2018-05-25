@@ -83,7 +83,7 @@ architecture Behavioral of flow_control_d1 is
 
 	signal is_started: std_logic := '0';
 	signal en_int_trig, en_algo_trig, periodic_trig_en, en_ext_trig, ext_trig_latch: std_logic := '0';
-	signal release: std_logic := '0';
+	signal release, release_always: std_logic := '0';
 	signal ext_trig: std_logic := '0';
 	signal trig, trig_d1, trig_d2, trig_front: std_logic := '0';
 	signal trig_immediate, trig_immediate_latch: std_logic := '0';
@@ -107,6 +107,7 @@ architecture Behavioral of flow_control_d1 is
 	
 	signal trig_event: std_logic := '0';
 	signal trig_events_log_en: std_logic := '0';
+	signal dma_error: std_logic := '0';
 	
 
 	component debounce IS
@@ -318,7 +319,8 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	periodic_trig_en <= flags(1);
 	en_algo_trig <= flags(2);
 	en_int_trig <= flags(3);
-	en_ext_trig <= flags(4); 
+	en_ext_trig <= flags(4);
+	release_always <= flags(6); 
 	
 	clr_trans_counter <= clr_flags(0);
 	clear_error <= clr_flags(1);
@@ -334,8 +336,10 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	cmd_inject_16_events_d1 <= cmd_inject_16_events_d0 when rising_edge(s_axis_aclk);
 	cmd_inject_16_events <= cmd_inject_16_events_d0 and (not cmd_inject_16_events_d1);
 
+	release <= flags2(0);  
 	trig_force <= flags2(1); 
 	set_unix_time <= flags2(2); 
+	
 
 
 
@@ -351,6 +355,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	status(8) <= pass;
 	status(16) <= trig_latch;
 	status(17) <= trig_ext_in_sync;
+	status(18) <= dma_error; -- asserted if fifo overflowed. Cleared by release signal
 	
 	transation_counter: process(s_axis_aclk)
 	begin
@@ -511,7 +516,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process; 
 	 
 	trig_service: process(s_axis_aclk)
-		variable state : integer range 0 to 4 := 0;
+		variable state : integer range 0 to 5 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1' or clr_trig_service = '1') then
@@ -559,10 +564,13 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											state := state + 1;
 										end if;
 					when 4 => if(trigger_relax_time_cnt = trigger_relax_time) then
-											state := 0;
+											state := state + 1;
 											trigger_relax_time_cnt <= (others => '0');
 										else
 											trigger_relax_time_cnt <= trigger_relax_time_cnt + 1;
+										end if;
+					when 5 => if(release = '1' or release_always = '1') then
+											state := 0;
 										end if;
 				end case; 
 			end if;
@@ -693,6 +701,18 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process;
 	maxis_trans_cnt <= maxis_trans_cnt_i;
 	maxis_accepted_cnt <= maxis_accepted_cnt_i;
+	
+	fifo4dma_overflow_control: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1' or release = '1') then
+				dma_error <= '0';
+			elsif(m_axis_tready_buf = '0') then
+				dma_error <= '1';
+			end if;
+		end if;
+	end process;
+		
 	
 	
 	i_fifo4dma : fifo4dma

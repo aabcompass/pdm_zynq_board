@@ -44,6 +44,7 @@ typedef struct
 	u32 n_gtu;
 	u32 unix_timestamp;
 	u8 is_sent;
+	u8 is_dma_error;
 	u32 n_intr;
 	u32 alt_trig_buffer;
 } TriggerInfo;
