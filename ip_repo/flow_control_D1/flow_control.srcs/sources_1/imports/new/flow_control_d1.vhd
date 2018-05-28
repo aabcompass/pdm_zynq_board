@@ -184,9 +184,11 @@ architecture Behavioral of flow_control_d1 is
 			s_axis_aresetn : IN STD_LOGIC;
 			s_axis_aclk : IN STD_LOGIC;
 			s_axis_tvalid : IN STD_LOGIC;
+			s_axis_tlast : IN STD_LOGIC;
 			s_axis_tready : OUT STD_LOGIC;
 			s_axis_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
 			m_axis_tvalid : OUT STD_LOGIC;
+			m_axis_tlast : OUT STD_LOGIC;
 			m_axis_tready : IN STD_LOGIC;
 			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
 			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -207,7 +209,7 @@ architecture Behavioral of flow_control_d1 is
 			m_axis_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
 			axis_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			axis_wr_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+			axis_rd_data_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) 
 		);
 	END COMPONENT;
 	
@@ -265,6 +267,9 @@ architecture Behavioral of flow_control_d1 is
 	signal s_axis_events_tdata: std_logic_vector(63 downto 0) := (others => '0');
 	signal inject_16_events: std_logic := '0';
 	signal cmd_inject_16_events, cmd_inject_16_events_d0, cmd_inject_16_events_d1: std_logic := '0';
+	
+	signal tlast_out_cnt: std_logic_vector(15 downto 0) := (others => '0');
+	signal m_axis_tlast_buf: std_logic := '0';
 	
 	signal trigger_relax_time_cnt: std_logic_vector(23 downto 0) := (others => '0');
 
@@ -516,7 +521,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process; 
 	 
 	trig_service: process(s_axis_aclk)
-		variable state : integer range 0 to 5 := 0;
+		variable state : integer range 0 to 7 := 0;
 	begin
 		if(rising_edge(s_axis_aclk)) then
 			if(clr_all = '1' or clr_trig_service = '1') then
@@ -569,7 +574,13 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 										else
 											trigger_relax_time_cnt <= trigger_relax_time_cnt + 1;
 										end if;
-					when 5 => if(release = '1' or release_always = '1') then
+					when 5 => if(m_axis_tlast_i = '0') then
+											state := state + 1;
+										end if;
+					when 6 => if(m_axis_tlast_i = '1') then
+											state := state + 1;
+										end if;
+					when 7 => if(release = '1' or release_always = '1') then
 											state := 0;
 										end if;
 				end case; 
@@ -713,16 +724,39 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 		end if;
 	end process;
 		
-	
+	tlast_out_former: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(clr_all = '1') then
+				m_axis_tlast_buf <= '0';
+				tlast_out_cnt <= X"0000";
+			else
+				if(m_axis_tvalid_buf = '1' and  m_axis_tready_buf = '1') then
+					if(tlast_out_cnt = X"8FFE") then
+						tlast_out_cnt <= tlast_out_cnt + 1;
+						m_axis_tlast_buf <= '1';
+					elsif(tlast_out_cnt = X"8FFF") then
+						tlast_out_cnt <= X"0000";
+						m_axis_tlast_buf <= '0';
+					else
+						tlast_out_cnt <= tlast_out_cnt + 1;
+						m_axis_tlast_buf <= '0';
+					end if;
+				end if;
+			end if;
+		end if;
+	end process;
 	
 	i_fifo4dma : fifo4dma
 	  PORT MAP (
 	    s_axis_aresetn => s_axis_aresetn,
 	    s_axis_aclk => s_axis_aclk,
 	    s_axis_tvalid => m_axis_tvalid_buf,
+	    s_axis_tlast => m_axis_tlast_buf,
 	    s_axis_tready => m_axis_tready_buf,
 	    s_axis_tdata => m_axis_tdata_buf,
 	    m_axis_tvalid => m_axis_tvalid,
+	    m_axis_tlast => m_axis_tlast_i,
 	    m_axis_tready => m_axis_tready,
 	    m_axis_tdata => m_axis_tdata,
 	    axis_data_count => open,
@@ -730,6 +764,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	    axis_rd_data_count => open
 	  );
 
+	m_axis_tlast <= m_axis_tlast_i;
 -----------------------------------------
 -- Trigger GTU event logging to M-AXIS --
 -----------------------------------------

@@ -94,12 +94,13 @@ void PrintTriggerInfo()
 	{
 		for(j=0;j<4;j++)
 		{
-			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
+			xil_printf("%d.%d\t%x\t%08d\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
 					triggerInfoL1[i][j].trigger_type,
 					triggerInfoL1[i][j].n_gtu,
 					triggerInfoL1[i][j].unix_timestamp,
+					triggerInfoL1[i][j].is_dma_error,
 					triggerInfoL1[i][j].n_intr,
 					triggerInfoL1[i][j].alt_trig_buffer,
 					triggerInfoL1[i][j].is_sent ? "sent" : "pending");
@@ -138,6 +139,7 @@ void PrintTriggerInfo()
 		}
 	}
 	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
+	xil_printf("XAxiDma_Busy returns %d\n\r", XAxiDma_Busy(&dma_raw, XAXIDMA_DEVICE_TO_DMA));
 }
 
 
@@ -308,7 +310,10 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
 	if(is_dma) XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
 	ret=XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
 	if(ret != XST_SUCCESS)
-		print("XAxiDma_SimpleTransfer returns nonzero!\n\r");
+	{
+		//DmaReset(pdma);
+		xil_printf("XAxiDma_SimpleTransfer returns %d! Reset DMA\n\r", ret);
+	}
 }
 
 
@@ -336,7 +341,7 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 	DmaReset(AxiDmaInst);*/
 	print("x");
 	//return if transfer is not completed
-	if(XAxiDma_Busy(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA)) return;
+	//if(XAxiDma_Busy(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA)) return;
 
 	// check whether trigger
 	if(current_trigbuf_raw < N1)
@@ -363,8 +368,8 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 
 void L1_trigger_service()
 {
-	//if(IsD1Triggered())
-	//	RxIntrHandlerRaw(&dma_raw);
+	if(IsD1Triggered())
+		RxIntrHandlerRaw(&dma_raw);
 }
 
 static void RxIntrHandlerL1(void *Callback)

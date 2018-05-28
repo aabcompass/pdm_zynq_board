@@ -372,6 +372,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		TrgImmediate();
 	}
+	else if(c == 'R')
+	{
+		D1_release();
+	}
 	else if(c == 'r')
 	{
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;

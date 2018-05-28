@@ -22,7 +22,7 @@
 #define REGW_NUM_OF_TRIGS_FLAGS2	9 /* 15:0 = number of triggers per cycle 5,24s*/
 #define REGW_UNIX_TIME				10
 #define REGW_TLAST_REMOVER_PHASE	11
-#define REGW_TRIGGER_RELAX_TIME		12 /*  */
+#define REGW_TRIGGER_RELAX_TIME		12 /* must be = 0 */
 
 #define REGR_FC_SM_STATE			14 /*16=trig_flag 4=pass_intr 3:0=sm_state*/
 #define REGR_GTU_CNT				15 /*number of GTU after last GTU counter reset*/
