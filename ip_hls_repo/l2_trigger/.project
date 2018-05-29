@@ -29,12 +29,12 @@
 		<link>
 			<name>source</name>
 			<type>2</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/.apc/.src</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/.apc/.src</location>
 		</link>
 		<link>
 			<name>testbench</name>
 			<type>2</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/.apc/.tb</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/.apc/.tb</location>
 		</link>
 		<link>
 			<name>solution1/constraints</name>
@@ -44,22 +44,22 @@
 		<link>
 			<name>solution2/constraints</name>
 			<type>2</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/solution2/.tcls</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/solution2/.tcls</location>
 		</link>
 		<link>
 			<name>source/l2_trigger.cpp</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.cpp</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.cpp</location>
 		</link>
 		<link>
 			<name>source/l2_trigger.h</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.h</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger.h</location>
 		</link>
 		<link>
 			<name>testbench/l2_trigger_test.cpp</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger_test.cpp</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/cpp_code/v10/l2_trigger_test.cpp</location>
 		</link>
 		<link>
 			<name>solution1/constraints/directives.tcl</name>
@@ -74,17 +74,17 @@
 		<link>
 			<name>solution2/constraints/.xml.directive</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/solution2/solution2.directive</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/solution2/solution2.directive</location>
 		</link>
 		<link>
 			<name>solution2/constraints/directives.tcl</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/solution2/directives.tcl</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/solution2/directives.tcl</location>
 		</link>
 		<link>
 			<name>solution2/constraints/script.tcl</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_hls_repo/l2_trigger/solution2/script.tcl</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_hls_repo/l2_trigger/solution2/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

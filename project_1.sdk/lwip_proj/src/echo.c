@@ -636,6 +636,8 @@ void InitHLS_peripherals()
 	XL2_trigger_InterruptGlobalDisable(&l2trigger);
 	XL2_trigger_Set_n_pixels_in_bus(&l2trigger, N_OF_PIXELS_PER_PMT*N_OF_PMT_PER_ECASIC*N_OF_ECASIC_PER_PDM);
 	XL2_trigger_EnableAutoRestart(&l2trigger);
+	XL2_trigger_Set_N_BG(&l2trigger, 4);
+	XL2_trigger_Set_LOW_THRESH(&l2trigger, 0);
 	XL2_trigger_Start(&l2trigger);
 }
 
