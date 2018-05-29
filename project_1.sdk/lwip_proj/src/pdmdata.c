@@ -339,7 +339,7 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
 
 	DmaReset(AxiDmaInst);*/
-	print("x");
+	//print("x");
 	//return if transfer is not completed
 	//if(XAxiDma_Busy(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA)) return;
 
@@ -353,8 +353,12 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp_L1();
 		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_intr = dma_intr_counter_raw;
 		// Change current trigger buffer to the next one
-		current_trigbuf_raw++;
+
 	}
+	current_trigbuf_raw++;
+
+	xil_printf("=%d", current_trigbuf_raw);
+
 	trig_counter_raw++;
 
 	dma_intr_counter_raw++;

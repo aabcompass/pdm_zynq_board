@@ -532,31 +532,28 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 			else
 				sm_state <= conv_std_logic_vector(state, 4);
 				case state is
-					when 0 => if(trig = '1') then 
-											if(self_trig = '1' or ext_trig = '1') then
-												if(trig_cnt < number_of_triggers) then
-													state := state + 1;
-													trig_type_i <= (others => '0');
-												end if;
-											else
+					when 0 => if(clr_trig_service = '1') then
+											trig_cnt <= (others => '0');
+											trig_type_i <= (others => '0');
+											trig_latch <= '0';		
+										elsif(trig = '1') then 
+											if(trig_cnt < number_of_triggers) then
 												state := state + 1;
 												trig_type_i <= (others => '0');
 											end if;
 										end if;
-					when 1 => 
-										if(periodic_trig_latch = '1') then
+					when 1 => if(periodic_trig_latch = '1') then
 											trig_type_i <= X"1";
 										elsif(self_trig_latch = '1') then
 											trig_type_i <= X"2";
-											trig_cnt <= trig_cnt + 1;
 										elsif(trig_immediate_latch = '1') then
-											trig_type_i <= X"3";
+											trig_type_i <= X"3"; 
 										elsif(ext_trig_latch = '1') then
 											trig_type_i <= X"4";
-											trig_cnt <= trig_cnt + 1;
 										else
 											trig_type_i <= X"8";
-										end if;							
+										end if;
+										trig_cnt <= trig_cnt + 1;							
 										trig_latch <= '1';		
 										gtu_timestamp <= gtu_sig_counter_i;
 										unix_timestamp <= unix_time_i;
