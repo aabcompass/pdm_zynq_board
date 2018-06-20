@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Mon May 28 11:55:54 2018
+--Date        : Wed Jun 20 11:28:26 2018
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.4 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -13794,45 +13794,6 @@ architecture STRUCTURE of design_1 is
     Dout : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   end component design_1_xlslice_1_0;
-  component design_1_hv_hk_v1_0_0_0 is
-  port (
-    sck_p : out STD_LOGIC;
-    sck_n : out STD_LOGIC;
-    mosi_p : out STD_LOGIC;
-    mosi_n : out STD_LOGIC;
-    cs_exp_p : out STD_LOGIC;
-    cs_exp_n : out STD_LOGIC;
-    cs_dac_p : out STD_LOGIC;
-    cs_dac_n : out STD_LOGIC;
-    miso_p : in STD_LOGIC;
-    miso_n : in STD_LOGIC;
-    intr_p : in STD_LOGIC;
-    intr_n : in STD_LOGIC;
-    intr_out : out STD_LOGIC;
-    gtu_sig : in STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component design_1_hv_hk_v1_0_0_0;
   component design_1_axi_dma_raw_1 is
   port (
     s_axi_lite_aclk : in STD_LOGIC;
@@ -14048,6 +14009,45 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_d1_0_0;
+  component design_1_hv_hk_v1_0_0_0 is
+  port (
+    sck_p : out STD_LOGIC;
+    sck_n : out STD_LOGIC;
+    mosi_p : out STD_LOGIC;
+    mosi_n : out STD_LOGIC;
+    cs_exp_p : out STD_LOGIC;
+    cs_exp_n : out STD_LOGIC;
+    cs_dac_p : out STD_LOGIC;
+    cs_dac_n : out STD_LOGIC;
+    miso_p : in STD_LOGIC;
+    miso_n : in STD_LOGIC;
+    intr_p : in STD_LOGIC;
+    intr_n : in STD_LOGIC;
+    intr_out : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC
+  );
+  end component design_1_hv_hk_v1_0_0_0;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );

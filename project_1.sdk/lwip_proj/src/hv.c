@@ -727,11 +727,11 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 }
 
 
-//void Enable_HVHK_Interrupts(XScuGic* pIntc)
-//{
-//	/* Enable the interrupt for the GPIO device.*/
-//	XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
-//}
+void Enable_HVHK_Interrupts(XScuGic* pIntc)
+{
+	/* Enable the interrupt for the GPIO device.*/
+	XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
+}
 
 // Setup interrupt system for HVPS
 // This function is called when user calls "hvps turnon" via telnet
@@ -745,21 +745,21 @@ void SetupHVPSIntrSystem(XScuGic* pIntc)
 
 		int Result;
 
-//		XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
-//						0xA8, 0x3);
-//
-//		/*
-//		 * Connect the interrupt handler that will be called when an
-//		 * interrupt occurs for the device.
-//		 */
-//		Result = XScuGic_Connect(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
-//					 (Xil_ExceptionHandler)HVInterruptHundler, NULL);
-//		if (Result != XST_SUCCESS) {
-//			print("Error XScuGic_Connect\n\r");
-//		}
-//
-//		Enable_HVHK_Interrupts(pIntc);
-//		XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
+		XScuGic_SetPriorityTriggerType(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
+						0xA8, 0x3);
+
+		/*
+		 * Connect the interrupt handler that will be called when an
+		 * interrupt occurs for the device.
+		 */
+		Result = XScuGic_Connect(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
+					 (Xil_ExceptionHandler)HVInterruptHundler, NULL);
+		if (Result != XST_SUCCESS) {
+			print("Error XScuGic_Connect\n\r");
+		}
+
+		Enable_HVHK_Interrupts(pIntc);
+		XScuGic_Enable(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR);
 
 		// Config timers
 		// Set up restart value
