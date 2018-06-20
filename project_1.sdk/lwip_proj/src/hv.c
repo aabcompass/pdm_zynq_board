@@ -606,6 +606,8 @@ void print_expander_regs()
 void InitHV()
 {
 	memset(&hvps_log.payload[0], 0, sizeof(hvps_log.payload));
+	hvps_log.zbh.header = BuildHeader(DATA_TYPE_HVPS_LOG, 1);
+	hvps_log.zbh.payload_size = sizeof(DATA_TYPE_HVPS_LOG_V1);
 	initDac();
 	expIni();
 }

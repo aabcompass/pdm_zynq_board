@@ -108,6 +108,7 @@ static enum  {
 	stop_sm_idle = 10,
 	wait4data_provider_stop=100,
 	wait4interruptD3=110,
+	stop_sm_stopping=115,
 	stop_sm_stopped=120
 	} stop_sm_state = stop_sm_idle;
 
@@ -191,13 +192,21 @@ void StopSM()
 		break;
 	case wait4interruptD3:
 		if(IsBufferL2Changed2())
-			stop_sm_state = stop_sm_stopped;
+			stop_sm_state = stop_sm_stopping;
+		break;
+	case stop_sm_stopping:
+		if(IsFTP_bin_idle())
+		{
+			// release trigger
+			datapath_sm_state = stop_sm_stopped;
+		}
 		break;
 	case stop_sm_stopped:
 		SendLogToFTP();
 		SetDataProviderTestMode(0);
 		PrnAllRegs();
 		stop_sm_state = stop_sm_idle;
+		break;
 	}
 }
 
@@ -250,12 +259,7 @@ void DataPathSM()
 			what_trigger_armed = 3;
 		}
 		break;
-//	case datapath_checkFTPready_state:
-//		if(!IsFTP_bin_idle())
-//		{
-//			print("\n\r!!! FTP isn't ready !!!\n\r");
-//		}
-//		datapath_sm_state = datapath_wait4ftp_ready2;
+
 	case datapath_wait4ftp_ready2:
 		if(IsFTP_bin_idle())
 		{
