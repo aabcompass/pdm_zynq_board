@@ -138,6 +138,7 @@ void RestartFile(u32 point)
 
 void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
+	char str3[250];
 	int ip0, ip1, ip2, ip3, port0, port1, i;
 	char filename[MAX_FILENAME_LEN];
 	u32 param;
@@ -161,6 +162,16 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
+	else if(strncmp(p->payload, "\xF2\x41\x42\x4F\x52\x0D\x0A", 7) == 0)
+	{
+		print("ABOR\n\r");
+		char ok_eomess_str[] = "225 No transfers to ABOR.\r\n";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	}
+	else if(strncmp(p->payload, "\xFF\xF4\xFF", 3) == 0)
+	{
+		print("?");
+	}
 	else if(strncmp(p->payload, "CWD /", 5) == 0)
 	{
 		char ok_eomess_str[] = "250 Directory successfully changed.\r\n";
@@ -179,6 +190,13 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		//char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
 		//tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 		SendDir();
+	}
+	else if(strncmp(p->payload, "QUIT", 4) == 0)
+	{
+		char ok_eomess_str[] = "221 Goodbye.\r\n";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+
+		//tcp_close(tpcb);
 	}
 	else if(sscanf(p->payload, "RETR %s",
 			filename) == 1)
@@ -202,6 +220,8 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		}
 		else
 		{
+			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
+			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 			SendFile();
 		}
 	}
@@ -237,6 +257,8 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		char ok_eomess_str[] = "500 Unknown command.\r\n";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		for(i=0; i<p->len; i++)
+			xil_printf("%02X " , ((char*)p->payload)[i]);
 	}
 }
 
@@ -548,8 +570,8 @@ void send_data_sm()
 		break;
 	case send_control_message2:
 		{
-			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
-			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
+//			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
+//			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 			char str2[] = "226 Transfer complete.\r\n";
 			tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
 			ftp_state = no_state;
