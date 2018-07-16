@@ -430,6 +430,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("DMA RAW DEST=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_DESTADDR_OFFSET));
 		xil_printf("Data provider status = 0x%08x\n\r", *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS));
 		printMMVars();
+		PrintFS();
 	}
 	else if(c == 'S')
 	{

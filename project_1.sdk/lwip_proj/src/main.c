@@ -250,6 +250,10 @@ int main()
 	print("Starting FTP client ...\n\r");
 	StartFTP_data();
 	StartFTP_config();
+	print("Memory file system init ...\n\r");
+	FileSystemInit();
+	print("Starting FTP server ...\n\r");
+	start_ftp_server_cmd();
 	print("Switch initialization...\n\r");
 	AXISSW_conf();
 	print("Flow control initialization...\n\r");
@@ -281,6 +285,7 @@ int main()
 		xemacif_input(echo_netif);
 		transfer_data();
 		ftp_data_sm();
+		send_data_sm();
 		ftp_config_sm();
 		DataPathSM();
 		L1_trigger_service();

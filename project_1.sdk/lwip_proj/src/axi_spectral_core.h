@@ -10,7 +10,7 @@
 //#define NUM_OF_PIXELS_PER_FRAME		(N_PIXELS*N_CHIPS*N_OF_ECASIC_PER_PDM)
 #define RECORDS_IN_FIFO	(N_OF_PIXEL_PER_PDM/6/4)
 //#define FRAMES_PER_BUNCH	128
-
+#define MAX_SIZE_TCP_PACKET 1500 /*bytes*/
 
 typedef struct
 {

@@ -21,7 +21,7 @@
 #define DEF_MAX_FILE_SIZE 1000000000 /*in bytes*/
 #define MAX_IDLE_TIME		30000000
 #define MIN_BUF_REMINDER	1500 /*bytes*/
-#define MAX_SIZE_TCP_PACKET 1500 /*bytes*/
+
 
 
 

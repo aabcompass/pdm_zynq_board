@@ -14,6 +14,12 @@
 #define ERR_SCURVE_IS_BEING_GATHERED	3
 #define ERR_INSTR_MODE_MUSTBE_0			4
 
+
 #define ERR_FTP_CLIENT_IS_BUSY			100
+
+#define FILENAME_IS_TOO_LONG			200
+#define FILE_ALREADY_EXIST				201
+#define TOO_MANY_FILES					202
+#define NO_SUCH_FILE					203
 
 #endif /* SRC_PDMDP_ERR_H_ */
