@@ -240,8 +240,8 @@ int main()
 	//xil_printf("artix_locked is forced to %d due to testing!\n\r", instrumentState.artix_locked);
 	print("Reset SPACIROCs...\n\r");
 	ResetSPACIROC3();
-	print("Starting TCP client on port 50001 (unused)...\n\r");
-	start_application();
+//	print("Starting TCP client on port 50001 (unused)...\n\r");
+//	start_application();
 	print("HLS peripherals initialization...\n\r");
 	InitHLS_peripherals();
 //	//start_updatefw();
@@ -283,7 +283,6 @@ int main()
 			TcpSlowTmrFlag = 0;
 		}
 		xemacif_input(echo_netif);
-		transfer_data();
 		ftp_data_sm();
 		send_data_sm();
 		ftp_config_sm();
