@@ -17,6 +17,8 @@ static u16 port_client;
 static int ftp_frame_acknowledged = 0;
 
 struct tcp_pcb* ctrl_tpcb;
+char not_reply_message[100];
+u8 is_message = 0;
 char spare[10000];
 
 FileRecord files[MAX_FILES];
@@ -135,6 +137,12 @@ void RestartFile(u32 point)
 		print("Send data SM is not in the IDLE state!\r\n");
 }
 
+void SendNotReplyMessage(struct tcp_pcb *tpcb, char* text)
+{
+	ctrl_tpcb = tpcb;
+	strcpy(not_reply_message, text);
+	is_message = 1;
+}
 
 void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
@@ -145,23 +153,25 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	u32 param;
 	if(sscanf(p->payload, "USER %s", str2) == 1)
 	{
-		sprintf(str3, "331 Password required for %s\r\n", str2);
-		tcp_write(tpcb, str3, strlen(str3), 1);
+		//sprintf(str3, "331 Password required for %s.\r\n", str2);
+		tcp_write(tpcb, "331\r\n331\r\n331\r\n", 15/*strlen(str3)*/, 1);
+	//	SendNotReplyMessage(tpcb, /*str3*/"\r\n");
 	}
 	else if(strncmp(p->payload, "PASS", 4) == 0)
 	{
 		char ok_eomess_str[] = "230 Login successful.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, "230\r\n230\r\n230\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 	}
 	else if(strncmp(p->payload, "PWD", 3) == 0)
 	{
 		char ok_eomess_str[] = "257 / is the current directory\r\n";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		SendNotReplyMessage(tpcb, /*ok_eomess_str*/"\r\n");
 	}
 	else if(strncmp(p->payload, "TYPE I", 6) == 0)
 	{
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, "200\r\n200\r\n200\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 	}
 	else if(strncmp(p->payload, "FEAT", 4) == 0)
 	{
@@ -189,7 +199,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		ip_addr_client = (ip0) | (ip1<<8) | (ip2<<16) | (ip3<<24);
 		port_client = (port0<<8) | port1;
 		char ok_eomess_str[] = "200 PORT command successful. Don't use PASV\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, "200\r\n200\r\n200\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 	}
 	else if(strncmp(p->payload, "LIST", 4) == 0)
 	{
@@ -200,7 +210,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(strncmp(p->payload, "QUIT", 4) == 0)
 	{
 		char ok_eomess_str[] = "221 Goodbye.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, "221\r\n221\r\n221\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 
 		//tcp_close(tpcb);
 	}
@@ -248,14 +258,14 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 				{
 					files[i].is_presented = 0;
 					char ok_eomess_str[] = "250 File successfully deleted\r\n";
-					tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+					tcp_write(tpcb, "250\r\n250\r\n250\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 					break;
 				}
 			}
 		}
 		if(i==MAX_FILES)
 		{
-			char ok_eomess_str[] = "550 Requested action ot taken. File unavailable\r\n";
+			char ok_eomess_str[] = "550 Requested action not taken. File unavailable\r\n";
 			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 		}
 	}
@@ -584,7 +594,15 @@ void send_data_sm()
 			break;
 		}
 	}
+
 	//if(ftp_state != 0)
 	//	xil_printf(" %d\n\r", ftp_state);
+}
+
+//send not reply messages
+void TestFunc()//if(is_message)
+{
+	is_message = 0;
+	tcp_write(ctrl_tpcb, not_reply_message, strlen(not_reply_message), 1);
 }
 

@@ -283,9 +283,9 @@ int main()
 			TcpSlowTmrFlag = 0;
 		}
 		xemacif_input(echo_netif);
-		ftp_data_sm();
+		//ftp_data_sm();
 		send_data_sm();
-		ftp_config_sm();
+		//ftp_config_sm();
 		DataPathSM();
 		L1_trigger_service();
 		StopSM();
