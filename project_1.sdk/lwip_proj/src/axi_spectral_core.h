@@ -75,6 +75,16 @@ typedef struct
 	int is_simple_packets;
 } InstrumentState;
 
+#define SCI_DATA_ARRAY_SIZE 100
+
+typedef struct
+{
+	DATA_TYPE_SCI_ALLTRG_V1 sci_data;
+	u32 file_id_ref;
+} DATA_TYPE_SCI_ALLTRG_RECORD;
+
+
+
 #define GPIO_OUTPUT_REG_OFFSET	8
 #define IS_TEST_GEN_BIT_OFFSET	1
 #define DUTY1_BIT_OFFSET		8

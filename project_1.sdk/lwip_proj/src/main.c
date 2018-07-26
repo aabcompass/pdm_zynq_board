@@ -247,9 +247,9 @@ int main()
 //	//start_updatefw();
 	print("Starting TCP client Telnet server on port 23 ...\n\r");
 	start_telnet_cmd();
-	print("Starting FTP client ...\n\r");
-	StartFTP_data();
-	StartFTP_config();
+//	print("Starting FTP client ...\n\r");
+//	StartFTP_data();
+//	StartFTP_config();
 	print("Memory file system init ...\n\r");
 	FileSystemInit();
 	print("Starting FTP server ...\n\r");

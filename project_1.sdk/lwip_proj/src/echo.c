@@ -63,28 +63,15 @@
 #include "xl2_trigger.h"
 #include "data_provider.h"
 
-
-//#include "netif/xaxiemacif.h"
-
-//extern xaxiemacif_s xaxiemacif_s_obj;
-
 u8 test_data[10000];
-
-//#define EMAC_PHY_MIIM_ADDR 7
-
-//u32 thr = 200;
 
 #define N_LINES 	N_OF_ECASIC_PER_PDM
 #define N_CHIPS		N_OF_PMT_PER_ECASIC
 #define N_PIXELS	N_OF_PIXELS_PER_PMT
 #define NUM_OF_PIXELS_PER_FRAME	N_OF_PIXEL_PER_PDM
 
-//XScurve_adderv2 scurve_adder[N_LINES];
-//XScurve_adder32 scurve_adder32[N_LINES];
 XScurve_adder scurve_adder;
 XL2_trigger l2trigger;
-
-//XLlFifo xllfifo_raw_array[N_LINES];
 
 extern SystemSettings systemSettings;
 extern InstrumentState instrumentState;
@@ -93,9 +80,9 @@ u32 frame_buffer_art1[NUM_OF_PIXELS_PER_FRAME/4];
 extern SCurveStruct sCurveStruct;
 extern DebugSettings debugSettings;
 
-//Z_DATA_TYPE_SCI_POLY_V5 packet_sci_poly __attribute__ ((aligned (256)));
 char boot_bin_buf[10000000];
 
+DATA_TYPE_SCI_ALLTRG_RECORD sci_data[SCI_DATA_ARRAY_SIZE];
 
 static enum  {
 	datapath_idle_state = 10,

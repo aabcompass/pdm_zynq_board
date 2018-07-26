@@ -76,7 +76,7 @@ int CreateFile(char* filename, char* pData, int size, uint32_t unix_time)
 			files[i].unix_time = unix_time;
 			files[i].is_presented = 1;
 			files[i].link = pData;
-			return 0;
+			return i;
 		}
 	}
 	return TOO_MANY_FILES;
@@ -138,14 +138,15 @@ void RestartFile(u32 point)
 
 void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
+	char str2[25];
 	char str3[250];
 	int ip0, ip1, ip2, ip3, port0, port1, i;
 	char filename[MAX_FILENAME_LEN];
 	u32 param;
-	if(strncmp(p->payload, "USER", 4) == 0)
+	if(sscanf(p->payload, "USER %s", str2) == 1)
 	{
-		char ok_eomess_str[] = "331 Please specify the password.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		sprintf(str3, "331 Password required for %s\r\n", str2);
+		tcp_write(tpcb, str3, strlen(str3), 1);
 	}
 	else if(strncmp(p->payload, "PASS", 4) == 0)
 	{
@@ -160,6 +161,11 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(strncmp(p->payload, "TYPE I", 6) == 0)
 	{
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	}
+	else if(strncmp(p->payload, "FEAT", 4) == 0)
+	{
+		char ok_eomess_str[] = "211 no-features.\r\n211 End\r\n";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "\xF2\x41\x42\x4F\x52\x0D\x0A", 7) == 0)

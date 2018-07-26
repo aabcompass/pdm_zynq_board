@@ -188,7 +188,6 @@ typedef struct
 } DATA_TYPE_SCI_ALLTRG_V1;
 
 
-
 //Trigger types in data out files :
 #define TRIG_NONE		0 /* No trigger occurred. No data preserved*/
 #define TRIG_PERIODIC	1 /* Auto (periodic) triggered data (in absence of others triggers)*/

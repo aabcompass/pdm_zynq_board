@@ -17,9 +17,12 @@
 
 #define ERR_FTP_CLIENT_IS_BUSY			100
 
-#define FILENAME_IS_TOO_LONG			200
-#define FILE_ALREADY_EXIST				201
-#define TOO_MANY_FILES					202
-#define NO_SUCH_FILE					203
+
+
+#define TOO_MANY_FILES					-1
+#define FILE_ALREADY_EXIST				-2
+#define FILENAME_IS_TOO_LONG			-3
+#define NO_SUCH_FILE					-4
+
 
 #endif /* SRC_PDMDP_ERR_H_ */
