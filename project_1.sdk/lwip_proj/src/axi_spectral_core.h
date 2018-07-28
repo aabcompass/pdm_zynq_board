@@ -75,12 +75,12 @@ typedef struct
 	int is_simple_packets;
 } InstrumentState;
 
-#define SCI_DATA_ARRAY_SIZE 100
+#define SCI_DATA_ARRAY_SIZE 10
 
 typedef struct
 {
 	DATA_TYPE_SCI_ALLTRG_V1 sci_data;
-	u32 file_id_ref;
+	u32 is_occupied;
 } DATA_TYPE_SCI_ALLTRG_RECORD;
 
 

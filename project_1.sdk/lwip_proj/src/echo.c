@@ -62,6 +62,7 @@
 #include "xscurve_adder.h"
 #include "xl2_trigger.h"
 #include "data_provider.h"
+#include "ftp_server.h"
 
 u8 test_data[10000];
 
@@ -200,8 +201,9 @@ void StopSM()
 
 void DataPathSM()
 {
-	int i, offset;
+	int i, offset, ret;
 	char* ptr;
+	int current_scidata_record;
 	static u32 prev_mode = 0;
 
 	char filename_str[20];
@@ -237,18 +239,34 @@ void DataPathSM()
 	case datapath_wait4trigger_state:
 		if(IsBufferL2Changed())
 		{
+			print("*");
+			// collect data parts from DMA memory
 			CopyEventData_trig();
-			//PrintTriggerInfo();
-
+			// compose the filename
 			sprintf(filename_str, FILENAME_CONCATED, instrumentState.file_counter_cc++);
-			SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
+			// copy to main sci data storage. Look for free space there
+			for(i=0;i<SCI_DATA_ARRAY_SIZE;i++)
+			{
+				if(!sci_data[i].is_occupied)
+				{
+					current_scidata_record = i;
+					xil_printf("current_scidata_record=%d\n\r", current_scidata_record);
+					memcpy((char*)&sci_data[current_scidata_record].sci_data, (char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1));
+					sci_data[current_scidata_record].is_occupied = 1;
+					xil_printf("link addr %08X occupied\n\r", &sci_data[current_scidata_record]);
+					// create file
+					ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
+					if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);
+					break;
+				}
+			}
+			//SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
 			datapath_sm_state = datapath_wait4ftp_ready2;
 			what_trigger_armed = 3;
 		}
 		break;
-
 	case datapath_wait4ftp_ready2:
-		if(IsFTP_bin_idle())
+		//if(IsFTP_bin_idle())
 		{
 			// release trigger
 			datapath_sm_state = datapath_idle_state;
@@ -556,6 +574,7 @@ void SetDefaultParameters()
 	instrumentState.file_counter_l2 = 0;
 	instrumentState.file_counter_l3 = 0;
 	instrumentState.is_simple_packets = 0;
+	memset(sci_data, 0, sizeof(sci_data));
 }
 
 

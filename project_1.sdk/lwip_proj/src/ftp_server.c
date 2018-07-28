@@ -50,12 +50,12 @@ static char* spectrum_addr;
 void FileSystemInit()
 {
 	memset(files, 0, sizeof(files));
-	CreateFile("file1.bin", file1, sizeof(file1), 0);
-	CreateFile("file2.bin", file2, sizeof(file2), 0);
+	CreateFile("file1.bin", file1, sizeof(file1), 0, file_regular);
+	CreateFile("file2.bin", file2, sizeof(file2), 0, file_regular);
 	PrintFS();
 }
 
-int CreateFile(char* filename, char* pData, int size, uint32_t unix_time)
+int CreateFile(char* filename, char* pData, int size, uint32_t unix_time, File_types file_type)
 {
 	int i;
 	// check whether file name is too long
@@ -75,6 +75,7 @@ int CreateFile(char* filename, char* pData, int size, uint32_t unix_time)
 		{
 			strcpy(files[i].filename, filename);
 			files[i].length = size;
+			files[i].file_type = file_type;
 			files[i].unix_time = unix_time;
 			files[i].is_presented = 1;
 			files[i].link = pData;
@@ -257,6 +258,11 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 				if(strcmp(filename, files[i].filename) == 0)
 				{
 					files[i].is_presented = 0;
+					if(files[i].file_type == file_scidata)
+					{
+						((DATA_TYPE_SCI_ALLTRG_RECORD*)(files[i].link))->is_occupied = 0;
+						xil_printf("link addr %08X freed\n\r", files[i].link);
+					}
 					char ok_eomess_str[] = "250 File successfully deleted\r\n";
 					tcp_write(tpcb, "250\r\n250\r\n250\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
 					break;
@@ -295,7 +301,7 @@ static err_t
 ftpdata_sent_callback(void *arg, struct tcp_pcb *tpcb, u16_t len)
 {
 	ftp_frame_acknowledged = 1;
-	print("\n\r->\n\r");
+	//print("\n\r->\n\r");
 	//tcp_packets_counter--;
 	return ERR_OK;
 }
@@ -310,7 +316,7 @@ static err_t ftp_send_data(char * data, u16_t len)
 	if (err != ERR_OK)
 	{
 		xil_printf("BIN: ftp_send_data: Error on tcp_write: %d, len=%d, tpcb=0x%08x\r\n", err, len, ftpdata_pcb);
-		return -1;
+		return err;
 	}
 	err = tcp_output(ftpdata_pcb);
 	if (err != ERR_OK)
@@ -327,7 +333,7 @@ ftpdata_client_err_callback(void * arg, err_t err)
 static err_t
 ftpdata_connected_callback(void *arg, struct tcp_pcb *tpcb, err_t err)
 {
-	xil_printf("txperf: Connected to ftpdata server\r\n");
+	//xil_printf("txperf: Connected to ftpdata server\r\n");
 	ftpserver_data_connected = 1;
 	/* store state */
 	//ftpdata_connected_pcb = tpcb;
@@ -346,7 +352,7 @@ start_ftpserver_data()
 {
 	err_t err;
 	struct ip_addr ipaddr;
-	xil_printf("start_ftpserver_data(), IP=%08x\n\r", ip_addr_client);
+	//xil_printf("start_ftpserver_data(), IP=%08x\n\r", ip_addr_client);
 
 	/* create new TCP PCB structure */
 	ftpdata_pcb = tcp_new();
@@ -397,7 +403,7 @@ static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 	return ERR_OK;
 }
 
-char wellcome_str[] = "220 (Zynqboard baremetal ve-e-e-ry simple FTP server. Do not blame me!)\r\n";
+char wellcome_str[] = "220 (Baremetal non standard FTP server.)\r\n";
 
 static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
@@ -505,7 +511,7 @@ void send_data_sm()
 		break;
 	case send_filename_record:
 		sprintf(file_record, "-r--r--r-- 1 1001 1001 %d Jan 01 2000 %s\r\n", (int)files[current_record].length, files[current_record].filename);
-		print(file_record);
+		//print(file_record);
 		ftp_send_data(file_record, strlen(file_record));
 		current_record++;
 		ftp_state = wait_state;
