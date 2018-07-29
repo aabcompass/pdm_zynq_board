@@ -75,7 +75,7 @@ typedef struct
 	int is_simple_packets;
 } InstrumentState;
 
-#define SCI_DATA_ARRAY_SIZE 10
+#define SCI_DATA_ARRAY_SIZE 100
 
 typedef struct
 {
