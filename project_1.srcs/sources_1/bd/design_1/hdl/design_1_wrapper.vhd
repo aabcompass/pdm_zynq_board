@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Jun 20 11:28:26 2018
---Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.4 LTS
+--Date        : Thu Sep 13 16:35:04 2018
+--Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.5 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
 --Purpose     : IP block netlist
@@ -61,6 +61,7 @@ entity design_1_wrapper is
     frame_art0 : in STD_LOGIC;
     frame_art1 : in STD_LOGIC;
     frame_art2 : in STD_LOGIC;
+    i_RX_Serial : in STD_LOGIC;
     intr_n : in STD_LOGIC;
     intr_p : in STD_LOGIC;
     loadb_sc_pc : out STD_LOGIC;
@@ -68,6 +69,7 @@ entity design_1_wrapper is
     miso_p : in STD_LOGIC;
     mosi_n : out STD_LOGIC;
     mosi_p : out STD_LOGIC;
+    pps_signal : in STD_LOGIC;
     resetb_pc : out STD_LOGIC;
     sck_n : out STD_LOGIC;
     sck_p : out STD_LOGIC;
@@ -79,8 +81,6 @@ entity design_1_wrapper is
     sr_rstb_pc : out STD_LOGIC;
     trig_L1_4led : out STD_LOGIC;
     trig_L2_4led : out STD_LOGIC;
-    trig_button : in STD_LOGIC;
-    trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     trig_ext_in : in STD_LOGIC;
     trig_out : out STD_LOGIC;
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 )
@@ -158,13 +158,13 @@ architecture STRUCTURE of design_1_wrapper is
     frame_art2 : in STD_LOGIC;
     data_art0 : in STD_LOGIC_VECTOR ( 15 downto 0 );
     data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    trig_button : in STD_LOGIC;
     user_led : out STD_LOGIC_VECTOR ( 0 to 0 );
-    trig_button_gnd : out STD_LOGIC_VECTOR ( 0 to 0 );
     trig_L2_4led : out STD_LOGIC;
     trig_ext_in : in STD_LOGIC;
     trig_L1_4led : out STD_LOGIC;
-    trig_out : out STD_LOGIC
+    trig_out : out STD_LOGIC;
+    i_RX_Serial : in STD_LOGIC;
+    pps_signal : in STD_LOGIC
   );
   end component design_1;
   component IOBUF is
@@ -250,6 +250,7 @@ design_1_i: component design_1
       frame_art0 => frame_art0,
       frame_art1 => frame_art1,
       frame_art2 => frame_art2,
+      i_RX_Serial => i_RX_Serial,
       intr_n => intr_n,
       intr_p => intr_p,
       loadb_sc_pc => loadb_sc_pc,
@@ -257,6 +258,7 @@ design_1_i: component design_1
       miso_p => miso_p,
       mosi_n => mosi_n,
       mosi_p => mosi_p,
+      pps_signal => pps_signal,
       resetb_pc => resetb_pc,
       sck_n => sck_n,
       sck_p => sck_p,
@@ -268,8 +270,6 @@ design_1_i: component design_1
       sr_rstb_pc => sr_rstb_pc,
       trig_L1_4led => trig_L1_4led,
       trig_L2_4led => trig_L2_4led,
-      trig_button => trig_button,
-      trig_button_gnd(0) => trig_button_gnd(0),
       trig_ext_in => trig_ext_in,
       trig_out => trig_out,
       user_led(0) => user_led(0)

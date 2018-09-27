@@ -215,14 +215,14 @@ set_property IOSTANDARD LVCMOS25 [get_ports sr_ck_pc_art]
 
 # ext trig xp bin (connect to GND to cause trigger)
 # on PCB X5.11 PL_IO_2_5[7]
-set_property PACKAGE_PIN Y18 [get_ports trig_button]
-set_property IOSTANDARD LVCMOS25 [get_ports trig_button]
-set_property PULLUP true [get_ports trig_button]
+#set_property PACKAGE_PIN Y18 [get_ports trig_button]
+#set_property IOSTANDARD LVCMOS25 [get_ports trig_button]
+#set_property PULLUP true [get_ports trig_button]
 
 
 
-set_property PACKAGE_PIN Y17 [get_ports {trig_button_gnd[0]}]
-set_property IOSTANDARD LVCMOS25 [get_ports {trig_button_gnd[0]}]
+#set_property PACKAGE_PIN Y17 [get_ports {trig_button_gnd[0]}]
+#set_property IOSTANDARD LVCMOS25 [get_ports {trig_button_gnd[0]}]
 
 set_property PACKAGE_PIN A8 [get_ports trig_L1_4led]
 set_property PACKAGE_PIN J9 [get_ports trig_L2_4led]
@@ -233,3 +233,8 @@ set_property PACKAGE_PIN Y12 [get_ports trig_ext_in]
 set_property PACKAGE_PIN AF13 [get_ports trig_out]
 set_property IOSTANDARD LVCMOS25 [get_ports trig_ext_in]
 set_property IOSTANDARD LVCMOS25 [get_ports trig_out]
+
+set_property PACKAGE_PIN Y18 [get_ports pps_signal]
+set_property IOSTANDARD LVCMOS25 [get_ports pps_signal]
+set_property PACKAGE_PIN Y17 [get_ports i_RX_Serial]
+set_property IOSTANDARD LVCMOS25 [get_ports i_RX_Serial]

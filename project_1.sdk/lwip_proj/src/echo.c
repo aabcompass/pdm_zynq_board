@@ -350,6 +350,14 @@ void PrnAllRegs()
 		if(i%4==0) xil_printf("\n\r%d.", i);
 		xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
 	}
+	print("\n\rXPAR_AXI_GPS_CORE_0_BASEADDR");
+	for(i=0;i<8;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXI_GPS_CORE_0_BASEADDR+i*4));
+	}
+
+
 }
 
 void ProcessUartCommands(struct netif *netif, char c)
