@@ -46,13 +46,15 @@ char file2[] = "The content of the file 2";
 static int current_record, requested_record, spectrum_nbytes, portion_size;
 static char* spectrum_addr;
 
+int dir_list_short;
+
 
 void FileSystemInit()
 {
 	memset(files, 0, sizeof(files));
-	CreateFile("file1.bin", file1, sizeof(file1), 0, file_regular);
-	CreateFile("file2.bin", file2, sizeof(file2), 0, file_regular);
-	PrintFS();
+	//CreateFile("file1.bin", file1, sizeof(file1), 0, file_regular);
+	//CreateFile("file2.bin", file2, sizeof(file2), 0, file_regular);
+	//PrintFS();
 }
 
 int CreateFile(char* filename, char* pData, int size, uint32_t unix_time, File_types file_type)
@@ -106,8 +108,9 @@ int DeleteFile(char* filename)
 	return NO_SUCH_FILE;
 }
 
-void SendDir()
+void SendDir(int is_short)
 {
+	dir_list_short = is_short;
 	if(ftp_state == no_state)
 		ftp_state = start_send_dir;
 	else
@@ -154,64 +157,63 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	u32 param;
 	if(sscanf(p->payload, "USER %s", str2) == 1)
 	{
-		//sprintf(str3, "331 Password required for %s.\r\n", str2);
-		tcp_write(tpcb, "331\r\n331\r\n331\r\n", 15/*strlen(str3)*/, 1);
-	//	SendNotReplyMessage(tpcb, /*str3*/"\r\n");
+		sprintf(str3, "331 Please specify the password.\r\n", str2);
+		tcp_write(tpcb, str3, strlen(str3), 1);
 	}
 	else if(strncmp(p->payload, "PASS", 4) == 0)
 	{
 		char ok_eomess_str[] = "230 Login successful.\r\n";
-		tcp_write(tpcb, "230\r\n230\r\n230\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "PWD", 3) == 0)
 	{
 		char ok_eomess_str[] = "257 / is the current directory\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		SendNotReplyMessage(tpcb, /*ok_eomess_str*/"\r\n");
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "TYPE I", 6) == 0)
 	{
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
-		tcp_write(tpcb, "200\r\n200\r\n200\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+	}
+	else if(strncmp(p->payload, "MDTM", 4) == 0)
+	{
+		char ok_eomess_str[] = "213 20000101000000\r\n";
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "FEAT", 4) == 0)
 	{
-		char ok_eomess_str[] = "211 no-features.\r\n211 End\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-	}
-	else if(strncmp(p->payload, "\xF2\x41\x42\x4F\x52\x0D\x0A", 7) == 0)
-	{
-		print("ABOR\n\r");
-		char ok_eomess_str[] = "225 No transfers to ABOR.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-	}
-	else if(strncmp(p->payload, "\xFF\xF4\xFF", 3) == 0)
-	{
-		print("?");
+		char ok_eomess_str[] = "211 no features\r\n";
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "CWD /", 5) == 0)
 	{
 		char ok_eomess_str[] = "250 Directory successfully changed.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(sscanf(p->payload, "PORT %d,%d,%d,%d,%d,%d",
 			&ip0, &ip1, &ip2, &ip3, &port0, &port1) == 6)
 	{
 		ip_addr_client = (ip0) | (ip1<<8) | (ip2<<16) | (ip3<<24);
 		port_client = (port0<<8) | port1;
-		char ok_eomess_str[] = "200 PORT command successful. Don't use PASV\r\n";
-		tcp_write(tpcb, "200\r\n200\r\n200\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
+		char ok_eomess_str[] = "200 PORT command successful\r\n";
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "LIST", 4) == 0)
 	{
 		//char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
-		//tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		SendDir();
+		//tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+		SendDir(0);
+	}
+	else if(strncmp(p->payload, "NLST", 4) == 0)
+	{
+		//char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
+		//tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+		SendDir(1);
 	}
 	else if(strncmp(p->payload, "QUIT", 4) == 0)
 	{
 		char ok_eomess_str[] = "221 Goodbye.\r\n";
-		tcp_write(tpcb, "221\r\n221\r\n221\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 
 		//tcp_close(tpcb);
 	}
@@ -233,7 +235,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		if(i==MAX_FILES)
 		{
 			char ok_eomess_str[] = "550 Requested action ot taken. File unavailable\r\n";
-			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+			tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		}
 		else
 		{
@@ -264,7 +266,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 						xil_printf("link addr %08X freed\n\r", files[i].link);
 					}
 					char ok_eomess_str[] = "250 File successfully deleted\r\n";
-					tcp_write(tpcb, "250\r\n250\r\n250\r\n"/*ok_eomess_str*/, 15/*sizeof(ok_eomess_str)*/, 1);
+					tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 					break;
 				}
 			}
@@ -272,13 +274,15 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		if(i==MAX_FILES)
 		{
 			char ok_eomess_str[] = "550 Requested action not taken. File unavailable\r\n";
-			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+			tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		}
 	}
 	else
 	{
 		char ok_eomess_str[] = "500 Unknown command.\r\n";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		print("UNKNOWN FTP CMD:\n\r");
+		print(p->payload);
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		for(i=0; i<p->len; i++)
 			xil_printf("%02X " , ((char*)p->payload)[i]);
 	}
@@ -403,7 +407,7 @@ static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 	return ERR_OK;
 }
 
-char wellcome_str[] = "220 (Baremetal non standard FTP server.)\r\n";
+char wellcome_str[] = "220 (Baremetal non standard FTP server)\r\n";
 
 static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
@@ -417,7 +421,7 @@ static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 	   callback argument */
 	tcp_arg(newpcb, (void*)connection);
 
-	tcp_write(newpcb, wellcome_str, sizeof(wellcome_str), 1);
+	tcp_write(newpcb, wellcome_str, strlen(wellcome_str), 1);
 	/* increment for subsequent accepted connections */
 	connection++;
 
@@ -497,8 +501,8 @@ void send_data_sm()
 		{
 			ftp_state = look_for_the_next_record;
 			ftpserver_data_connected = 0;
-			//char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
-			//tcp_write(ctrl_tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+			char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
+			tcp_write(ctrl_tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		}
 		break;
 	case look_for_the_next_record:
@@ -510,7 +514,10 @@ void send_data_sm()
 			current_record++;
 		break;
 	case send_filename_record:
-		sprintf(file_record, "-r--r--r-- 1 1001 1001 %d Jan 01 2000 %s\r\n", (int)files[current_record].length, files[current_record].filename);
+		if(dir_list_short == 0)
+			sprintf(file_record, "-r--r--r-- 1 1001 1001 %d Jan 01 2000 %s\r\n", (int)files[current_record].length, files[current_record].filename);
+		else
+			sprintf(file_record, "%s\r\n", (int)files[current_record].length, files[current_record].filename);
 		//print(file_record);
 		ftp_send_data(file_record, strlen(file_record));
 		current_record++;
@@ -535,10 +542,10 @@ void send_data_sm()
 		break;
 	case send_control_message:
 		{
-			char str2[] = "150 Here comes the directory listing.\r\n226 Directory send OK.\r\n";
-			tcp_write(ctrl_tpcb, str2, 64, 1);
+			char str2[] = "226 Directory send OK.\r\n";
+			tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
 			//char ok_eomess_str[] = "150 Here comes the directory listing.\r\n";
-			//tcp_write(ctrl_tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+			//tcp_write(ctrl_tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 			ftp_state = no_state;
 			break;
 		}
@@ -552,7 +559,7 @@ void send_data_sm()
 			ftp_state = send_portion;
 			ftpserver_data_connected = 0;
 //			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
-//			tcp_write(ctrl_tpcb, str3, sizeof(str3), 1);
+//			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 		}
 	case send_portion:
 		portion_size = spectrum_nbytes > MAX_SIZE_TCP_PACKET ? MAX_SIZE_TCP_PACKET : spectrum_nbytes;

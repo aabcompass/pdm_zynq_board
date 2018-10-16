@@ -250,10 +250,10 @@ void DataPathSM()
 				if(!sci_data[i].is_occupied)
 				{
 					current_scidata_record = i;
-					xil_printf("current_scidata_record=%d\n\r", current_scidata_record);
+					xil_printf("[%d]\n\r", current_scidata_record);
 					memcpy((char*)&sci_data[current_scidata_record].sci_data, (char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1));
 					sci_data[current_scidata_record].is_occupied = 1;
-					xil_printf("link addr %08X occupied\n\r", &sci_data[current_scidata_record]);
+					//xil_printf("link addr %08X occupied\n\r", &sci_data[current_scidata_record]);
 					// create file
 					ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
 					if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);

@@ -292,7 +292,7 @@ int main()
 		UpdateFW_SM();
 		ScurveService();
 		HVInterruptService();
-		GPS_service();
+		//GPS_service();
 		IncProgramCounter();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))
 		{
