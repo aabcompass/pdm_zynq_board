@@ -236,8 +236,6 @@ int main()
 	print("SPACIROC FIFO initialization...\n\r");
 	XLlFifoPollingInit();
 	LoadArtix();
-	//instrumentState.artix_locked = 7;
-	//xil_printf("artix_locked is forced to %d due to testing!\n\r", instrumentState.artix_locked);
 	print("Reset SPACIROCs...\n\r");
 	ResetSPACIROC3();
 //	print("Starting TCP client on port 50001 (unused)...\n\r");

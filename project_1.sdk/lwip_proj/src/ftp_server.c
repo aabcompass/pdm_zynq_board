@@ -170,6 +170,11 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char ok_eomess_str[] = "257 / is the current directory\r\n";
 		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
+	else if(strncmp(p->payload, "SYST", 4) == 0)
+	{
+		char ok_eomess_str[] = "215 UNIX Type: L8\r\n";
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+	}
 	else if(strncmp(p->payload, "TYPE I", 6) == 0)
 	{
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
@@ -210,7 +215,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		//tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		SendDir(1);
 	}
-	else if(strncmp(p->payload, "QUIT", 4) == 0)
+	else if(strncasecmp(p->payload, "QUIT", 4) == 0)
 	{
 		char ok_eomess_str[] = "221 Goodbye.\r\n";
 		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);

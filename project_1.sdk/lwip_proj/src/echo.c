@@ -371,6 +371,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		PrnAllRegs();
 	}
+	else if(c == '#')
+	{
+		print_expander_regs();
+	}
 	else if(c == 'h')
 	{
 		HV_prnLog();
@@ -540,14 +544,14 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		ProvideTestDataL1();
 	}
-	else if(c == '%')
-	{
-		remove_BOOT_bin();
-	}
-	else if(c == 'w')
-	{
-		WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
-	}
+//	else if(c == '%')
+//	{
+//		remove_BOOT_bin();
+//	}
+//	else if(c == 'w')
+//	{
+//		WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
+//	}
 	else if(c == 'x')
 	{
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) ^= (1<<BIT_TESTMODE_0);
