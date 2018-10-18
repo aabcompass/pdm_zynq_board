@@ -249,29 +249,20 @@ typedef struct
 #define HVPS_LOG_SIZE_NRECORDS	100000
 
 // The list of possible types of records
-#define HVPS_TURN_ON			0x01 // turn on
-#define HVPS_TURN_OFF			0x02 // turn off
-#define HVPS_DACS_LOADED		0x03 // DAC loaded by user
-#define HVPS_SR_LOADED			0x04 // Shift register loaded by user
-#define HVPS_INTR				0x05 // Interrupt
-#define HVPS_SANITY_RELEASE		0x08 // HVPS channel has been turned off because of too many tries to turn on this HV
-#define HVPS_SANITY_INTR		0x09 // HVPS channel has been turned off because of too many interrupts from its HVOK line
-#define HVPS_AGC_UP_3_to_1		0x0C // Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
-#define HVPS_AGC_UP_1_to_0		0x0D // Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
-#define HVPS_AGC_UP_0_to_1		0x0E // Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
-#define HVPS_AGC_UP_1_to_3		0x0F // Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
 
-#define HVPS_TURN_ON_STR			 "TURN_ON" // turn on
-#define HVPS_TURN_OFF_STR			 "TURN_OFF"// turn off
-#define HVPS_DACS_LOADED_STR		 "DACS_LOADED"// DAC loaded by user
-#define HVPS_SR_LOADED_STR			 "SR_LOADED"// Shift register loaded by user
-#define HVPS_INTR_STR				 "INTR"// Interrupt
-#define HVPS_SANITY_RELEASE_STR		 "SANITY_RELEASE"// HVPS channel has been turned off because of too many tries to turn on this HV
-#define HVPS_SANITY_INTR_STR		 "SANITY_INTR"// HVPS channel has been turned off because of too many interrupts from its HVOK line
-#define HVPS_AGC_UP_3_to_1_STR		 "AGC_UP_3_to_1"// Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
-#define HVPS_AGC_UP_1_to_0_STR		 "AGC_UP_1_to_0"// Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
-#define HVPS_AGC_UP_0_to_1_STR		 "AGC_UP_0_to_1"// Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
-#define HVPS_AGC_UP_1_to_3_STR		 "AGC_UP_1_to_3"// Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
+//#define HVPS_TURN_ON			0x01 // turn on
+//#define HVPS_TURN_OFF			0x02 // turn off
+//#define HVPS_DACS_LOADED		0x03 // DAC loaded by user
+//#define HVPS_SR_LOADED			0x04 // Shift register loaded by user
+//#define HVPS_INTR				0x05 // Interrupt
+//#define HVPS_SANITY_RELEASE		0x08 // HVPS channel has been turned off because of too many tries to turn on this HV
+//#define HVPS_SANITY_INTR		0x09 // HVPS channel has been turned off because of too many interrupts from its HVOK line
+//#define HVPS_AGC_UP_3_to_1		0x0C // Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
+//#define HVPS_AGC_UP_1_to_0		0x0D // Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
+//#define HVPS_AGC_UP_0_to_1		0x0E // Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
+//#define HVPS_AGC_UP_1_to_3		0x0F // Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
+
+
 
 
 typedef struct

@@ -116,7 +116,7 @@ int current_hvdac_value = 0;
 #define RX_BUFFER_BASE		(MEM_BASE_ADDR + 0x00300000)
 //#define MAX_PKT_LEN		0x20
 
-
+char hvps_log_file_ftp[sizeof(Z_DATA_TYPE_HVPS_LOG_V1)];
 
 
 void PrintBin(u16 data)
@@ -168,6 +168,18 @@ void RunStopping()
 	stop_sm_state = wait4data_provider_stop;
 }
 
+void SendLogToFTP()
+{
+	u32 size = HV_getLogFileSize();
+	int ret;
+	memset(hvps_log_file_ftp, 0, sizeof(Z_DATA_TYPE_HVPS_LOG_V1));
+	memcpy(hvps_log_file_ftp, HV_getLogPtr(), size);
+	DeleteFile("HVPS.log");
+	ret = CreateFile("HVPS.log", hvps_log_file_ftp, size, 0, file_regular);
+	xil_printf("CreateFile rets %d\n\r", ret);
+	HV_clean_log();
+}
+
 void StopSM()
 {
 	switch(stop_sm_state)
@@ -190,7 +202,7 @@ void StopSM()
 		}
 		break;
 	case stop_sm_stopped:
-		SendLogToFTP();
+		//SendLogToFTP();
 		SetDataProviderTestMode(0);
 		PrnAllRegs();
 		stop_sm_state = stop_sm_idle;
@@ -423,11 +435,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 		// static int incr_var = 0;
 		// for external trigger i/o check
 		// *(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
-		xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
+		//xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
 		xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
 
-		xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
-		xil_printf("GetFileSize() = %d\n\r", GetFileSize());
+		//xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
+		//xil_printf("GetFileSize() = %d\n\r", GetFileSize());
 		xil_printf("datapath_sm_state = %d\n\r", datapath_sm_state);
 
 		xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());

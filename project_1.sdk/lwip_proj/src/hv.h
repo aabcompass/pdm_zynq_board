@@ -134,7 +134,7 @@ unsigned char HV_setINT(char kHV);  // sets INTerruption when HVPS no kHV is ON 
                                     //  Polish_Status when it is==1)
 void setRegister(u32 opcode, u32 reg_addr, u32 reg_data);
 u32 getRegister(u32 opcode, u32 reg_addr/*, u32* reg_data*/);
-
+void HV_addLog(u32 record_type, u32 channels);
 void HVInterruptService();
 
 #define HV_MIN_DAC_VALUE	0

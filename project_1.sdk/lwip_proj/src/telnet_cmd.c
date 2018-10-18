@@ -81,6 +81,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "instrument mode %d %d",
 			&param, &param2) == 2)
 	{
+		if(param == 0)
+			SendLogToFTP();
 		SetInstrumentMode(param);
 		SetTime(param2);
 		DateTime dateTime;
@@ -95,6 +97,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
 	{
+		if(param == 0)
+			SendLogToFTP();
 		SetInstrumentMode(param);
 		RunStopping();
 		char ok_eomess_str[] = "Ok\n\r";
@@ -292,10 +296,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else
 	{
 		static int called = 0;
-		if(called)
-			strcpy(ans_str, "Error 1\n\r");
-		else
-			strcpy(ans_str, "PDM DP console\n\r");
+		strcpy(ans_str, "Error 1\n\r");
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 		called = 1;
 	}
