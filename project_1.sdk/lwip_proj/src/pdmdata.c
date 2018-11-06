@@ -13,6 +13,7 @@
 #include "axi_spectral_core.h"
 #include "pdmdp_err.h"
 #include "data_provider.h"
+#include "ftp_server.h"
 
 
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
@@ -707,7 +708,8 @@ void ScurveService()
 			xil_printf("Stop gathering S-Curve. current_dac_value=%d\n\r", sCurveStruct.current_dac_value);
 			sCurveStruct.is_scurve_being_gathered = 0;
 			sprintf(filename_str, FILENAME_SCURVE, scurve_filename_counter++);
-			SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
+			//SendSpectrum2FTP((char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), filename_str);
+			CreateFile(filename_str, (char*)&scurvePacket, sizeof(Z_DATA_TYPE_SCURVE_V1), 0, file_regular);
 		}
 	}
 }

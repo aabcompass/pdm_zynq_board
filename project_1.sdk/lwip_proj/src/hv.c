@@ -20,7 +20,7 @@ int hv_turned_on_user = 0;
 // bit of hv_turned_successful is set if both HVon and HVok of corresponding channel were set to HIGH during the last turn on.
 // bit of hv_turned_successful is cleared if:
 // 1. HVPS channel is turned off by user.
-// 2. Both HVon and HVok were not gone back to HIGH state after interrupt event in 1 sec.
+// 2. Both HVon and HVok were not gone back to HIGH state after interrupt event in 1 sec.(??)
 // 3. HVPS channel has produced more than specified number of interrupts  = 1000.
 // LSB bit represents channel0, etc...
 int hv_working_successful = 0;
@@ -41,19 +41,20 @@ Z_DATA_TYPE_HVPS_LOG_V1 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
 volatile u32 hvps_log_current_record = 0;
 
 
-enum hvps_log_records {
-	HVPS_TURN_ON,  		// turn on
-	HVPS_TURN_OFF,		// turn off
-	HVPS_DACS_LOADED,		// DAC loaded by user
-	HVPS_SR_LOADED,		// Shift register loaded by user
-	HVPS_INTR,			// Interrupt
-	HVPS_BLOCK_RELEASE,	// HVPS channel has been turned off because of too many tries to turn on this HV
-	HVPS_BLOCK_INTR,		// HVPS channel has been turned off because of too many interrupts from its HVOK line
-	HVPS_AGC_UP_3_to_1,	// Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded.
-	HVPS_AGC_UP_1_to_0,	// Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded.
-	HVPS_AGC_UP_0_to_1,	// Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded.
-	HVPS_AGC_UP_1_to_3	// Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded.
-};
+//enum hvps_log_records {
+#define		HVPS_TURN_ON		0  		/* turn on */
+#define		HVPS_TURN_OFF		1		/* turn off */
+#define		HVPS_DACS_LOADED	2		/* DAC loaded by user */
+#define		HVPS_SR_LOADED		3		/* Shift register loaded by user */
+#define		HVPS_INTR			4			/* Interrupt */
+#define		HVPS_BLOCK_ECUNIT	5	/* HVPS channel has been turned as its HVOK line was deasserted at least on 1 second */
+#define		HVPS_BLOCK_INTR		6		/* HVPS channel (EC) has been turned off because of too many interrupts from its lines */
+#define		HVPS_AGC_UP_3_to_1	7	/* Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded. */
+#define		HVPS_AGC_UP_1_to_0	8	/* Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded. */
+#define		HVPS_AGC_UP_0_to_1	9	/* Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded. */
+#define		HVPS_AGC_UP_1_to_3	10	/* Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded. */
+#define		HVPS_STATUS         11 /* POLISH STATUS */
+//};
 
 const char* hvps_log_records_txt[] = {
 		"TURN_ON",
@@ -66,7 +67,8 @@ const char* hvps_log_records_txt[] = {
 		"AGC_3->1",
 		"AGC_1->0",
 		"AGC_0->1",
-		"AGC_1->3"};
+		"AGC_1->3",
+		"STATUS"};
 
 
 static void delay(int time)
@@ -195,7 +197,7 @@ void expIni(void){
 // ****************
 // Turn off selected HV
 // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
-// This functions was imported from the Mexican code
+// This function was imported from the Mexican code
 void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
   unsigned char expAddress = kHV/3;   // expander number: 0, 1, 2
   unsigned char kHVCWinEXP = kHV - 3 * expAddress; // C-W id within expander (0, 1, 2)
@@ -219,7 +221,7 @@ void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 
   delay(10);  // 10 millisec delay
 
-  HV_addLog(HVPS_TURN_OFF, kHV);
+  //HV_addLog(HVPS_TURN_OFF, kHV);
 
 // this procedure leaves:
 //     *  interupts disable for ON/OFF and Status pins,
@@ -235,7 +237,7 @@ void HV_turnOFF(char kHV) {   // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 
 // ****************
 // Turn off all HV
-// This functions was imported from the Mexican code
+// This function was imported from the Mexican code
 void HV_turnOFF_all(void)  {
 	unsigned char iExp = 0;
 	//unsigned char int_bits = 0x00;
@@ -261,7 +263,7 @@ void HV_turnOFF_all(void)  {
 
  }
 
-// This functions was imported from the Mexican code
+// This function was imported from the Mexican code
 // I don't know why this function is needed for.
 // ****************
 unsigned char HV_ON_test(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
@@ -310,7 +312,7 @@ unsigned char HV_ON_test(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 // ****************
 // Turn on selected HV
 // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
-// This functions was imported from the Mexican code
+// This function was imported from the Mexican code
 unsigned char HV_turnON(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
 	int i;
 	HV_turnOFF(kHV);   // to turn OFF it is necessary to turn OFF, first (discharge capacitor)
@@ -349,7 +351,7 @@ unsigned char HV_turnON(char kHV) {  // kHV - HVPS_CW id = 0,1,2,3,4,5,6,7,8
    }
   datGPIO = getRegister(expAddressR, GPIO); // once again
 
-  HV_addLog(HVPS_TURN_ON, kHV);
+  //HV_addLog(HVPS_TURN_ON, kHV);
 
   return datGPIO;
 
@@ -381,7 +383,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
   if (!(datGPIO & kON_OFF)) { // HVPS_CW off
      unsigned char kOFF = 0x3f - kStatus; // ON/OFF and Status bits are 0
      setRegister(expAddressW, GPINTEN, (datGPINTEN & kOFF) );   // disable interrupts
-     print("A");
+     print("B");
     }
    else if ((datGPIO & kStatus) == kStatus) { // both ON/OFF and  Polish_Status are 1
       unsigned char datDEFVAL = getRegister(expAddressR, DEFVAL);   // read reference INT for 3 HVPSs
@@ -390,7 +392,7 @@ unsigned char HV_setINT(char kHV) {  // sets INTerruption when HVPS no kHV is ON
       setRegister(expAddressW, INTCON, datINTCON|kStatus);   // sets INTCON
       setRegister(expAddressW, GPINTEN, (datGPINTEN | kStatus));   // sets interrupts
       ret = datGPIO;
-      print("B");
+      print("A");
     }
    else if ((datGPIO & kON_OFF) == kON_OFF) { // only ON/OFF == 1
       unsigned char datDEFVAL = getRegister(expAddressR, DEFVAL);   // read reference INT for 3 HVPSs
@@ -464,13 +466,34 @@ void HV_clean_log()
 
 void HV_prnLog()
 {
-	int i;
+	int i,j;
 	for(i=0;i<hvps_log_current_record;i++)
 	{
-		xil_printf("%d.\tGTU=%d\tTYPE:%s\tCH:%05x\n\r", i,
+		xil_printf("%d.\tGTU=%d\tTYPE:%s\t",
+				i,
 				(u32)hvps_log.payload[i].ts.n_gtu,
-				hvps_log_records_txt[hvps_log.payload[i].record_type],
-				hvps_log.payload[i].channels);
+				hvps_log_records_txt[hvps_log.payload[i].record_type]);
+		switch(hvps_log.payload[i].record_type)
+		{
+		case HVPS_DACS_LOADED:
+			xil_printf("Channel #%d: dac_value:%d", hvps_log.payload[i].channels>>16, hvps_log.payload[i].channels & 0xFFFF);
+			break;
+//		case HVPS_TURN_ON:
+//		case HVPS_TURN_OFF:
+////			print("Channels:");
+////			for(j=0;j<NUM_OF_HV;j++)
+////				xil_printf("%d ", (hvps_log.payload[i].channels == j));
+////			break;
+//		case HVPS_SR_LOADED:
+//		case HVPS_BLOCK_RELEASE:
+		default:
+			print("Channels:");
+			for(j=0;j<NUM_OF_HV;j++)
+				xil_printf("%d ", (hvps_log.payload[i].channels >> j*2) & 3);
+			break;
+		}
+
+		print("\r\n");
 	}
 }
 // This function is periodically called from the lifecycle in main().
@@ -513,7 +536,7 @@ void HVInterruptService()
 							HV_turnOFF(i/2); // turn off this HV
 							hv_working_successful &= ~(1<<i/2);
 							is_interrupt_pending &= ~(1<<i);
-							HV_addLog(HVPS_BLOCK_RELEASE, (1<<i));
+							HV_addLog(HVPS_BLOCK_ECUNIT, (1<<i));
 							print("HV channel has been blocked\n\r");
 						}
 					}
@@ -534,7 +557,7 @@ void HVInterruptService()
 				hv_working_successful &= ~(1<<i/2);
 				HV_addLog(HVPS_BLOCK_INTR, 1<<i);
 				HV_turnOFF(i/2);
-				print("HV channel turned off due to big number if interrupts\n\r");
+				print("HV channel turned off because of a big number if interrupts\n\r");
 			}
 		}
 	}
@@ -669,6 +692,20 @@ void HV_turnON_list(int list[NUM_OF_HV])
 			hv_n_tries_to_release[i*2+1] = 0;
 		}
 	}
+
+	HV_addLog(HVPS_TURN_ON,
+			list[8] << 16  |
+			list[7] << 14  |
+			list[6] << 12  |
+			list[5] << 10  |
+			list[4] << 8  |
+			list[3] << 6  |
+			list[2] << 4  |
+			list[1] << 2  |
+			list[0] << 0);
+
+	int tmp_array[NUM_OF_HV];
+	HV_getStatus(tmp_array);
 }
 
 // Turn off HVs by list
@@ -685,6 +722,19 @@ void HV_turnOFF_list(int list[NUM_OF_HV])
 			hv_working_successful &= ~(1<<i);
 		}
 	}
+
+	HV_addLog(HVPS_TURN_OFF,
+			list[8] << 16  |
+			list[7] << 14  |
+			list[6] << 12  |
+			list[5] << 10  |
+			list[4] << 8  |
+			list[3] << 6  |
+			list[2] << 4  |
+			list[1] << 2  |
+			list[0] << 0);
+	int tmp_array[NUM_OF_HV];
+	HV_getStatus(tmp_array);
 }
 
 // Set DAC value by list
@@ -724,6 +774,16 @@ void HV_getStatus(int list[NUM_OF_HV])
 	list[6] = (gpio_exp3>>0) & 0x3;
 	list[7] = (gpio_exp3>>2) & 0x3;
 	list[8] = (gpio_exp3>>4) & 0x3;
+	HV_addLog(HVPS_STATUS,
+			list[8] << 16 |
+			list[7] << 14 |
+			list[6] << 12 |
+			list[5] << 10 |
+			list[4] << 8 |
+			list[3] << 6 |
+			list[2] << 4 |
+			list[1] << 2 |
+			list[0] << 0);
 }
 
 // Set Cathode voltage by list

@@ -136,6 +136,7 @@ void setRegister(u32 opcode, u32 reg_addr, u32 reg_data);
 u32 getRegister(u32 opcode, u32 reg_addr/*, u32* reg_data*/);
 void HV_addLog(u32 record_type, u32 channels);
 void HVInterruptService();
+void HV_getStatus(int list[NUM_OF_HV]);
 
 #define HV_MIN_DAC_VALUE	0
 #define HV_MAX_DAC_VALUE	4095
