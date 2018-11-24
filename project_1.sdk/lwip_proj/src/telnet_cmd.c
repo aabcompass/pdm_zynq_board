@@ -64,7 +64,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	}
 	else if(strncmp(p->payload, "instrument status", 17) == 0)
 	{
-		sprintf(reply, "%d %d\n\r", GetFTP_bin_State(), instrumentState.mode);
+		sprintf(reply, "%d %d\n\r", /*GetFTP_bin_State()*/40, instrumentState.mode);
 		tcp_write(tpcb, reply, sizeof(reply), 1);
 	}
 	else if(strncmp(p->payload, "instrument ver", 14) == 0)

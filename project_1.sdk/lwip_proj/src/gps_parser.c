@@ -73,7 +73,7 @@ void GPS_service()
 		if(msg_pos >= NMEA0183_MAX_STR_LEN) return;
 		msg_str[msg_pos] = c;
 		msg_pos++;
-		//xil_printf("%c", c);
+//		xil_printf("%c", c);
 	}
 }
 

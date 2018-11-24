@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_PDM_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench_PDM" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="46766334fs"></ZoomStartTime>
+      <ZoomEndTime time="95166335fs"></ZoomEndTime>
+      <Cursor1Time time="54833000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="18" />
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/CLOCK_200">
+      <obj_property name="ElementShortName">CLOCK_200</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_200</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/DATA_EC0EC1EC2">
+      <obj_property name="ElementShortName">DATA_EC0EC1EC2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_EC0EC1EC2[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/FRAME">
+      <obj_property name="ElementShortName">FRAME</obj_property>
+      <obj_property name="ObjectShortName">FRAME</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/s_aresetn_ev">
+      <obj_property name="ElementShortName">s_aresetn_ev</obj_property>
+      <obj_property name="ObjectShortName">s_aresetn_ev</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/m_aclk_ev">
+      <obj_property name="ElementShortName">m_aclk_ev</obj_property>
+      <obj_property name="ObjectShortName">m_aclk_ev</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/m_axis_tvalid_ev">
+      <obj_property name="ElementShortName">m_axis_tvalid_ev</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid_ev</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/m_axis_tready_ev">
+      <obj_property name="ElementShortName">m_axis_tready_ev</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready_ev</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/m_axis_tdata_ev">
+      <obj_property name="ElementShortName">m_axis_tdata_ev[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata_ev[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench_PDM/uut/m_axis_tlast_ev">
+      <obj_property name="ElementShortName">m_axis_tlast_ev</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast_ev</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/THR_CMD">
+      <obj_property name="ElementShortName">THR_CMD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">THR_CMD[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/L1_TRIGGER/gtu_counter">
+      <obj_property name="ElementShortName">gtu_counter[6:0]</obj_property>
+      <obj_property name="ObjectShortName">gtu_counter[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s">
+      <obj_property name="ElementShortName">thr_values_s[33:0]</obj_property>
+      <obj_property name="ObjectShortName">thr_values_s[33:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus944">
+      <obj_property name="label">PMT_THR1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus1012">
+      <obj_property name="label">PMT_THR2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus1021">
+      <obj_property name="label">EC_THR1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">[23]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">[22]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">[21]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">[20]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus1031">
+      <obj_property name="label">EC_THR2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[33]">
+         <obj_property name="ElementShortName">[33]</obj_property>
+         <obj_property name="ObjectShortName">[33]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[32]">
+         <obj_property name="ElementShortName">[32]</obj_property>
+         <obj_property name="ObjectShortName">[32]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[31]">
+         <obj_property name="ElementShortName">[31]</obj_property>
+         <obj_property name="ObjectShortName">[31]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[30]">
+         <obj_property name="ElementShortName">[30]</obj_property>
+         <obj_property name="ObjectShortName">[30]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[29]">
+         <obj_property name="ElementShortName">[29]</obj_property>
+         <obj_property name="ObjectShortName">[29]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[28]">
+         <obj_property name="ElementShortName">[28]</obj_property>
+         <obj_property name="ObjectShortName">[28]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[27]">
+         <obj_property name="ElementShortName">[27]</obj_property>
+         <obj_property name="ObjectShortName">[27]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[26]">
+         <obj_property name="ElementShortName">[26]</obj_property>
+         <obj_property name="ObjectShortName">[26]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[25]">
+         <obj_property name="ElementShortName">[25]</obj_property>
+         <obj_property name="ObjectShortName">[25]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench_PDM/uut/L1_TRIGGER/thr_values_s[24]">
+         <obj_property name="ElementShortName">[24]</obj_property>
+         <obj_property name="ObjectShortName">[24]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/L1_TRIGGER/pdm_thr1">
+      <obj_property name="ElementShortName">pdm_thr1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pdm_thr1[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench_PDM/uut/L1_TRIGGER/pdm_thr2">
+      <obj_property name="ElementShortName">pdm_thr2[12:0]</obj_property>
+      <obj_property name="ObjectShortName">pdm_thr2[12:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

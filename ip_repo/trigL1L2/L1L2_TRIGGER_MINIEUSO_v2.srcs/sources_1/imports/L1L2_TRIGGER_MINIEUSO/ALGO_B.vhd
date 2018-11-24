@@ -45,7 +45,10 @@ entity ALGO_B is port (
 	S01_AXIS_TVALID			    :	in	std_logic;
 	S01_AXIS_TREADY			    :	out	std_logic := '1';	
 	------------------------------------------------------
-	L1_EVENT            :   out std_logic--;
+	L1_EVENT            :   out std_logic;
+	-- inputs forwarding for TA trigger tests
+	data_conv_out: out std_logic_vector(15 downto 0);
+	frame_conv_out: out std_logic 
 	);
 	
 end ALGO_B;
@@ -127,6 +130,9 @@ i_format_converter_l : format_converter
            frame_out 	=> open--: out STD_LOGIC);
 	);
 
+	data_conv_out <= DATA_conv;
+	frame_conv_out <= FRAME_conv;
+	
 
 	L1_TRIGGER : L1
     port map (
