@@ -73,6 +73,10 @@ typedef struct
 	int file_counter_cc;
 	u32 artix_locked;
 	int is_simple_packets;
+	int is_HVPS_OK;
+	int err_SDcard; //SD-card error during mount. 0 - OK
+	int err_artix_bin; // Error during artix.bin load. 0 - Ok
+	int is_artix_loaded;
 } InstrumentState;
 
 #define SCI_DATA_ARRAY_SIZE 100

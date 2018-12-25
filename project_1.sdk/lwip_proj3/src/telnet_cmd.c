@@ -34,6 +34,13 @@ void SetInstrumentMode(u32 mode)
 	}
 }
 
+char err_str[20];
+
+void SendErrorCommand(struct tcp_pcb *tpcb,  int err_code)
+{
+	sprintf(err_str, "Error %d\n\r", err_code);
+	tcp_write(tpcb, err_str, strlen(err_str), 1);
+}
 
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
@@ -98,18 +105,34 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
 	{
-		if(param == 0)
-			SendLogToFTP();
-		SetInstrumentMode(param);
-		RunStopping();
-		char ok_eomess_str[] = "Ok\n\r";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		//if(param == 0)
-		//	SendLogToFTP();
+		if(instrumentState.err_SDcard)
+		{
+			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_SDcard);
+		}
+		else if(instrumentState.err_artix_bin)
+		{
+			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
+		}
+		else if(instrumentState.artix_locked == 0)
+		{
+			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+			SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
+		}
+		else
+		{
+			if(param == 0)
+				SendLogToFTP();
+			SetInstrumentMode(param);
+			RunStopping();
+			char ok_eomess_str[] = "Ok\n\r";
+			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+		}
 	}
 	else if(strncmp(p->payload, "instrument start", 16) == 0)
 	{
-		//This function does nothing
+		//This function does nothing (for compatibility)
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
@@ -168,10 +191,21 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "hvps turnon %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
-		char str[] = "Ok\n\r";
+		if(!instrumentState.is_HVPS_OK)
+		{
+			print("Additional try to initialize HVPS\n\r");
+			instrumentState.is_HVPS_OK = expIni(); //init hv
+			if(!instrumentState.is_HVPS_OK)
+			{
+				print("HVPS seems not connected or powered\n\r");
+				SendErrorCommand(tpcb, ERR_HVPS_DISCONN_OR_POWERED);
+				return;
+			}
+		}
 		HV_turnON_list(turn);
-		tcp_write(tpcb, str, sizeof(str), 1);
 		SetupHVPSIntrSystem(getIntcPtr());
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
 	}
 	else if(sscanf(p->payload, "hvps turnoff %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)

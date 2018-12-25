@@ -46,7 +46,7 @@ int FfsSdPolledInit(void)
 
 	if (Res != FR_OK) {
 		xil_printf("Error with mounting file system. Code = %d\n\r", Res);
-		return XST_FAILURE;
+		return Res;
 	}
 
 	return XST_SUCCESS;
@@ -193,14 +193,14 @@ int ReadArtixBitstream(char * data, int* size)
 
 	Res = f_open(&fil, FILENAME_ARTIX_BITSTREAM, FA_READ);
 	if (Res) {
-		return XST_FAILURE;
+		return Res;
 	}
 	/*
 	 * Pointer to beginning of file .
 	 */
 	Res = f_lseek(&fil, 0);
 	if (Res) {
-		return XST_FAILURE;
+		return Res;
 	}
 
 	/*
@@ -209,7 +209,7 @@ int ReadArtixBitstream(char * data, int* size)
 	Res = f_read(&fil, (void*)data, fno.fsize,
 			&NumBytesRead);
 	if (Res) {
-		return XST_FAILURE;
+		return Res;
 	}
 	else
 	{
@@ -218,7 +218,7 @@ int ReadArtixBitstream(char * data, int* size)
 
 	Res = f_close(&fil);
 	if (Res) {
-		return XST_FAILURE;
+		return Res;
 	}
 	return XST_SUCCESS;
 }

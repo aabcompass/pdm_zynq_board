@@ -228,12 +228,22 @@ void memcpy_invalidate(void* p_dst, void* p_src, u32 len_bytes)
 	memcpy(p_dst, p_src, len_bytes);
 }
 
+// returns 1 is all zeros, 0 otherwise
+u32 CheckZeros(u8* p, u32 len_bytes)
+{
+	int i; u32 ret;
+	for(i=0;i<len_bytes;i++)
+		ret |= !(p[i] == 0);
+	return !ret;
+}
+
 void CopyEventData_trig()
 {
 	int i;
 	u32 gtu_addr, gtu_addr_cross, gtu_n_cross_l, gtu_n_cross_r;
 	u32 alt_trig_buffer;
 	print("c");
+	xil_printf("CopyEventData_trig: prev_alt_buffer=%d", prev_alt_buffer);
 	//copy D1
 	for(i=0;i<N1;i++)
 	{
@@ -249,6 +259,9 @@ void CopyEventData_trig()
 		memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
 				&DataDMA__Raw[prev_alt_buffer%2][i][0][0],
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
+
+		if(CheckZeros(&DataDMA__Raw[prev_alt_buffer%2][i][0][0], N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0))
+			print("All zeros!\n\r");
 
 
 		//xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);

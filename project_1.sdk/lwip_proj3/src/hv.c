@@ -176,7 +176,8 @@ void setDacValue_list(int dac[NUM_OF_HV])
 }
 
 // Expander initialization
-void expIni(void){
+int expIni(void){
+	u32 reg;
 	setRegister(EXP1, IOCON,    (1<<SREAD) | (1<<DISSLW) | (1<<ODR) /*0x34*/);  //
 	setRegister(EXP2, IOCON,   (1<<SREAD) | (1<<DISSLW) | (1<<ODR)  /*0x34*/);  //
 	setRegister(EXP3, IOCON,    (1<<SREAD) | (1<<DISSLW) | (1<<ODR) /*0x34*/);  //
@@ -191,6 +192,13 @@ void expIni(void){
 	setRegister(EXP1, IODIR,   0x2A);  //
 	setRegister(EXP1, GPPU,    0x00);  // GPIO pull-up resistor register: no pullup
 	setRegister(EXP1, IOCON,    (1<<SREAD) | (1<<DISSLW) | (1<<HAEN) | (1<<ODR) /*0x3c*/);  //
+	// check whether HVPS connected and powered
+	reg = getRegister(EXP1, IODIR);
+	//xil_printf("expIni: IODIR=0x%02X", reg);
+	if(reg == 0x2A)
+		return 1;
+	else
+		return 0;
 }
 
 

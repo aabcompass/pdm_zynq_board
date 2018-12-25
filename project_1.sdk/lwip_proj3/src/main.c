@@ -132,14 +132,17 @@ int LoadArtix()
 			init_loadbit_spi();
 			upload_bit();
 			print("Cross board has been loaded\n\r");
-		} else {
-			print("Cross board NOT loaded\n\r");
+			instrumentState.artix_locked = *(u32*)(XPAR_AXI_GPIO_0_BASEADDR);
+			instrumentState.is_artix_loaded = GetArtixLoadState();
+			xil_printf("artix_locked = %x\n\r", instrumentState.artix_locked);
+			return 0;
 		}
-		instrumentState.artix_locked = *(u32*)(XPAR_AXI_GPIO_0_BASEADDR);
-		xil_printf("artix_locked = %x\n\r", instrumentState.artix_locked);
-		//FfsSdClose();
+		else
+		{
+			print("Cross board NOT loaded\n\r");
+			return err;
+		}
 	}
-	return 0;
 }
 
 //int LoadSpaciroc1()
@@ -175,6 +178,7 @@ int main()
 
 	struct ip_addr ipaddr, netmask, gw;
 	char c_uart[] = {0, 0};
+	int ret;
 
 	/* the mac address of the board. this should be unique per board */
 	unsigned char mac_ethernet_address[] =
@@ -228,14 +232,23 @@ int main()
 	//print("Starting interrupt controller...\n\r");
 	//SetupIntrSystem();
 	print("HVPS expander initialization...\n\r");
-	expIni(); //init hv
+	instrumentState.is_HVPS_OK = expIni(); //init hv
+	if(!instrumentState.is_HVPS_OK)
+		print("HVPS seems not connected or powered\n\r");
 	//print("Starting interrupt system for HVPS...\n\r");
 	//InterruptOnAb();
 	print("SD card file system initialization...\n\r");
-	FfsSdPolledInit();
+	instrumentState.err_SDcard = FfsSdPolledInit();
+	if(instrumentState.err_SDcard)
+		xil_printf("err_SDcard = %d\n\r", instrumentState.err_SDcard);
 	print("SPACIROC FIFO initialization...\n\r");
 	XLlFifoPollingInit();
-	LoadArtix();
+	if(!instrumentState.err_SDcard)
+	{
+		instrumentState.err_artix_bin = LoadArtix();
+		if(instrumentState.err_artix_bin)
+			xil_printf("err_artix_bin = %d\n\r", instrumentState.err_artix_bin);
+	}
 	print("Reset SPACIROCs...\n\r");
 	ResetSPACIROC3();
 //	print("Starting TCP client on port 50001 (unused)...\n\r");
