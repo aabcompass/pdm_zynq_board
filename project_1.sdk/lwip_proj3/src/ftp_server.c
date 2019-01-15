@@ -48,6 +48,10 @@ static char* spectrum_addr;
 
 int dir_list_short;
 
+int GetFTPstate()
+{
+	return ftp_state;
+}
 
 void FileSystemInit()
 {
@@ -337,6 +341,8 @@ static void
 ftpdata_client_err_callback(void * arg, err_t err)
 {
 	xil_printf("BIN: ftpdata_client_err_callback: err=%d,\t state=%d\n\r", err, ftp_state);
+	print("FTP server it returned to default state\n\r");
+	ftp_state = 0;
 }
 
 static err_t
@@ -494,7 +500,8 @@ void send_data_sm()
 	switch(ftp_state)
 	{
 	case no_state:
-		current_record = 0;
+		ftp_frame_acknowledged = 0;
+		ftpserver_data_connected = 0;
 		break;
 	case start_send_dir:
 		current_record = 0;

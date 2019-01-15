@@ -450,6 +450,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 
 		xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
+		xil_printf("GetFTPstate()=%d\n\r",  GetFTPstate());
 		xil_printf("GetCurPosFC1()=%d\n\r", GetCurPosFC1());
 		xil_printf("GetDMAIntrCounterN(0)=%d\n\r", GetDMAIntrCounterN(0));
 		xil_printf("GetDMAIntrCounterN(1)=%d\n\r", GetDMAIntrCounterN(1));
