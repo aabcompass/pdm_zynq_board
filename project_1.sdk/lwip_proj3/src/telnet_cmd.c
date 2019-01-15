@@ -388,8 +388,8 @@ static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 	/* increment for subsequent accepted connections */
 	connection++;
 
-	char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
-	tcp_write(newpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	//char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
+	//tcp_write(newpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 
 	return ERR_OK;
 }
