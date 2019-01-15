@@ -338,13 +338,13 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		tcp_close(tpcb);
 	}
-	else
-	{
-		static int called = 0;
-		strcpy(ans_str, "Error 1\n\r");
-		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
-		called = 1;
-	}
+//	else
+//	{
+//		static int called = 0;
+//		strcpy(ans_str, "Error 1\n\r");
+//		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
+//		called = 1;
+//	}
 }
 
 static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
@@ -387,6 +387,9 @@ static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 
 	/* increment for subsequent accepted connections */
 	connection++;
+
+	char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
+	tcp_write(newpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 
 	return ERR_OK;
 }
