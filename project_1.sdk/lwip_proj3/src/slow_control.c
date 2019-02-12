@@ -52,7 +52,8 @@ void SendTestSettingsToSp3(u32 dac_value, u32 c_pixel)
 			sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].misc_reg1 = 0x00000000;
 			sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].misc_reg2 = 0x00000000;
 			for(pixel=0;pixel<64;pixel++)
-				sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].tst_msk_dac[pixel] = 0x0040 | ((pixel==c_pixel)<<7);
+				sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].tst_msk_dac[pixel] = 0x0040 | ((pixel!=c_pixel)<<7);
+				//sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].tst_msk_dac[pixel] = 0x0040 | ((1)<<7);
 			xil_printf("chip=%d, line=%d, dac_value=%d\n\r", chip, line, dac_value);
 		}
 		sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[chip][line].tst_msk_dac[10] = 0x01C0;

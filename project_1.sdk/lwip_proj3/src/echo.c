@@ -558,10 +558,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		ProvideTestDataL1();
 	}
-//	else if(c == '%')
-//	{
-//		remove_BOOT_bin();
-//	}
+	else if(c == '%')
+	{
+		SendTestSettingsToSp3(712, 10);
+	}
 //	else if(c == 'w')
 //	{
 //		WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
