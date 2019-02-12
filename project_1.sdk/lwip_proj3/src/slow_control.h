@@ -38,6 +38,19 @@
 #define REGW_SLOWCTRL_GENERALREG_4	12
 #define REGW_SLOWCTRL_GENERALREG_5	13
 
+#define DAC7_DEFAULT_VALUE	64
+
+typedef struct
+{
+	uint32_t dac10bit;// bits [31:0]
+	uint8_t pixel_mask[N_OF_PIXELS_PER_PMT]; //bits [607:32]
+	uint8_t dac7bit[N_OF_PIXELS_PER_PMT]; //bits [607:32]
+} SLOWCTRL_SP3_SGL_ASIC_USER_V0; // 268 bytes
+
+typedef struct
+{
+	SLOWCTRL_SP3_SGL_ASIC_USER_V0 slowctrl_sp3_sgl_asic[N_OF_PMT_PER_ECASIC][N_OF_ECASIC_PER_PDM];
+} SLOWCTRL_SP3_ALL_ASIC_USER_V0;
 
 // Configuration slow control data for one SPACIROC III.
 // Fields of this structure are describes in the excel file produces by Silvie Blin

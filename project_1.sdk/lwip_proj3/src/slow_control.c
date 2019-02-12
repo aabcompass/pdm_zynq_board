@@ -12,6 +12,9 @@
 SLOWCTRL_SP3_36CHIPS_REFORMATTED_V1 reformatted;
 SLOWCTRL_SP3_ALL_ASIC_V1 sc_sp3_all_asic_test;
 SLOWCTRL_SP3_SAME_ASIC_V1 slowctrl_samedata;
+SLOWCTRL_SP3_ALL_ASIC_USER_V0 ind_slowctrl_userdata;
+
+u32 current_line=0, current_asic=0, current_pixel=0;
 
 void SetDefaultSCParameters()
 {
@@ -23,6 +26,22 @@ void SetDefaultSCParameters()
 	slowctrl_samedata.misc_reg2 = 0x00000000;
 }
 
+void SetDefaultIndSCParameters()
+{
+	int i,j,k;
+	for (i=0;i<N_OF_ECASIC_PER_PDM;i++)
+	{
+		for(j=0;j<N_OF_PMT_PER_ECASIC;j++)
+		{
+			ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac10bit = 0;
+			for(k=0;k<N_OF_PIXELS_PER_PMT;k++)
+			{
+				ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac7bit[k] = DAC7_DEFAULT_VALUE;
+				ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].pixel_mask[k] = 1;
+			}
+		}
+	}
+}
 
 void PrintReformattedData()
 {
@@ -35,6 +54,81 @@ void PrintReformattedData()
 		xil_printf("%02x ", p[i]);
 	}
 
+}
+
+void SetIndSCCurrentLine(u32 line)
+{
+	current_line = line;
+}
+
+void SetIndSCCurrentAsic(u32 asic)
+{
+	current_asic = asic;
+}
+
+void SetIndSCCurrentPixel(u32 pixel)
+{
+	current_pixel = pixel;
+}
+
+void SetIndSCDac10( u32 dac10)
+{
+	ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].dac10bit = dac10;
+}
+
+void SetIndSCDac7(u32 dac7)
+{
+	ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].dac7bit[current_pixel] = dac7;
+}
+
+void SetIndSCPixelMask(u32 pixel_mask)
+{
+	ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].pixel_mask[current_pixel] = pixel_mask;
+}
+
+u32 GetIndSCDac10()
+{
+	return ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].dac10bit;
+}
+
+u32 GetIndSCDac7()
+{
+	return ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].dac7bit[current_pixel];
+}
+
+u32 GetIndSCPixelMask()
+{
+	return ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[current_asic][current_line].pixel_mask[current_pixel];
+}
+
+void SendUserIndSCSettingsToSp3()
+{
+	int i, j, k;
+	u32 s_value, dac10_value, dac7_value, c_pixel;
+	memset((char*)&sc_sp3_all_asic_test, 0, sizeof(sc_sp3_all_asic_test));
+	for(i=0;i<N_OF_ECASIC_PER_PDM;i++)
+	{
+		for(j=0;j<N_OF_PMT_PER_ECASIC;j++)
+		{
+			//dac_value = 512;//100*chip;//(25*(j+i*6));
+			s_value = 0;
+			dac10_value = ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac10bit;
+			sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[j][i].misc_reg0 = 0x0FA20007 | dac10_value<<7 | s_value<<3;
+			sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[j][i].misc_reg1 = 0x00000000;
+			sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[j][i].misc_reg2 = 0x00000000;
+			xil_printf("chip=%d, line=%d, dac10_value=%d\n\r", j, i, dac10_value);
+			for(k=0;k<N_OF_PIXELS_PER_PMT;k++)
+			{
+				c_pixel = ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].pixel_mask[k];
+				dac7_value = ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac7bit[k];
+				sc_sp3_all_asic_test.slowctrl_sp3_sgl_asic[j][i].tst_msk_dac[k] = dac7_value | (c_pixel<<7);
+				//xil_printf("\t pixel=%d, dac7_value=%d\n\r", k, dac7_value);
+			}
+		}
+	}
+	ReformatSlowControlData(&sc_sp3_all_asic_test);
+	//PrintReformattedData();
+	LoadIndividualDataToSlowControl();
 }
 
 void SendTestSettingsToSp3(u32 dac_value, u32 c_pixel)
@@ -60,7 +154,7 @@ void SendTestSettingsToSp3(u32 dac_value, u32 c_pixel)
 	}
 	ReformatSlowControlData(&sc_sp3_all_asic_test);
 	//PrintReformattedData();
-	LoadIndividualDataToSlowConrol();
+	LoadIndividualDataToSlowControl();
 }
 
 
@@ -142,7 +236,7 @@ void LoadSameDataToSlowControl2(u32 current_dac_value)
 	for(i=0;i<1000000;i++);
 }
 
-void LoadIndividualDataToSlowConrol()
+void LoadIndividualDataToSlowControl()
 {
 	TxFIFOSend((char*)&reformatted, sizeof(reformatted)/4);
 	*(u32*)(XPAR_SPACIROC3_SC_0_BASEADDR + 4*REGW_SLOWCTRL_CONFIG) = (1<<BIT_USER_LED) | (1<<BIT_SELECT_DIN);

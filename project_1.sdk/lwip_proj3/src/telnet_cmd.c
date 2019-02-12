@@ -183,6 +183,63 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(sscanf(p->payload, "slowctrl line %d", &param) == 1)
+	{
+		SetIndSCCurrentLine(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl asic %d", &param) == 1)
+	{
+		SetIndSCCurrentAsic(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl pixel %d", &param) == 1)
+	{
+		SetIndSCCurrentPixel(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl dac10 %d", &param) == 1)
+	{
+		SetIndSCDac10(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl dac7 %d", &param) == 1)
+	{
+		SetIndSCDac7(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl mask %d", &param) == 1)
+	{
+		SetIndSCPixelMask(param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "slowctrl apply", 14) == 0)
+	{
+		SendUserIndSCSettingsToSp3();
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "slowctrl dac10?", 15) == 0)
+	{
+		sprintf(reply, "%d\n\r", GetIndSCDac10());
+		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
+	else if(strncmp(p->payload, "slowctrl dac7?", 14) == 0)
+	{
+		sprintf(reply, "%d\n\r", GetIndSCDac7());
+		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
+	else if(strncmp(p->payload, "slowctrl mask?", 14) == 0)
+	{
+		sprintf(reply, "%d\n\r", GetIndSCPixelMask());
+		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
 	else if(strncmp(p->payload, "hvps status interrupt", 21) == 0)
 	{
 		sprintf(reply, "%d\n\r", GetIntrState());
