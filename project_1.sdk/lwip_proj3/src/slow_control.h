@@ -45,7 +45,7 @@ typedef struct
 	uint32_t dac10bit;// bits [31:0]
 	uint8_t pixel_mask[N_OF_PIXELS_PER_PMT]; //bits [607:32]
 	uint8_t dac7bit[N_OF_PIXELS_PER_PMT]; //bits [607:32]
-} SLOWCTRL_SP3_SGL_ASIC_USER_V0; // 268 bytes
+} SLOWCTRL_SP3_SGL_ASIC_USER_V0; //
 
 typedef struct
 {
