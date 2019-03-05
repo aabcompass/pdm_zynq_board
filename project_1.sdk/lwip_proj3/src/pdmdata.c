@@ -45,6 +45,7 @@ TriggerInfo triggerInfoL1[2][MAX_TRIGGERS_PER_CYCLE];
 TriggerInfo triggerInfoL2[2][MAX_TRIGGERS_PER_CYCLE];
 TriggerInfo triggerInfoL3[2][1];
 
+u32 scurve_memcpy_pos = 0;
 /*
  *
  * The ZYNQ boards memory management.
@@ -665,6 +666,7 @@ int StartScurveGathering(u32 start_dac_value, u32 step_dac_value, u32 stop_dac_v
 	// set instrument mode in cores to zero (just 'started')
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
+	scurve_memcpy_pos = 0;
 
 	return ERR_OK;
 }
@@ -688,17 +690,17 @@ void ScurveService()
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-		//TODO !!! большой костыль !!! Почему-то нужно дополнительно выдавать N_OF_FRAMES_RAW_POLY_V0 данных. Непонятно, почему...
-		if(sCurveStruct.scurve_counter == 0)
-		{
-			//wait for data_provider to be in idle_state
-			for(i=0;i<10000000;i++)
-				if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
-					break;
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
-			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
-		}
+//		//TODO !!! большой костыль !!! Почему-то нужно дополнительно выдавать N_OF_FRAMES_RAW_POLY_V0 данных. Непонятно, почему...
+//		if(sCurveStruct.scurve_counter == 0)
+//		{
+//			//wait for data_provider to be in idle_state
+//			for(i=0;i<10000000;i++)
+//				if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
+//					break;
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0;
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+//			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+//		}
 		//wait for data_provider to be in idle_state
 		for(i=0;i<10000000;i++)
 			if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
@@ -708,12 +710,28 @@ void ScurveService()
 		delay(50);
 		//Print in order to delay for a short time
 		print("-->");
-		//Invalidate DCache Range
-		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[current_alt_buffer][0][0][/*scurve_counter*/0][0], sizeof(DataDMA__L2)/*sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*/);
-		//now we are expecting 1 double integrated GTU in L3 array
-		memcpy(&scurvePacket.payload.int32_data[sCurveStruct.current_dac_value][0],
-				&DataDMA__L2[current_alt_buffer][0][0][sCurveStruct.scurve_counter%N_FRAMES_DMA_L2][0],
-				sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+		// Copying data to
+		if((sCurveStruct.scurve_counter+1)%128 == 0)
+		{
+			xil_printf("\n\rCopying data to the scurve array to pos. %d. current_alt_buffer=%d\n\r", scurve_memcpy_pos, current_alt_buffer);
+			//Invalidate DCache Range
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[!current_alt_buffer][0][0][0][0], sizeof(DataDMA__L2));
+			//now we are expecting 1 double integrated GTU in L3 array
+			if(sCurveStruct.step_dac_value == 1)
+			{
+				memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos][0],
+						&DataDMA__L2[!current_alt_buffer][0][0][0][0],
+						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*N_FRAMES_DMA_L2);
+			}
+			else if(sCurveStruct.step_dac_value == 8)
+			{
+				for(i=0;i<N_FRAMES_DMA_L2;i++)
+					memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos+sCurveStruct.step_dac_value*i][0],
+						&DataDMA__L2[!current_alt_buffer][0][0][i][0],
+						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
+			}
+			scurve_memcpy_pos += N_FRAMES_DMA_L2;
+		}
 		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
 		sCurveStruct.scurve_counter++;
 		if(sCurveStruct.current_dac_value > sCurveStruct.stop_dac_value)

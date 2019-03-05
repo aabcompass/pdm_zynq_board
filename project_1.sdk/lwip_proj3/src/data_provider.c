@@ -115,14 +115,15 @@ void Provide(u32 len)
 
 void ProvideAndCheck()
 {
-	int i;
+	int i,j;
 	Provide(N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0*N_OF_FRAMES_INT32_POLY_V0);
 	print("Waiting for D3 interrupt\n\r");
 	for(i=0;i<10000;i++)
 	{
 		if(IsBufferL2Changed())
 			break;
-		print("--------->");
+		for(j=0;j<10000;j++);
+		print("*");
 	}
 	xil_printf("DMAIntrCounterRaw=%d\n\r", GetDMAIntrCounterN(0));
 	xil_printf("DMAIntrCounterL1=%d\n\r", GetDMAIntrCounterN(1));
