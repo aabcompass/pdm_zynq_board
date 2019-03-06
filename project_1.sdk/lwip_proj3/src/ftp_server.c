@@ -23,6 +23,10 @@ char spare[10000];
 
 FileRecord files[MAX_FILES];
 
+char text_file_dac7[TEXT_FILE_SIZE_100K];
+char text_file_mask[TEXT_FILE_SIZE_100K];
+char text_file_dac10[TEXT_FILE_SIZE_10K];
+
 static enum  {
 	no_state = 0,
 	start_send_dir = 20,
@@ -37,7 +41,11 @@ static enum  {
 	send_portion = 150,
 	wait_state2 = 175,
 	close_ftp_data2 = 200,
-	send_control_message2 = 220
+	send_control_message2 = 220,
+	start_rcv_file = 300,
+	wait_connect_rcv = 330,
+	wait_connect_close = 350,
+	rcv_close = 380
 } ftp_state = no_state;
 
 char file1[] = "The content of the file 1";
@@ -133,6 +141,17 @@ void SendFile()
 		print("Send data SM is not in the IDLE state!\r\n");
 }
 
+void RecvFile()
+{
+	if(ftp_state == no_state)
+	{
+		ftp_state = start_rcv_file;
+		spectrum_nbytes = 0;
+	}
+	else
+		print("Send data SM is not in the IDLE state!\r\n");
+}
+
 void RestartFile(u32 point)
 {
 	if(ftp_state == no_state)
@@ -182,6 +201,11 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(strncmp(p->payload, "TYPE I", 6) == 0)
 	{
 		char ok_eomess_str[] = "200 Switching to Binary mode.\r\n";
+		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+	}
+	else if(strncmp(p->payload, "TYPE A", 6) == 0)
+	{
+		char ok_eomess_str[] = "200 Switching to ASCII mode.\r\n";
 		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 	}
 	else if(strncmp(p->payload, "MDTM", 4) == 0)
@@ -243,7 +267,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		}
 		if(i==MAX_FILES)
 		{
-			char ok_eomess_str[] = "550 Requested action ot taken. File unavailable\r\n";
+			char ok_eomess_str[] = "550 Requested action or taken. File unavailable\r\n";
 			tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
 		}
 		else
@@ -251,6 +275,44 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
 			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 			SendFile();
+		}
+	}
+	else if(sscanf(p->payload, "STOR %s",
+			filename) == 1)
+	{
+		xil_printf("Stored file %s\n\r", filename);
+		for(i=0;i<MAX_FILES;i++)
+		{
+			if(files[i].is_presented == 0)
+			{
+				requested_record = i;
+				break;
+			}
+		}
+		if(i==MAX_FILES)
+		{
+			char ok_eomess_str[] = "452 Not enough space\r\n";
+			tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
+		}
+		else
+		{
+			sprintf(str3, "150 Start to listen data for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
+			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
+			files[i].file_type = file_regular;
+			files[i].length = 0;
+			files[i].is_presented = 1;
+			if(strcmp(filename, FILENAME_DAC10) == 0)
+				files[i].link = text_file_dac10;
+			else if(strcmp(filename, FILENAME_DAC7) == 0)
+				files[i].link = text_file_dac7;
+			else if(strcmp(filename, FILENAME_MASK) == 0)
+				files[i].link = text_file_mask;
+			else
+				files[i].is_presented = 0;
+			strcpy(files[i].filename, filename);
+			files[i].unix_time = 0;
+			current_record = i;
+			RecvFile();
 		}
 	}
 	else if(sscanf(p->payload, "REST %s",
@@ -306,6 +368,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 //
 //**********************************************************
 volatile int ftpserver_data_connected = 0;
+volatile int ftpserver_data_closed = 0;
 
 static struct tcp_pcb *ftpdata_pcb;
 
@@ -316,6 +379,32 @@ ftpdata_sent_callback(void *arg, struct tcp_pcb *tpcb, u16_t len)
 	ftp_frame_acknowledged = 1;
 	//print("\n\r->\n\r");
 	//tcp_packets_counter--;
+	return ERR_OK;
+}
+
+static err_t
+ftpdata_rcv_callback(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
+{
+	char *pointer;
+	xil_printf("Received %d bytes, err=%d, tpcb->flags=%d\n\r", p->len, err, tpcb->flags);
+	//ftp_frame_acknowledged = 1;
+
+	tcp_recved(tpcb, p->len);
+
+	pointer = (char*)(files[current_record].link + spectrum_nbytes);
+	memcpy(pointer, p->payload, p->len);
+	spectrum_nbytes += p->len;
+
+	if(p->len == 0)
+	{
+		ftpserver_data_closed = 1;
+		files[current_record].length = spectrum_nbytes;
+		xil_printf("\n\rTotally received: %d bytes\n\r", files[current_record].length);
+	}
+
+	/* free the received pbuf */
+	pbuf_free(p);
+
 	return ERR_OK;
 }
 
@@ -356,7 +445,7 @@ ftpdata_connected_callback(void *arg, struct tcp_pcb *tpcb, err_t err)
 	/* set callback values & functions */
 	tcp_arg(tpcb, NULL);
 	tcp_sent(tpcb, ftpdata_sent_callback);
-	//tcp_recv(tpcb, ftpdata_rcv_callback);
+	tcp_recv(tpcb, ftpdata_rcv_callback);
 
 	/* initiate data transfer */
 	return ERR_OK;
@@ -618,10 +707,33 @@ void send_data_sm()
 			ftp_state = no_state;
 			break;
 		}
-	}
+	case start_rcv_file:
+		start_ftpserver_data();
+		ftp_state = wait_connect_rcv;
+		break;
+	case wait_connect_rcv:
+		if(ftpserver_data_connected == 1)
+		{
+			print("wait_connect_rcv\n\r");
+			ftpserver_data_connected = 0;
+			ftpserver_data_closed = 0;
+			ftp_state = wait_connect_close;
+		}
+	case wait_connect_close:
+		if(ftpserver_data_closed == 1)
+		{
+			ftpserver_data_closed = 0;
+			print("rcv data closed\n\r");
+			ftp_state = rcv_close;
+		}
+	case rcv_close:
+		{
+			char str2[] = "226 Transfer complete.\r\n";
+			tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
 
-	//if(ftp_state != 0)
-	//	xil_printf(" %d\n\r", ftp_state);
+			ftp_state = no_state;
+		}
+	}
 }
 
 //send not reply messages

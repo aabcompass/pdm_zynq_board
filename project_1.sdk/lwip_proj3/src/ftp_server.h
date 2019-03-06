@@ -9,6 +9,12 @@
 
 #define MAX_FILES			1000	 /*  */
 #define MAX_FILENAME_LEN	51
+#define TEXT_FILE_SIZE_100K		100000
+#define TEXT_FILE_SIZE_10K		1000
+
+#define FILENAME_DAC10	"dac10.conf"
+#define FILENAME_DAC7	"dac7.conf"
+#define FILENAME_MASK	"pixelmask.conf"
 
 typedef enum {file_regular, file_scidata} File_types;
 
