@@ -176,6 +176,22 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+//	else if(strncmp(p->payload, "acq tcp", 7) == 1)
+//	{
+//		// send one D3 GTU packet
+//		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_NFRAMES) = N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0;
+//		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = (1<<CMD_START_BIT_OFFSET);
+//		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_CTRL) = 0;
+//		for(i=0;i<10000000;i++)
+//			if(!(*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007))
+//				break;
+//		if(i==10000000)
+//			print("Data_provider is stalled\n\r");
+//
+//		SetDataProviderTestMode(param);
+//		char str[] = "Ok\n\r";
+//		tcp_write(tpcb, str, sizeof(str), 1);
+//	}
 	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1)
 	{
 		debugSettings.current_thr = param;
