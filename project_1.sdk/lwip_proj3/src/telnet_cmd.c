@@ -42,7 +42,42 @@ void SendErrorCommand(struct tcp_pcb *tpcb,  int err_code)
 	tcp_write(tpcb, err_str, strlen(err_str), 1);
 }
 
+void ProcessInstrumentModeCommand(struct tcp_pcb *tpcb, u32 param, u32 param2)
+{
+	if(instrumentState.err_SDcard)
+	{
+		print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+		SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_SDcard);
+	}
+	else if(instrumentState.err_artix_bin)
+	{
+		print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+		SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
+	}
+	else if(instrumentState.artix_locked == 0)
+	{
+		print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+		SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
+	}
+	else
+	{
+		if(param == 0)
+			SendLogToFTP();
+		else
+			xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
+		SetInstrumentMode(param);
+		SetTime(param2);
+		DateTime dateTime;
+		convertUnixTimeToDate(param2, &dateTime);
+		xil_printf("%s\n\r", formatDate(&dateTime, 0));
 
+		if(param == 0)
+			RunStopping();
+		char ok_eomess_str[] = "Ok\n\r";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	}
+
+}
 
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
@@ -91,61 +126,63 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "instrument mode %d %d",
 			&param, &param2) == 2)
 	{
-		if(param == 0)
-			SendLogToFTP();
-		SetInstrumentMode(param);
-		SetTime(param2);
-		DateTime dateTime;
-		convertUnixTimeToDate(param2, &dateTime);
-		xil_printf("%s\n\r", formatDate(&dateTime, 0));
-
-		char ok_eomess_str[] = "Ok\n\r";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		//if(param == 0)
-		//	SendLogToFTP();
+		ProcessInstrumentModeCommand(tpcb, param, param2);
+//		if(param == 0)
+//			SendLogToFTP();
+//		SetInstrumentMode(param);
+//		SetTime(param2);
+//		DateTime dateTime;
+//		convertUnixTimeToDate(param2, &dateTime);
+//		xil_printf("%s\n\r", formatDate(&dateTime, 0));
+//
+//		char ok_eomess_str[] = "Ok\n\r";
+//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+//		//if(param == 0)
+//		//	SendLogToFTP();
 	}
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
 	{
-		if(instrumentState.err_SDcard)
-		{
-			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_SDcard);
-		}
-		else if(instrumentState.err_artix_bin)
-		{
-			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
-		}
-		else if(instrumentState.artix_locked == 0)
-		{
-			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-			SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
-		}
-		else
-		{
-			if(param == 0)
-				SendLogToFTP();
-			else
-				xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
-			SetInstrumentMode(param);
-			RunStopping();
-			char ok_eomess_str[] = "Ok\n\r";
-			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-		}
+		ProcessInstrumentModeCommand(tpcb, param, 0);
+//		if(instrumentState.err_SDcard)
+//		{
+//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+//			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_SDcard);
+//		}
+//		else if(instrumentState.err_artix_bin)
+//		{
+//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+//			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
+//		}
+//		else if(instrumentState.artix_locked == 0)
+//		{
+//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+//			SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
+//		}
+//		else
+//		{
+//			if(param == 0)
+//				SendLogToFTP();
+//			else
+//				xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
+//			SetInstrumentMode(param);
+//			RunStopping(); // old bug!
+//			char ok_eomess_str[] = "Ok\n\r";
+//			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+//		}
 	}
-	else if(strncmp(p->payload, "instrument start", 16) == 0)
-	{
-		//This function does nothing (for compatibility)
-		char ok_eomess_str[] = "Ok\n\r";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-	}
-	else if(strncmp(p->payload, "instrument stop", 15) == 0)
-	{
-		//This function does nothing
-		char ok_eomess_str[] = "Ok\n\r";
-		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-	}
+//	else if(strncmp(p->payload, "instrument start", 16) == 0)
+//	{
+//		//This function does nothing (for compatibility)
+//		char ok_eomess_str[] = "Ok\n\r";
+//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+//	}
+//	else if(strncmp(p->payload, "instrument stop", 15) == 0)
+//	{
+//		//This function does nothing
+//		char ok_eomess_str[] = "Ok\n\r";
+//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+//	}
 	else if(sscanf(p->payload, "acq scurve %d %d %d %d",
 			&param0,
 			&param1,

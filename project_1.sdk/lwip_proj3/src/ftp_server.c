@@ -504,6 +504,7 @@ void send_data_sm()
 		ftpserver_data_connected = 0;
 		break;
 	case start_send_dir:
+		print("Send directory list...\n\r");
 		current_record = 0;
 		start_ftpserver_data();
 		ftp_state = wait_connect;
