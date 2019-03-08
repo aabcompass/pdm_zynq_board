@@ -33,7 +33,7 @@ void SetDefaultIndSCParameters()
 	{
 		for(j=0;j<N_OF_PMT_PER_ECASIC;j++)
 		{
-			ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac10bit = 0;
+			ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac10bit = DAC10_NOISY_VALUE;
 			for(k=0;k<N_OF_PIXELS_PER_PMT;k++)
 			{
 				ind_slowctrl_userdata.slowctrl_sp3_sgl_asic[j][i].dac7bit[k] = DAC7_DEFAULT_VALUE;

@@ -39,6 +39,7 @@
 #define REGW_SLOWCTRL_GENERALREG_5	13
 
 #define DAC7_DEFAULT_VALUE	64
+#define DAC10_NOISY_VALUE	712
 
 typedef struct
 {
