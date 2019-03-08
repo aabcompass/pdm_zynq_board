@@ -42,6 +42,8 @@ void SendErrorCommand(struct tcp_pcb *tpcb,  int err_code)
 	tcp_write(tpcb, err_str, strlen(err_str), 1);
 }
 
+
+
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
 	u8 str_len=0; char reply[128];
@@ -124,6 +126,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		{
 			if(param == 0)
 				SendLogToFTP();
+			else
+				xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
 			SetInstrumentMode(param);
 			RunStopping();
 			char ok_eomess_str[] = "Ok\n\r";

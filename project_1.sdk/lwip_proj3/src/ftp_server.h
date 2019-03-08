@@ -27,6 +27,7 @@ void PrintFS();
 void FileSystemInit();
 int CreateFile(char* filename, char* pData, int size, uint32_t unix_time, File_types file_type);
 void SendDir();
+int RemoveAllSciDataFilesFromFTP();
 
 
 

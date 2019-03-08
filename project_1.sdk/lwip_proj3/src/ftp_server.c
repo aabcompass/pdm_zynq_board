@@ -631,3 +631,16 @@ void TestFunc()//if(is_message)
 	tcp_write(ctrl_tpcb, not_reply_message, strlen(not_reply_message), 1);
 }
 
+int RemoveAllSciDataFilesFromFTP()
+{
+	int i,j=0;
+	for(i=0;i<MAX_FILES;i++)
+	{
+		if(files[i].is_presented == 1 && files[i].file_type == file_scidata)
+		{
+			files[i].is_presented = 0;
+			j++;
+		}
+	}
+	return j;
+}
