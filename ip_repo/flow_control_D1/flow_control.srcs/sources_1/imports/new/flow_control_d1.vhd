@@ -35,6 +35,14 @@ entity flow_control_d1 is
   		m_axis_events_tready : IN STD_LOGIC;
   		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
   		
+  		-- in TA trigger events
+  		s_axis_ta_event_tdata: in STD_LOGIC_VECTOR(31 DOWNTO 0);
+  		s_axis_ta_event_tvalid: in STD_LOGIC;
+  		s_axis_ta_event_tlast: in STD_LOGIC;
+  		s_axis_ta_event_tready: out STD_LOGIC := '1';
+  		
+  		
+  		
   		trig0 : in std_logic;
   		trig1 : in std_logic;
   		trig2 : in std_logic;
@@ -69,7 +77,7 @@ entity flow_control_d1 is
   		trans_counter: OUT STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --18
   		m_axis_fifo_error: OUT STD_LOGIC_VECTOR(31 downto 0); --19
   		gtu_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --20
-  		trig_type: OUT STD_LOGIC_VECTOR(3 downto 0); --21
+  		trig_type: OUT STD_LOGIC_VECTOR(31 downto 0); --21
   		unix_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --22
   		maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --23
   		maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --24
@@ -82,12 +90,14 @@ architecture Behavioral of flow_control_d1 is
 	signal sm_state, sm_state_sink: std_logic_vector(3 downto 0) := "0000";
 
 	signal is_started: std_logic := '0';
-	signal en_int_trig, en_algo_trig, periodic_trig_en, en_ext_trig, ext_trig_latch: std_logic := '0';
+	signal en_int_trig, en_algo_trig, periodic_trig_en, en_ext_trig, en_ta_trig, ext_trig_latch: std_logic := '0';
 	signal release, release_always: std_logic := '0';
 	signal ext_trig: std_logic := '0';
 	signal trig, trig_d1, trig_d2, trig_front: std_logic := '0';
 	signal trig_immediate, trig_immediate_latch: std_logic := '0';
+	signal ta_trig, ta_trig_latch: std_logic := '0';
 	signal periodic_trig, periodic_trig_latch: std_logic := '0'; 
+	signal ta_trig_param_latch: std_logic_vector(31 downto 0) := (others => '0');
 
 	signal clear_error: std_logic := '0';
 	
@@ -263,7 +273,7 @@ architecture Behavioral of flow_control_d1 is
 	signal maxis_accepted_cnt_i: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal inject_16_events_cnt: std_logic_vector(3 downto 0) := (others => '0');
-	signal trig_type_i: std_logic_vector(3 downto 0) := (others => '0');
+	signal trig_type_i: std_logic_vector(31 downto 0) := (others => '0');
 	signal s_axis_events_tdata: std_logic_vector(63 downto 0) := (others => '0');
 	signal inject_16_events: std_logic := '0';
 	signal cmd_inject_16_events, cmd_inject_16_events_d0, cmd_inject_16_events_d1: std_logic := '0';
@@ -325,6 +335,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	en_algo_trig <= flags(2);
 	en_int_trig <= flags(3);
 	en_ext_trig <= flags(4);
+	en_ta_trig <= flags(5);
 	release_always <= flags(6); 
 	
 	clr_trans_counter <= clr_flags(0);
@@ -485,8 +496,9 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
 	trig_4led <= trig0 or trig1 or trig2;
 	ext_trig <= (trig_ext_in_sync and en_ext_trig);
+	ta_trig <= (s_axis_ta_event_tvalid and en_ta_trig);
 
-	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or ext_trig or trig_immediate;
+	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or ext_trig or trig_immediate or ta_trig;
 	latency_process: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then
@@ -498,6 +510,8 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 				self_trig_latch <= self_trig;
 				ext_trig_latch <= ext_trig;
 				trig_immediate_latch <= trig_immediate;
+				ta_trig_latch <= ta_trig;
+				ta_trig_param_latch <= s_axis_ta_event_tdata;
 			end if;
 		end if;
 	end process;
@@ -543,15 +557,18 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											end if;
 										end if;
 					when 1 => if(periodic_trig_latch = '1') then
-											trig_type_i <= X"1";
+											trig_type_i(3 downto 0) <= X"1";
 										elsif(self_trig_latch = '1') then
-											trig_type_i <= X"2";
+											trig_type_i(3 downto 0) <= X"2";
 										elsif(trig_immediate_latch = '1') then
-											trig_type_i <= X"3"; 
+											trig_type_i(3 downto 0) <= X"3"; 
 										elsif(ext_trig_latch = '1') then
-											trig_type_i <= X"4";
+											trig_type_i(3 downto 0) <= X"4";
+										elsif(ta_trig_latch = '1') then
+											trig_type_i(3 downto 0) <= X"5";
 										else
-											trig_type_i <= X"8";
+											trig_type_i(3 downto 0) <= X"8";
+											trig_type_i(31 downto 11) <= ta_trig_param_latch(20 downto 0);
 										end if;
 										trig_cnt <= trig_cnt + 1;							
 										trig_latch <= '1';		
@@ -781,7 +798,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	end process;
 
 	trig_event <= (trig_front and trig_events_log_en) or inject_16_events;
-	s_axis_events_tdata <= gtu_sig_counter_i & X"0001000" & trig_type_i;
+	s_axis_events_tdata <= gtu_sig_counter_i & X"0001000" & trig_type_i(3 downto 0);
 
 	i_fifo4gtu_events : fifo4gtu_events
 		PORT MAP (

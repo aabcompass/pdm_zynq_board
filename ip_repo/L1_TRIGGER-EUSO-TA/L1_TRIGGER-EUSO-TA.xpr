@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/L1_TRIGGER-EUSO-TA/L1_TRIGGER-EUSO-TA.xpr">
+<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current2/ip_repo/L1_TRIGGER-EUSO-TA/L1_TRIGGER-EUSO-TA.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="1afc793c8a764a79994ca1d629a9fafd"/>

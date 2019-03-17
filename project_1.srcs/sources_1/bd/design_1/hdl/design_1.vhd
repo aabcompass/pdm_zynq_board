@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sat Nov 24 18:16:37 2018
---Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.5 LTS
+--Date        : Sat Mar 16 19:14:37 2019
+--Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -10017,54 +10017,6 @@ architecture STRUCTURE of design_1 is
     trig_pixel : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_l2_trigger_0_0;
-  component design_1_axis_flow_control_d1_0_0 is
-  port (
-    s_axis_aclk : in STD_LOGIC;
-    s_axis_aresetn : in STD_LOGIC;
-    s_axis_tvalid : in STD_LOGIC;
-    s_axis_tready : out STD_LOGIC;
-    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
-    s_axis_tlast : in STD_LOGIC;
-    m_axis_tvalid : out STD_LOGIC;
-    m_axis_tready : in STD_LOGIC;
-    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
-    m_axis_tkeep : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    m_axis_tlast : out STD_LOGIC;
-    m_axis_events_tvalid : out STD_LOGIC;
-    m_axis_events_tready : in STD_LOGIC;
-    m_axis_events_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
-    trig0 : in STD_LOGIC;
-    trig1 : in STD_LOGIC;
-    trig2 : in STD_LOGIC;
-    trig_4led : out STD_LOGIC;
-    trig_button : in STD_LOGIC;
-    trig_led : out STD_LOGIC;
-    trig_ext_in : in STD_LOGIC;
-    trig_out : out STD_LOGIC;
-    gtu_sig : in STD_LOGIC;
-    S_AXI_ACLK : in STD_LOGIC;
-    S_AXI_ARESETN : in STD_LOGIC;
-    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_AWVALID : in STD_LOGIC;
-    S_AXI_AWREADY : out STD_LOGIC;
-    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S_AXI_WVALID : in STD_LOGIC;
-    S_AXI_WREADY : out STD_LOGIC;
-    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_BVALID : out STD_LOGIC;
-    S_AXI_BREADY : in STD_LOGIC;
-    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_ARVALID : in STD_LOGIC;
-    S_AXI_ARREADY : out STD_LOGIC;
-    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_RVALID : out STD_LOGIC;
-    S_AXI_RREADY : in STD_LOGIC
-  );
-  end component design_1_axis_flow_control_d1_0_0;
   component design_1_hv_hk_v1_0_0_0 is
   port (
     sck_p : out STD_LOGIC;
@@ -10257,16 +10209,68 @@ architecture STRUCTURE of design_1 is
     THR_CMD : in STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_ALGO_B_TA_1_0;
+  component design_1_axis_flow_control_d1_0_0 is
+  port (
+    s_axis_aclk : in STD_LOGIC;
+    s_axis_aresetn : in STD_LOGIC;
+    s_axis_tvalid : in STD_LOGIC;
+    s_axis_tready : out STD_LOGIC;
+    s_axis_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
+    s_axis_tlast : in STD_LOGIC;
+    m_axis_tvalid : out STD_LOGIC;
+    m_axis_tready : in STD_LOGIC;
+    m_axis_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    m_axis_tkeep : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    m_axis_tlast : out STD_LOGIC;
+    m_axis_events_tvalid : out STD_LOGIC;
+    m_axis_events_tready : in STD_LOGIC;
+    m_axis_events_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    s_axis_ta_event_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axis_ta_event_tvalid : in STD_LOGIC;
+    s_axis_ta_event_tlast : in STD_LOGIC;
+    s_axis_ta_event_tready : out STD_LOGIC;
+    trig0 : in STD_LOGIC;
+    trig1 : in STD_LOGIC;
+    trig2 : in STD_LOGIC;
+    trig_4led : out STD_LOGIC;
+    trig_button : in STD_LOGIC;
+    trig_led : out STD_LOGIC;
+    trig_ext_in : in STD_LOGIC;
+    trig_out : out STD_LOGIC;
+    gtu_sig : in STD_LOGIC;
+    S_AXI_ACLK : in STD_LOGIC;
+    S_AXI_ARESETN : in STD_LOGIC;
+    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_AWVALID : in STD_LOGIC;
+    S_AXI_AWREADY : out STD_LOGIC;
+    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S_AXI_WVALID : in STD_LOGIC;
+    S_AXI_WREADY : out STD_LOGIC;
+    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_BVALID : out STD_LOGIC;
+    S_AXI_BREADY : in STD_LOGIC;
+    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_ARVALID : in STD_LOGIC;
+    S_AXI_ARREADY : out STD_LOGIC;
+    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_RVALID : out STD_LOGIC;
+    S_AXI_RREADY : in STD_LOGIC
+  );
+  end component design_1_axis_flow_control_d1_0_0;
   signal ALGO_B_0_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal ALGO_B_0_frame_conv_out : STD_LOGIC;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
   signal ALGO_B_1_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal ALGO_B_2_L1_EVENT : STD_LOGIC;
   signal ALGO_B_2_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
-  signal ALGO_B_TA_1_m_axis_ev_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal ALGO_B_TA_1_m_axis_ev_TLAST : STD_LOGIC;
-  signal ALGO_B_TA_1_m_axis_ev_TREADY : STD_LOGIC;
-  signal ALGO_B_TA_1_m_axis_ev_TVALID : STD_LOGIC;
+  signal ALGO_B_TA_1_m_ev_axis_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal ALGO_B_TA_1_m_ev_axis_TLAST : STD_LOGIC;
+  signal ALGO_B_TA_1_m_ev_axis_TREADY : STD_LOGIC;
+  signal ALGO_B_TA_1_m_ev_axis_TVALID : STD_LOGIC;
   signal ARESETN_1 : STD_LOGIC_VECTOR ( 0 to 0 );
   signal CLK_IN1_D_1_2_CLK_N : STD_LOGIC;
   signal CLK_IN1_D_1_2_CLK_P : STD_LOGIC;
@@ -11297,6 +11301,7 @@ architecture STRUCTURE of design_1 is
   signal NLW_axi_dma_tst_L1_m_axis_mm2s_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal NLW_axi_fifo_mm_s_1_interrupt_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_fifo_mm_s_1_mm2s_prmry_reset_out_n_UNCONNECTED : STD_LOGIC;
+  signal NLW_axi_fifo_mm_s_TA_ev_axi_str_rxd_tready_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_fifo_mm_s_TA_ev_interrupt_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_fifo_mm_s_TA_ev_s2mm_prmry_reset_out_n_UNCONNECTED : STD_LOGIC;
   signal NLW_axi_quad_spi_0_io0_t_UNCONNECTED : STD_LOGIC;
@@ -11555,10 +11560,10 @@ ALGO_B_TA_1: component design_1_ALGO_B_TA_1_0
       m2_axis_tvalid => NLW_ALGO_B_TA_1_m2_axis_tvalid_UNCONNECTED,
       m_axis_aclk => processing_system7_0_FCLK_CLK1,
       m_axis_aresetn => rst_processing_system7_0_200M_peripheral_aresetn(0),
-      m_ev_axis_tdata(31 downto 0) => ALGO_B_TA_1_m_axis_ev_TDATA(31 downto 0),
-      m_ev_axis_tlast => ALGO_B_TA_1_m_axis_ev_TLAST,
-      m_ev_axis_tready => ALGO_B_TA_1_m_axis_ev_TREADY,
-      m_ev_axis_tvalid => ALGO_B_TA_1_m_axis_ev_TVALID
+      m_ev_axis_tdata(31 downto 0) => ALGO_B_TA_1_m_ev_axis_TDATA(31 downto 0),
+      m_ev_axis_tlast => ALGO_B_TA_1_m_ev_axis_TLAST,
+      m_ev_axis_tready => ALGO_B_TA_1_m_ev_axis_TREADY,
+      m_ev_axis_tvalid => ALGO_B_TA_1_m_ev_axis_TVALID
     );
 HV_AERA_IP_0: component design_1_HV_AERA_IP_0_0
      port map (
@@ -11938,10 +11943,10 @@ axi_fifo_mm_s_1: component design_1_axi_fifo_mm_s_1_0
     );
 axi_fifo_mm_s_TA_ev: component design_1_axi_fifo_mm_s_0_0
      port map (
-      axi_str_rxd_tdata(31 downto 0) => ALGO_B_TA_1_m_axis_ev_TDATA(31 downto 0),
-      axi_str_rxd_tlast => ALGO_B_TA_1_m_axis_ev_TLAST,
-      axi_str_rxd_tready => ALGO_B_TA_1_m_axis_ev_TREADY,
-      axi_str_rxd_tvalid => ALGO_B_TA_1_m_axis_ev_TVALID,
+      axi_str_rxd_tdata(31 downto 0) => B"00000000000000000000000000000000",
+      axi_str_rxd_tlast => '0',
+      axi_str_rxd_tready => NLW_axi_fifo_mm_s_TA_ev_axi_str_rxd_tready_UNCONNECTED,
+      axi_str_rxd_tvalid => '0',
       interrupt => NLW_axi_fifo_mm_s_TA_ev_interrupt_UNCONNECTED,
       s2mm_prmry_reset_out_n => NLW_axi_fifo_mm_s_TA_ev_s2mm_prmry_reset_out_n_UNCONNECTED,
       s_axi_aclk => processing_system7_0_FCLK_CLK1,
@@ -13072,6 +13077,10 @@ axis_flow_control_D1: component design_1_axis_flow_control_d1_0_0
       m_axis_tvalid => axis_flow_control_d1_0_m_axis_TVALID,
       s_axis_aclk => processing_system7_0_FCLK_CLK1,
       s_axis_aresetn => rst_processing_system7_0_200M_peripheral_aresetn(0),
+      s_axis_ta_event_tdata(31 downto 0) => ALGO_B_TA_1_m_ev_axis_TDATA(31 downto 0),
+      s_axis_ta_event_tlast => ALGO_B_TA_1_m_ev_axis_TLAST,
+      s_axis_ta_event_tready => ALGO_B_TA_1_m_ev_axis_TREADY,
+      s_axis_ta_event_tvalid => ALGO_B_TA_1_m_ev_axis_TVALID,
       s_axis_tdata(63 downto 0) => top_switch_raw_m_axis_TDATA(63 downto 0),
       s_axis_tlast => top_switch_raw_m_axis_TLAST,
       s_axis_tready => top_switch_raw_m_axis_TREADY,

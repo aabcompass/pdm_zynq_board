@@ -41,6 +41,12 @@ entity axis_flow_control_d1 is
   		m_axis_events_tready : IN STD_LOGIC;
   		m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
  
+  		-- in TA trigger events
+  		s_axis_ta_event_tdata: in STD_LOGIC_VECTOR(31 DOWNTO 0);
+  		s_axis_ta_event_tvalid: in STD_LOGIC;
+  		s_axis_ta_event_tlast: in STD_LOGIC;
+  		s_axis_ta_event_tready: out STD_LOGIC := '1';
+
   		trig0 : in std_logic;
   		trig1 : in std_logic;
   		trig2 : in std_logic;
@@ -209,6 +215,12 @@ architecture Behavioral of axis_flow_control_d1 is
 				m_axis_events_tready : IN STD_LOGIC;
 				m_axis_events_tdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
 				
+  		-- in TA trigger events
+				s_axis_ta_event_tdata: in STD_LOGIC_VECTOR(31 DOWNTO 0);
+				s_axis_ta_event_tvalid: in STD_LOGIC;
+				s_axis_ta_event_tlast: in STD_LOGIC;
+				s_axis_ta_event_tready: out STD_LOGIC := '1';
+
 				trig0 : in std_logic;
 				trig1 : in std_logic;
 				trig2 : in std_logic;
@@ -242,7 +254,7 @@ architecture Behavioral of axis_flow_control_d1 is
 				trans_counter: OUT STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --18
 				m_axis_fifo_error: OUT STD_LOGIC_VECTOR(31 downto 0); --19
 				gtu_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --20
-				trig_type: OUT STD_LOGIC_VECTOR(3 downto 0); --21
+				trig_type: OUT STD_LOGIC_VECTOR(31 downto 0); --21
 				unix_timestamp: OUT STD_LOGIC_VECTOR(31 downto 0); --22
 				maxis_trans_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --23
 				maxis_accepted_cnt: OUT STD_LOGIC_VECTOR(31 downto 0); --24
@@ -877,6 +889,12 @@ begin
 				m_axis_events_tvalid   => m_axis_events_tvalid,--: OUT STD_LOGIC;
 				m_axis_events_tready   => m_axis_events_tready,--: IN STD_LOGIC;
 				m_axis_events_tdata   => m_axis_events_tdata,--: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+				
+  		-- in TA trigger events
+				s_axis_ta_event_tdata   => s_axis_ta_event_tdata, --: in STD_LOGIC_VECTOR(31 DOWNTO 0);
+				s_axis_ta_event_tvalid   => s_axis_ta_event_tvalid,--: in STD_LOGIC;
+				s_axis_ta_event_tlast   => s_axis_ta_event_tlast,--: in STD_LOGIC;
+				s_axis_ta_event_tready   => s_axis_ta_event_tready, --: out STD_LOGIC := '1';
 
 
 				trig0  => trig0,--: in std_logic;
@@ -912,7 +930,7 @@ begin
 				trans_counter => slv_reg18(C_CNT_DWIDTH-1 downto 0),--: OUT STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --18
 				m_axis_fifo_error => slv_reg19,--: OUT STD_LOGIC_VECTOR(31 downto 0); --19
 				gtu_timestamp => slv_reg20,--: OUT STD_LOGIC_VECTOR(31 downto 0); --20
-				trig_type => slv_reg21(3 downto 0),--: OUT STD_LOGIC_VECTOR(3 downto 0); --21
+				trig_type => slv_reg21,--: OUT STD_LOGIC_VECTOR(3 downto 0); --21
 				unix_timestamp => slv_reg22,--: OUT STD_LOGIC_VECTOR(31 downto 0); --22
 				maxis_trans_cnt => slv_reg23,--: OUT STD_LOGIC_VECTOR(31 downto 0) --23
 				maxis_accepted_cnt => slv_reg24, 
