@@ -1645,7 +1645,7 @@ begin
                     --Latency read
                     state_S <= s2;
                 when s2 =>
-                    --SUM+64
+                    --SUM+32
                         add_15b_l0A <= dout_sum_fifo_sc(14 downto 0);
                         add_15b_l1A <= dout_sum_fifo_sc(29 downto 15);
                         add_15b_l2A <= dout_sum_fifo_sc(44 downto 30);
@@ -1663,28 +1663,28 @@ begin
                         add_15b_l14A <= dout_sum_fifo_sc(224 downto 210);
                         add_15b_l15A <= dout_sum_fifo_sc(239 downto 225);
                         
-                        add_15b_l0B <= "1000000";
-                        add_15b_l1B <= "1000000";
-                        add_15b_l2B <= "1000000";
-                        add_15b_l3B <= "1000000";
-                        add_15b_l4B <= "1000000";
-                        add_15b_l5B <= "1000000";
-                        add_15b_l6B <= "1000000";
-                        add_15b_l7B <= "1000000";
-                        add_15b_l8B <= "1000000";
-                        add_15b_l9B <= "1000000";
-                        add_15b_l10B <= "1000000";
-                        add_15b_l11B <= "1000000";
-                        add_15b_l12B <= "1000000";
-                        add_15b_l13B <= "1000000";
-                        add_15b_l14B <= "1000000";
-                        add_15b_l15B <= "1000000";
+                        add_15b_l0B <= "0100000";
+                        add_15b_l1B <= "0100000";
+                        add_15b_l2B <= "0100000";
+                        add_15b_l3B <= "0100000";
+                        add_15b_l4B <= "0100000";
+                        add_15b_l5B <= "0100000";
+                        add_15b_l6B <= "0100000";
+                        add_15b_l7B <= "0100000";
+                        add_15b_l8B <= "0100000";
+                        add_15b_l9B <= "0100000";
+                        add_15b_l10B <= "0100000";
+                        add_15b_l11B <= "0100000";
+                        add_15b_l12B <= "0100000";
+                        add_15b_l13B <= "0100000";
+                        add_15b_l14B <= "0100000";
+                        add_15b_l15B <= "0100000";
                         
                         state_S <= s3;
                 when s3 =>
                     if (m_axis_dout_tvalid_l0 = '1') then--Check if SQRT(SUM*2) is ready
                         --SQRT minimum from IP Coregen => width MAX 8bit + 5 bit
-                        --S=SUM+64+32*SQRT(2*SUM)
+                        --S=(SUM+32)+32*SQRT(2*SUM)
                         add_16_l0B  <= m_axis_dout_tdata_l0(7 downto 0) & "00000"; --32*SQRT(2*SUM)
                         add_16_l1B  <= m_axis_dout_tdata_l1(7 downto 0) & "00000"; --32*SQRT(2*SUM)
                         add_16_l2B  <= m_axis_dout_tdata_l2(7 downto 0) & "00000"; --32*SQRT(2*SUM)

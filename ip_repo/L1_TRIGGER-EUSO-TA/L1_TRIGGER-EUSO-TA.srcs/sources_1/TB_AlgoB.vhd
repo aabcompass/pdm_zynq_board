@@ -325,10 +325,10 @@
            THR_CMD_s(31 downto 24)  <= "00000000";--Selector cmd type "00"
            wait for period;
            THR_CMD_s(9 downto 0)    <= conv_std_logic_vector(10,10);--EC_THR2 (0:512)
-           THR_CMD_s(21 downto 10)  <= conv_std_logic_vector(16,12);--PDM_THR1 (0:2304)
+           THR_CMD_s(21 downto 10)  <= conv_std_logic_vector(18,12);--PDM_THR1 (0:2304)
            THR_CMD_s(31 downto 22)  <= "0100000000";--Selector cmd type"01"
            wait for period;
-           THR_CMD_s(12 downto 0)  <= conv_std_logic_vector(21,13);--PDM_THR2 (0:4608)
+           THR_CMD_s(12 downto 0)  <= conv_std_logic_vector(25,13);--PDM_THR2 (0:4608)
            THR_CMD_s(31 downto 13) <= "1000000000000000000";--Selector cmd type "10"
            wait;
         end process;

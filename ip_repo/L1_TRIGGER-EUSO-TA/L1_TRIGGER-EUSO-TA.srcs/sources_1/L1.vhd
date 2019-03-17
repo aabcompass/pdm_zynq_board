@@ -146,8 +146,8 @@ architecture Behavioral of L1 is
     signal  ec_cnt_rdy_ec6ec7ec8        : std_logic := '0';
     signal  ec_cnt_ec6ec7ec8            : std_logic_vector(9 downto 0) := ( others => '0');
     
-    signal  pdm_thr1                    : std_logic_vector(11 downto 0) := "000000010000";--DEFAULT PDM_THR1=16
-    signal  pdm_thr2                    : std_logic_vector(12 downto 0) := "0000000010101";--DEFAULT PDM_THR2=21
+    signal  pdm_thr1                    : std_logic_vector(11 downto 0) := "000000010010";--DEFAULT PDM_THR1=18
+    signal  pdm_thr2                    : std_logic_vector(12 downto 0) := "0000000011001";--DEFAULT PDM_THR2=25
         
     signal  ec_cnt_old                  : std_logic_vector(11 downto 0) := ( others => '0');
     signal  ec_cnt_new                  : std_logic_vector(11 downto 0) := ( others => '0');
