@@ -3,19 +3,19 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.xpr">
+<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current2/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="38e26ba6747c452d92ad9a5bdabf4088"/>
     <Option Name="Part" Val="xc7z020clg484-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../current/ip_repo/trigL1L2/L1L2_TRIGGER_MINIEUSO_v2.cache/compile_simlib/activehdl"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val="em.avnet.com:zed:part0:1.3"/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
@@ -36,130 +36,22 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="122"/>
-    <Option Name="WTModelSimExportSim" Val="122"/>
-    <Option Name="WTQuestaExportSim" Val="122"/>
-    <Option Name="WTIesExportSim" Val="122"/>
-    <Option Name="WTVcsExportSim" Val="122"/>
-    <Option Name="WTRivieraExportSim" Val="122"/>
-    <Option Name="WTActivehdlExportSim" Val="122"/>
+    <Option Name="WTXSimExportSim" Val="145"/>
+    <Option Name="WTModelSimExportSim" Val="145"/>
+    <Option Name="WTQuestaExportSim" Val="145"/>
+    <Option Name="WTIesExportSim" Val="145"/>
+    <Option Name="WTVcsExportSim" Val="145"/>
+    <Option Name="WTRivieraExportSim" Val="145"/>
+    <Option Name="WTActivehdlExportSim" Val="145"/>
   </Configuration>
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/ip/S_MEMORY/S_MEMORY.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/S_MEMORY/S_MEMORY.xci"/>
-          <Attr Name="ImportTime" Val="1467379127"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/ADDER_12/ADDER_12.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ADDER_12/ADDER_12.xci"/>
-          <Attr Name="ImportTime" Val="1467379133"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/SQRT_15/SQRT_15.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SQRT_15/SQRT_15.xci"/>
-          <Attr Name="ImportTime" Val="1467379128"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/ACCUMULATOR_11/ACCUMULATOR_11.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ACCUMULATOR_11/ACCUMULATOR_11.xci"/>
-          <Attr Name="ImportTime" Val="1467379132"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/CIRC_MEM_FIFO/CIRC_MEM_FIFO.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/CIRC_MEM_FIFO/CIRC_MEM_FIFO.xci"/>
-          <Attr Name="ImportTime" Val="1467379130"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/CIRCULAR_BUFFER/CIRCULAR_BUFFER.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/CIRCULAR_BUFFER/CIRCULAR_BUFFER.xci"/>
-          <Attr Name="ImportTime" Val="1467379135"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/SUM_FIFO_L1/SUM_FIFO_L1.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/SUM_FIFO_L1/SUM_FIFO_L1.xci"/>
-          <Attr Name="ImportTime" Val="1479380075"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/SUM_FIFO/SUM_FIFO.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SUM_FIFO/SUM_FIFO.xci"/>
-          <Attr Name="ImportTime" Val="1467379134"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/SUM_MEMORY/SUM_MEMORY.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SUM_MEMORY/SUM_MEMORY.xci"/>
-          <Attr Name="ImportTime" Val="1467379135"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/ADDER_15/ADDER_15.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ADDER_15/ADDER_15.xci"/>
-          <Attr Name="ImportTime" Val="1467379126"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/L1L2_TRIGGER_MINIEUSO/EC.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../jemeuso/L1L2_TRIGGER_MINIEUSO/EC.vhd"/>
           <Attr Name="ImportTime" Val="1476344591"/>
           <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/FIFO_OUT/FIFO_OUT.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/FIFO_OUT/FIFO_OUT.xci"/>
-          <Attr Name="ImportTime" Val="1467379129"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/fifo_4format_converter/fifo_4format_converter.xci">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../trig/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/fifo_4format_converter/fifo_4format_converter.xci"/>
-          <Attr Name="ImportTime" Val="1498621262"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -187,90 +79,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/ip/ACCUM_15x16/ACCUM_15x16.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/SUM_MEMORY_L2/SUM_MEMORY_L2.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/SUM_MEMORY_L2/SUM_MEMORY_L2.xci"/>
-          <Attr Name="ImportTime" Val="1479380075"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/ADDER_22/ADDER_22.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/ADDER_22/ADDER_22.xci"/>
-          <Attr Name="ImportTime" Val="1479380075"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/S_MEMORY_L2/S_MEMORY_L2.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/MULT_15x10/MULT_15x10.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/MULT_5x5/MULT_5x5.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/CIRCULAR_BUFFER_L2/CIRCULAR_BUFFER_L2.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/FIFO_IN/FIFO_IN.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/L1L2_TRIGGER_MINIEUSO/L2.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L2.vhd"/>
           <Attr Name="ImportTime" Val="1476359501"/>
           <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/ip/MMCM_CLK/MMCM_CLK.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/MMCM_CLK/MMCM_CLK.xci"/>
-          <Attr Name="ImportTime" Val="1479379807"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -328,6 +142,318 @@
         <Option Name="XSimWcfgFile" Val="$PPRDIR/Testbench_L1L2_behav.wcfg"/>
       </Config>
     </FileSet>
+    <FileSet Name="ACCUM_15x16" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ACCUM_15x16">
+      <File Path="$PSRCDIR/sources_1/ip/ACCUM_15x16/ACCUM_15x16.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ACCUM_15x16"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="ACCUMULATOR_11" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ACCUMULATOR_11">
+      <File Path="$PSRCDIR/sources_1/ip/ACCUMULATOR_11/ACCUMULATOR_11.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ACCUMULATOR_11/ACCUMULATOR_11.xci"/>
+          <Attr Name="ImportTime" Val="1467379132"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ACCUMULATOR_11"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="ADDER_12" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ADDER_12">
+      <File Path="$PSRCDIR/sources_1/ip/ADDER_12/ADDER_12.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ADDER_12/ADDER_12.xci"/>
+          <Attr Name="ImportTime" Val="1467379133"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ADDER_12"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="ADDER_15" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ADDER_15">
+      <File Path="$PSRCDIR/sources_1/ip/ADDER_15/ADDER_15.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/ADDER_15/ADDER_15.xci"/>
+          <Attr Name="ImportTime" Val="1467379126"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ADDER_15"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="ADDER_22" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ADDER_22">
+      <File Path="$PSRCDIR/sources_1/ip/ADDER_22/ADDER_22.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/ADDER_22/ADDER_22.xci"/>
+          <Attr Name="ImportTime" Val="1479380075"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ADDER_22"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="CIRC_MEM_FIFO" Type="BlockSrcs" RelSrcDir="$PSRCDIR/CIRC_MEM_FIFO">
+      <File Path="$PSRCDIR/sources_1/ip/CIRC_MEM_FIFO/CIRC_MEM_FIFO.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/CIRC_MEM_FIFO/CIRC_MEM_FIFO.xci"/>
+          <Attr Name="ImportTime" Val="1467379130"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="CIRC_MEM_FIFO"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="CIRCULAR_BUFFER" Type="BlockSrcs" RelSrcDir="$PSRCDIR/CIRCULAR_BUFFER">
+      <File Path="$PSRCDIR/sources_1/ip/CIRCULAR_BUFFER/CIRCULAR_BUFFER.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/CIRCULAR_BUFFER/CIRCULAR_BUFFER.xci"/>
+          <Attr Name="ImportTime" Val="1467379135"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="CIRCULAR_BUFFER"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="CIRCULAR_BUFFER_L2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/CIRCULAR_BUFFER_L2">
+      <File Path="$PSRCDIR/sources_1/ip/CIRCULAR_BUFFER_L2/CIRCULAR_BUFFER_L2.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="CIRCULAR_BUFFER_L2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="fifo_4format_converter" Type="BlockSrcs" RelSrcDir="$PSRCDIR/fifo_4format_converter">
+      <File Path="$PSRCDIR/sources_1/ip/fifo_4format_converter/fifo_4format_converter.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../trig/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/fifo_4format_converter/fifo_4format_converter.xci"/>
+          <Attr Name="ImportTime" Val="1498621262"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="fifo_4format_converter"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="FIFO_IN" Type="BlockSrcs" RelSrcDir="$PSRCDIR/FIFO_IN">
+      <File Path="$PSRCDIR/sources_1/ip/FIFO_IN/FIFO_IN.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="FIFO_IN"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="FIFO_OUT" Type="BlockSrcs" RelSrcDir="$PSRCDIR/FIFO_OUT">
+      <File Path="$PSRCDIR/sources_1/ip/FIFO_OUT/FIFO_OUT.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/FIFO_OUT/FIFO_OUT.xci"/>
+          <Attr Name="ImportTime" Val="1467379129"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="FIFO_OUT"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="MMCM_CLK" Type="BlockSrcs" RelSrcDir="$PSRCDIR/MMCM_CLK">
+      <File Path="$PSRCDIR/sources_1/ip/MMCM_CLK/MMCM_CLK.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/MMCM_CLK/MMCM_CLK.xci"/>
+          <Attr Name="ImportTime" Val="1479379807"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="MMCM_CLK"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="MULT_5x5" Type="BlockSrcs" RelSrcDir="$PSRCDIR/MULT_5x5">
+      <File Path="$PSRCDIR/sources_1/ip/MULT_5x5/MULT_5x5.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="MULT_5x5"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="MULT_15x10" Type="BlockSrcs" RelSrcDir="$PSRCDIR/MULT_15x10">
+      <File Path="$PSRCDIR/sources_1/ip/MULT_15x10/MULT_15x10.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="MULT_15x10"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="S_MEMORY" Type="BlockSrcs" RelSrcDir="$PSRCDIR/S_MEMORY">
+      <File Path="$PSRCDIR/sources_1/ip/S_MEMORY/S_MEMORY.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/S_MEMORY/S_MEMORY.xci"/>
+          <Attr Name="ImportTime" Val="1467379127"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="S_MEMORY"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="S_MEMORY_L2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/S_MEMORY_L2">
+      <File Path="$PSRCDIR/sources_1/ip/S_MEMORY_L2/S_MEMORY_L2.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="S_MEMORY_L2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="SQRT_15" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SQRT_15">
+      <File Path="$PSRCDIR/sources_1/ip/SQRT_15/SQRT_15.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SQRT_15/SQRT_15.xci"/>
+          <Attr Name="ImportTime" Val="1467379128"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="SQRT_15"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="SUM_FIFO" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SUM_FIFO">
+      <File Path="$PSRCDIR/sources_1/ip/SUM_FIFO/SUM_FIFO.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SUM_FIFO/SUM_FIFO.xci"/>
+          <Attr Name="ImportTime" Val="1467379134"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="SUM_FIFO"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="SUM_FIFO_L1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SUM_FIFO_L1">
+      <File Path="$PSRCDIR/sources_1/ip/SUM_FIFO_L1/SUM_FIFO_L1.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/SUM_FIFO_L1/SUM_FIFO_L1.xci"/>
+          <Attr Name="ImportTime" Val="1479380075"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="SUM_FIFO_L1"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="SUM_MEMORY" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SUM_MEMORY">
+      <File Path="$PSRCDIR/sources_1/ip/SUM_MEMORY/SUM_MEMORY.xci">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1_TRIGGER_MINIEUSO_V4/L1_TRIGGER_MINIEUSO_V4.srcs/sources_1/ip/SUM_MEMORY/SUM_MEMORY.xci"/>
+          <Attr Name="ImportTime" Val="1467379135"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="SUM_MEMORY"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="SUM_MEMORY_L2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SUM_MEMORY_L2">
+      <File Path="$PSRCDIR/sources_1/ip/SUM_MEMORY_L2/SUM_MEMORY_L2.xci">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../L1L2_TRIGGER_MINIEUSO/L1L2_TRIGGER_MINIEUSO.srcs/sources_1/ip/SUM_MEMORY_L2/SUM_MEMORY_L2.xci"/>
+          <Attr Name="ImportTime" Val="1479380075"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="SUM_MEMORY_L2"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -351,14 +477,202 @@
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="10">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1" IncludeInArchive="true">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
         <Step Id="synth_design"/>
       </Strategy>
+    </Run>
+    <Run Id="ACCUM_15x16_synth_1" Type="Ft3:Synth" SrcSet="ACCUM_15x16" Part="xc7z020clg484-1" ConstrsSet="ACCUM_15x16" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/ACCUM_15x16_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true">
+    <Run Id="ACCUMULATOR_11_synth_1" Type="Ft3:Synth" SrcSet="ACCUMULATOR_11" Part="xc7z020clg484-1" ConstrsSet="ACCUMULATOR_11" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/ACCUMULATOR_11_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="ADDER_12_synth_1" Type="Ft3:Synth" SrcSet="ADDER_12" Part="xc7z020clg484-1" ConstrsSet="ADDER_12" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/ADDER_12_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="ADDER_15_synth_1" Type="Ft3:Synth" SrcSet="ADDER_15" Part="xc7z020clg484-1" ConstrsSet="ADDER_15" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/ADDER_15_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="ADDER_22_synth_1" Type="Ft3:Synth" SrcSet="ADDER_22" Part="xc7z020clg484-1" ConstrsSet="ADDER_22" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/ADDER_22_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="CIRC_MEM_FIFO_synth_1" Type="Ft3:Synth" SrcSet="CIRC_MEM_FIFO" Part="xc7z020clg484-1" ConstrsSet="CIRC_MEM_FIFO" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/CIRC_MEM_FIFO_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="CIRCULAR_BUFFER_synth_1" Type="Ft3:Synth" SrcSet="CIRCULAR_BUFFER" Part="xc7z020clg484-1" ConstrsSet="CIRCULAR_BUFFER" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/CIRCULAR_BUFFER_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="CIRCULAR_BUFFER_L2_synth_1" Type="Ft3:Synth" SrcSet="CIRCULAR_BUFFER_L2" Part="xc7z020clg484-1" ConstrsSet="CIRCULAR_BUFFER_L2" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/CIRCULAR_BUFFER_L2_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="fifo_4format_converter_synth_1" Type="Ft3:Synth" SrcSet="fifo_4format_converter" Part="xc7z020clg484-1" ConstrsSet="fifo_4format_converter" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/fifo_4format_converter_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="FIFO_IN_synth_1" Type="Ft3:Synth" SrcSet="FIFO_IN" Part="xc7z020clg484-1" ConstrsSet="FIFO_IN" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/FIFO_IN_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="FIFO_OUT_synth_1" Type="Ft3:Synth" SrcSet="FIFO_OUT" Part="xc7z020clg484-1" ConstrsSet="FIFO_OUT" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/FIFO_OUT_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="MMCM_CLK_synth_1" Type="Ft3:Synth" SrcSet="MMCM_CLK" Part="xc7z020clg484-1" ConstrsSet="MMCM_CLK" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/MMCM_CLK_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="MULT_5x5_synth_1" Type="Ft3:Synth" SrcSet="MULT_5x5" Part="xc7z020clg484-1" ConstrsSet="MULT_5x5" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/MULT_5x5_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="MULT_15x10_synth_1" Type="Ft3:Synth" SrcSet="MULT_15x10" Part="xc7z020clg484-1" ConstrsSet="MULT_15x10" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/MULT_15x10_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="S_MEMORY_synth_1" Type="Ft3:Synth" SrcSet="S_MEMORY" Part="xc7z020clg484-1" ConstrsSet="S_MEMORY" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/S_MEMORY_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="S_MEMORY_L2_synth_1" Type="Ft3:Synth" SrcSet="S_MEMORY_L2" Part="xc7z020clg484-1" ConstrsSet="S_MEMORY_L2" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/S_MEMORY_L2_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="SQRT_15_synth_1" Type="Ft3:Synth" SrcSet="SQRT_15" Part="xc7z020clg484-1" ConstrsSet="SQRT_15" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SQRT_15_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="SUM_FIFO_synth_1" Type="Ft3:Synth" SrcSet="SUM_FIFO" Part="xc7z020clg484-1" ConstrsSet="SUM_FIFO" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SUM_FIFO_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="SUM_FIFO_L1_synth_1" Type="Ft3:Synth" SrcSet="SUM_FIFO_L1" Part="xc7z020clg484-1" ConstrsSet="SUM_FIFO_L1" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SUM_FIFO_L1_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="SUM_MEMORY_synth_1" Type="Ft3:Synth" SrcSet="SUM_MEMORY" Part="xc7z020clg484-1" ConstrsSet="SUM_MEMORY" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SUM_MEMORY_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="SUM_MEMORY_L2_synth_1" Type="Ft3:Synth" SrcSet="SUM_MEMORY_L2" Part="xc7z020clg484-1" ConstrsSet="SUM_MEMORY_L2" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SUM_MEMORY_L2_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>
@@ -371,7 +685,342 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+    </Run>
+    <Run Id="ACCUM_15x16_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="ACCUM_15x16" Description="Default settings for Implementation." SynthRun="ACCUM_15x16_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="ACCUMULATOR_11_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="ACCUMULATOR_11" Description="Default settings for Implementation." SynthRun="ACCUMULATOR_11_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="ADDER_12_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="ADDER_12" Description="Default settings for Implementation." SynthRun="ADDER_12_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="ADDER_15_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="ADDER_15" Description="Default settings for Implementation." SynthRun="ADDER_15_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="ADDER_22_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="ADDER_22" Description="Default settings for Implementation." SynthRun="ADDER_22_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="CIRC_MEM_FIFO_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="CIRC_MEM_FIFO" Description="Default settings for Implementation." SynthRun="CIRC_MEM_FIFO_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="CIRCULAR_BUFFER_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="CIRCULAR_BUFFER" Description="Default settings for Implementation." SynthRun="CIRCULAR_BUFFER_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="CIRCULAR_BUFFER_L2_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="CIRCULAR_BUFFER_L2" Description="Default settings for Implementation." SynthRun="CIRCULAR_BUFFER_L2_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="fifo_4format_converter_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="fifo_4format_converter" Description="Default settings for Implementation." SynthRun="fifo_4format_converter_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="FIFO_IN_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="FIFO_IN" Description="Default settings for Implementation." SynthRun="FIFO_IN_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="FIFO_OUT_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="FIFO_OUT" Description="Default settings for Implementation." SynthRun="FIFO_OUT_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="MMCM_CLK_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="MMCM_CLK" Description="Default settings for Implementation." SynthRun="MMCM_CLK_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="MULT_5x5_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="MULT_5x5" Description="Default settings for Implementation." SynthRun="MULT_5x5_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="MULT_15x10_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="MULT_15x10" Description="Default settings for Implementation." SynthRun="MULT_15x10_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="S_MEMORY_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="S_MEMORY" Description="Default settings for Implementation." SynthRun="S_MEMORY_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="S_MEMORY_L2_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="S_MEMORY_L2" Description="Default settings for Implementation." SynthRun="S_MEMORY_L2_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="SQRT_15_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="SQRT_15" Description="Default settings for Implementation." SynthRun="SQRT_15_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="SUM_FIFO_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="SUM_FIFO" Description="Default settings for Implementation." SynthRun="SUM_FIFO_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="SUM_FIFO_L1_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="SUM_FIFO_L1" Description="Default settings for Implementation." SynthRun="SUM_FIFO_L1_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="SUM_MEMORY_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="SUM_MEMORY" Description="Default settings for Implementation." SynthRun="SUM_MEMORY_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+    </Run>
+    <Run Id="SUM_MEMORY_L2_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="SUM_MEMORY_L2" Description="Default settings for Implementation." SynthRun="SUM_MEMORY_L2_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
     </Run>
   </Runs>
 </Project>

@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Sun Mar 17 21:57:06 2019
+--Date        : Sun Mar 31 21:10:56 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10083,51 +10083,6 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axi_gps_core_0_0;
-  component design_1_ALGO_B_0_0 is
-  port (
-    S00_AXIS_ACLK : in STD_LOGIC;
-    S01_AXIS_ACLK : in STD_LOGIC;
-    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S00_AXIS_TVALID : in STD_LOGIC;
-    S00_AXIS_TREADY : out STD_LOGIC;
-    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S01_AXIS_TVALID : in STD_LOGIC;
-    S01_AXIS_TREADY : out STD_LOGIC;
-    L1_EVENT : out STD_LOGIC;
-    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
-  );
-  end component design_1_ALGO_B_0_0;
-  component design_1_ALGO_B_0_1 is
-  port (
-    S00_AXIS_ACLK : in STD_LOGIC;
-    S01_AXIS_ACLK : in STD_LOGIC;
-    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S00_AXIS_TVALID : in STD_LOGIC;
-    S00_AXIS_TREADY : out STD_LOGIC;
-    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S01_AXIS_TVALID : in STD_LOGIC;
-    S01_AXIS_TREADY : out STD_LOGIC;
-    L1_EVENT : out STD_LOGIC;
-    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
-  );
-  end component design_1_ALGO_B_0_1;
-  component design_1_ALGO_B_0_2 is
-  port (
-    S00_AXIS_ACLK : in STD_LOGIC;
-    S01_AXIS_ACLK : in STD_LOGIC;
-    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S00_AXIS_TVALID : in STD_LOGIC;
-    S00_AXIS_TREADY : out STD_LOGIC;
-    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    S01_AXIS_TVALID : in STD_LOGIC;
-    S01_AXIS_TREADY : out STD_LOGIC;
-    L1_EVENT : out STD_LOGIC;
-    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
-  );
-  end component design_1_ALGO_B_0_2;
   component design_1_axi_fifo_mm_s_0_0 is
   port (
     interrupt : out STD_LOGIC;
@@ -10261,6 +10216,51 @@ architecture STRUCTURE of design_1 is
     THR_CMD : in STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_ALGO_B_TA_1_0;
+  component design_1_ALGO_B_0_0 is
+  port (
+    S00_AXIS_ACLK : in STD_LOGIC;
+    S01_AXIS_ACLK : in STD_LOGIC;
+    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S00_AXIS_TVALID : in STD_LOGIC;
+    S00_AXIS_TREADY : out STD_LOGIC;
+    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S01_AXIS_TVALID : in STD_LOGIC;
+    S01_AXIS_TREADY : out STD_LOGIC;
+    L1_EVENT : out STD_LOGIC;
+    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    frame_conv_out : out STD_LOGIC
+  );
+  end component design_1_ALGO_B_0_0;
+  component design_1_ALGO_B_0_1 is
+  port (
+    S00_AXIS_ACLK : in STD_LOGIC;
+    S01_AXIS_ACLK : in STD_LOGIC;
+    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S00_AXIS_TVALID : in STD_LOGIC;
+    S00_AXIS_TREADY : out STD_LOGIC;
+    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S01_AXIS_TVALID : in STD_LOGIC;
+    S01_AXIS_TREADY : out STD_LOGIC;
+    L1_EVENT : out STD_LOGIC;
+    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    frame_conv_out : out STD_LOGIC
+  );
+  end component design_1_ALGO_B_0_1;
+  component design_1_ALGO_B_0_2 is
+  port (
+    S00_AXIS_ACLK : in STD_LOGIC;
+    S01_AXIS_ACLK : in STD_LOGIC;
+    S00_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S00_AXIS_TVALID : in STD_LOGIC;
+    S00_AXIS_TREADY : out STD_LOGIC;
+    S01_AXIS_TDATA : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    S01_AXIS_TVALID : in STD_LOGIC;
+    S01_AXIS_TREADY : out STD_LOGIC;
+    L1_EVENT : out STD_LOGIC;
+    data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    frame_conv_out : out STD_LOGIC
+  );
+  end component design_1_ALGO_B_0_2;
   signal ALGO_B_0_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal ALGO_B_0_frame_conv_out : STD_LOGIC;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;

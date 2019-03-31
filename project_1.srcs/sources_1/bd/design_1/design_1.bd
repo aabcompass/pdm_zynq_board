@@ -1360,27 +1360,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>ALGO_B_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_0</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ALGO_B_1</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_1</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>ALGO_B_2</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_2</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>axi_fifo_mm_s_TA_ev</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axi_fifo_mm_s" spirit:vendor="xilinx.com" spirit:version="4.1"/>
         <spirit:configurableElementValues>
@@ -1410,6 +1389,27 @@
         <spirit:componentRef spirit:library="user" spirit:name="ALGO_B_TA" spirit:vendor="user.org" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_TA_1_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>ALGO_B_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>ALGO_B_1</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_1</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>ALGO_B_2</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_ALGO_B_0_2</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -2362,16 +2362,12 @@
         <spirit:internalPortReference spirit:componentRef="axi_dma_events_L1" spirit:portRef="m_axi_s2mm_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_switch_0" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_clock_converter_6" spirit:portRef="m_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_0" spirit:portRef="S00_AXIS_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_0" spirit:portRef="S01_AXIS_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_1" spirit:portRef="S00_AXIS_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_1" spirit:portRef="S01_AXIS_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_2" spirit:portRef="S00_AXIS_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_2" spirit:portRef="S01_AXIS_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_fifo_mm_s_TA_ev" spirit:portRef="s_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_gpio_TA_ev" spirit:portRef="s_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="s_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="S_AXI_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="CLOCK_200"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="m_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ACLK"/>
@@ -2384,8 +2380,12 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M06_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="CLOCK_200"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="m_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_0" spirit:portRef="S00_AXIS_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_0" spirit:portRef="S01_AXIS_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_1" spirit:portRef="S00_AXIS_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_1" spirit:portRef="S01_AXIS_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_2" spirit:portRef="S00_AXIS_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_2" spirit:portRef="S01_AXIS_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L9_axis_data_count</spirit:name>
@@ -2469,6 +2469,7 @@
         <spirit:internalPortReference spirit:componentRef="axi_gpio_TA_ev" spirit:portRef="s_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="s_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_flow_control_D1" spirit:portRef="S_AXI_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="m_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_DMA_RAW" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="S00_ARESETN"/>
@@ -2479,7 +2480,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M06_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="ALGO_B_TA_1" spirit:portRef="m_axis_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconcat_1_dout</spirit:name>

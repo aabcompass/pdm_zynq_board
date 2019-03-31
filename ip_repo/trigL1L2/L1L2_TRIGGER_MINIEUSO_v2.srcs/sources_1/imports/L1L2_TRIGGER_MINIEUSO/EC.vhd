@@ -343,67 +343,67 @@ architecture arch_ec of EC0EC1EC2 is
     
     --S calculation
     signal  add_12_l0A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l0B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l0B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l0S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l1A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l1B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l1B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l1S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l2A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l2B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l2B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l2S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l3A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l3B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l3B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l3S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l4A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l4B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l4B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l4S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l5A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l5B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l5B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l5S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l6A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l6B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l6B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l6S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l7A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l7B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l7B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l7S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l8A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l8B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l8B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l8S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l9A                   :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l9B                   :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l9B                   :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l9S                   :   std_logic_vector(11 downto 0);
     
     signal  add_12_l10A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l10B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l10B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l10S                  :   std_logic_vector(11 downto 0);
     
     signal  add_12_l11A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l11B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l11B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l11S                  :   std_logic_vector(11 downto 0);
     
     signal  add_12_l12A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l12B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l12B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l12S                  :   std_logic_vector(11 downto 0);
     
     signal  add_12_l13A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l13B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l13B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l13S                  :   std_logic_vector(11 downto 0);
     
     signal  add_12_l14A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l14B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l14B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l14S                  :   std_logic_vector(11 downto 0);
     
     signal  add_12_l15A                  :   std_logic_vector(10 downto 0) := ( others => '0');
-    signal  add_12_l15B                  :   std_logic_vector(8 downto 0) := ( others => '0');
+    signal  add_12_l15B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l15S                  :   std_logic_vector(11 downto 0);
     
     type    state_S_type                  is   (s0,s1);
@@ -530,7 +530,7 @@ architecture arch_ec of EC0EC1EC2 is
 	COMPONENT ADDER_12
       PORT (
         A : IN STD_LOGIC_VECTOR(10 DOWNTO 0);
-        B : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+        B : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
         CLK : IN STD_LOGIC;
         S : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
       );
@@ -1814,22 +1814,22 @@ begin
                 when s1 =>
                     if (m_axis_dout_tvalid_l0 = '1') then--Check if SQRT(SUM) is ready
                         --SQRT minimum from IP Coregen => width 16 bit
-                        add_12_l0B  <= m_axis_dout_tdata_l0 & "0"; --2*SQRT(SUM)
-                        add_12_l1B  <= m_axis_dout_tdata_l1 & "0"; --2*SQRT(SUM)
-                        add_12_l2B  <= m_axis_dout_tdata_l2 & "0"; --2*SQRT(SUM)
-                        add_12_l3B  <= m_axis_dout_tdata_l3 & "0"; --2*SQRT(SUM)
-                        add_12_l4B  <= m_axis_dout_tdata_l4 & "0"; --2*SQRT(SUM)
-                        add_12_l5B  <= m_axis_dout_tdata_l5 & "0"; --2*SQRT(SUM)
-                        add_12_l6B  <= m_axis_dout_tdata_l6 & "0"; --2*SQRT(SUM)
-                        add_12_l7B  <= m_axis_dout_tdata_l7 & "0"; --2*SQRT(SUM)
-                        add_12_l8B  <= m_axis_dout_tdata_l8 & "0"; --2*SQRT(SUM)
-                        add_12_l9B  <= m_axis_dout_tdata_l9 & "0"; --2*SQRT(SUM)
-                        add_12_l10B <= m_axis_dout_tdata_l10 & "0"; --2*SQRT(SUM)
-                        add_12_l11B <= m_axis_dout_tdata_l11 & "0"; --2*SQRT(SUM)
-                        add_12_l12B <= m_axis_dout_tdata_l12 & "0"; --2*SQRT(SUM)
-                        add_12_l13B <= m_axis_dout_tdata_l13 & "0"; --2*SQRT(SUM)
-                        add_12_l14B <= m_axis_dout_tdata_l14 & "0"; --2*SQRT(SUM)
-                        add_12_l15B <= m_axis_dout_tdata_l15 & "0"; --2*SQRT(SUM)
+                        add_12_l0B  <= m_axis_dout_tdata_l0 & "00"; --4*SQRT(SUM)
+                        add_12_l1B  <= m_axis_dout_tdata_l1 & "00"; --4*SQRT(SUM)
+                        add_12_l2B  <= m_axis_dout_tdata_l2 & "00"; --4*SQRT(SUM)
+                        add_12_l3B  <= m_axis_dout_tdata_l3 & "00"; --4*SQRT(SUM)
+                        add_12_l4B  <= m_axis_dout_tdata_l4 & "00"; --4*SQRT(SUM)
+                        add_12_l5B  <= m_axis_dout_tdata_l5 & "00"; --4*SQRT(SUM)
+                        add_12_l6B  <= m_axis_dout_tdata_l6 & "00"; --4*SQRT(SUM)
+                        add_12_l7B  <= m_axis_dout_tdata_l7 & "00"; --4*SQRT(SUM)
+                        add_12_l8B  <= m_axis_dout_tdata_l8 & "00"; --4*SQRT(SUM)
+                        add_12_l9B  <= m_axis_dout_tdata_l9 & "00"; --4*SQRT(SUM)
+                        add_12_l10B <= m_axis_dout_tdata_l10 & "00"; --4*SQRT(SUM)
+                        add_12_l11B <= m_axis_dout_tdata_l11 & "00"; --4*SQRT(SUM)
+                        add_12_l12B <= m_axis_dout_tdata_l12 & "00"; --4*SQRT(SUM)
+                        add_12_l13B <= m_axis_dout_tdata_l13 & "00"; --4*SQRT(SUM)
+                        add_12_l14B <= m_axis_dout_tdata_l14 & "00"; --4*SQRT(SUM)
+                        add_12_l15B <= m_axis_dout_tdata_l15 & "00"; --4*SQRT(SUM)
                                             
                         state_S <= s0;
                         S_calc <= '1';
