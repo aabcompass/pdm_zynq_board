@@ -5,16 +5,17 @@
    <db_ref_list>
       <db_ref path="spaciroc3_sc_tb_behav.wdb" id="1">
          <top_modules>
+            <top_module name="glbl" />
             <top_module name="spaciroc3_sc_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="5940000000000fs"></ZoomStartTime>
-      <ZoomEndTime time="6062800000001fs"></ZoomEndTime>
-      <Cursor1Time time="5997400000000fs"></Cursor1Time>
+      <ZoomStartTime time="2669400000000fs"></ZoomStartTime>
+      <ZoomEndTime time="2722500000001fs"></ZoomEndTime>
+      <Cursor1Time time="687200000000fs"></Cursor1Time>
    </zoom_setting>
-   <WVObjectSize size="30" />
+   <WVObjectSize size="38" />
    <wvobject type="other" fp_name="/spaciroc3_sc_tb/clk_counter">
       <obj_property name="ElementShortName">clk_counter</obj_property>
       <obj_property name="ObjectShortName">clk_counter</obj_property>
@@ -89,6 +90,13 @@
    <wvobject type="array" fp_name="/spaciroc3_sc_tb/dut/sr_in_pc">
       <obj_property name="ElementShortName">sr_in_pc[5:0]</obj_property>
       <obj_property name="ObjectShortName">sr_in_pc[5:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spaciroc3_sc_tb/dut/sr_ck_pc">
+      <obj_property name="ElementShortName">sr_ck_pc</obj_property>
+      <obj_property name="ObjectShortName">sr_ck_pc</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="divider16" type="divider">
       <obj_property name="label">shifting</obj_property>
@@ -145,5 +153,33 @@
       <obj_property name="ElementShortName">tready_cnt[15:0]</obj_property>
       <obj_property name="ObjectShortName">tready_cnt[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider31" type="divider">
+      <obj_property name="label">load_from_file</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spaciroc3_sc_tb/i_fifo_generator_4tb/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spaciroc3_sc_tb/i_fifo_generator_4tb/m_axis_tready">
+      <obj_property name="ElementShortName">m_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spaciroc3_sc_tb/i_fifo_generator_4tb/m_axis_tdata">
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spaciroc3_sc_tb/your_instance_name/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/spaciroc3_sc_tb/your_instance_name/m_axis_tready">
+      <obj_property name="ElementShortName">m_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/spaciroc3_sc_tb/your_instance_name/m_axis_tdata">
+      <obj_property name="ElementShortName">m_axis_tdata[191:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[191:0]</obj_property>
    </wvobject>
 </wave_config>
