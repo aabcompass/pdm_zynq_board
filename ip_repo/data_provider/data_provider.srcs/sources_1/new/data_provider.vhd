@@ -43,6 +43,8 @@ entity data_provider is
 			-- params
 			infinite : in std_logic;
 			num_of_frames: in std_logic_vector(20 downto 0);
+			-- pixel masking
+			pixel_masking_reg: in std_logic_vector(31 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -199,6 +201,26 @@ architecture Behavioral of data_provider is
 	
 	signal is_pattern: std_logic := '0';
 	signal clr_pattern: std_logic := '0';
+	
+	signal mem_doutb: std_logic_vector(11 downto 0) := (others => '0');
+	
+	signal pixelmask0b_art0l : std_logic := '0';--<= mem_doutb(0);
+	signal pixelmask1b_art0l : std_logic := '0';--<= mem_doutb(1);
+	signal pixelmask0b_art0r : std_logic := '0';--<= mem_doutb(2);
+	signal pixelmask1b_art0r : std_logic := '0';--<= mem_doutb(3);
+	signal pixelmask0b_art1l : std_logic := '0';--<= mem_doutb(4);
+	signal pixelmask1b_art1l : std_logic := '0';--<= mem_doutb(5);
+	signal pixelmask0b_art1r : std_logic := '0';--<= mem_doutb(6);
+	signal pixelmask1b_art1r : std_logic := '0';--<= mem_doutb(7);
+	signal pixelmask0b_art2l : std_logic := '0';--<= mem_doutb(8);
+	signal pixelmask1b_art2l : std_logic := '0';--<= mem_doutb(9);
+	signal pixelmask0b_art2r : std_logic := '0';--<= mem_doutb(10);
+	signal pixelmask1b_art2r : std_logic := '0';--<= mem_doutb(11);
+
+	signal pixelmask0_art0l, pixelmask1_art0l, pixelmask0_art0r, pixelmask1_art0r: std_logic_vector(7 downto 0); 
+	signal pixelmask0_art1l, pixelmask1_art1l, pixelmask0_art1r, pixelmask1_art1r: std_logic_vector(7 downto 0); 
+	signal pixelmask0_art2l, pixelmask1_art2l, pixelmask0_art2r, pixelmask1_art2r: std_logic_vector(7 downto 0); 
+
 
 	attribute keep : string;  
 	attribute keep of frame_art0_check: signal is "true"; 
@@ -375,6 +397,28 @@ raw_datapath_gen: for i in 0 to 2 generate
 	signal infinite_d1: std_logic := '0';
 	signal status_d0: std_logic := '0';
 	
+	signal ecasic_num: std_logic_vector(2 downto 0);
+	signal wea: std_logic_vector(0 downto 0);
+	signal write_cmd: std_logic;
+	signal pixel_discard: std_logic_vector(0 downto 0);
+	signal pixel_num: std_logic_vector(8 downto 0);
+	signal addra: std_logic_vector(9 downto 0);
+	
+
+
+	COMPONENT blk_mem4data_prov
+		PORT (
+			clka : IN STD_LOGIC;
+			ena : IN STD_LOGIC;
+			wea : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+			addra : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+			dina : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+			clkb : IN STD_LOGIC;
+			addrb : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			doutb : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+		);
+	END COMPONENT;
+	
 begin
 
 	xpm_cdc_single_inst: xpm_cdc_single
@@ -469,28 +513,85 @@ begin
 			end if;
 		end if;
 	end process;
+
+	pixel_discard <= pixel_masking_reg(0 downto 0 );
+	pixel_num <= pixel_masking_reg(16 downto 8);
+	ecasic_num <= pixel_masking_reg(22 downto 20);
+	write_cmd <= pixel_masking_reg(24);
+	
+	addra <= pixel_num(8 downto 2) & ecasic_num(0) & pixel_num(1 downto 0);
+	
+	wea <= "1" when (conv_integer(ecasic_num(2 downto 1)) = i) and write_cmd = '1' else "0";	
+	blk_mem_l : blk_mem4data_prov
+	  PORT MAP (
+	    clka => s_axi_clk,
+	    ena => '1',
+	    wea => wea,
+	    addra => addra,
+	    dina => pixel_discard,
+	    clkb => clk_art_x1(i),
+	    addrb => counter(7 downto 0),
+	    doutb => mem_doutb(4*i+3 downto 4*i)
+	  );
+	    
 	
 end generate;  
 	
+	pixelmask0b_art0l <= not mem_doutb(0);
+	pixelmask1b_art0l <= not mem_doutb(1);
+	pixelmask0b_art0r <= not mem_doutb(2);
+	pixelmask1b_art0r <= not mem_doutb(3);
+	pixelmask0b_art1l <= not mem_doutb(4);
+	pixelmask1b_art1l <= not mem_doutb(5);
+	pixelmask0b_art1r <= not mem_doutb(6);
+	pixelmask1b_art1r <= not mem_doutb(7);
+	pixelmask0b_art2l <= not mem_doutb(8);
+	pixelmask1b_art2l <= not mem_doutb(9);
+	pixelmask0b_art2r <= not mem_doutb(10);
+	pixelmask1b_art2r <= not mem_doutb(11);
+	
+	pixelmask1_art0l <= (others => pixelmask1b_art0l);
+	pixelmask0_art0l <= (others => pixelmask0b_art0l);
+	pixelmask1_art0r <= (others => pixelmask1b_art0r);
+	pixelmask0_art0r <= (others => pixelmask0b_art0r);
+
+	pixelmask1_art1l <= (others => pixelmask1b_art1l);
+	pixelmask0_art1l <= (others => pixelmask0b_art1l);
+	pixelmask1_art1r <= (others => pixelmask1b_art1r);
+	pixelmask0_art1r <= (others => pixelmask0b_art1r);
+
+	pixelmask1_art2l <= (others => pixelmask1b_art2l);
+	pixelmask0_art2l <= (others => pixelmask0b_art2l);
+	pixelmask1_art2r <= (others => pixelmask1b_art2r);
+	pixelmask0_art2r <= (others => pixelmask0b_art2r);
 
 	process(clk_art0_x1)
 	begin
 		if(rising_edge(clk_art0_x1)) then
-			data_art0_ddr_d2_sw16 <= data_art0_ddr_d2(23 downto 16) & data_art0_ddr_d2(31 downto 24) & data_art0_ddr_d2(7 downto 0) & data_art0_ddr_d2(15 downto 8);
+			data_art0_ddr_d2_sw16 <=  (data_art0_ddr_d2(23 downto 16) and pixelmask1_art0l) & 
+																(data_art0_ddr_d2(31 downto 24) and pixelmask0_art0l) & 
+																(data_art0_ddr_d2(7 downto 0)   and pixelmask1_art0r) & 
+																(data_art0_ddr_d2(15 downto 8)  and pixelmask0_art0r);
 		end if;
 	end process;
 	
 	process(clk_art1_x1)
 	begin
 		if(rising_edge(clk_art1_x1)) then
-			data_art1_ddr_d2_sw16 <= data_art1_ddr_d2(23 downto 16) & data_art1_ddr_d2(31 downto 24) & data_art1_ddr_d2(7 downto 0) & data_art1_ddr_d2(15 downto 8);
+			data_art1_ddr_d2_sw16 <=  (data_art1_ddr_d2(23 downto 16) and pixelmask1_art1l) & 
+																(data_art1_ddr_d2(31 downto 24) and pixelmask0_art1l) & 
+																(data_art1_ddr_d2(7 downto 0)   and pixelmask1_art1r) & 
+																(data_art1_ddr_d2(15 downto 8)  and pixelmask0_art1r);
 		end if;
 	end process;
 	 
 	process(clk_art2_x1)
 	begin
 		if(rising_edge(clk_art2_x1)) then
-			data_art2_ddr_d2_sw16 <= data_art2_ddr_d2(23 downto 16) & data_art2_ddr_d2(31 downto 24) & data_art2_ddr_d2(7 downto 0) & data_art2_ddr_d2(15 downto 8);
+			data_art2_ddr_d2_sw16 <=  (data_art2_ddr_d2(23 downto 16) and pixelmask1_art2l) & 
+																(data_art2_ddr_d2(31 downto 24) and pixelmask0_art2l) & 
+																(data_art2_ddr_d2(7 downto 0)   and pixelmask1_art2r) & 
+																(data_art2_ddr_d2(15 downto 8)  and pixelmask0_art2r);
 		end if;
 	end process;
 	

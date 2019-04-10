@@ -224,6 +224,7 @@ component data_provider is
 			-- params
 			infinite : in std_logic;
 			num_of_frames: in std_logic_vector(20 downto 0);
+			pixel_masking_reg: in std_logic_vector(31 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -891,6 +892,7 @@ begin
 				testmode => slv_reg9,
 				infinite => slv_reg10(0),
 				num_of_frames => slv_reg3(20 downto 0),--: in std_logic_vector(7 downto 0);
+				pixel_masking_reg => slv_reg6,
 				-- counter
 				status => slv_reg16,--: out std_logic_vector(31 downto 0);
 				counter_tvalid_all_latch => slv_reg18(15 downto 0),--: out std_logic_vector(15 downto 0);--

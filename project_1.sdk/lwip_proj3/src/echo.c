@@ -405,6 +405,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		TrgImmediate();
 	}
+	else if(c == 'M')
+	{
+		LoadPixMaskTst();
+	}
 	else if(c == 'R')
 	{
 		D1_release();

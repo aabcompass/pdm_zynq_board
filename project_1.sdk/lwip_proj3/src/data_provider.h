@@ -80,6 +80,7 @@
 #define REGW_TESTGEN				2
 #define REGW_NFRAMES				3
 #define REGW_CLR					4
+#define REGW_LOAD_PIX_MASK			6
 #define REGW_PATTERN_TRANS_STEP		7
 #define REGW_PATTERN_STEPS_MAX		8
 #define REGW_TESTMODE				9
@@ -101,6 +102,12 @@
 #define CFG_BIT_RUN_TIMESTAMP2		8
 
 #define BIT_TESTMODE_0				0
+
+//REGW_LOAD_PIX_MASK
+#define BIT_PIX_DISCARD				(1<<0)
+#define BIT_PIX_NUM					(1<<8)
+#define BIT_ECASIC_LINE				(1<<20)
+#define BIT_PIX_WR					(1<<24)
 
 
 
