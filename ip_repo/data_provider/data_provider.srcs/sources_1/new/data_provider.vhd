@@ -200,6 +200,7 @@ architecture Behavioral of data_provider is
 	signal pattern_cntr: std_logic_vector(31 downto 0) := (others => '0');
 	
 	signal is_pattern: std_logic := '0';
+	signal is_all_ones: std_logic := '0';
 	signal clr_pattern: std_logic := '0';
 	
 	signal mem_doutb: std_logic_vector(11 downto 0) := (others => '0');
@@ -380,11 +381,11 @@ begin
    
   
   data_art0_ddr_d1 <= data_art0_ddr when rising_edge(clk_art0_x1);
-  data_art0_ddr_d2 <= data_art0_ddr_d1;-- when rising_edge(clk_art0_x1);
+  data_art0_ddr_d2 <= data_art0_ddr_d1 when is_all_ones = '0' else X"01010101";
   data_art1_ddr_d1 <= data_art1_ddr when rising_edge(clk_art1_x1);
-  data_art1_ddr_d2 <= data_art1_ddr_d1;-- when rising_edge(clk_art1_x1);
+  data_art1_ddr_d2 <= data_art1_ddr_d1 when is_all_ones = '0' else X"01010101";
   data_art2_ddr_d1 <= data_art2_ddr when rising_edge(clk_art2_x1);
-  data_art2_ddr_d2 <= data_art2_ddr_d1;-- when rising_edge(clk_art2_x1);
+  data_art2_ddr_d2 <= data_art2_ddr_d1 when is_all_ones = '0' else X"01010101";
 
 	clk_art_x1(0) <= clk_art0_x1;
 	clk_art_x1(1) <= clk_art1_x1;
@@ -519,7 +520,7 @@ begin
 	ecasic_num <= pixel_masking_reg(22 downto 20);
 	write_cmd <= pixel_masking_reg(24);
 	
-	addra <= pixel_num(8 downto 2) & ecasic_num(0) & pixel_num(1 downto 0);
+	addra <= pixel_num(8 downto 1) & ecasic_num(0) & pixel_num(0 downto 0);
 	
 	wea <= "1" when (conv_integer(ecasic_num(2 downto 1)) = i) and write_cmd = '1' else "0";	
 	blk_mem_l : blk_mem4data_prov
@@ -705,6 +706,7 @@ end generate;
 		);
 
 	is_pattern <= testmode(0);
+	is_all_ones <= testmode(1);
 	clr_pattern <= clr_reg(0);
 	
 
