@@ -378,6 +378,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	u16* reg_data;
 	u16* p;
 	static int num = 0;
+	static int ec = 0;
 
 	if(c == '*')
 	{
@@ -405,19 +406,18 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		TrgImmediate();
 	}
+	else if(c == 'm')
+	{
+		LoadPixMaskTst(num, ec, 0);
+	}
 	else if(c == 'M')
 	{
-		LoadPixMaskTst();
+		LoadPixMaskTst(num, ec, 1);
 	}
 	else if(c == 'R')
 	{
 		D1_release();
 	}
-//	else if(c == 'r')
-//	{
-//		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-//		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED;
-//	}
 	else if(c == 'e')
 	{
 		Print_DataDMA_events_L1(/**(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGR_TRIG_ALL_CNT*4)*/20);
@@ -501,8 +501,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c >= '0' && c <= '9')
 	{
 		//SelectSwitch(0);
-		num = c - '0';
-		xil_printf("num=%d\n\r", num);
+		ec = c - '0';
+		xil_printf("ec=%d\n\r", ec);
 	}
 	else if(c == 'D')
 	{
@@ -572,17 +572,13 @@ void ProcessUartCommands(struct netif *netif, char c)
 //	}
 	else if(c == 'x')
 	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) ^= (1<<BIT_TESTMODE_0);
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) ^= (1<<BIT_TESTMODE_ALL_ONES);
 		xil_printf("REGW_TESTMODE=0x%08x\n\r", *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE));
 	}
 	else if(c == 'r')
 	{
 		TestFunc();
 	}
-//	else if(c == 'S')
-//	{
-//		DmaRawStart();
-//	}
 
 }
 
