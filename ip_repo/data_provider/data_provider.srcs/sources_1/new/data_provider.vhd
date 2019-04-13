@@ -121,6 +121,7 @@ architecture Behavioral of data_provider is
 	signal data_art0_ddr, data_art1_ddr, data_art2_ddr: std_logic_vector(31 downto 0) := (others => '0');
 	signal data_art0_ddr_d1, data_art1_ddr_d1, data_art2_ddr_d1: std_logic_vector(31 downto 0) := (others => '0');
 	signal data_art0_ddr_d2, data_art1_ddr_d2, data_art2_ddr_d2: std_logic_vector(31 downto 0) := (others => '0');
+	signal data_art0_ddr_d3, data_art1_ddr_d3, data_art2_ddr_d3: std_logic_vector(31 downto 0) := (others => '0');
 	signal data_art0_ddr_d2_sw16, data_art1_ddr_d2_sw16, data_art2_ddr_d2_sw16: std_logic_vector(31 downto 0) := (others => '0');
 	signal algob_fifo_16to8_0l_dout, algob_fifo_16to8_0r_dout: std_logic_vector(7 downto 0) := (others => '0');
 	signal algob_fifo_16to8_1l_dout, algob_fifo_16to8_1r_dout: std_logic_vector(7 downto 0) := (others => '0');
@@ -137,6 +138,7 @@ architecture Behavioral of data_provider is
 	signal start_feed : std_logic_vector(2 downto 0) := "000";
 	signal start_feed_int : std_logic_vector(2 downto 0) := "000";
 	signal s_axis_tlast_art_cc_fifo, s_axis_tvalid_art_cc_fifo  : std_logic_vector(2 downto 0) := "000";
+	signal s_axis_tlast_art_cc_fifo_d1, s_axis_tvalid_art_cc_fifo_d1  : std_logic_vector(2 downto 0) := "000";
 	signal s_axis_tlast_art_int_fifo, s_axis_tvalid_art_int_fifo  : std_logic_vector(2 downto 0) := "000";
 	
 	signal tcounter : std_logic_vector(8 downto 0) := (others => '0');
@@ -386,6 +388,9 @@ begin
   data_art1_ddr_d2 <= data_art1_ddr_d1 when is_all_ones = '0' else X"01010101";
   data_art2_ddr_d1 <= data_art2_ddr when rising_edge(clk_art2_x1);
   data_art2_ddr_d2 <= data_art2_ddr_d1 when is_all_ones = '0' else X"01010101";
+  data_art0_ddr_d3 <= data_art0_ddr_d2  when rising_edge(clk_art0_x1);
+  data_art1_ddr_d3 <= data_art1_ddr_d2  when rising_edge(clk_art1_x1);
+  data_art2_ddr_d3 <= data_art2_ddr_d2  when rising_edge(clk_art2_x1);
 
 	clk_art_x1(0) <= clk_art0_x1;
 	clk_art_x1(1) <= clk_art1_x1;
@@ -534,7 +539,9 @@ begin
 	    addrb => counter(7 downto 0),
 	    doutb => mem_doutb(4*i+3 downto 4*i)
 	  );
-	    
+
+	s_axis_tvalid_art_cc_fifo_d1(i) <= s_axis_tvalid_art_cc_fifo(i) when rising_edge(clk_art_x1(i));
+	s_axis_tlast_art_cc_fifo_d1(i) <= s_axis_tlast_art_cc_fifo(i) when rising_edge(clk_art_x1(i));     
 	
 end generate;  
 	
@@ -569,43 +576,44 @@ end generate;
 	process(clk_art0_x1)
 	begin
 		if(rising_edge(clk_art0_x1)) then
-			data_art0_ddr_d2_sw16 <=  (data_art0_ddr_d2(23 downto 16) and pixelmask1_art0l) & 
-																(data_art0_ddr_d2(31 downto 24) and pixelmask0_art0l) & 
-																(data_art0_ddr_d2(7 downto 0)   and pixelmask1_art0r) & 
-																(data_art0_ddr_d2(15 downto 8)  and pixelmask0_art0r);
+			data_art0_ddr_d2_sw16 <=  (data_art0_ddr_d3(23 downto 16) and pixelmask1_art0l) & 
+																(data_art0_ddr_d3(31 downto 24) and pixelmask0_art0l) & 
+																(data_art0_ddr_d3(7 downto 0)   and pixelmask1_art0r) & 
+																(data_art0_ddr_d3(15 downto 8)  and pixelmask0_art0r);
 		end if;
 	end process;
 	
 	process(clk_art1_x1)
 	begin
 		if(rising_edge(clk_art1_x1)) then
-			data_art1_ddr_d2_sw16 <=  (data_art1_ddr_d2(23 downto 16) and pixelmask1_art1l) & 
-																(data_art1_ddr_d2(31 downto 24) and pixelmask0_art1l) & 
-																(data_art1_ddr_d2(7 downto 0)   and pixelmask1_art1r) & 
-																(data_art1_ddr_d2(15 downto 8)  and pixelmask0_art1r);
+			data_art1_ddr_d2_sw16 <=  (data_art1_ddr_d3(23 downto 16) and pixelmask1_art1l) & 
+																(data_art1_ddr_d3(31 downto 24) and pixelmask0_art1l) & 
+																(data_art1_ddr_d3(7 downto 0)   and pixelmask1_art1r) & 
+																(data_art1_ddr_d3(15 downto 8)  and pixelmask0_art1r);
 		end if;
 	end process;
 	 
 	process(clk_art2_x1)
 	begin
 		if(rising_edge(clk_art2_x1)) then
-			data_art2_ddr_d2_sw16 <=  (data_art2_ddr_d2(23 downto 16) and pixelmask1_art2l) & 
-																(data_art2_ddr_d2(31 downto 24) and pixelmask0_art2l) & 
-																(data_art2_ddr_d2(7 downto 0)   and pixelmask1_art2r) & 
-																(data_art2_ddr_d2(15 downto 8)  and pixelmask0_art2r);
+			data_art2_ddr_d2_sw16 <=  (data_art2_ddr_d3(23 downto 16) and pixelmask1_art2l) & 
+																(data_art2_ddr_d3(31 downto 24) and pixelmask0_art2l) & 
+																(data_art2_ddr_d3(7 downto 0)   and pixelmask1_art2r) & 
+																(data_art2_ddr_d3(15 downto 8)  and pixelmask0_art2r);
 		end if;
 	end process;
+	
 	
 	inst_art0l_cc_fifo : fifo_generator_0
 		PORT MAP (
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art0_x1,
 			s_aresetn => fifo_rst_n(0),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(0),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(0),
 			s_axis_tready => open,
 			s_axis_tdata => data_art0_ddr_d2_sw16(31 downto 16),--(15 downto 0),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(0),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(0),
 			m_axis_tvalid => m_axis_art0l_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art0l_tdata_real,
@@ -620,11 +628,11 @@ end generate;
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art0_x1,
 			s_aresetn => fifo_rst_n(0),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(0),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(0),
 			s_axis_tready => open,
 			s_axis_tdata => data_art0_ddr_d2_sw16(15 downto 0),--(31 downto 16),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(0),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(0),
 			m_axis_tvalid => m_axis_art0r_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art0r_tdata_real,
@@ -638,11 +646,11 @@ end generate;
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art1_x1,
 			s_aresetn => fifo_rst_n(1),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(1),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(1),
 			s_axis_tready => open,
 			s_axis_tdata => data_art1_ddr_d2_sw16(31 downto 16),--(15 downto 0),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(1),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(1),
 			m_axis_tvalid => m_axis_art1l_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art1l_tdata_real,
@@ -656,11 +664,11 @@ end generate;
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art1_x1,
 			s_aresetn => fifo_rst_n(1),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(1),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(1),
 			s_axis_tready => open,
 			s_axis_tdata => data_art1_ddr_d2_sw16(15 downto 0),--(31 downto 16),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(1),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(1),
 			m_axis_tvalid => m_axis_art1r_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art1r_tdata_real,
@@ -674,11 +682,11 @@ end generate;
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art2_x1,
 			s_aresetn => fifo_rst_n(2),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(2),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(2),
 			s_axis_tready => open,
 			s_axis_tdata => data_art2_ddr_d2_sw16(31 downto 16),--(15 downto 0),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(2),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(2),
 			m_axis_tvalid => m_axis_art2l_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art2l_tdata_real,
@@ -692,11 +700,11 @@ end generate;
 			m_aclk => m_axis_aclk,
 			s_aclk => clk_art2_x1,
 			s_aresetn => fifo_rst_n(2),
-			s_axis_tvalid => s_axis_tvalid_art_cc_fifo(2),
+			s_axis_tvalid => s_axis_tvalid_art_cc_fifo_d1(2),
 			s_axis_tready => open,
 			s_axis_tdata => data_art2_ddr_d2_sw16(15 downto 0),--(31 downto 16),
 			s_axis_tkeep => "00",
-			s_axis_tlast => s_axis_tlast_art_cc_fifo(2),
+			s_axis_tlast => s_axis_tlast_art_cc_fifo_d1(2),
 			m_axis_tvalid => m_axis_art2r_tvalid_i,
 			m_axis_tready => all_ready,
 			m_axis_tdata => m_axis_art2r_tdata_real,
