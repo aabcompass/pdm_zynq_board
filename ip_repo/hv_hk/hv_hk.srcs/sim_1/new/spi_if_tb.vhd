@@ -46,6 +46,7 @@ architecture Behavioral of spi_if_tb is
            miso : in STD_LOGIC;
            cs_exp : out STD_LOGIC := '1';
            cs_dac : out STD_LOGIC := '1';
+           intr: in std_logic;
            -- control if
            start : in STD_LOGIC;
            exp_not_dac: in std_logic;
@@ -96,9 +97,10 @@ begin
 			 miso => '0',--: in STD_LOGIC;
 			 cs_exp => open,--: out STD_LOGIC;
 			 cs_dac => open,--: out STD_LOGIC;
+			 intr => '0',
 			 -- control if
 			 start => start,--: in STD_LOGIC;
-			 exp_not_dac => '0',--: in std_logic; 
+			 exp_not_dac => '1',--: in std_logic; 
 			 ready => open,
 			 datain => X"123456", --: in STD_LOGIC_VECTOR (23 downto 0);
 			 datain2 => X"123456", --: in STD_LOGIC_VECTOR (23 downto 0);
