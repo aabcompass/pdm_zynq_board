@@ -3,19 +3,19 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/clone/current/ip_repo/HV_AERA/HV_AERA.xpr">
+<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current3/ip_repo/HV_AERA/HV_AERA.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="702098e4d106480b83aee91a9c79988c"/>
     <Option Name="Part" Val="xc7z030ffg676-2"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/activehdl"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/HV_AERA.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/HV_AERA.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="29"/>
+    <Option Name="WTXSimLaunchSim" Val="43"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -70,6 +70,13 @@
       </File>
       <File Path="$PPRDIR/component.xml">
         <FileInfo SFType="IPXACT"/>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/ADCV.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>

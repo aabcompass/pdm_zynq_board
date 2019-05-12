@@ -41,7 +41,7 @@ architecture Behavioral of hv_tb is
 			port(   
 						RESET                       : in std_logic;
 						PDM_CLK                     : in std_logic;
-						
+						gtu_width										: in std_logic_vector(4 downto 0);
 						GTU_HV                    	 : out std_logic;
 						CLK_HV                    	 : out std_logic;
 						DATA_HV                     : out std_logic;
@@ -72,7 +72,7 @@ begin
 			port map(   
 						RESET => '0', --                     : in std_logic;
 						PDM_CLK  =>  PDM_CLK,--                   : in std_logic;
-						
+						gtu_width => "00001",
 						GTU_HV   => open , --                	 : out std_logic;
 						CLK_HV   =>  open, --                	 : out std_logic;
 						DATA_HV   => open ,  --                : out std_logic;

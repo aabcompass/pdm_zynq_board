@@ -24,14 +24,14 @@ void ResetDMATrigEventLog()
 	print("XAxiDma_Reset(&dma_events_l1)) Error!\n\r");
 }
 
-void DMA_events_log_init()
-{
-	XStatus status;
-	XAxiDma_Config *CfgPtr;
-	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_EVENTS_L1_DEVICE_ID);
-	status = XAxiDma_CfgInitialize(&dma_events_l1, CfgPtr);
-	if(status)	print("Error in XAxiDma_CfgInitialize dma_events_l1!\n\r");
-}
+//void DMA_events_log_init()
+//{
+//	XStatus status;
+//	XAxiDma_Config *CfgPtr;
+//	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_EVENTS_L1_DEVICE_ID);
+//	status = XAxiDma_CfgInitialize(&dma_events_l1, CfgPtr);
+//	if(status)	print("Error in XAxiDma_CfgInitialize dma_events_l1!\n\r");
+//}
 
 void DMA_events_log_start()
 {

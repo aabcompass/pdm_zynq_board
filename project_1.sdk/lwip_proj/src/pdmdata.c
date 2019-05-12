@@ -598,9 +598,9 @@ void DMA_init()
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l2!\n\r");
 	DmaStartN(3, 0);
 
-	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
-	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
-	if(status)	print("Error in XAxiDma_CfgInitialize data_tst_l1!\n\r");
+//	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_TST_L1_DEVICE_ID);
+//	status = XAxiDma_CfgInitialize(&data_tst_l1, CfgPtr);
+//	if(status)	print("Error in XAxiDma_CfgInitialize data_tst_l1!\n\r");
 
 
 }
