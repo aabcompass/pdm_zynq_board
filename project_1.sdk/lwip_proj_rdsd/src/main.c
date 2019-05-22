@@ -126,7 +126,7 @@ int LoadArtix()
 	{
 		print("Loading bitstream to the cross board\n\r");
 		PrepareArtixConfiguration();
-		err = ReadArtixBitstream(&artixBitstream, &artixBitstream_size);
+		//err = ReadArtixBitstream(&artixBitstream, &artixBitstream_size);
 		if(!err) {
 			SetBitstreamPtr(&artixBitstream, artixBitstream_size);
 			init_loadbit_spi();
@@ -242,7 +242,7 @@ int main()
 	//print("Starting interrupt system for HVPS...\n\r");
 	//InterruptOnAb();
 	print("SD card file system initialization...\n\r");
-	instrumentState.err_SDcard = FfsSdPolledInit();
+	//instrumentState.err_SDcard = FfsSdPolledInit();
 	if(instrumentState.err_SDcard)
 		xil_printf("err_SDcard = %d\n\r", instrumentState.err_SDcard);
 	print("SPACIROC FIFO initialization...\n\r");

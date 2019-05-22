@@ -300,7 +300,7 @@ void UpdateFW_SM()
 	case update_wait4ftp_retr:
 		if(IsRetrComplete())
 		{
-			WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
+			//WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
 			update_sm_state = update_finished;
 		}
 		break;
