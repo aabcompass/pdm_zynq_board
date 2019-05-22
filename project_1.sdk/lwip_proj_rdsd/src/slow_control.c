@@ -253,7 +253,7 @@ void LoadSameDataToSlowControl2(u32 current_dac_value)
 
 void LoadIndividualDataToSlowControl()
 {
-	TxFIFOSend((char*)&reformatted, sizeof(reformatted)/4);
+	//TxFIFOSend((char*)&reformatted, sizeof(reformatted)/4);
 	*(u32*)(XPAR_SPACIROC3_SC_0_BASEADDR + 4*REGW_SLOWCTRL_CONFIG) = (1<<BIT_USER_LED) | (1<<BIT_SELECT_DIN);
 	*(u32*)(XPAR_SPACIROC3_SC_0_BASEADDR + 4*REGW_SLOWCTRL_CONTROLREG) = (1<<BIT_START);
 	*(u32*)(XPAR_SPACIROC3_SC_0_BASEADDR + 4*REGW_SLOWCTRL_CONTROLREG) = 0;

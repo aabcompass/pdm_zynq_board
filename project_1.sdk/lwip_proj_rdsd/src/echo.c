@@ -447,7 +447,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		//xil_printf("GetFileSize() = %d\n\r", GetFileSize());
 		xil_printf("datapath_sm_state = %d\n\r", datapath_sm_state);
 
-		xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
+		//xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
 
 		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
 		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());

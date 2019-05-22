@@ -246,7 +246,7 @@ int main()
 	if(instrumentState.err_SDcard)
 		xil_printf("err_SDcard = %d\n\r", instrumentState.err_SDcard);
 	print("SPACIROC FIFO initialization...\n\r");
-	XLlFifoPollingInit();
+	//XLlFifoPollingInit();
 	if(!instrumentState.err_SDcard)
 	{
 		instrumentState.err_artix_bin = LoadArtix();
