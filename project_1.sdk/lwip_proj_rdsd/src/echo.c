@@ -195,7 +195,7 @@ void StopSM()
 			stop_sm_state = stop_sm_stopping;
 		break;
 	case stop_sm_stopping:
-		if(IsFTP_bin_idle())
+		//if(IsFTP_bin_idle())
 		{
 			// release trigger
 			datapath_sm_state = stop_sm_stopped;
@@ -294,11 +294,11 @@ void UpdateFW_SM()
 	case update_idle:
 		break;
 	case update_start:
-		ReadFile("RETR BOOT.bin\r\n", boot_bin_buf);
+		//ReadFile("RETR BOOT.bin\r\n", boot_bin_buf);
 		update_sm_state = update_wait4ftp_retr;
 		break;
 	case update_wait4ftp_retr:
-		if(IsRetrComplete())
+		//if(IsRetrComplete())
 		{
 			//WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
 			update_sm_state = update_finished;
@@ -441,7 +441,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		// for external trigger i/o check
 		// *(u32*)(XPAR_AXI_GPIO_0_BASEADDR + 8) = ++incr_var;
 		//xil_printf("GetFTP_bin_State() = %d\n\r", GetFTP_bin_State());
-		xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
+		//xil_printf("Get_keepalive_cnt() = %d\n\r", Get_keepalive_cnt());
 
 		//xil_printf("GetFTP_ini_State() = %d\n\r", GetFTP_ini_State());
 		//xil_printf("GetFileSize() = %d\n\r", GetFileSize());

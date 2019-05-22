@@ -310,7 +310,7 @@ int main()
 		//ScurveService();
 		HVInterruptService();
 		GPS_service();
-		IncProgramCounter();
+		//IncProgramCounter();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))
 		{
 			c_uart[0] = XUartPs_RecvByte (XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/);

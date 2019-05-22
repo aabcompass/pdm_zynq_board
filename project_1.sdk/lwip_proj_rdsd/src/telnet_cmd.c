@@ -388,20 +388,20 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		u32 num_of_records, num_of_records_L1, num_of_records_L2;
 		char str_ok[] = "Ok\n\r";
 		char str_err[] = "Error 100\n\r"; //ERR_FTP_CLIENT_IS_BUSY
-		if(!IsFTP_bin_idle())
+		//if(!IsFTP_bin_idle())
 		{
 			tcp_write(tpcb, str_err, sizeof(str_err), 1);
 		}
-		else
+		//else
 		{
 			num_of_records_L1 = StopEventsLog_L1();
 			num_of_records_L2 = StopEventsLog_L2();
 			num_of_records = num_of_records_L1 + num_of_records_L2;
 			Inject16Events2DMA();
 			ResetDMATrigEventLog();
-			SendSpectrum2FTP(Get_DataDMA_events_L1_ptr_and_invalidate(num_of_records),
-					num_of_records*sizeof(DATA_TYPE_EVENTS_LOG), "event_log.bin");
-			tcp_write(tpcb, str_ok, sizeof(str_ok), 1);
+			//SendSpectrum2FTP(Get_DataDMA_events_L1_ptr_and_invalidate(num_of_records),
+			//		num_of_records*sizeof(DATA_TYPE_EVENTS_LOG), "event_log.bin");
+			//tcp_write(tpcb, str_ok, sizeof(str_ok), 1);
 		}
 	}
 	else if(strncmp(p->payload, "trg", 3) == 0)
