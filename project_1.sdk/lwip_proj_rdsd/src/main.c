@@ -57,7 +57,7 @@ git change 5
 #include "swap.h"
 #include "xllfifo.h"
 
-#include "hv.h"
+//#include "hv.h"
 
 //Z_DATA_TYPE_SCI_POLY_V4 packet_sci_poly __attribute__ ((aligned (256)));
 InstrumentState instrumentState;
@@ -236,7 +236,7 @@ int main()
 	//print("Starting interrupt controller...\n\r");
 	//SetupIntrSystem();
 	print("HVPS expander initialization...\n\r");
-	instrumentState.is_HVPS_OK = expIni(); //init hv
+	//instrumentState.is_HVPS_OK = expIni(); //init hv
 	if(!instrumentState.is_HVPS_OK)
 		print("HVPS seems not connected or powered\n\r");
 	//print("Starting interrupt system for HVPS...\n\r");
@@ -308,7 +308,7 @@ int main()
 		StopSM();
 		UpdateFW_SM();
 		//ScurveService();
-		HVInterruptService();
+		//HVInterruptService();
 		GPS_service();
 		//IncProgramCounter();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))

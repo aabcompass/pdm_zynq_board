@@ -53,7 +53,7 @@
 #include "slow_control.h"
 #include "axis_flowctrl_d1.h"
 #include "axis_flowctrl_d2.h"
-#include "hv.h"
+//#include "hv.h"
 #include "xparameters.h"
 
 #include "minieuso_pdmdata.h"
@@ -170,14 +170,14 @@ void RunStopping()
 
 void SendLogToFTP()
 {
-	u32 size = HV_getLogFileSize();
+	//u32 size = HV_getLogFileSize();
 	int ret;
 	memset(hvps_log_file_ftp, 0, sizeof(Z_DATA_TYPE_HVPS_LOG_V1));
-	memcpy(hvps_log_file_ftp, HV_getLogPtr(), size);
+	//memcpy(hvps_log_file_ftp, HV_getLogPtr(), size);
 	DeleteFile("HVPS.log");
-	ret = CreateFile("HVPS.log", hvps_log_file_ftp, size, 0, file_regular);
+	//ret = CreateFile("HVPS.log", hvps_log_file_ftp, size, 0, file_regular);
 	xil_printf("CreateFile rets %d\n\r", ret);
-	HV_clean_log();
+	//HV_clean_log();
 }
 
 void StopSM()
@@ -386,11 +386,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == '#')
 	{
-		print_expander_regs();
+		//print_expander_regs();
 	}
 	else if(c == 'h')
 	{
-		HV_prnLog();
+		//HV_prnLog();
 	}
 	else if(c == 't')
 	{
@@ -449,8 +449,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 
 		//xil_printf("GetSC3FifoVacancy: %d\n\r",  GetSC3FifoVacancy());
 
-		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
-		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
+		//xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
+		//xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
 
 		//xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
