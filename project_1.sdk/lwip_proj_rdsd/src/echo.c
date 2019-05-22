@@ -452,7 +452,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("Intr: %d\n\r", *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_INTR));
 		xil_printf("HV_getLogSize()= %d\n\r", HV_getLogSize());
 
-		xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
+		//xil_printf("Get_receive_buffer_offset=%d\n\r", Get_receive_buffer_offset());
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
 		xil_printf("GetFTPstate()=%d\n\r",  GetFTPstate());
 		xil_printf("GetCurPosFC1()=%d\n\r", GetCurPosFC1());

@@ -274,8 +274,8 @@ int main()
 	print("Flow control initialization...\n\r");
 	FlowControlInit_D1();
 	FlowControlInit_D2();
-	print("Starting test data provider\n\r");
-	start_test_data_provider();
+	//print("Starting test data provider\n\r");
+	//start_test_data_provider();
 	print("DMA initialization...\n\r");
 	//DMA_init();
 	//DMA_events_log_init();
