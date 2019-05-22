@@ -171,6 +171,8 @@ int LoadArtix()
 
 int main()
 {
+	print("Starting main program...\n\r");
+
 	//while(1)
 #if __aarch64__
 	Xil_DCacheDisable();
@@ -192,6 +194,7 @@ int main()
 #endif
 #endif
 
+	print("Init platform...\n\r");
 	init_platform();
 
 #if LWIP_DHCP==1
@@ -227,6 +230,7 @@ int main()
 
 	/* specify that the network if is up */
 	netif_set_up(echo_netif);
+
 
 	SetDefaultParameters();
 	//print("Starting interrupt controller...\n\r");

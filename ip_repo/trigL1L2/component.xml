@@ -138,12 +138,15 @@
           <spirit:localName>xilinx_anylanguagesynthesis_xilinx_com_ip_fifo_generator_13_1__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagesynthesis_xilinx_com_ip_mult_gen_12_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagesynthesis_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>f0a54d71</spirit:value>
+            <spirit:value>dedbddfd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -169,12 +172,15 @@
           <spirit:localName>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_fifo_generator_13_1__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_mult_gen_12_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>bc2445ca</spirit:value>
+            <spirit:value>fc210a32</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -382,6 +388,10 @@
         <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>L1L2_TRIGGER_MINIEUSO_v2.srcs/sources_1/ip/MULT_8/MULT_8.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>L1L2_TRIGGER_MINIEUSO_v2.srcs/sources_1/ip/S_MEMORY/S_MEMORY.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
       </spirit:file>
@@ -498,7 +508,21 @@
       </spirit:vendorExtensions>
     </spirit:fileSet>
     <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagesynthesis_xilinx_com_ip_mult_gen_12_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="mult_gen" xilinx:version="12.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+    <spirit:fileSet>
       <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>L1L2_TRIGGER_MINIEUSO_v2.srcs/sources_1/ip/MULT_8/MULT_8.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
       <spirit:file>
         <spirit:name>L1L2_TRIGGER_MINIEUSO_v2.srcs/sources_1/ip/S_MEMORY/S_MEMORY.xci</spirit:name>
         <spirit:userFileType>xci</spirit:userFileType>
@@ -615,6 +639,16 @@
       </spirit:vendorExtensions>
     </spirit:fileSet>
     <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_mult_gen_12_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="mult_gen" xilinx:version="12.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+    <spirit:fileSet>
       <spirit:name>xilinx_testbench_view_fileset</spirit:name>
       <spirit:file>
         <spirit:name>L1L2_TRIGGER_MINIEUSO_v2.srcs/sim_1/imports/L1_TRIGGER_MINIEUSO_V4/testbench_EC_behav.wcfg</spirit:name>
@@ -652,17 +686,17 @@
       </xilinx:taxonomies>
       <xilinx:displayName>ALGO_B_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>3</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2018-11-24T16:43:10Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>5</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2019-05-12T20:33:55Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
-        <xilinx:tag xilinx:name="user.org:user:ALGO_B:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/trigL1L2</xilinx:tag>
+        <xilinx:tag xilinx:name="user.org:user:ALGO_B:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current3/ip_repo/trigL1L2</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2016.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="03056635"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="4e315b0e"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="61c7844d"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="3d988aa8"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="ba2e542f"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="db54f1b5"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>

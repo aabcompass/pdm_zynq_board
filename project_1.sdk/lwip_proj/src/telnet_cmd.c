@@ -308,6 +308,21 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(strncmp(p->payload, "hvps init", 9) == 0)
+	{
+		print("Additional try to initialize HVPS\n\r");
+		instrumentState.is_HVPS_OK = expIni(); //init hv
+		if(!instrumentState.is_HVPS_OK)
+		{
+			print("HVPS seems not connected or powered\n\r");
+			SendErrorCommand(tpcb, ERR_HVPS_DISCONN_OR_POWERED);
+		}
+		else
+		{
+			char str[] = "Ok\n\r";
+			tcp_write(tpcb, str, sizeof(str), 1);
+		}
+	}
 	else if(sscanf(p->payload, "hvps turnoff %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
