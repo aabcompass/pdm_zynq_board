@@ -79,7 +79,7 @@ typedef struct
 	int is_artix_loaded;
 } InstrumentState;
 
-#define SCI_DATA_ARRAY_SIZE 30
+#define SCI_DATA_ARRAY_SIZE 100
 
 typedef struct
 {
