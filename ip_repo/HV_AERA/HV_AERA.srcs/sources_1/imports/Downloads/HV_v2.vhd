@@ -33,7 +33,7 @@ use ieee.std_logic_unsigned.all;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity HV is
+entity HV_v2 is
     port(   
 					RESET                       : in std_logic;
 					PDM_CLK                     : in std_logic;
@@ -46,9 +46,9 @@ entity HV is
 					TRANSMIT 						 : in std_logic;			
 					TEST                        : out std_logic_vector(31 downto 0)
         );
-end HV;
+end HV_v2;
  
-architecture Behavioral of HV is
+architecture Behavioral of HV_v2 is
 
 signal clk_cnt										 : std_logic_vector(3 downto 0):=(others=>'0');
 signal command_in_1								 : std_logic_vector(17 downto 0):=(others=>'0');

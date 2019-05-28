@@ -54,10 +54,10 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/L1L2_TRIGGER_MINIEUSO/EC.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/Downloads/EC.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../jemeuso/L1L2_TRIGGER_MINIEUSO/EC.vhd"/>
-          <Attr Name="ImportTime" Val="1476344591"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Downloads/EC.vhd"/>
+          <Attr Name="ImportTime" Val="1558714088"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
