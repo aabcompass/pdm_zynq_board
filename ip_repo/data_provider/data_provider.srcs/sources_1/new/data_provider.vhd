@@ -45,6 +45,10 @@ entity data_provider is
 			num_of_frames: in std_logic_vector(20 downto 0);
 			-- pixel masking
 			pixel_masking_reg: in std_logic_vector(31 downto 0);
+			-- ADCV calc params
+			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
+			adcv_max_pixel_num: in std_logic_vector(7 downto 0); 
+			ec_sig_out: out std_logic_vector(8 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -94,6 +98,9 @@ entity data_provider is
 end data_provider; 
 
 architecture Behavioral of data_provider is
+
+attribute KEEP_HIERARCHY : string;
+attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
  
 	
 	COMPONENT fifo_generator_0
@@ -602,6 +609,104 @@ end generate;
 																(data_art2_ddr_d3(15 downto 8)  and pixelmask0_art2r);
 		end if;
 	end process;
+	
+	ADCV_calc_gen: for i in 0 to 2 generate
+		signal cnt_tetrade_ec_00: std_logic_vector(4*8-1 downto 0) := (others => '0');
+		signal cnt_tetrade_ec_01: std_logic_vector(4*8-1 downto 0) := (others => '0');
+		signal cnt_tetrade_ec_02: std_logic_vector(4*8-1 downto 0) := (others => '0');
+		signal sum_ec_00, sum_ec_01, sum_ec_02: std_logic_vector(7 downto 0) := (others => '0');
+		signal datain: std_logic_vector(31 downto 0) := (others => '0');
+		signal datain_cnt: std_logic_vector(7 downto 0) := (others => '0');
+		signal ec_sig: std_logic_vector(2 downto 0) := "000";
+	begin
+		
+		art0_select: if(i=0) generate
+			datain <= data_art0_ddr_d2_sw16;
+		end generate;
+
+		art1_select: if(i=1) generate
+			datain <= data_art1_ddr_d2_sw16;
+		end generate;
+
+		art2_select: if(i=2) generate
+			datain <= data_art2_ddr_d2_sw16;
+		end generate;
+
+		ADCV_calc_cnt_process: process(clk_art_x1(i))
+		begin
+			if(rising_edge(clk_art_x1(i))) then
+				if(s_axis_tvalid_art_cc_fifo_d1(i) = '0') then
+					datain_cnt <= (others => '0');
+				else
+					datain_cnt <= datain_cnt + 1;
+				end if;
+			end if;
+		end process;
+		
+		ADCV_calc_process: process(clk_art_x1(i))
+		begin
+			if(rising_edge(clk_art_x1(i))) then
+				if(s_axis_tvalid_art_cc_fifo_d1(i) = '0') then
+					cnt_tetrade_ec_00(4*8-1 downto 0) <= (others => '0');
+					cnt_tetrade_ec_01(4*8-1 downto 0) <= (others => '0');
+					cnt_tetrade_ec_02(4*8-1 downto 0) <= (others => '0');
+				else
+					for j in 0 to 3 loop
+						if(datain(8*j+7 downto 8*j) > adcv_max_asic_cnts) then
+							case datain_cnt(7 downto 6) is
+								when "00" => cnt_tetrade_ec_00(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
+								when "01" => cnt_tetrade_ec_01(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
+								when "10" => cnt_tetrade_ec_02(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
+								when others => cnt_tetrade_ec_02(8*j+7 downto 8*j) <= cnt_tetrade_ec_02(8*j+7 downto 8*j);
+							end case;
+						end if;
+					end loop;
+				end if;				
+			end if;
+		end process;
+		
+		sum_process: process(clk_art_x1(i))
+		begin	
+			if(rising_edge(clk_art_x1(i))) then
+				sum_ec_00 <= cnt_tetrade_ec_00(31 downto 24) + 
+										 cnt_tetrade_ec_00(23 downto 16) +
+										 cnt_tetrade_ec_00(15 downto 8) +
+										 cnt_tetrade_ec_00(7 downto 0);
+				sum_ec_01 <= cnt_tetrade_ec_01(31 downto 24) + 
+										 cnt_tetrade_ec_01(23 downto 16) +
+										 cnt_tetrade_ec_01(15 downto 8) +
+										 cnt_tetrade_ec_01(7 downto 0);
+				sum_ec_02 <= cnt_tetrade_ec_02(31 downto 24) + 
+										 cnt_tetrade_ec_02(23 downto 16) +
+										 cnt_tetrade_ec_02(15 downto 8) +
+										 cnt_tetrade_ec_02(7 downto 0);
+			end if;
+		end process;
+		
+		cmp_process: process(clk_art_x1(i))
+		begin	
+			if(rising_edge(clk_art_x1(i))) then
+				if(sum_ec_00 >= adcv_max_pixel_num) then ec_sig(0) <= '1'; else ec_sig(0) <= '0'; end if;
+				if(sum_ec_01 >= adcv_max_pixel_num) then ec_sig(1) <= '1'; else ec_sig(1) <= '0'; end if;
+				if(sum_ec_02 >= adcv_max_pixel_num) then ec_sig(2) <= '1'; else ec_sig(2) <= '0'; end if;
+			end if;
+		end process;
+		
+xpm_cdc_array_single_inst: xpm_cdc_array_single
+		  generic map (
+		    -- Common module generics
+		    DEST_SYNC_FF   => 4, -- integer; range: 2-10
+		    SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+		    SRC_INPUT_REG  => 0, -- integer; 0=do not register input, 1=register input
+		    WIDTH          => 3  -- integer; range: 2-1024
+		  )
+		  port map (
+		    src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+		    src_in   => ec_sig,
+		    dest_clk => m_axis_aclk,
+		    dest_out => ec_sig_out(3*i+2 downto 3*i)
+		  );		
+	end generate;
 	
 	
 	inst_art0l_cc_fifo : fifo_generator_0

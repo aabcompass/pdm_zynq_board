@@ -66,6 +66,10 @@ end ADCV;
 
 architecture Behavioral of ADCV is
 
+		attribute KEEP_HIERARCHY : string;
+		attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
+
+
 		signal ec_sig_d1: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
 		signal ec_release_sig: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
 		signal cathode_voltage, cathode_voltage_d1: std_logic_vector(2*9-1 downto 0) := (others => '1');

@@ -87,8 +87,14 @@
           <Attr Name="UsedIn" Val="out_of_context"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/constrs_1/new/tigs.xdc">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+        </FileInfo>
+      </File>
       <Config>
-        <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/data_provider_clocks_ooc.xdc"/>
+        <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/tigs.xdc"/>
         <Option Name="ConstrsType" Val="XDC"/>
       </Config>
     </FileSet>

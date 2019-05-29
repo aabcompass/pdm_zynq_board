@@ -332,6 +332,12 @@ void PrnAllRegs()
 {
 	int i;
 	print("\n\r");
+	print("\n\rXPAR_AXI_GPIO_0_BASEADDR");
+	for(i=0;i<4;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXI_GPIO_0_BASEADDR+i*4));
+	}
 	print("\n\rXPAR_AXI_DATA_PROVIDER_0_BASEADDR");
 	for(i=0;i<32;i++)
 	{

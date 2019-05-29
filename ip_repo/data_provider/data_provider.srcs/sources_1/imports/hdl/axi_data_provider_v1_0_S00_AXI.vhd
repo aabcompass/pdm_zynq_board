@@ -27,7 +27,9 @@ entity axi_data_provider_v1_0_S00_AXI is
 		-- data lines
 		data_art0: in std_logic_vector(15 downto 0);
 		data_art1: in std_logic_vector(15 downto 0);
-		data_art2: in std_logic_vector(15 downto 0);			
+		data_art2: in std_logic_vector(15 downto 0);		
+		--ADCV
+		ec_sig_out: out std_logic_vector(8 downto 0);	
 		-- -- data to trigger L1 and to memory buffer
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
@@ -136,6 +138,9 @@ end axi_data_provider_v1_0_S00_AXI;
 
 architecture arch_imp of axi_data_provider_v1_0_S00_AXI is
 
+	attribute KEEP_HIERARCHY : string;
+	attribute KEEP_HIERARCHY of arch_imp: architecture is "TRUE";
+
 	-- AXI4LITE signals
 	signal axi_awaddr	: std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
 	signal axi_awready	: std_logic;
@@ -225,6 +230,10 @@ component data_provider is
 			infinite : in std_logic;
 			num_of_frames: in std_logic_vector(20 downto 0);
 			pixel_masking_reg: in std_logic_vector(31 downto 0);
+			-- ADCV calc params
+			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
+			adcv_max_pixel_num: in std_logic_vector(7 downto 0); 
+			ec_sig_out: out std_logic_vector(8 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -893,6 +902,10 @@ begin
 				infinite => slv_reg10(0),
 				num_of_frames => slv_reg3(20 downto 0),--: in std_logic_vector(7 downto 0);
 				pixel_masking_reg => slv_reg6,
+				-- adcv
+				adcv_max_asic_cnts => slv_reg14(15 downto 8),--: in std_logic_vector(7 downto 0);
+				adcv_max_pixel_num => slv_reg14(7 downto 0),--: in std_logic_vector(7 downto 0); 
+				ec_sig_out => ec_sig_out,--: out std_logic_vector(8 downto 0);
 				-- counter
 				status => slv_reg16,--: out std_logic_vector(31 downto 0);
 				counter_tvalid_all_latch => slv_reg18(15 downto 0),--: out std_logic_vector(15 downto 0);--

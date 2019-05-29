@@ -62,11 +62,6 @@
 #define IS_CS				1
 #define NO_CS				0
 
-// HV CATHODE regs
-#define REGW_HVCATH_SW		0
-#define REGW_HVCATH_CTRL	2
-
-#define BIT_TRANSMIT		0
 
 
 #define  IODIR    0x00  //direction register: 1-input, 0-output

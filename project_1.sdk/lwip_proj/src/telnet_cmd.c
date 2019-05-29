@@ -7,6 +7,7 @@
 #include "pdmdp_err.h"
 #include "axis_flowctrl_d1.h"
 #include "axis_flowctrl_d2.h"
+#include "xparameters.h"
 
 
 #include "unix_date_time.h"
@@ -114,6 +115,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	}
 	else if(strncmp(p->payload, "instrument ver", 14) == 0)
 	{
+		char tmp_str[10];
 		//char ok_eomess_str[] = "Ok\n\r";
 		strcpy(ans_str, __DATE__);
 		strcat(ans_str, " ");
@@ -121,6 +123,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		strcat(ans_str, " ");
 		strcat(ans_str, MINIEUSO_ZYNQ_VER_STRING);
 		strcat(ans_str, "\r\n");
+		sprintf(tmp_str, "%d\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR+8));
+		strcat(ans_str, tmp_str);
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 	}
 	else if(sscanf(p->payload, "instrument mode %d %d",

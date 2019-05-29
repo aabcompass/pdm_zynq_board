@@ -10,12 +10,12 @@
     <Option Name="Part" Val="xc7z030ffg676-2"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../alexander/xil_proj/pdm_zynq_board/current/ip_repo/HV_AERA/HV_AERA.cache/compile_simlib/activehdl"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
@@ -79,6 +79,13 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/Downloads/HV_v2.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/hdl/axi_cathode_ctrl.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>

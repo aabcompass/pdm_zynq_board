@@ -33,6 +33,8 @@ entity axi_data_provider_v1_0 is
 		data_art1: in std_logic_vector(15 downto 0);
 		data_art2: in std_logic_vector(15 downto 0);			
 		-- -- data to trigger L1 and to memory buffer
+		--ADCV
+		ec_sig_out: out std_logic_vector(8 downto 0);
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
 		
@@ -123,6 +125,8 @@ architecture arch_imp of axi_data_provider_v1_0 is
 		data_art1: in std_logic_vector(15 downto 0);
 		data_art2: in std_logic_vector(15 downto 0);			
 		-- -- data to trigger L1 and to memory buffer
+		--ADCV
+		ec_sig_out: out std_logic_vector(8 downto 0);
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
 		
@@ -216,6 +220,8 @@ axi_data_provider_v1_0_S00_AXI_inst : axi_data_provider_v1_0_S00_AXI
 		data_art1 => data_art1,--: in std_logic_vector(15 downto 0);
 		data_art2 => data_art2,--: in std_logic_vector(15 downto 0);			
 		-- -- data to trigger L1 and to memory buffer
+		--ADCV
+		ec_sig_out => ec_sig_out,
 		-- raw data to MPU
 		m_axis_aclk => m_axis_aclk,--: in std_logic;
 		

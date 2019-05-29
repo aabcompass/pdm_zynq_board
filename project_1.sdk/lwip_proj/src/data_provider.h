@@ -90,6 +90,8 @@
 #define REGW_PATTERN_CLR_1R1L		12
 #define REGW_PATTERN_CLR_2R2L		13
 
+#define REGW_ADCV_CONF				14
+
 #define REGR_STATUS					16
 #define REGR_TST_DATA_VERIFICATOR	18
 
@@ -109,6 +111,10 @@
 #define BIT_PIX_NUM					(1<<8)
 #define BIT_ECASIC_LINE				(1<<20)
 #define BIT_PIX_WR					(1<<24)
+
+//REGW_ADCV_CONF
+#define BIT_ADCV_MAX_PIXEL_NUM		(1<<0)
+#define BIT_ADCV_ASIC_CNT			(1<<8)
 
 
 

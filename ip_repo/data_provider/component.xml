@@ -536,7 +536,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>413579c9</spirit:value>
+            <spirit:value>1ea3c564</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -558,7 +558,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>031acfd1</spirit:value>
+            <spirit:value>7e0165d7</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -566,7 +566,7 @@
         <spirit:name>xilinx_testbench</spirit:name>
         <spirit:displayName>Test Bench</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
-        <spirit:modelName>pixel_addr_tb</spirit:modelName>
+        <spirit:modelName>data_provider_tb</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
         </spirit:fileSetRef>
@@ -711,6 +711,23 @@
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
             <spirit:left spirit:format="long">15</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ec_sig_out</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">8</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -1570,6 +1587,12 @@
         <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>data_provider.srcs/constrs_1/new/tigs.xdc</spirit:name>
+        <spirit:userFileType>xdc</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>data_provider.srcs/sources_1/new/data_provider.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
@@ -1588,7 +1611,7 @@
       <spirit:file>
         <spirit:name>data_provider.srcs/sources_1/imports/hdl/axi_data_provider_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_ad5259d6</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_4fddcb10</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1712,19 +1735,19 @@
       </xilinx:taxonomies>
       <xilinx:displayName>axi_data_provider</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>8</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-04-06T19:57:46Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>10</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2019-05-29T09:06:54Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="user.org:user:axi_data_provider_v1_0:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current/ip_repo/data_provider</xilinx:tag>
-        <xilinx:tag xilinx:name="user.org:user:axi_data_provider:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current2/ip_repo/data_provider</xilinx:tag>
+        <xilinx:tag xilinx:name="user.org:user:axi_data_provider:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current3/ip_repo/data_provider</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2016.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7cff464b"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="92676e58"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="727da359"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="63358aea"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="9c6e3539"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="169f24d8"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="f9bc4ffd"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="6cd6f88f"/>
     </xilinx:packagingInfo>

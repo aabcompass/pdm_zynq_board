@@ -50,6 +50,10 @@ end HV_v2;
  
 architecture Behavioral of HV_v2 is
 
+		attribute KEEP_HIERARCHY : string;
+		attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
+
+
 signal clk_cnt										 : std_logic_vector(3 downto 0):=(others=>'0');
 signal command_in_1								 : std_logic_vector(17 downto 0):=(others=>'0');
 signal command_in_2								 : std_logic_vector(17 downto 0):=(others=>'0');
