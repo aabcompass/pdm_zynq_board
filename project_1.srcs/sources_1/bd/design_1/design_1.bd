@@ -270,13 +270,13 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc</spirit:name>
+          <spirit:name>sr_ck_pc_art</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc_art</spirit:name>
+          <spirit:name>sr_ck_pc</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
@@ -1334,13 +1334,6 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>HV_AERA_IP_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="HV_AERA_IP" spirit:vendor="user.org" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_HV_AERA_IP_0_0</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>ALGO_B_0</spirit:instanceName>
         <spirit:componentRef spirit:library="user" spirit:name="ALGO_B" spirit:vendor="user.org" spirit:version="1.0"/>
         <spirit:configurableElementValues>
@@ -1377,6 +1370,13 @@
           <spirit:configurableElementValue spirit:referenceId="CONST_VAL">20190529</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>axi_cathode_ctrl_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="axi_cathode_ctrl" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axi_cathode_ctrl_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:interconnections>
       <spirit:interconnection>
@@ -1393,11 +1393,6 @@
         <spirit:name>processing_system7_0_axi_periph_M03_AXI</spirit:name>
         <spirit:activeInterface spirit:busRef="M03_AXI" spirit:componentRef="inst_interconnect_100MHz"/>
         <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="axi_gpio_0"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>processing_system7_0_axi_periph_M05_AXI</spirit:name>
-        <spirit:activeInterface spirit:busRef="s00_axi" spirit:componentRef="HV_AERA_IP_0"/>
-        <spirit:activeInterface spirit:busRef="M05_AXI" spirit:componentRef="inst_interconnect_100MHz"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>processing_system7_0_axi_periph_M06_AXI</spirit:name>
@@ -1899,6 +1894,11 @@
         <spirit:activeInterface spirit:busRef="m_ev_axis" spirit:componentRef="ALGO_B_TA_1"/>
         <spirit:activeInterface spirit:busRef="s_axis_ta_event" spirit:componentRef="axis_flow_control_D1"/>
       </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>inst_interconnect_100MHz_M05_AXI</spirit:name>
+        <spirit:activeInterface spirit:busRef="M05_AXI" spirit:componentRef="inst_interconnect_100MHz"/>
+        <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="axi_cathode_ctrl_0"/>
+      </spirit:interconnection>
     </spirit:interconnections>
     <spirit:adHocConnections>
       <spirit:adHocConnection>
@@ -1952,7 +1952,8 @@
         <spirit:internalPortReference spirit:componentRef="l2_trigger_0" spirit:portRef="ap_clk"/>
         <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_gps_core_0" spirit:portRef="S_AXI_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="s00_axi_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ACLK"/>
@@ -1973,8 +1974,7 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="S_AXI_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>processing_system7_0_FCLK_RESET0_N</spirit:name>
@@ -2026,7 +2026,7 @@
         <spirit:internalPortReference spirit:componentRef="l2_trigger_0" spirit:portRef="ap_rst_n"/>
         <spirit:internalPortReference spirit:componentRef="hv_hk_v1_0_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_gps_core_0" spirit:portRef="S_AXI_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="s00_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M01_ARESETN"/>
@@ -2045,7 +2045,7 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M11_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="S_AXI_ARESETN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>rst_processing_system7_0_50M_interconnect_aresetn</spirit:name>
@@ -2084,40 +2084,10 @@
         <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="data_art1"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_GTU_HV_p</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="GTU_HV_p"/>
-        <spirit:externalPortReference spirit:portRef="GTU_HV_p"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_GTU_HV_n</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="GTU_HV_n"/>
-        <spirit:externalPortReference spirit:portRef="GTU_HV_n"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_CLK_HV_p</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="CLK_HV_p"/>
-        <spirit:externalPortReference spirit:portRef="CLK_HV_p"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_CLK_HV_n</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="CLK_HV_n"/>
-        <spirit:externalPortReference spirit:portRef="CLK_HV_n"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_DATA_HV_p</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="DATA_HV_p"/>
-        <spirit:externalPortReference spirit:portRef="DATA_HV_p"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>HV_AERA_IP_0_DATA_HV_n</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="HV_AERA_IP_0" spirit:portRef="DATA_HV_n"/>
-        <spirit:externalPortReference spirit:portRef="DATA_HV_n"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_ck_pc</spirit:name>
         <spirit:internalPortReference spirit:componentRef="spaciroc3_sc_0" spirit:portRef="sr_ck_pc"/>
-        <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
         <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
+        <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_rstb_pc</spirit:name>
@@ -2536,6 +2506,41 @@
         <spirit:name>xlconstant_0_dout</spirit:name>
         <spirit:internalPortReference spirit:componentRef="PL_FW_VER" spirit:portRef="dout"/>
         <spirit:internalPortReference spirit:componentRef="axi_gpio_0" spirit:portRef="gpio2_io_i"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_GTU_HV_p</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="GTU_HV_p"/>
+        <spirit:externalPortReference spirit:portRef="GTU_HV_p"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_GTU_HV_n</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="GTU_HV_n"/>
+        <spirit:externalPortReference spirit:portRef="GTU_HV_n"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_CLK_HV_p</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="CLK_HV_p"/>
+        <spirit:externalPortReference spirit:portRef="CLK_HV_p"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_CLK_HV_n</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="CLK_HV_n"/>
+        <spirit:externalPortReference spirit:portRef="CLK_HV_n"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_DATA_HV_p</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="DATA_HV_p"/>
+        <spirit:externalPortReference spirit:portRef="DATA_HV_p"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_cathode_ctrl_0_DATA_HV_n</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="DATA_HV_n"/>
+        <spirit:externalPortReference spirit:portRef="DATA_HV_n"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>axi_data_provider_0_ec_sig_out</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="ec_sig_out"/>
+        <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="ec_sig"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
@@ -11177,15 +11182,15 @@
             <spirit:range>64K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_HV_AERA_IP_0_reg0</spirit:name>
-            <spirit:displayName>/HV_AERA_IP_0/s00_axi/reg0</spirit:displayName>
-            <spirit:addressOffset>0x83C00000</spirit:addressOffset>
-            <spirit:range>64K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
             <spirit:name>SEG_axi_data_provider_0_reg0</spirit:name>
             <spirit:displayName>/axi_data_provider_0/s00_axi/reg0</spirit:displayName>
             <spirit:addressOffset>0x83C30000</spirit:addressOffset>
+            <spirit:range>64K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_axi_cathode_ctrl_0_reg0</spirit:name>
+            <spirit:displayName>/axi_cathode_ctrl_0/S_AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0x83C00000</spirit:addressOffset>
             <spirit:range>64K</spirit:range>
           </spirit:segment>
         </spirit:segments>

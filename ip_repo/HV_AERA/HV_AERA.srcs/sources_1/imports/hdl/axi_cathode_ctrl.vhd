@@ -21,8 +21,11 @@ entity axi_cathode_ctrl is
 	port (
 		-- Users to add ports here
 		GTU_HV_p, GTU_HV_n, CLK_HV_p, CLK_HV_n, DATA_HV_p, DATA_HV_n: out std_logic;
-		
+		--ADCV
 		ec_sig: in std_logic_vector(8 downto 0);
+		--To HVPS log file
+		axis_cathode_tdata: out std_logic_vector(31 downto 0);
+		axis_cathode_tvalid: out std_logic;
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -192,7 +195,7 @@ architecture arch_imp of axi_cathode_ctrl is
            release_time: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty: in std_logic_vector(7 downto 0));
+           gtu_big_pulses_qty: in std_logic_vector(15 downto 0));
 	end component;
 	
 	signal command_adcv: std_logic_vector(17 downto 0) := (others => '0');
@@ -590,7 +593,7 @@ begin
 									slv_reg0 <= slv_reg0;
 									slv_reg1 <= slv_reg1;
 									slv_reg2 <= slv_reg2;
-										slv_reg3 <= slv_reg3;
+									slv_reg3 <= slv_reg3;
 									slv_reg4 <= slv_reg4;
 									slv_reg5 <= slv_reg5;
 									slv_reg6 <= slv_reg6;
@@ -823,16 +826,16 @@ begin
            release_time => slv_reg5,--: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0 => slv_reg6(4 downto 0),--: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1 => slv_reg7(4 downto 0),--: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty => slv_reg8(7 downto 0));--: in std_logic_vector(7 downto 0));
+           gtu_big_pulses_qty => slv_reg8(15 downto 0));--: in std_logic_vector(7 downto 0));
 
 	adcv_select: process(S_AXI_ACLK)
 	begin
 		if(rising_edge(S_AXI_ACLK)) then
-			if(adcv_en = '0') then
+			if(adcv_en = '0') then --old mode
 				COMMAND <= "000000000000" & "01" & slv_reg0(17 downto 0);
-				TRANSMIT <= slv_reg2(0);
-				gtu_width <= "00010";
-			else
+				TRANSMIT <= slv_reg2(0); 
+				gtu_width <= slv_reg6(4 downto 0);
+			else   -- new mode
 				COMMAND <= "000000000000" & "01" & command_adcv;
 				TRANSMIT <= command_adcv_dv;
 				gtu_width <= gtu_len_adcv;
@@ -850,10 +853,11 @@ begin
 						gtu_width => gtu_width,		
 						COMMAND		=>		COMMAND,			 --: in std_logic_vector(31 downto 0);
 						TRANSMIT 	=>	TRANSMIT,			 --: in std_logic;
-						TEST     =>  slv_reg3               -- : out std_logic_vector(31 downto 0)
+						TEST     =>  open--slv_reg3               -- : out std_logic_vector(31 downto 0)
 					);
 
-	
+	axis_cathode_tdata <= COMMAND;
+	axis_cathode_tvalid <= TRANSMIT;
 	
 	i_obufds_GTU_HV: obufds port map(GTU_HV_p, GTU_HV_n, GTU_HV);
 	i_obufds_CLK_HV: obufds port map(CLK_HV_p, CLK_HV_n, CLK_HV);

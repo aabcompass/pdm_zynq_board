@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed May 29 12:46:16 2019
+--Date        : Wed May 29 20:26:49 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10134,37 +10134,6 @@ architecture STRUCTURE of design_1 is
     THR_CMD : in STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_ALGO_B_TA_1_0;
-  component design_1_HV_AERA_IP_0_0 is
-  port (
-    GTU_HV_p : out STD_LOGIC;
-    GTU_HV_n : out STD_LOGIC;
-    CLK_HV_p : out STD_LOGIC;
-    CLK_HV_n : out STD_LOGIC;
-    DATA_HV_p : out STD_LOGIC;
-    DATA_HV_n : out STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component design_1_HV_AERA_IP_0_0;
   component design_1_ALGO_B_0_0 is
   port (
     S00_AXIS_ACLK : in STD_LOGIC;
@@ -10282,6 +10251,40 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_xlconstant_0_0;
+  component design_1_axi_cathode_ctrl_0_0 is
+  port (
+    GTU_HV_p : out STD_LOGIC;
+    GTU_HV_n : out STD_LOGIC;
+    CLK_HV_p : out STD_LOGIC;
+    CLK_HV_n : out STD_LOGIC;
+    DATA_HV_p : out STD_LOGIC;
+    DATA_HV_n : out STD_LOGIC;
+    ec_sig : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    axis_cathode_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    axis_cathode_tvalid : out STD_LOGIC;
+    S_AXI_ACLK : in STD_LOGIC;
+    S_AXI_ARESETN : in STD_LOGIC;
+    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_AWVALID : in STD_LOGIC;
+    S_AXI_AWREADY : out STD_LOGIC;
+    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S_AXI_WVALID : in STD_LOGIC;
+    S_AXI_WREADY : out STD_LOGIC;
+    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_BVALID : out STD_LOGIC;
+    S_AXI_BREADY : in STD_LOGIC;
+    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_ARVALID : in STD_LOGIC;
+    S_AXI_ARREADY : out STD_LOGIC;
+    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_RVALID : out STD_LOGIC;
+    S_AXI_RREADY : in STD_LOGIC
+  );
+  end component design_1_axi_cathode_ctrl_0_0;
   signal ALGO_B_0_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal ALGO_B_0_frame_conv_out : STD_LOGIC;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
@@ -10297,12 +10300,6 @@ architecture STRUCTURE of design_1 is
   signal CLK_IN1_D_1_2_CLK_P : STD_LOGIC;
   signal CLK_IN1_D_1_CLK_N : STD_LOGIC;
   signal CLK_IN1_D_1_CLK_P : STD_LOGIC;
-  signal HV_AERA_IP_0_CLK_HV_n : STD_LOGIC;
-  signal HV_AERA_IP_0_CLK_HV_p : STD_LOGIC;
-  signal HV_AERA_IP_0_DATA_HV_n : STD_LOGIC;
-  signal HV_AERA_IP_0_DATA_HV_p : STD_LOGIC;
-  signal HV_AERA_IP_0_GTU_HV_n : STD_LOGIC;
-  signal HV_AERA_IP_0_GTU_HV_p : STD_LOGIC;
   signal S01_AXI_1_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal S01_AXI_1_AWBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal S01_AXI_1_AWCACHE : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -10327,6 +10324,13 @@ architecture STRUCTURE of design_1 is
   signal axi_artix_conf_v1_0_0_artx_programb_io_TRI_I : STD_LOGIC;
   signal axi_artix_conf_v1_0_0_artx_programb_io_TRI_O : STD_LOGIC;
   signal axi_artix_conf_v1_0_0_artx_programb_io_TRI_T : STD_LOGIC;
+  signal axi_cathode_ctrl_0_CLK_HV_n : STD_LOGIC;
+  signal axi_cathode_ctrl_0_CLK_HV_p : STD_LOGIC;
+  signal axi_cathode_ctrl_0_DATA_HV_n : STD_LOGIC;
+  signal axi_cathode_ctrl_0_DATA_HV_p : STD_LOGIC;
+  signal axi_cathode_ctrl_0_GTU_HV_n : STD_LOGIC;
+  signal axi_cathode_ctrl_0_GTU_HV_p : STD_LOGIC;
+  signal axi_data_provider_0_ec_sig_out : STD_LOGIC_VECTOR ( 8 downto 0 );
   signal axi_data_provider_0_gtu_sig : STD_LOGIC;
   signal axi_data_provider_0_m_axis_art0l_TDATA : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal axi_data_provider_0_m_axis_art0l_TLAST : STD_LOGIC;
@@ -10784,6 +10788,25 @@ architecture STRUCTURE of design_1 is
   signal inst_interconnect_100MHz_M04_AXI_WREADY : STD_LOGIC;
   signal inst_interconnect_100MHz_M04_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal inst_interconnect_100MHz_M04_AXI_WVALID : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_ARREADY : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_ARVALID : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_AWREADY : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_AWVALID : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_BREADY : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_BRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_BVALID : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_RDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_RREADY : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_RRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_RVALID : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_WDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_WREADY : STD_LOGIC;
+  signal inst_interconnect_100MHz_M05_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
+  signal inst_interconnect_100MHz_M05_AXI_WVALID : STD_LOGIC;
   signal inst_interconnect_100MHz_M10_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal inst_interconnect_100MHz_M10_AXI_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal inst_interconnect_100MHz_M10_AXI_ARREADY : STD_LOGIC;
@@ -11108,25 +11131,6 @@ architecture STRUCTURE of design_1 is
   signal processing_system7_0_axi_periph_M03_AXI_WREADY : STD_LOGIC;
   signal processing_system7_0_axi_periph_M03_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal processing_system7_0_axi_periph_M03_AXI_WVALID : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_ARREADY : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_ARVALID : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_AWREADY : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_AWVALID : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_BREADY : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_BRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_BVALID : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_RDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_RREADY : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_RRESP : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_RVALID : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_WDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_WREADY : STD_LOGIC;
-  signal processing_system7_0_axi_periph_M05_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
-  signal processing_system7_0_axi_periph_M05_AXI_WVALID : STD_LOGIC;
   signal processing_system7_0_axi_periph_M06_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal processing_system7_0_axi_periph_M06_AXI_ARREADY : STD_LOGIC;
   signal processing_system7_0_axi_periph_M06_AXI_ARVALID : STD_LOGIC;
@@ -11239,7 +11243,8 @@ architecture STRUCTURE of design_1 is
   signal NLW_ALGO_B_TA_1_m0_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_ALGO_B_TA_1_m1_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_ALGO_B_TA_1_m2_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
-  signal NLW_axi_data_provider_0_ec_sig_out_UNCONNECTED : STD_LOGIC_VECTOR ( 8 downto 0 );
+  signal NLW_axi_cathode_ctrl_0_axis_cathode_tvalid_UNCONNECTED : STD_LOGIC;
+  signal NLW_axi_cathode_ctrl_0_axis_cathode_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0r_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art1l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -11416,16 +11421,16 @@ architecture STRUCTURE of design_1 is
   signal NLW_top_switch_raw_m_axis_event_tvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_top_switch_raw_m_axis_event_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
 begin
-  CLK_HV_n <= HV_AERA_IP_0_CLK_HV_n;
-  CLK_HV_p <= HV_AERA_IP_0_CLK_HV_p;
+  CLK_HV_n <= axi_cathode_ctrl_0_CLK_HV_n;
+  CLK_HV_p <= axi_cathode_ctrl_0_CLK_HV_p;
   CLK_IN1_D_1_2_CLK_N <= clk_art_2_clk_n;
   CLK_IN1_D_1_2_CLK_P <= clk_art_2_clk_p;
   CLK_IN1_D_1_CLK_N <= clk_art_0_clk_n;
   CLK_IN1_D_1_CLK_P <= clk_art_0_clk_p;
-  DATA_HV_n <= HV_AERA_IP_0_DATA_HV_n;
-  DATA_HV_p <= HV_AERA_IP_0_DATA_HV_p;
-  GTU_HV_n <= HV_AERA_IP_0_GTU_HV_n;
-  GTU_HV_p <= HV_AERA_IP_0_GTU_HV_p;
+  DATA_HV_n <= axi_cathode_ctrl_0_DATA_HV_n;
+  DATA_HV_p <= axi_cathode_ctrl_0_DATA_HV_p;
+  GTU_HV_n <= axi_cathode_ctrl_0_GTU_HV_n;
+  GTU_HV_p <= axi_cathode_ctrl_0_GTU_HV_p;
   artx_conf_cclk <= axi_quad_spi_0_sck_o;
   artx_conf_data <= axi_quad_spi_0_io0_o;
   artx_done_1 <= artx_done;
@@ -11539,36 +11544,6 @@ ALGO_B_TA_1: component design_1_ALGO_B_TA_1_0
       m_ev_axis_tready => ALGO_B_TA_1_m_ev_axis_TREADY,
       m_ev_axis_tvalid => ALGO_B_TA_1_m_ev_axis_TVALID
     );
-HV_AERA_IP_0: component design_1_HV_AERA_IP_0_0
-     port map (
-      CLK_HV_n => HV_AERA_IP_0_CLK_HV_n,
-      CLK_HV_p => HV_AERA_IP_0_CLK_HV_p,
-      DATA_HV_n => HV_AERA_IP_0_DATA_HV_n,
-      DATA_HV_p => HV_AERA_IP_0_DATA_HV_p,
-      GTU_HV_n => HV_AERA_IP_0_GTU_HV_n,
-      GTU_HV_p => HV_AERA_IP_0_GTU_HV_p,
-      s00_axi_aclk => processing_system7_0_FCLK_CLK0,
-      s00_axi_araddr(3 downto 0) => processing_system7_0_axi_periph_M05_AXI_ARADDR(3 downto 0),
-      s00_axi_aresetn => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      s00_axi_arprot(2 downto 0) => processing_system7_0_axi_periph_M05_AXI_ARPROT(2 downto 0),
-      s00_axi_arready => processing_system7_0_axi_periph_M05_AXI_ARREADY,
-      s00_axi_arvalid => processing_system7_0_axi_periph_M05_AXI_ARVALID,
-      s00_axi_awaddr(3 downto 0) => processing_system7_0_axi_periph_M05_AXI_AWADDR(3 downto 0),
-      s00_axi_awprot(2 downto 0) => processing_system7_0_axi_periph_M05_AXI_AWPROT(2 downto 0),
-      s00_axi_awready => processing_system7_0_axi_periph_M05_AXI_AWREADY,
-      s00_axi_awvalid => processing_system7_0_axi_periph_M05_AXI_AWVALID,
-      s00_axi_bready => processing_system7_0_axi_periph_M05_AXI_BREADY,
-      s00_axi_bresp(1 downto 0) => processing_system7_0_axi_periph_M05_AXI_BRESP(1 downto 0),
-      s00_axi_bvalid => processing_system7_0_axi_periph_M05_AXI_BVALID,
-      s00_axi_rdata(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_RDATA(31 downto 0),
-      s00_axi_rready => processing_system7_0_axi_periph_M05_AXI_RREADY,
-      s00_axi_rresp(1 downto 0) => processing_system7_0_axi_periph_M05_AXI_RRESP(1 downto 0),
-      s00_axi_rvalid => processing_system7_0_axi_periph_M05_AXI_RVALID,
-      s00_axi_wdata(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_WDATA(31 downto 0),
-      s00_axi_wready => processing_system7_0_axi_periph_M05_AXI_WREADY,
-      s00_axi_wstrb(3 downto 0) => processing_system7_0_axi_periph_M05_AXI_WSTRB(3 downto 0),
-      s00_axi_wvalid => processing_system7_0_axi_periph_M05_AXI_WVALID
-    );
 PL_FW_VER: component design_1_xlconstant_0_0
      port map (
       dout(31 downto 0) => xlconstant_0_dout(31 downto 0)
@@ -11604,6 +11579,39 @@ axi_artix_conf_v1_0_0: component design_1_axi_artix_conf_v1_0_0_0
       s00_axi_wstrb(3 downto 0) => processing_system7_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
       s00_axi_wvalid => processing_system7_0_axi_periph_M00_AXI_WVALID(0)
     );
+axi_cathode_ctrl_0: component design_1_axi_cathode_ctrl_0_0
+     port map (
+      CLK_HV_n => axi_cathode_ctrl_0_CLK_HV_n,
+      CLK_HV_p => axi_cathode_ctrl_0_CLK_HV_p,
+      DATA_HV_n => axi_cathode_ctrl_0_DATA_HV_n,
+      DATA_HV_p => axi_cathode_ctrl_0_DATA_HV_p,
+      GTU_HV_n => axi_cathode_ctrl_0_GTU_HV_n,
+      GTU_HV_p => axi_cathode_ctrl_0_GTU_HV_p,
+      S_AXI_ACLK => processing_system7_0_FCLK_CLK0,
+      S_AXI_ARADDR(6 downto 0) => inst_interconnect_100MHz_M05_AXI_ARADDR(6 downto 0),
+      S_AXI_ARESETN => rst_processing_system7_0_50M_peripheral_aresetn(0),
+      S_AXI_ARPROT(2 downto 0) => inst_interconnect_100MHz_M05_AXI_ARPROT(2 downto 0),
+      S_AXI_ARREADY => inst_interconnect_100MHz_M05_AXI_ARREADY,
+      S_AXI_ARVALID => inst_interconnect_100MHz_M05_AXI_ARVALID,
+      S_AXI_AWADDR(6 downto 0) => inst_interconnect_100MHz_M05_AXI_AWADDR(6 downto 0),
+      S_AXI_AWPROT(2 downto 0) => inst_interconnect_100MHz_M05_AXI_AWPROT(2 downto 0),
+      S_AXI_AWREADY => inst_interconnect_100MHz_M05_AXI_AWREADY,
+      S_AXI_AWVALID => inst_interconnect_100MHz_M05_AXI_AWVALID,
+      S_AXI_BREADY => inst_interconnect_100MHz_M05_AXI_BREADY,
+      S_AXI_BRESP(1 downto 0) => inst_interconnect_100MHz_M05_AXI_BRESP(1 downto 0),
+      S_AXI_BVALID => inst_interconnect_100MHz_M05_AXI_BVALID,
+      S_AXI_RDATA(31 downto 0) => inst_interconnect_100MHz_M05_AXI_RDATA(31 downto 0),
+      S_AXI_RREADY => inst_interconnect_100MHz_M05_AXI_RREADY,
+      S_AXI_RRESP(1 downto 0) => inst_interconnect_100MHz_M05_AXI_RRESP(1 downto 0),
+      S_AXI_RVALID => inst_interconnect_100MHz_M05_AXI_RVALID,
+      S_AXI_WDATA(31 downto 0) => inst_interconnect_100MHz_M05_AXI_WDATA(31 downto 0),
+      S_AXI_WREADY => inst_interconnect_100MHz_M05_AXI_WREADY,
+      S_AXI_WSTRB(3 downto 0) => inst_interconnect_100MHz_M05_AXI_WSTRB(3 downto 0),
+      S_AXI_WVALID => inst_interconnect_100MHz_M05_AXI_WVALID,
+      axis_cathode_tdata(31 downto 0) => NLW_axi_cathode_ctrl_0_axis_cathode_tdata_UNCONNECTED(31 downto 0),
+      axis_cathode_tvalid => NLW_axi_cathode_ctrl_0_axis_cathode_tvalid_UNCONNECTED,
+      ec_sig(8 downto 0) => axi_data_provider_0_ec_sig_out(8 downto 0)
+    );
 axi_data_provider_0: component design_1_axi_data_provider_0_0
      port map (
       clk_art0_x1 => clk_wiz_0_clk_out1,
@@ -11612,7 +11620,7 @@ axi_data_provider_0: component design_1_axi_data_provider_0_0
       data_art0(15 downto 0) => data_art0_1(15 downto 0),
       data_art1(15 downto 0) => data_art1_1(15 downto 0),
       data_art2(15 downto 0) => data_art2_1(15 downto 0),
-      ec_sig_out(8 downto 0) => NLW_axi_data_provider_0_ec_sig_out_UNCONNECTED(8 downto 0),
+      ec_sig_out(8 downto 0) => axi_data_provider_0_ec_sig_out(8 downto 0),
       frame_art0 => frame_art0_1,
       frame_art1 => frame_art1_1,
       frame_art2 => frame_art2_1,
@@ -13181,25 +13189,25 @@ inst_interconnect_100MHz: entity work.design_1_inst_interconnect_100MHz_0
       M04_AXI_wvalid => inst_interconnect_100MHz_M04_AXI_WVALID,
       M05_ACLK => processing_system7_0_FCLK_CLK0,
       M05_ARESETN(0) => rst_processing_system7_0_50M_peripheral_aresetn(0),
-      M05_AXI_araddr(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_ARADDR(31 downto 0),
-      M05_AXI_arprot(2 downto 0) => processing_system7_0_axi_periph_M05_AXI_ARPROT(2 downto 0),
-      M05_AXI_arready => processing_system7_0_axi_periph_M05_AXI_ARREADY,
-      M05_AXI_arvalid => processing_system7_0_axi_periph_M05_AXI_ARVALID,
-      M05_AXI_awaddr(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_AWADDR(31 downto 0),
-      M05_AXI_awprot(2 downto 0) => processing_system7_0_axi_periph_M05_AXI_AWPROT(2 downto 0),
-      M05_AXI_awready => processing_system7_0_axi_periph_M05_AXI_AWREADY,
-      M05_AXI_awvalid => processing_system7_0_axi_periph_M05_AXI_AWVALID,
-      M05_AXI_bready => processing_system7_0_axi_periph_M05_AXI_BREADY,
-      M05_AXI_bresp(1 downto 0) => processing_system7_0_axi_periph_M05_AXI_BRESP(1 downto 0),
-      M05_AXI_bvalid => processing_system7_0_axi_periph_M05_AXI_BVALID,
-      M05_AXI_rdata(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_RDATA(31 downto 0),
-      M05_AXI_rready => processing_system7_0_axi_periph_M05_AXI_RREADY,
-      M05_AXI_rresp(1 downto 0) => processing_system7_0_axi_periph_M05_AXI_RRESP(1 downto 0),
-      M05_AXI_rvalid => processing_system7_0_axi_periph_M05_AXI_RVALID,
-      M05_AXI_wdata(31 downto 0) => processing_system7_0_axi_periph_M05_AXI_WDATA(31 downto 0),
-      M05_AXI_wready => processing_system7_0_axi_periph_M05_AXI_WREADY,
-      M05_AXI_wstrb(3 downto 0) => processing_system7_0_axi_periph_M05_AXI_WSTRB(3 downto 0),
-      M05_AXI_wvalid => processing_system7_0_axi_periph_M05_AXI_WVALID,
+      M05_AXI_araddr(31 downto 0) => inst_interconnect_100MHz_M05_AXI_ARADDR(31 downto 0),
+      M05_AXI_arprot(2 downto 0) => inst_interconnect_100MHz_M05_AXI_ARPROT(2 downto 0),
+      M05_AXI_arready => inst_interconnect_100MHz_M05_AXI_ARREADY,
+      M05_AXI_arvalid => inst_interconnect_100MHz_M05_AXI_ARVALID,
+      M05_AXI_awaddr(31 downto 0) => inst_interconnect_100MHz_M05_AXI_AWADDR(31 downto 0),
+      M05_AXI_awprot(2 downto 0) => inst_interconnect_100MHz_M05_AXI_AWPROT(2 downto 0),
+      M05_AXI_awready => inst_interconnect_100MHz_M05_AXI_AWREADY,
+      M05_AXI_awvalid => inst_interconnect_100MHz_M05_AXI_AWVALID,
+      M05_AXI_bready => inst_interconnect_100MHz_M05_AXI_BREADY,
+      M05_AXI_bresp(1 downto 0) => inst_interconnect_100MHz_M05_AXI_BRESP(1 downto 0),
+      M05_AXI_bvalid => inst_interconnect_100MHz_M05_AXI_BVALID,
+      M05_AXI_rdata(31 downto 0) => inst_interconnect_100MHz_M05_AXI_RDATA(31 downto 0),
+      M05_AXI_rready => inst_interconnect_100MHz_M05_AXI_RREADY,
+      M05_AXI_rresp(1 downto 0) => inst_interconnect_100MHz_M05_AXI_RRESP(1 downto 0),
+      M05_AXI_rvalid => inst_interconnect_100MHz_M05_AXI_RVALID,
+      M05_AXI_wdata(31 downto 0) => inst_interconnect_100MHz_M05_AXI_WDATA(31 downto 0),
+      M05_AXI_wready => inst_interconnect_100MHz_M05_AXI_WREADY,
+      M05_AXI_wstrb(3 downto 0) => inst_interconnect_100MHz_M05_AXI_WSTRB(3 downto 0),
+      M05_AXI_wvalid => inst_interconnect_100MHz_M05_AXI_WVALID,
       M06_ACLK => processing_system7_0_FCLK_CLK0,
       M06_ARESETN(0) => rst_processing_system7_0_50M_peripheral_aresetn(0),
       M06_AXI_araddr(31 downto 0) => processing_system7_0_axi_periph_M06_AXI_ARADDR(31 downto 0),

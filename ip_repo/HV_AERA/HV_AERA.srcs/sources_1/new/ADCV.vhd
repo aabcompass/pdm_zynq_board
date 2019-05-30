@@ -61,7 +61,7 @@ entity ADCV is
            release_time: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty: in std_logic_vector(7 downto 0));
+           gtu_big_pulses_qty: in std_logic_vector(15 downto 0));
 end ADCV;
 
 architecture Behavioral of ADCV is
@@ -77,7 +77,7 @@ architecture Behavioral of ADCV is
 		signal gtu_sig_d1: std_logic := '0';
 		signal transformer_boost: std_logic := '0';
 		
-		signal transformer_boost_timer: std_logic_vector(8 downto 0) := (others => '0');
+		signal transformer_boost_timer: std_logic_vector(15 downto 0) := (others => '0');
 
 
 begin

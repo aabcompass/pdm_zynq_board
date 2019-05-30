@@ -83,7 +83,9 @@ extern DebugSettings debugSettings;
 
 char boot_bin_buf[10000000];
 
-DATA_TYPE_SCI_ALLTRG_RECORD sci_data[SCI_DATA_ARRAY_SIZE];
+//DATA_TYPE_SCI_ALLTRG_RECORD sci_data[SCI_DATA_ARRAY_SIZE];
+DATA_TYPE_SCI_ALLTRG_RECORD* sci_data;
+u32 *test_big_array;//[400000000];
 
 static enum  {
 	datapath_idle_state = 10,
@@ -118,6 +120,40 @@ int current_hvdac_value = 0;
 
 char hvps_log_file_ftp[sizeof(Z_DATA_TYPE_HVPS_LOG_V1)];
 
+int mem_test()
+{
+//	sci_data = malloc(sizeof(DATA_TYPE_SCI_ALLTRG_RECORD)*SCI_DATA_ARRAY_SIZE);
+	u32 N = 0x1F000000/sizeof(u32);
+	u32 pStart = 0x20000000;
+	u32 i;
+	test_big_array = (u32*)pStart;
+	for(i=0; i<N; i+=4)
+	{
+		*(u32*)(test_big_array+i) = i;
+		if(i % (N/128) == 0)
+			print("-");
+	}
+	for(i=0; i<N; i+=4)
+	{
+		if(i % (N/128) == 0)
+			print("+");
+		if(*(u32*)(test_big_array+i) != i)
+		{
+			xil_printf("Error on %d\n\r", i);
+			return 0;
+		}
+	}
+	print("Memory test passed\n\r");
+
+	return 1;
+}
+
+int mem_alloc()
+{
+	char var_addr;
+	xil_printf("Top addr = 0x%08x\n\r", &var_addr);
+	sci_data = 0x10000000; // To be defined after the situation with memory will be clear for me.
+}
 
 void PrintBin(u16 data)
 {
@@ -607,7 +643,7 @@ void SetDefaultParameters()
 	instrumentState.file_counter_l2 = 0;
 	instrumentState.file_counter_l3 = 0;
 	instrumentState.is_simple_packets = 0;
-	memset(sci_data, 0, sizeof(sci_data));
+	memset(sci_data, 0, sizeof(DATA_TYPE_SCI_ALLTRG_RECORD)*SCI_DATA_ARRAY_SIZE /*sizeof(sci_data)*/);
 }
 
 

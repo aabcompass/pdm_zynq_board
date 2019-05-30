@@ -458,6 +458,11 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		tcp_close(tpcb);
 	}
+	else if(strncmp(p->payload, "reboot", 6) == 0)
+	{
+		*(u32*)(0XF8000008) = 0xDF0D;
+		*(u32*)(0xF8000200) = 1;
+	}
 //	else
 //	{
 //		static int called = 0;

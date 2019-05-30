@@ -172,6 +172,8 @@ int LoadArtix()
 int main()
 {
 	print("Starting main program...\n\r");
+	print("Memory allocation for big arrays...\n\r");
+	mem_alloc();
 
 	//while(1)
 #if __aarch64__

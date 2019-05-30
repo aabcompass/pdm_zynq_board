@@ -69,9 +69,13 @@
 #define  SC_FIFO_DEVICE_ID XPAR_AXI_FIFO_MM_S_1_DEVICE_ID
 
 XLlFifo FifoInstance;
+char test_array[100];
 
 
-
+void print_FifoInstance_address()
+{
+	xil_printf("&test_array[]=0x%08x\n\r", test_array);
+}
 
 int XLlFifoPollingInit()
 {
