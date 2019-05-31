@@ -392,6 +392,13 @@ start_ftpserver_data()
 // control tcp connection
 //////////////////////////
 
+static err_t sent_callback(void *arg, struct tcp_pcb *tpcb,
+        u16_t len)
+{
+	print("sent_callback\n\r");
+	ctrl_tpcb = tpcb;
+}
+
 static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
                                struct pbuf *p, err_t err)
 {
@@ -414,7 +421,7 @@ static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 
 	/* free the received pbuf */
 	pbuf_free(p);
-	ctrl_tpcb = tpcb; //Leads to error
+	//ctrl_tpcb = tpcb; //Leads to error
 	return ERR_OK;
 }
 
@@ -427,6 +434,8 @@ static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 
 	/* set the receive callback for this connection */
 	tcp_recv(newpcb, recv_callback);
+
+	tcp_sent(newpcb, sent_callback);
 
 	/* just use an integer number indicating the connection id as the
 	   callback argument */
@@ -615,9 +624,11 @@ void send_data_sm()
 //			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
 //			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 			char str2[] = "226 Transfer complete.\r\n";
-			tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
+			err_t err = tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
+			err_t err2 = tcp_output(ctrl_tpcb);
+			//err_t err = tcp_output(ctrl_tpcb);
 			ftp_state = no_state;
-			print("Sent 226\n\r");
+			xil_printf("Sent 226. err=%d err2=%d\n\r", err, err2);
 			break;
 		}
 	}
