@@ -52,12 +52,12 @@ void ProcessInstrumentModeCommand(struct tcp_pcb *tpcb, u32 param, u32 param2)
 	}
 	else if(instrumentState.err_artix_bin)
 	{
-		print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+		print("Problems with loading Artix board\n\r");
 		SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
 	}
 	else if(instrumentState.artix_locked == 0)
 	{
-		print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
+		print("Artix does not give clock\n\r");
 		SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
 	}
 	else

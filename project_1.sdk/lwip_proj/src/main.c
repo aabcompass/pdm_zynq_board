@@ -118,9 +118,12 @@ int LoadArtix()
 	int err;
 	char artixBitstream[10000000]; // 10 MBytes
 	int artixBitstream_size;
-	if(*(u32*)(XPAR_AXI_GPIO_0_BASEADDR) & 0x7)
+	instrumentState.artix_locked = *(u32*)(XPAR_AXI_GPIO_0_BASEADDR)  & 0x7;
+	xil_printf("artix_locked=%d\n\r",  instrumentState.artix_locked);
+	if(instrumentState.artix_locked == 7)
 	{
 		print("Artix already loaded.\n\r");
+		return 0;
 	}
 	else
 	{

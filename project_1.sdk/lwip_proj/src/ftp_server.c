@@ -617,12 +617,19 @@ void send_data_sm()
 			char str2[] = "226 Transfer complete.\r\n";
 			tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
 			ftp_state = no_state;
+			print("Sent 226\n\r");
 			break;
 		}
 	}
 
 	//if(ftp_state != 0)
 	//	xil_printf(" %d\n\r", ftp_state);
+}
+
+void SendAgain()
+{
+	char str2[] = "226 Transfer complete.\r\n";
+	tcp_write(ctrl_tpcb, str2, strlen(str2), 1);
 }
 
 //send not reply messages

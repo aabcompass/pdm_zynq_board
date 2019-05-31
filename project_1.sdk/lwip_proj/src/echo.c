@@ -426,6 +426,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		PrnAllRegs();
 	}
+	else if(c == '!')
+	{
+		SendAgain();
+	}
 	else if(c == '#')
 	{
 		print_expander_regs();
