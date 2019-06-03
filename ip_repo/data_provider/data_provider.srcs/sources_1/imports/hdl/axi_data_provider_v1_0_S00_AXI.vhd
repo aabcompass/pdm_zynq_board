@@ -232,7 +232,7 @@ component data_provider is
 			pixel_masking_reg: in std_logic_vector(31 downto 0);
 			-- ADCV calc params
 			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
-			adcv_max_pixel_num: in std_logic_vector(7 downto 0); 
+			adcv_max_pixel_num: in std_logic_vector(9 downto 0); 
 			ec_sig_out: out std_logic_vector(8 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
@@ -903,8 +903,8 @@ begin
 				num_of_frames => slv_reg3(20 downto 0),--: in std_logic_vector(7 downto 0);
 				pixel_masking_reg => slv_reg6,
 				-- adcv
-				adcv_max_asic_cnts => slv_reg14(15 downto 8),--: in std_logic_vector(7 downto 0);
-				adcv_max_pixel_num => slv_reg14(7 downto 0),--: in std_logic_vector(7 downto 0); 
+				adcv_max_asic_cnts => slv_reg14(23 downto 16),--: in std_logic_vector(7 downto 0);
+				adcv_max_pixel_num => slv_reg14(9 downto 0),--: in std_logic_vector(7 downto 0); 
 				ec_sig_out => ec_sig_out,--: out std_logic_vector(8 downto 0);
 				-- counter
 				status => slv_reg16,--: out std_logic_vector(31 downto 0);

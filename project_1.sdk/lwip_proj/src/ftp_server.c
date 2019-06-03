@@ -128,6 +128,10 @@ void SendFile()
 		ftp_state = start_send_file;
 		spectrum_nbytes = files[requested_record].length;
 		spectrum_addr = files[requested_record].link;
+		//clear flag record exists
+		files[requested_record].is_presented = 0;
+		if(files[requested_record].file_type == file_scidata)
+			((DATA_TYPE_SCI_ALLTRG_RECORD*)(files[requested_record].link))->is_occupied = 0;
 	}
 	else
 		print("Send data SM is not in the IDLE state!\r\n");
@@ -229,7 +233,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "RETR %s",
 			filename) == 1)
 	{
-		xil_printf("Requested file %s\n\r", filename);
+		//xil_printf("Requested file %s\n\r", filename);
 		for(i=0;i<MAX_FILES;i++)
 		{
 			if(files[i].is_presented == 1)
@@ -251,6 +255,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
 			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 			SendFile();
+
 		}
 	}
 	else if(sscanf(p->payload, "REST %s",
@@ -261,7 +266,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "DELE %s",
 			filename) == 1)
 	{
-		xil_printf("Delete file %s\n\r", filename);
+		//xil_printf("Delete file %s\n\r", filename);
 		for(i=0;i<MAX_FILES;i++)
 		{
 			if(files[i].is_presented == 1)
@@ -272,7 +277,7 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 					if(files[i].file_type == file_scidata)
 					{
 						((DATA_TYPE_SCI_ALLTRG_RECORD*)(files[i].link))->is_occupied = 0;
-						xil_printf("link addr %08X freed\n\r", files[i].link);
+						//xil_printf("link addr %08X freed\n\r", files[i].link);
 					}
 					char ok_eomess_str[] = "250 File successfully deleted\r\n";
 					tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
@@ -289,11 +294,11 @@ void ProcessFTPCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else
 	{
 		char ok_eomess_str[] = "500 Unknown command.\r\n";
-		print("UNKNOWN FTP CMD:\n\r");
+		//print("UNKNOWN FTP CMD:\n\r");
 		print(p->payload);
 		tcp_write(tpcb, ok_eomess_str, strlen(ok_eomess_str), 1);
-		for(i=0; i<p->len; i++)
-			xil_printf("%02X " , ((char*)p->payload)[i]);
+		//for(i=0; i<p->len; i++)
+		//	xil_printf("%02X " , ((char*)p->payload)[i]);
 	}
 }
 
@@ -395,7 +400,7 @@ start_ftpserver_data()
 static err_t sent_callback(void *arg, struct tcp_pcb *tpcb,
         u16_t len)
 {
-	print("sent_callback\n\r");
+	//print("sent_callback\n\r");
 	ctrl_tpcb = tpcb;
 }
 
@@ -430,7 +435,7 @@ char wellcome_str[] = "220 (Baremetal non standard FTP server)\r\n";
 static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
 	static int connection = 1;
-	print("a");
+	//print("a");
 
 	/* set the receive callback for this connection */
 	tcp_recv(newpcb, recv_callback);
@@ -513,7 +518,7 @@ void send_data_sm()
 		ftpserver_data_connected = 0;
 		break;
 	case start_send_dir:
-		print("Send directory list...\n\r");
+		//print("Send directory list...\n\r");
 		current_record = 0;
 		start_ftpserver_data();
 		ftp_state = wait_connect;
@@ -628,7 +633,7 @@ void send_data_sm()
 			err_t err2 = tcp_output(ctrl_tpcb);
 			//err_t err = tcp_output(ctrl_tpcb);
 			ftp_state = no_state;
-			xil_printf("Sent 226. err=%d err2=%d\n\r", err, err2);
+			//xil_printf("Sent 226. err=%d err2=%d\n\r", err, err2);
 			break;
 		}
 	}

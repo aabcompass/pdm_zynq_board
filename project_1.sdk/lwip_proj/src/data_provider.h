@@ -114,7 +114,7 @@
 
 //REGW_ADCV_CONF
 #define BIT_ADCV_MAX_PIXEL_NUM		(1<<0)
-#define BIT_ADCV_ASIC_CNT			(1<<8)
+#define BIT_ADCV_ASIC_CNT			(1<<16)
 
 
 

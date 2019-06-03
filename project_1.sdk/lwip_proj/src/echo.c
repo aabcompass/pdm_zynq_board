@@ -428,7 +428,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == '!')
 	{
-		SendAgain();
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+4*REGW_ADCV_CONF) = 10*BIT_ADCV_MAX_PIXEL_NUM + 100*BIT_ADCV_ASIC_CNT;
 	}
 	else if(c == '#')
 	{

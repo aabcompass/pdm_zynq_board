@@ -244,7 +244,7 @@ void CopyEventData_trig()
 	u32 gtu_addr, gtu_addr_cross, gtu_n_cross_l, gtu_n_cross_r;
 	u32 alt_trig_buffer;
 	print("c");
-	xil_printf("CopyEventData_trig: prev_alt_buffer=%d", prev_alt_buffer);
+	//xil_printf("CopyEventData_trig: prev_alt_buffer=%d", prev_alt_buffer);
 	//copy D1
 	for(i=0;i<N1;i++)
 	{

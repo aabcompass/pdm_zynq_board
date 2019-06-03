@@ -47,7 +47,7 @@ entity data_provider is
 			pixel_masking_reg: in std_logic_vector(31 downto 0);
 			-- ADCV calc params
 			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
-			adcv_max_pixel_num: in std_logic_vector(7 downto 0); 
+			adcv_max_pixel_num: in std_logic_vector(9 downto 0); 
 			ec_sig_out: out std_logic_vector(8 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
@@ -611,10 +611,10 @@ end generate;
 	end process;
 	
 	ADCV_calc_gen: for i in 0 to 2 generate
-		signal cnt_tetrade_ec_00: std_logic_vector(4*8-1 downto 0) := (others => '0');
-		signal cnt_tetrade_ec_01: std_logic_vector(4*8-1 downto 0) := (others => '0');
-		signal cnt_tetrade_ec_02: std_logic_vector(4*8-1 downto 0) := (others => '0');
-		signal sum_ec_00, sum_ec_01, sum_ec_02: std_logic_vector(7 downto 0) := (others => '0');
+		signal cnt_tetrade_ec_00: std_logic_vector(4*10-1 downto 0) := (others => '0');
+		signal cnt_tetrade_ec_01: std_logic_vector(4*10-1 downto 0) := (others => '0');
+		signal cnt_tetrade_ec_02: std_logic_vector(4*10-1 downto 0) := (others => '0');
+		signal sum_ec_00, sum_ec_01, sum_ec_02: std_logic_vector(9 downto 0) := (others => '0');
 		signal datain: std_logic_vector(31 downto 0) := (others => '0');
 		signal datain_cnt: std_logic_vector(7 downto 0) := (others => '0');
 		signal ec_sig: std_logic_vector(2 downto 0) := "000";
@@ -647,17 +647,17 @@ end generate;
 		begin
 			if(rising_edge(clk_art_x1(i))) then
 				if(s_axis_tvalid_art_cc_fifo_d1(i) = '0') then
-					cnt_tetrade_ec_00(4*8-1 downto 0) <= (others => '0');
-					cnt_tetrade_ec_01(4*8-1 downto 0) <= (others => '0');
-					cnt_tetrade_ec_02(4*8-1 downto 0) <= (others => '0');
+					cnt_tetrade_ec_00(4*10-1 downto 0) <= (others => '0');
+					cnt_tetrade_ec_01(4*10-1 downto 0) <= (others => '0');
+					cnt_tetrade_ec_02(4*10-1 downto 0) <= (others => '0');
 				else
 					for j in 0 to 3 loop
 						if(datain(8*j+7 downto 8*j) > adcv_max_asic_cnts) then
 							case datain_cnt(7 downto 6) is
-								when "00" => cnt_tetrade_ec_00(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
-								when "01" => cnt_tetrade_ec_01(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
-								when "10" => cnt_tetrade_ec_02(8*j+7 downto 8*j) <= cnt_tetrade_ec_00(8*j+7 downto 8*j) + 1;
-								when others => cnt_tetrade_ec_02(8*j+7 downto 8*j) <= cnt_tetrade_ec_02(8*j+7 downto 8*j);
+								when "00" => cnt_tetrade_ec_00(10*j+7 downto 10*j) <= cnt_tetrade_ec_00(10*j+7 downto 10*j) + 1;
+								when "01" => cnt_tetrade_ec_01(10*j+7 downto 10*j) <= cnt_tetrade_ec_00(10*j+7 downto 10*j) + 1;
+								when "10" => cnt_tetrade_ec_02(10*j+7 downto 10*j) <= cnt_tetrade_ec_00(10*j+7 downto 10*j) + 1;
+								when others => cnt_tetrade_ec_02(10*j+7 downto 10*j) <= cnt_tetrade_ec_02(10*j+7 downto 10*j);
 							end case;
 						end if;
 					end loop;
@@ -668,18 +668,21 @@ end generate;
 		sum_process: process(clk_art_x1(i))
 		begin	
 			if(rising_edge(clk_art_x1(i))) then
-				sum_ec_00 <= cnt_tetrade_ec_00(31 downto 24) + 
-										 cnt_tetrade_ec_00(23 downto 16) +
-										 cnt_tetrade_ec_00(15 downto 8) +
-										 cnt_tetrade_ec_00(7 downto 0);
-				sum_ec_01 <= cnt_tetrade_ec_01(31 downto 24) + 
-										 cnt_tetrade_ec_01(23 downto 16) +
-										 cnt_tetrade_ec_01(15 downto 8) +
-										 cnt_tetrade_ec_01(7 downto 0);
-				sum_ec_02 <= cnt_tetrade_ec_02(31 downto 24) + 
-										 cnt_tetrade_ec_02(23 downto 16) +
-										 cnt_tetrade_ec_02(15 downto 8) +
-										 cnt_tetrade_ec_02(7 downto 0);
+				sum_ec_00 <=  "0000000000" +
+											cnt_tetrade_ec_00(39 downto 30) + 
+										 cnt_tetrade_ec_00(29 downto 20) +
+										 cnt_tetrade_ec_00(19 downto 10) +
+										 cnt_tetrade_ec_00(9 downto 0);
+				sum_ec_01 <= "0000000000" +
+											cnt_tetrade_ec_01(39 downto 30) + 
+										 cnt_tetrade_ec_01(29 downto 20) +
+										 cnt_tetrade_ec_01(19 downto 10) +
+										 cnt_tetrade_ec_01(9 downto 0);
+				sum_ec_02 <= "0000000000" +
+											cnt_tetrade_ec_02(39 downto 30) + 
+										 cnt_tetrade_ec_02(29 downto 20) +
+										 cnt_tetrade_ec_02(19 downto 10) +
+										 cnt_tetrade_ec_02(9 downto 0);
 			end if;
 		end process;
 		
