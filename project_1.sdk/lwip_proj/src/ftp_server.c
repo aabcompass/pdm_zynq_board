@@ -91,6 +91,16 @@ int CreateFile(char* filename, char* pData, int size, uint32_t unix_time, File_t
 	return TOO_MANY_FILES;
 }
 
+int DeleteAllFiles()
+{
+	int i;
+	for(i=0;i<MAX_FILES;i++)
+	{
+		files[i].is_presented = 0;
+		((DATA_TYPE_SCI_ALLTRG_RECORD*)(files[i].link))->is_occupied = 0;
+	}
+}
+
 int DeleteFile(char* filename)
 {
 	int i;
