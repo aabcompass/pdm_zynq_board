@@ -323,27 +323,27 @@ void DataPathSM()
 	}
 }
 
-void UpdateFW_SM()
-{
-	switch(update_sm_state)
-	{
-	case update_idle:
-		break;
-	case update_start:
-		ReadFile("RETR BOOT.bin\r\n", boot_bin_buf);
-		update_sm_state = update_wait4ftp_retr;
-		break;
-	case update_wait4ftp_retr:
-		if(IsRetrComplete())
-		{
-			WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
-			update_sm_state = update_finished;
-		}
-		break;
-	case update_finished:
-		break;
-	}
-}
+//void UpdateFW_SM()
+//{
+//	switch(update_sm_state)
+//	{
+//	case update_idle:
+//		break;
+//	case update_start:
+//		ReadFile("RETR BOOT.bin\r\n", boot_bin_buf);
+//		update_sm_state = update_wait4ftp_retr;
+//		break;
+//	case update_wait4ftp_retr:
+//		if(IsRetrComplete())
+//		{
+//			WriteFileToSDCard(boot_bin_buf, GetFileSize(), "BOOT.bin");
+//			update_sm_state = update_finished;
+//		}
+//		break;
+//	case update_finished:
+//		break;
+//	}
+//}
 
 void StartUpdateFW()
 {
