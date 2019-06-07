@@ -80,6 +80,25 @@ void ProcessInstrumentModeCommand(struct tcp_pcb *tpcb, u32 param, u32 param2)
 
 }
 
+void hvpson_cmd(int* turn, struct tcp_pcb *tpcb)
+{
+	if(!instrumentState.is_HVPS_OK)
+	{
+		print("Additional try to initialize HVPS\n\r");
+		instrumentState.is_HVPS_OK = expIni(); //init hv
+		if(!instrumentState.is_HVPS_OK)
+		{
+			print("HVPS seems not connected or powered\n\r");
+			SendErrorCommand(tpcb, ERR_HVPS_DISCONN_OR_POWERED);
+			return;
+		}
+	}
+	HV_turnON_list(turn);
+	SetupHVPSIntrSystem(getIntcPtr());
+	char str[] = "Ok\n\r";
+	tcp_write(tpcb, str, sizeof(str), 1);
+}
+
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 {
 	u8 str_len=0; char reply[128];
@@ -118,9 +137,6 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		DeleteAllFiles();
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-
-//		sprintf(reply, "%d %d\n\r", /*GetFTP_bin_State()*/40, instrumentState.mode);
-//		tcp_write(tpcb, reply, sizeof(reply), 1);
 	}
 	else if(strncmp(p->payload, "instrument ver", 14) == 0)
 	{
@@ -140,62 +156,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			&param, &param2) == 2)
 	{
 		ProcessInstrumentModeCommand(tpcb, param, param2);
-//		if(param == 0)
-//			SendLogToFTP();
-//		SetInstrumentMode(param);
-//		SetTime(param2);
-//		DateTime dateTime;
-//		convertUnixTimeToDate(param2, &dateTime);
-//		xil_printf("%s\n\r", formatDate(&dateTime, 0));
-//
-//		char ok_eomess_str[] = "Ok\n\r";
-//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-//		//if(param == 0)
-//		//	SendLogToFTP();
 	}
 	else if(sscanf(p->payload, "instrument mode %d",
 			&param) == 1)
 	{
 		ProcessInstrumentModeCommand(tpcb, param, 0);
-//		if(instrumentState.err_SDcard)
-//		{
-//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-//			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_SDcard);
-//		}
-//		else if(instrumentState.err_artix_bin)
-//		{
-//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-//			SendErrorCommand(tpcb, ERR_ARTIX_BOARD + instrumentState.err_artix_bin);
-//		}
-//		else if(instrumentState.artix_locked == 0)
-//		{
-//			print("Artix board is absent or bad or artix.bin on SD-card was generated for another Artix type\n\r");
-//			SendErrorCommand(tpcb, ERR_ARTIX_NOT_LOCKED);
-//		}
-//		else
-//		{
-//			if(param == 0)
-//				SendLogToFTP();
-//			else
-//				xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
-//			SetInstrumentMode(param);
-//			RunStopping(); // old bug!
-//			char ok_eomess_str[] = "Ok\n\r";
-//			tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-//		}
 	}
-//	else if(strncmp(p->payload, "instrument start", 16) == 0)
-//	{
-//		//This function does nothing (for compatibility)
-//		char ok_eomess_str[] = "Ok\n\r";
-//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-//	}
-//	else if(strncmp(p->payload, "instrument stop", 15) == 0)
-//	{
-//		//This function does nothing
-//		char ok_eomess_str[] = "Ok\n\r";
-//		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
-//	}
 	else if(sscanf(p->payload, "acq scurve %d %d %d %d",
 			&param0,
 			&param1,
@@ -305,21 +271,27 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "hvps turnon %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
-		if(!instrumentState.is_HVPS_OK)
-		{
-			print("Additional try to initialize HVPS\n\r");
-			instrumentState.is_HVPS_OK = expIni(); //init hv
-			if(!instrumentState.is_HVPS_OK)
-			{
-				print("HVPS seems not connected or powered\n\r");
-				SendErrorCommand(tpcb, ERR_HVPS_DISCONN_OR_POWERED);
-				return;
-			}
-		}
-		HV_turnON_list(turn);
-		SetupHVPSIntrSystem(getIntcPtr());
-		char str[] = "Ok\n\r";
-		tcp_write(tpcb, str, sizeof(str), 1);
+//		if(!instrumentState.is_HVPS_OK)
+//		{
+//			print("Additional try to initialize HVPS\n\r");
+//			instrumentState.is_HVPS_OK = expIni(); //init hv
+//			if(!instrumentState.is_HVPS_OK)
+//			{
+//				print("HVPS seems not connected or powered\n\r");
+//				SendErrorCommand(tpcb, ERR_HVPS_DISCONN_OR_POWERED);
+//				return;
+//			}
+//		}
+//		HV_turnON_list(turn);
+//		SetupHVPSIntrSystem(getIntcPtr());
+//		char str[] = "Ok\n\r";
+//		tcp_write(tpcb, str, sizeof(str), 1);
+		hvpson_cmd(turn, tpcb);
+	}
+	else if(strncmp(p->payload, "hvps turnon all", 15) == 0)
+	{
+		for(i=0;i<9;i++) turn[i] = 1;
+		hvpson_cmd(turn, tpcb);
 	}
 	else if(strncmp(p->payload, "hvps init", 9) == 0)
 	{
@@ -343,6 +315,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		HV_turnOFF_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(strncmp(p->payload, "hvps turnoff all", 16) == 0)
+	{
+		for(i=0;i<9;i++) turn[i] = 1;
+		char str[] = "Ok\n\r";
+		HV_turnOFF_list(turn);
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+
 	else if(sscanf(p->payload, "hvps setdac %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
@@ -350,9 +330,25 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		setDacValue_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
+	else if(sscanf(p->payload, "hvps setdac all %d",
+			&turn[0]) == 1)
+	{
+		for(i=1;i<9;i++) turn[i] = turn[0];
+		char str[] = "Ok\n\r";
+		setDacValue_list(turn);
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
 	else if(sscanf(p->payload, "hvps cathode %d %d %d %d %d %d %d %d %d",
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
+		HV_setCathodeVoltage(turn);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "hvps cathode all %d",
+			&turn[0]) == 1)
+	{
+		for(i=1;i<9;i++) turn[i] = turn[0];
 		HV_setCathodeVoltage(turn);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);

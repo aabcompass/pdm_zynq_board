@@ -814,10 +814,10 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 		reg += list[i]<<(2*i);
 	}
 	xil_printf("Cathode reg = 0x%08x\n\r", reg);
-	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_SW) = reg;
-	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = (1<<BIT_TRANSMIT);
+	*(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR + 4*REGW_HVCATH_SW) = reg;
+	*(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR + 4*REGW_HVCATH_CTRL) = (1<<BIT_TRANSMIT);
 	print("t");
-	*(u32*)(XPAR_HV_AERA_IP_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
+	*(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
 	HV_addLog(HVPS_SR_LOADED, reg);
 	return 0;
 }

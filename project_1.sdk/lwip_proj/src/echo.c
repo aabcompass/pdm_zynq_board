@@ -426,10 +426,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		PrnAllRegs();
 	}
-	else if(c == '!')
-	{
-		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+4*REGW_ADCV_CONF) = 10*BIT_ADCV_MAX_PIXEL_NUM + 100*BIT_ADCV_ASIC_CNT;
-	}
 	else if(c == '#')
 	{
 		print_expander_regs();
@@ -533,6 +529,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == '-')
 	{
 		xil_printf("num=%d\n\r", --num);
+	}
+	else if(c == '!')
+	{
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+4*REGW_ADCV_CONF) = num*BIT_ADCV_MAX_PIXEL_NUM + 60*BIT_ADCV_ASIC_CNT;
 	}
 	else if(c == 'f')
 	{
