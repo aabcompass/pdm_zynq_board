@@ -311,7 +311,7 @@ int main()
 		DataPathSM();
 		L1_trigger_service();
 		StopSM();
-		UpdateFW_SM();
+		//UpdateFW_SM();
 		ScurveService();
 		HVInterruptService();
 		GPS_service();
