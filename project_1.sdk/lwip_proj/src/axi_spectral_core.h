@@ -71,6 +71,7 @@ typedef struct
 	int file_counter_l2;
 	int file_counter_l3;
 	int file_counter_cc;
+	int file_counter_hv;
 	u32 artix_locked;
 	int is_simple_packets;
 	int is_HVPS_OK;

@@ -63,9 +63,9 @@ void ProcessInstrumentModeCommand(struct tcp_pcb *tpcb, u32 param, u32 param2)
 	else
 	{
 		if(param == 0)
-			SendLogToFTP();
+			SendHVPSLogToFTP(1);
 		else
-			xil_printf("Removing all sci data files from FTP server... Removed %d files\n\r", RemoveAllSciDataFilesFromFTP());
+			xil_printf("RRemoved  all sci data files from FTP server: %d files\n\r", RemoveAllSciDataFilesFromFTP());
 		SetInstrumentMode(param);
 		SetTime(param2);
 		DateTime dateTime;
@@ -465,8 +465,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	}
 	else if(strncmp(p->payload, "reboot", 6) == 0)
 	{
-		*(u32*)(0XF8000008) = 0xDF0D;
-		*(u32*)(0xF8000200) = 1;
+		RebootZynq();
 	}
 //	else
 //	{

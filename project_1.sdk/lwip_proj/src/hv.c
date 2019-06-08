@@ -458,6 +458,11 @@ int HV_getLogSize()
 	return hvps_log_current_record;
 }
 
+int HV_isLogFileEmpty()
+{
+	return !hvps_log_current_record;
+}
+
 int HV_getLogFileSize()
 {
 	return sizeof(DATA_TYPE_HVPS_LOG_V1)*hvps_log_current_record + sizeof(ZynqBoardHeader);

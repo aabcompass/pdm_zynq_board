@@ -120,6 +120,12 @@ int current_hvdac_value = 0;
 
 char hvps_log_file_ftp[sizeof(Z_DATA_TYPE_HVPS_LOG_V1)];
 
+void RebootZynq()
+{
+	*(u32*)(0XF8000008) = 0xDF0D;
+	*(u32*)(0xF8000200) = 1;
+}
+
 int mem_test()
 {
 //	sci_data = malloc(sizeof(DATA_TYPE_SCI_ALLTRG_RECORD)*SCI_DATA_ARRAY_SIZE);
@@ -204,16 +210,23 @@ void RunStopping()
 	stop_sm_state = wait4data_provider_stop;
 }
 
-void SendLogToFTP()
+void SendHVPSLogToFTP(int mode) //0 - numerical,  1 - HVPS.log
 {
 	u32 size = HV_getLogFileSize();
+	char filename_str[20];
 	int ret;
 	memset(hvps_log_file_ftp, 0, sizeof(Z_DATA_TYPE_HVPS_LOG_V1));
 	memcpy(hvps_log_file_ftp, HV_getLogPtr(), size);
-	DeleteFile("HVPS.log");
-	ret = CreateFile("HVPS.log", hvps_log_file_ftp, size, 0, file_regular);
+	//DeleteFile("HVPS.log");
+	sprintf(filename_str, FILENAME_HVLOG, instrumentState.file_counter_hv++);
+	if(mode == 0)
+		ret = CreateFile(/*"HVPS.log"*/filename_str, hvps_log_file_ftp, size, 0, file_regular);
+	else
+		ret = CreateFile("HVPS.log", hvps_log_file_ftp, size, 0, file_regular);
+
 	xil_printf("CreateFile rets %d\n\r", ret);
 	HV_clean_log();
+	xil_printf("%d HVPS size\n\r", size);
 }
 
 void StopSM()
@@ -303,6 +316,7 @@ void DataPathSM()
 					sci_data[current_scidata_record].is_occupied = 1;
 					//xil_printf("link addr %08X occupied\n\r", &sci_data[current_scidata_record]);
 					// create file
+					if((instrumentState.file_counter_cc+1)%25 == 0) SendHVPSLogToFTP(0);
 					ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
 					if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);
 					break;
@@ -430,6 +444,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		print_expander_regs();
 	}
+	else if(c == '&')
+	{
+		RebootZynq();
+	}
 	else if(c == 'h')
 	{
 		HV_prnLog();
@@ -533,6 +551,10 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == '!')
 	{
 		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+4*REGW_ADCV_CONF) = num*BIT_ADCV_MAX_PIXEL_NUM + 60*BIT_ADCV_ASIC_CNT;
+	}
+	else if(c == 'l')
+	{
+		SendHVPSLogToFTP(0);
 	}
 	else if(c == 'f')
 	{
