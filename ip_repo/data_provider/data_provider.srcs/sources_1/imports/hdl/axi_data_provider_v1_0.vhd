@@ -35,6 +35,7 @@ entity axi_data_provider_v1_0 is
 		-- -- data to trigger L1 and to memory buffer
 		--ADCV
 		ec_sig_out: out std_logic_vector(8 downto 0);
+		art_overbright_out: out std_logic_vector(2 downto 0) := (others => '0');
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
 		
@@ -127,6 +128,7 @@ architecture arch_imp of axi_data_provider_v1_0 is
 		-- -- data to trigger L1 and to memory buffer
 		--ADCV
 		ec_sig_out: out std_logic_vector(8 downto 0);
+		art_overbright_out: out std_logic_vector(2 downto 0) := (others => '0');
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
 		
@@ -222,6 +224,7 @@ axi_data_provider_v1_0_S00_AXI_inst : axi_data_provider_v1_0_S00_AXI
 		-- -- data to trigger L1 and to memory buffer
 		--ADCV
 		ec_sig_out => ec_sig_out,
+		art_overbright_out => art_overbright_out,
 		-- raw data to MPU
 		m_axis_aclk => m_axis_aclk,--: in std_logic;
 		

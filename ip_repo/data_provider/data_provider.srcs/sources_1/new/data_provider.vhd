@@ -48,7 +48,10 @@ entity data_provider is
 			-- ADCV calc params
 			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
 			adcv_max_pixel_num: in std_logic_vector(9 downto 0); 
+			grand_total_max: in std_logic_vector(23 downto 0); 
 			ec_sig_out: out std_logic_vector(8 downto 0);
+			art_overbright: out std_logic_vector(2 downto 0);
+			art_total_out: out std_logic_vector(24*3-1 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -230,6 +233,10 @@ attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
 	signal pixelmask0_art0l, pixelmask1_art0l, pixelmask0_art0r, pixelmask1_art0r: std_logic_vector(7 downto 0); 
 	signal pixelmask0_art1l, pixelmask1_art1l, pixelmask0_art1r, pixelmask1_art1r: std_logic_vector(7 downto 0); 
 	signal pixelmask0_art2l, pixelmask1_art2l, pixelmask0_art2r, pixelmask1_art2r: std_logic_vector(7 downto 0); 
+	
+	signal data_art_ddr_d3: std_logic_vector(32*3-1 downto 0) := (others => '0');
+	signal art_total: std_logic_vector(24*3-1 downto 0) := (others => '0');
+	
 
 
 	attribute keep : string;  
@@ -395,13 +402,105 @@ begin
   data_art1_ddr_d2 <= data_art1_ddr_d1 when is_all_ones = '0' else X"01010101";
   data_art2_ddr_d1 <= data_art2_ddr when rising_edge(clk_art2_x1);
   data_art2_ddr_d2 <= data_art2_ddr_d1 when is_all_ones = '0' else X"01010101";
+
   data_art0_ddr_d3 <= data_art0_ddr_d2  when rising_edge(clk_art0_x1);
   data_art1_ddr_d3 <= data_art1_ddr_d2  when rising_edge(clk_art1_x1);
   data_art2_ddr_d3 <= data_art2_ddr_d2  when rising_edge(clk_art2_x1);
+  
+  data_art_ddr_d3 <= data_art2_ddr_d3 & data_art1_ddr_d3 & data_art0_ddr_d3;
 
 	clk_art_x1(0) <= clk_art0_x1;
 	clk_art_x1(1) <= clk_art1_x1;
 	clk_art_x1(2) <= clk_art2_x1;
+
+grand_total_calc: for i in 0 to 2 generate
+	signal frame_art_d1, frame_art_d2, frame_art_d3: std_logic := '0';
+	signal total0, total1, total2, total3: std_logic_vector(23 downto 0) := (others => '0');
+	signal total0_latched, total1_latched, total2_latched, total3_latched: std_logic_vector(23 downto 0) := (others => '0');
+	signal overbright: std_logic := '0';
+	
+	COMPONENT fifo4synch
+	  PORT (
+	    wr_clk : IN STD_LOGIC;
+	    rd_clk : IN STD_LOGIC;
+	    din : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+	    wr_en : IN STD_LOGIC;
+	    rd_en : IN STD_LOGIC;
+	    dout : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
+	    full : OUT STD_LOGIC;
+	    empty : OUT STD_LOGIC
+	  );
+	END COMPONENT;
+	
+begin
+	
+	frame_art_d1 <= frame_art_Q1(i) when rising_edge(clk_art_x1(i));
+	frame_art_d2 <= frame_art_d1 when rising_edge(clk_art_x1(i));
+	frame_art_d3 <= frame_art_d2 when rising_edge(clk_art_x1(i));
+	
+	calc_process: process(clk_art_x1(i))
+	begin
+		if(rising_edge(clk_art_x1(i))) then
+			if(frame_art_d3 = '1') then
+				if(frame_art_d2 = '0') then
+					total0_latched <= total0;
+					total1_latched <= total1;
+					total2_latched <= total2;
+					total3_latched <= total3;
+					art_total(i*24+23 downto i*24) <= total0_latched + total1_latched + total2_latched + total3_latched;
+					total0 <= X"000000" + data_art_ddr_d3(i*32+7 downto i*32);
+					total1 <= X"000000" + data_art_ddr_d3(i*32+15 downto i*32+8);
+					total2 <= X"000000" + data_art_ddr_d3(i*32+23 downto i*32+16);
+					total3 <= X"000000" + data_art_ddr_d3(i*32+31 downto i*32+24);
+				else
+					total0 <= total0 + data_art_ddr_d3(i*32+7 downto i*32);
+					total1 <= total1 + data_art_ddr_d3(i*32+15 downto i*32+8);
+					total2 <= total2 + data_art_ddr_d3(i*32+23 downto i*32+16);
+					total3 <= total3 + data_art_ddr_d3(i*32+31 downto i*32+24);
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	cmp: process(clk_art_x1(i))
+	begin
+		if(rising_edge(clk_art_x1(i))) then
+			if(art_total(i*24+23 downto i*24) > grand_total_max) then
+				overbright <= '1';
+			else
+				overbright <= '0';
+			end if;	
+		end if;
+	end process;
+	
+	xpm_cdc_status: xpm_cdc_single
+  generic map (
+     DEST_SYNC_FF   => 4, -- integer; range: 2-10
+     SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+     SRC_INPUT_REG  => 0  -- integer; 0=do not register input, 1=register input
+  )
+  port map (
+     src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+     src_in   => overbright,
+     dest_clk => s_axi_clk,
+     dest_out => art_overbright(i)
+  );
+	
+	i_fifo4synch : fifo4synch
+    PORT MAP (
+      wr_clk => clk_art_x1(i),
+      rd_clk => s_axi_clk,
+      din => art_total(i*24+23 downto i*24),
+      wr_en => '1',
+      rd_en => '1',
+      dout => art_total_out(i*24+23 downto i*24),
+      full => open,
+      empty => open
+    );	
+	
+end generate;
+
+
 
 raw_datapath_gen: for i in 0 to 2 generate
 
@@ -652,7 +751,7 @@ end generate;
 					cnt_tetrade_ec_02(4*10-1 downto 0) <= (others => '0');
 				else
 					for j in 0 to 3 loop
-						if(datain(8*j+7 downto 8*j) > adcv_max_asic_cnts) then
+						if(conv_integer(datain(8*j+7 downto 8*j)) > conv_integer(adcv_max_asic_cnts)) then
 							case datain_cnt(7 downto 6) is
 								when "00" => cnt_tetrade_ec_00(10*j+7 downto 10*j) <= cnt_tetrade_ec_00(10*j+7 downto 10*j) + 1;
 								when "01" => cnt_tetrade_ec_01(10*j+7 downto 10*j) <= cnt_tetrade_ec_00(10*j+7 downto 10*j) + 1;

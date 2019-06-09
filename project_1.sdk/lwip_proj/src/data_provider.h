@@ -91,9 +91,18 @@
 #define REGW_PATTERN_CLR_2R2L		13
 
 #define REGW_ADCV_CONF				14
+#define REGW_GRAND_TOTAL_MAX		15
 
 #define REGR_STATUS					16
 #define REGR_TST_DATA_VERIFICATOR	18
+
+#define REGR_TOTAL_ART0				20
+#define REGR_TOTAL_ART1				21
+#define REGR_TOTAL_ART2				22
+
+#define REGR_OVERBRIGHT				24
+
+//bits
 
 #define CMD_START_BIT_OFFSET		0
 #define CMD_START_INT_BIT_OFFSET	1

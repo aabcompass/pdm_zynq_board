@@ -30,6 +30,7 @@ entity axi_data_provider_v1_0_S00_AXI is
 		data_art2: in std_logic_vector(15 downto 0);		
 		--ADCV
 		ec_sig_out: out std_logic_vector(8 downto 0);	
+		art_overbright_out: out std_logic_vector(2 downto 0) := (others => '0');
 		-- -- data to trigger L1 and to memory buffer
 		-- raw data to MPU
 		m_axis_aclk: in std_logic;
@@ -233,7 +234,10 @@ component data_provider is
 			-- ADCV calc params
 			adcv_max_asic_cnts: in std_logic_vector(7 downto 0);
 			adcv_max_pixel_num: in std_logic_vector(9 downto 0); 
+			grand_total_max: in std_logic_vector(23 downto 0); 
 			ec_sig_out: out std_logic_vector(8 downto 0);
+			art_overbright: out std_logic_vector(2 downto 0);
+			art_total_out: out std_logic_vector(24*3-1 downto 0);
 			-- stat
 			status : out std_logic_vector(31 downto 0);
 			
@@ -282,6 +286,8 @@ component data_provider is
 );
 end component;
 
+	signal art_total_out: std_logic_vector(24*3-1 downto 0) := (others => '0');
+	signal art_overbright: std_logic_vector(2 downto 0) := (others => '0');
 
 begin
 	-- I/O Connections assignments
@@ -880,6 +886,7 @@ begin
 	end process;
 
 
+
 	-- Add user logic here
 	i_data_provider : data_provider
 	    Port map( 
@@ -905,7 +912,11 @@ begin
 				-- adcv
 				adcv_max_asic_cnts => slv_reg14(23 downto 16),--: in std_logic_vector(7 downto 0);
 				adcv_max_pixel_num => slv_reg14(9 downto 0),--: in std_logic_vector(7 downto 0); 
+				grand_total_max => slv_reg15(23 downto 0),
 				ec_sig_out => ec_sig_out,--: out std_logic_vector(8 downto 0);
+				art_overbright => art_overbright,
+				art_total_out => art_total_out,
+				
 				-- counter
 				status => slv_reg16,--: out std_logic_vector(31 downto 0);
 				counter_tvalid_all_latch => slv_reg18(15 downto 0),--: out std_logic_vector(15 downto 0);--
@@ -956,5 +967,12 @@ begin
 				m_axis_art2r_tlast => m_axis_art2r_tlast,--: out std_logic;
 				m_axis_art2r_tready => m_axis_art2r_tready--: in std_logic;
 	    );
+	    
+	    slv_reg20(23 downto 0) <= art_total_out(23 downto 0);
+	    slv_reg21(23 downto 0) <= art_total_out(24*1+23 downto 24);
+	    slv_reg22(23 downto 0) <= art_total_out(24*2+23 downto 24*2);
+	    
+	    slv_reg24(2 downto 0) <= art_overbright;
+	    art_overbright_out <= art_overbright;
 
 end arch_imp;

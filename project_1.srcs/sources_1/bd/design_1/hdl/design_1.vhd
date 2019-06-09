@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Mon Jun  3 13:08:00 2019
+--Date        : Sun Jun  9 16:54:29 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10492,6 +10492,7 @@ architecture STRUCTURE of design_1 is
     data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
     data_art2 : in STD_LOGIC_VECTOR ( 15 downto 0 );
     ec_sig_out : out STD_LOGIC_VECTOR ( 8 downto 0 );
+    art_overbright_out : out STD_LOGIC_VECTOR ( 2 downto 0 );
     m_axis_aclk : in STD_LOGIC;
     m_axis_art0l_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
     m_axis_art0l_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -11524,6 +11525,7 @@ architecture STRUCTURE of design_1 is
   signal NLW_ALGO_B_TA_1_m0_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_ALGO_B_TA_1_m1_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_ALGO_B_TA_1_m2_axis_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal NLW_axi_data_provider_0_art_overbright_out_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art0r_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal NLW_axi_data_provider_0_m_axis_art1l_tkeep_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -11896,6 +11898,7 @@ axi_cathode_ctrl_0: component design_1_axi_cathode_ctrl_0_0
     );
 axi_data_provider_0: component design_1_axi_data_provider_0_0
      port map (
+      art_overbright_out(2 downto 0) => NLW_axi_data_provider_0_art_overbright_out_UNCONNECTED(2 downto 0),
       clk_art0_x1 => clk_wiz_0_clk_out1,
       clk_art1_x1 => clk_wiz_3_clk_out1,
       clk_art2_x1 => clk_wiz_2_clk_out1,
