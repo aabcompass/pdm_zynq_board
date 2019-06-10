@@ -12,233 +12,677 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="699410000000fs"></ZoomStartTime>
-      <ZoomEndTime time="712010000001fs"></ZoomEndTime>
-      <Cursor1Time time="703010000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="1376000000001fs"></ZoomEndTime>
+      <Cursor1Time time="9000000000fs"></Cursor1Time>
    </zoom_setting>
-   <WVObjectSize size="23" />
-   <wvobject type="logic" fp_name="/data_provider_tb/clk_art">
-      <obj_property name="ElementShortName">clk_art</obj_property>
-      <obj_property name="ObjectShortName">clk_art</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/m_axis_aclk">
-      <obj_property name="ElementShortName">m_axis_aclk</obj_property>
-      <obj_property name="ObjectShortName">m_axis_aclk</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/s_axi_clk">
-      <obj_property name="ElementShortName">s_axi_clk</obj_property>
-      <obj_property name="ObjectShortName">s_axi_clk</obj_property>
-   </wvobject>
+   <WVObjectSize size="25" />
    <wvobject type="logic" fp_name="/data_provider_tb/frame_art">
       <obj_property name="ElementShortName">frame_art</obj_property>
       <obj_property name="ObjectShortName">frame_art</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/start_sig">
-      <obj_property name="ElementShortName">start_sig</obj_property>
-      <obj_property name="ObjectShortName">start_sig</obj_property>
+   <wvobject type="array" fp_name="/data_provider_tb/data_art">
+      <obj_property name="ElementShortName">data_art[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_art[15:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0l_tvalid">
-      <obj_property name="ElementShortName">m_axis_art0l_tvalid</obj_property>
-      <obj_property name="ObjectShortName">m_axis_art0l_tvalid</obj_property>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/art_total_out">
+      <obj_property name="ElementShortName">art_total_out[71:0]</obj_property>
+      <obj_property name="ObjectShortName">art_total_out[71:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tvalid">
-      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
-      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/s_axis_tvalid_art_cc_fifo">
-      <obj_property name="ElementShortName">s_axis_tvalid_art_cc_fifo[2:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axis_tvalid_art_cc_fifo[2:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/start_feed">
-      <obj_property name="ElementShortName">start_feed[2:0]</obj_property>
-      <obj_property name="ObjectShortName">start_feed[2:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/counter_frames">
-      <obj_property name="ElementShortName">counter_frames[20:0]</obj_property>
-      <obj_property name="ObjectShortName">counter_frames[20:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/counter">
-      <obj_property name="ElementShortName">counter[8:0]</obj_property>
-      <obj_property name="ObjectShortName">counter[8:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/infinite_d1">
-      <obj_property name="ElementShortName">infinite_d1</obj_property>
-      <obj_property name="ObjectShortName">infinite_d1</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/data_provider_tb/clk_axi_counter">
-      <obj_property name="ElementShortName">clk_axi_counter</obj_property>
-      <obj_property name="ObjectShortName">clk_axi_counter</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/fifo_rst_n">
-      <obj_property name="ElementShortName">fifo_rst_n[2:0]</obj_property>
-      <obj_property name="ObjectShortName">fifo_rst_n[2:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/dut/atleast_one_empty">
-      <obj_property name="ElementShortName">atleast_one_empty</obj_property>
-      <obj_property name="ObjectShortName">atleast_one_empty</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/s_axis_tlast_art_cc_fifo">
-      <obj_property name="ElementShortName">s_axis_tlast_art_cc_fifo[2:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axis_tlast_art_cc_fifo[2:0]</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group70">
-      <obj_property name="label">fifo</obj_property>
+   <wvobject type="vbus" fp_name="vbus252">
+      <obj_property name="label">2</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tvalid">
-         <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
-         <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tready">
-         <obj_property name="ElementShortName">s_axis_tready</obj_property>
-         <obj_property name="ObjectShortName">s_axis_tready</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tlast">
-         <obj_property name="ElementShortName">s_axis_tlast</obj_property>
-         <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tkeep">
-         <obj_property name="ElementShortName">s_axis_tkeep[1:0]</obj_property>
-         <obj_property name="ObjectShortName">s_axis_tkeep[1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_axis_tdata">
-         <obj_property name="ElementShortName">s_axis_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">s_axis_tdata[15:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_aresetn">
-         <obj_property name="ElementShortName">s_aresetn</obj_property>
-         <obj_property name="ObjectShortName">s_aresetn</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/s_aclk">
-         <obj_property name="ElementShortName">s_aclk</obj_property>
-         <obj_property name="ObjectShortName">s_aclk</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tvalid">
-         <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tready">
-         <obj_property name="ElementShortName">m_axis_tready</obj_property>
-         <obj_property name="ObjectShortName">m_axis_tready</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tlast">
-         <obj_property name="ElementShortName">m_axis_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tkeep">
-         <obj_property name="ElementShortName">m_axis_tkeep[1:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_tkeep[1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_axis_tdata">
-         <obj_property name="ElementShortName">m_axis_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_tdata[15:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/m_aclk">
-         <obj_property name="ElementShortName">m_aclk</obj_property>
-         <obj_property name="ObjectShortName">m_aclk</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/inst_art0l_cc_fifo/axis_prog_empty">
-         <obj_property name="ElementShortName">axis_prog_empty</obj_property>
-         <obj_property name="ObjectShortName">axis_prog_empty</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/counter_tvalid_art0l">
-      <obj_property name="ElementShortName">counter_tvalid_art0l[15:0]</obj_property>
-      <obj_property name="ObjectShortName">counter_tvalid_art0l[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/counter_tvalid_art0l_latch">
-      <obj_property name="ElementShortName">counter_tvalid_art0l_latch[15:0]</obj_property>
-      <obj_property name="ObjectShortName">counter_tvalid_art0l_latch[15:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[71]">
+         <obj_property name="ElementShortName">[71]</obj_property>
+         <obj_property name="ObjectShortName">[71]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[70]">
+         <obj_property name="ElementShortName">[70]</obj_property>
+         <obj_property name="ObjectShortName">[70]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[69]">
+         <obj_property name="ElementShortName">[69]</obj_property>
+         <obj_property name="ObjectShortName">[69]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[68]">
+         <obj_property name="ElementShortName">[68]</obj_property>
+         <obj_property name="ObjectShortName">[68]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[67]">
+         <obj_property name="ElementShortName">[67]</obj_property>
+         <obj_property name="ObjectShortName">[67]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[66]">
+         <obj_property name="ElementShortName">[66]</obj_property>
+         <obj_property name="ObjectShortName">[66]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[65]">
+         <obj_property name="ElementShortName">[65]</obj_property>
+         <obj_property name="ObjectShortName">[65]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[64]">
+         <obj_property name="ElementShortName">[64]</obj_property>
+         <obj_property name="ObjectShortName">[64]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[63]">
+         <obj_property name="ElementShortName">[63]</obj_property>
+         <obj_property name="ObjectShortName">[63]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[62]">
+         <obj_property name="ElementShortName">[62]</obj_property>
+         <obj_property name="ObjectShortName">[62]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[61]">
+         <obj_property name="ElementShortName">[61]</obj_property>
+         <obj_property name="ObjectShortName">[61]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[60]">
+         <obj_property name="ElementShortName">[60]</obj_property>
+         <obj_property name="ObjectShortName">[60]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[59]">
+         <obj_property name="ElementShortName">[59]</obj_property>
+         <obj_property name="ObjectShortName">[59]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[58]">
+         <obj_property name="ElementShortName">[58]</obj_property>
+         <obj_property name="ObjectShortName">[58]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[57]">
+         <obj_property name="ElementShortName">[57]</obj_property>
+         <obj_property name="ObjectShortName">[57]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[56]">
+         <obj_property name="ElementShortName">[56]</obj_property>
+         <obj_property name="ObjectShortName">[56]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[55]">
+         <obj_property name="ElementShortName">[55]</obj_property>
+         <obj_property name="ObjectShortName">[55]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[54]">
+         <obj_property name="ElementShortName">[54]</obj_property>
+         <obj_property name="ObjectShortName">[54]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[53]">
+         <obj_property name="ElementShortName">[53]</obj_property>
+         <obj_property name="ObjectShortName">[53]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[52]">
+         <obj_property name="ElementShortName">[52]</obj_property>
+         <obj_property name="ObjectShortName">[52]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[51]">
+         <obj_property name="ElementShortName">[51]</obj_property>
+         <obj_property name="ObjectShortName">[51]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[50]">
+         <obj_property name="ElementShortName">[50]</obj_property>
+         <obj_property name="ObjectShortName">[50]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[49]">
+         <obj_property name="ElementShortName">[49]</obj_property>
+         <obj_property name="ObjectShortName">[49]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[48]">
+         <obj_property name="ElementShortName">[48]</obj_property>
+         <obj_property name="ObjectShortName">[48]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/data_provider_tb/dut/\raw_datapath_gen(0)\/infinite_d1">
-      <obj_property name="ElementShortName">infinite_d1</obj_property>
-      <obj_property name="ObjectShortName">infinite_d1</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group59">
-      <obj_property name="label">M_AXIS</obj_property>
+   <wvobject type="vbus" fp_name="vbus227">
+      <obj_property name="label">1</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art0l_tdata">
-         <obj_property name="ElementShortName">m_axis_art0l_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0l_tdata[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[47]">
+         <obj_property name="ElementShortName">[47]</obj_property>
+         <obj_property name="ObjectShortName">[47]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0l_tvalid">
-         <obj_property name="ElementShortName">m_axis_art0l_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0l_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[46]">
+         <obj_property name="ElementShortName">[46]</obj_property>
+         <obj_property name="ObjectShortName">[46]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0l_tlast">
-         <obj_property name="ElementShortName">m_axis_art0l_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0l_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[45]">
+         <obj_property name="ElementShortName">[45]</obj_property>
+         <obj_property name="ObjectShortName">[45]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art0r_tdata">
-         <obj_property name="ElementShortName">m_axis_art0r_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0r_tdata[15:0]</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[44]">
+         <obj_property name="ElementShortName">[44]</obj_property>
+         <obj_property name="ObjectShortName">[44]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0r_tvalid">
-         <obj_property name="ElementShortName">m_axis_art0r_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0r_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[43]">
+         <obj_property name="ElementShortName">[43]</obj_property>
+         <obj_property name="ObjectShortName">[43]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art0r_tlast">
-         <obj_property name="ElementShortName">m_axis_art0r_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art0r_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[42]">
+         <obj_property name="ElementShortName">[42]</obj_property>
+         <obj_property name="ObjectShortName">[42]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art1l_tdata">
-         <obj_property name="ElementShortName">m_axis_art1l_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1l_tdata[15:0]</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[41]">
+         <obj_property name="ElementShortName">[41]</obj_property>
+         <obj_property name="ObjectShortName">[41]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art1l_tvalid">
-         <obj_property name="ElementShortName">m_axis_art1l_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1l_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[40]">
+         <obj_property name="ElementShortName">[40]</obj_property>
+         <obj_property name="ObjectShortName">[40]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art1l_tlast">
-         <obj_property name="ElementShortName">m_axis_art1l_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1l_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[39]">
+         <obj_property name="ElementShortName">[39]</obj_property>
+         <obj_property name="ObjectShortName">[39]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art1r_tdata">
-         <obj_property name="ElementShortName">m_axis_art1r_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1r_tdata[15:0]</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[38]">
+         <obj_property name="ElementShortName">[38]</obj_property>
+         <obj_property name="ObjectShortName">[38]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art1r_tvalid">
-         <obj_property name="ElementShortName">m_axis_art1r_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1r_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[37]">
+         <obj_property name="ElementShortName">[37]</obj_property>
+         <obj_property name="ObjectShortName">[37]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art1r_tlast">
-         <obj_property name="ElementShortName">m_axis_art1r_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art1r_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[36]">
+         <obj_property name="ElementShortName">[36]</obj_property>
+         <obj_property name="ObjectShortName">[36]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art2l_tdata">
-         <obj_property name="ElementShortName">m_axis_art2l_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2l_tdata[15:0]</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[35]">
+         <obj_property name="ElementShortName">[35]</obj_property>
+         <obj_property name="ObjectShortName">[35]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art2l_tvalid">
-         <obj_property name="ElementShortName">m_axis_art2l_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2l_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[34]">
+         <obj_property name="ElementShortName">[34]</obj_property>
+         <obj_property name="ObjectShortName">[34]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art2l_tlast">
-         <obj_property name="ElementShortName">m_axis_art2l_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2l_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[33]">
+         <obj_property name="ElementShortName">[33]</obj_property>
+         <obj_property name="ObjectShortName">[33]</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/data_provider_tb/dut/m_axis_art2r_tdata">
-         <obj_property name="ElementShortName">m_axis_art2r_tdata[15:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2r_tdata[15:0]</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[32]">
+         <obj_property name="ElementShortName">[32]</obj_property>
+         <obj_property name="ObjectShortName">[32]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art2r_tvalid">
-         <obj_property name="ElementShortName">m_axis_art2r_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2r_tvalid</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[31]">
+         <obj_property name="ElementShortName">[31]</obj_property>
+         <obj_property name="ObjectShortName">[31]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/data_provider_tb/dut/m_axis_art2r_tlast">
-         <obj_property name="ElementShortName">m_axis_art2r_tlast</obj_property>
-         <obj_property name="ObjectShortName">m_axis_art2r_tlast</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[30]">
+         <obj_property name="ElementShortName">[30]</obj_property>
+         <obj_property name="ObjectShortName">[30]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[29]">
+         <obj_property name="ElementShortName">[29]</obj_property>
+         <obj_property name="ObjectShortName">[29]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[28]">
+         <obj_property name="ElementShortName">[28]</obj_property>
+         <obj_property name="ObjectShortName">[28]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[27]">
+         <obj_property name="ElementShortName">[27]</obj_property>
+         <obj_property name="ObjectShortName">[27]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[26]">
+         <obj_property name="ElementShortName">[26]</obj_property>
+         <obj_property name="ObjectShortName">[26]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[25]">
+         <obj_property name="ElementShortName">[25]</obj_property>
+         <obj_property name="ObjectShortName">[25]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[24]">
+         <obj_property name="ElementShortName">[24]</obj_property>
+         <obj_property name="ObjectShortName">[24]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/pattern_cntr">
-      <obj_property name="ElementShortName">pattern_cntr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pattern_cntr[31:0]</obj_property>
+   <wvobject type="vbus" fp_name="vbus202">
+      <obj_property name="label">0</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">[23]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">[22]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">[21]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">[20]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/sum">
+      <obj_property name="ElementShortName">sum[23:0]</obj_property>
+      <obj_property name="ObjectShortName">sum[23:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/data_provider_tb/dut/pattern_step_cntr">
-      <obj_property name="ElementShortName">pattern_step_cntr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pattern_step_cntr[31:0]</obj_property>
+   <wvobject fp_name="divider584" type="divider">
+      <obj_property name="label">grand_total</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\grand_total_calc(0)\/total0">
+      <obj_property name="ElementShortName">total0[23:0]</obj_property>
+      <obj_property name="ObjectShortName">total0[23:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\grand_total_calc(0)\/total1">
+      <obj_property name="ElementShortName">total1[23:0]</obj_property>
+      <obj_property name="ObjectShortName">total1[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\grand_total_calc(0)\/total2">
+      <obj_property name="ElementShortName">total2[23:0]</obj_property>
+      <obj_property name="ObjectShortName">total2[23:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\grand_total_calc(0)\/total3">
+      <obj_property name="ElementShortName">total3[23:0]</obj_property>
+      <obj_property name="ObjectShortName">total3[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/\grand_total_calc(0)\/overbright">
+      <obj_property name="ElementShortName">overbright</obj_property>
+      <obj_property name="ObjectShortName">overbright</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus358">
+      <obj_property name="label">art0_total</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">[23]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">[22]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">[21]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">[20]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus456">
+      <obj_property name="label">art0_total_out</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[23]">
+         <obj_property name="ElementShortName">[23]</obj_property>
+         <obj_property name="ObjectShortName">[23]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[22]">
+         <obj_property name="ElementShortName">[22]</obj_property>
+         <obj_property name="ObjectShortName">[22]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[21]">
+         <obj_property name="ElementShortName">[21]</obj_property>
+         <obj_property name="ObjectShortName">[21]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[20]">
+         <obj_property name="ElementShortName">[20]</obj_property>
+         <obj_property name="ObjectShortName">[20]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/art_total_out[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/data_provider_tb/dut/art_overbright[0]">
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/data_art0_even">
+      <obj_property name="ElementShortName">data_art0_even[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_art0_even[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider583" type="divider">
+      <obj_property name="label">ec_sig</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/ec_sig_out">
+      <obj_property name="ElementShortName">ec_sig_out[8:0]</obj_property>
+      <obj_property name="ObjectShortName">ec_sig_out[8:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/adcv_max_asic_cnts">
+      <obj_property name="ElementShortName">adcv_max_asic_cnts[7:0]</obj_property>
+      <obj_property name="ObjectShortName">adcv_max_asic_cnts[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/adcv_max_pixel_num">
+      <obj_property name="ElementShortName">adcv_max_pixel_num[9:0]</obj_property>
+      <obj_property name="ObjectShortName">adcv_max_pixel_num[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus681">
+      <obj_property name="label">cnt_tetrade_ec_10bit</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[19]">
+         <obj_property name="ElementShortName">[19]</obj_property>
+         <obj_property name="ObjectShortName">[19]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[18]">
+         <obj_property name="ElementShortName">[18]</obj_property>
+         <obj_property name="ObjectShortName">[18]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[17]">
+         <obj_property name="ElementShortName">[17]</obj_property>
+         <obj_property name="ObjectShortName">[17]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[16]">
+         <obj_property name="ElementShortName">[16]</obj_property>
+         <obj_property name="ObjectShortName">[16]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/cnt_tetrade_ec_00[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain">
+      <obj_property name="ElementShortName">datain[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus632">
+      <obj_property name="label">datain_8biy</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[15]">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">[15]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[14]">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">[14]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[13]">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">[13]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[12]">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">[12]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/data_provider_tb/dut/\ADCV_calc_gen(0)\/datain[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/data_provider_tb/dut/data_art0_ddr_d2_sw16">
+      <obj_property name="ElementShortName">data_art0_ddr_d2_sw16[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_art0_ddr_d2_sw16[31:0]</obj_property>
    </wvobject>
 </wave_config>

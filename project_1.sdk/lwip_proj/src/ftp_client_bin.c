@@ -110,6 +110,12 @@ void IncProgramCounter()
 	program_counter++;
 }
 
+u32 GetProgramCounter()
+{
+	return program_counter;
+}
+
+
 static int
 SendFTPcmd(char* str)//transfer_ftpctrl_data()
 {

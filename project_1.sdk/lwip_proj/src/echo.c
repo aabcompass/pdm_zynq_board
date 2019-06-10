@@ -468,7 +468,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'm')
 	{
-		LoadPixMaskTst(num, ec, 0);
+		//LoadPixMaskTst(num, ec, 0);
+		*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_GRAND_TOTAL_MAX) = 100000;
 	}
 	else if(c == 'M')
 	{
@@ -494,6 +495,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 's')
 	{
+		xil_printf("GetProgramCounter=%d\n\r", GetProgramCounter());
 		xil_printf("sizeof(DATA_TYPE_SCI_ALLTRG_V1)=%d\n\r", sizeof(DATA_TYPE_SCI_ALLTRG_V1));
 		xil_printf("GetArtixLoadState=0x%08x\n\r",  GetArtixLoadState());
 		xil_printf("locked = 0x%08x\n\r", *(u32*)(XPAR_AXI_GPIO_0_BASEADDR));
