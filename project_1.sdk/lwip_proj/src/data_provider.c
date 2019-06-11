@@ -25,6 +25,17 @@ int IsDataProviding()
 	return *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS) & 0x00000007;
 }
 
+void SetGrandTotals(u32 max)
+{
+	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_GRAND_TOTAL_MAX) = max;
+}
+
+u32 GetOverbrightStatus()
+{
+	return *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_OVERBRIGHT);
+}
+
+
 void SetDataProviderTestMode(int mode)
 {
 	print("Waiting for data provider idle state.\n\r");

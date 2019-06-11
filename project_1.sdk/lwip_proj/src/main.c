@@ -292,6 +292,8 @@ int main()
 	SetL1TAthresholds(5, 6, 7, 9, 15, 20);
 	print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
 	ProvideAndCheck();
+	print("Setting HVPS protection maximum value (10000)");
+	SetGrandTotals(10000);
 
 	/* receive and process packets */
 	while (1) {
@@ -314,6 +316,7 @@ int main()
 		//UpdateFW_SM();
 		ScurveService();
 		HVInterruptService();
+		HVprotectionService();
 		GPS_service();
 		IncProgramCounter();
 		if(XUartPs_IsReceiveData(XPAR_PS7_UART_0_BASEADDR/*STDOUT_BASEADDRESS*/))

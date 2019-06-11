@@ -360,6 +360,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 				turn[0], turn[1], turn[2], turn[3], turn[4], turn[5], turn[6], turn[7], turn[8]);
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
+	else if(sscanf(p->payload, "hvps protect %d", &param0) == 1)
+	{
+		SetGrandTotals(param0);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
 	else if(sscanf(p->payload, "settime %d",
 			&param0) == 1)
 	{

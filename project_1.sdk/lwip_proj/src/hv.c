@@ -41,6 +41,8 @@ volatile int is_interrupt_pending = 0;
 Z_DATA_TYPE_HVPS_LOG_V1 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
 volatile u32 hvps_log_current_record = 0;
 
+int hvps_protection_started = 0;
+
 
 //enum hvps_log_records {
 #define		HVPS_TURN_ON		0  		/* turn on */
@@ -55,6 +57,7 @@ volatile u32 hvps_log_current_record = 0;
 #define		HVPS_AGC_UP_0_to_1	9	/* Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded. */
 #define		HVPS_AGC_UP_1_to_3	10	/* Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded. */
 #define		HVPS_STATUS         11 /* POLISH STATUS */
+#define 	HVPS_OVERBRIGHT		12
 //};
 
 const char* hvps_log_records_txt[] = {
@@ -720,6 +723,7 @@ void HV_turnON_list(int list[NUM_OF_HV])
 
 	int tmp_array[NUM_OF_HV];
 	HV_getStatus(tmp_array);
+	hvps_protection_started = 0;
 }
 
 // Turn off HVs by list
@@ -866,5 +870,19 @@ void SetupHVPSIntrSystem(XScuGic* pIntc)
 		// Set up restart value
 		*(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR + 4*REGW_HVHK_TIMER0_RESTART_VALUE) = HVHK_TIMER_RESTART_VALUE_US;
 		return;
+	}
+}
+
+void HVprotectionService()
+{
+	u32 status = GetOverbrightStatus();
+	if(status && (hvps_protection_started == 0))
+	{
+		int list[] = {0,0,0, 0,0,0, 0,0,0};
+		HV_setCathodeVoltage(list);
+		HV_turnOFF_all();
+		HV_addLog(HVPS_OVERBRIGHT, status);
+		print("Overbright!\n\r");
+		hvps_protection_started = 1;
 	}
 }
