@@ -528,7 +528,7 @@ void send_data_sm()
 		ftpserver_data_connected = 0;
 		break;
 	case start_send_dir:
-		//print("Send directory list...\n\r");
+		print("$");
 		current_record = 0;
 		start_ftpserver_data();
 		ftp_state = wait_connect;
@@ -587,6 +587,7 @@ void send_data_sm()
 			break;
 		}
 	case start_send_file:
+		print("+");
 		start_ftpserver_data();
 		ftp_state = wait_connect2;
 		break;
