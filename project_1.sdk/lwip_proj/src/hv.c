@@ -41,7 +41,7 @@ volatile int is_interrupt_pending = 0;
 Z_DATA_TYPE_HVPS_LOG_V1 hvps_log;//[HVPS_LOG_SIZE_NRECORDS];
 volatile u32 hvps_log_current_record = 0;
 
-int hvps_protection_started = 0;
+int hvps_protection_started = 0; // to do not do protection before hvps start
 
 
 //enum hvps_log_records {

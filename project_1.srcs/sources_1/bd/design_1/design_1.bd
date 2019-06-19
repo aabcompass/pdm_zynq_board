@@ -234,13 +234,13 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc</spirit:name>
+          <spirit:name>sr_ck_pc_art</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>sr_ck_pc_art</spirit:name>
+          <spirit:name>sr_ck_pc</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
           </spirit:wire>
@@ -1386,6 +1386,13 @@
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axi_data_provider_0_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>axi_pixel_mask_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="axi_pixel_mask" spirit:vendor="user.org" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axi_pixel_mask_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:interconnections>
       <spirit:interconnection>
@@ -1449,11 +1456,6 @@
         <spirit:activeInterface spirit:busRef="S_AXIS_S2MM" spirit:componentRef="axi_dma_L2"/>
       </spirit:interconnection>
       <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r1_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_00"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_sa_00"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
         <spirit:name>axis_broadcaster_1r6_M00_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_01"/>
         <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_sa_01"/>
@@ -1477,11 +1479,6 @@
         <spirit:name>axis_broadcaster_1r3_M00_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_05"/>
         <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_sa_05"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_clock_converter_0_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_clock_converter_0"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_clock_converter_1_M_AXIS</spirit:name>
@@ -1572,11 +1569,6 @@
         <spirit:name>processing_system7_0_M_AXI_GP1</spirit:name>
         <spirit:activeInterface spirit:busRef="M_AXI_GP1" spirit:componentRef="processing_system7_0"/>
         <spirit:activeInterface spirit:busRef="S00_AXI" spirit:componentRef="inst_interconnect_100MHz"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_dwidth_converter_0_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_0"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_broadcaster_1r10"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_dwidth_converter_3_M_AXIS</spirit:name>
@@ -1749,11 +1741,6 @@
         <spirit:activeInterface spirit:busRef="m_axis" spirit:componentRef="axis_flow_control_D2"/>
       </spirit:interconnection>
       <spirit:interconnection>
-        <spirit:name>axis_broadcaster_00_M01_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_00"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_clock_converter_0"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
         <spirit:name>axis_broadcaster_01_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_01"/>
         <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_clock_converter_1"/>
@@ -1777,16 +1764,6 @@
         <spirit:name>axis_broadcaster_05_M01_AXIS</spirit:name>
         <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_05"/>
         <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_clock_converter_3"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_data_fifo_0_M_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_1st_fifo_0"/>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_broadcaster_00"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axi_data_provider_0_m_axis_art0l</spirit:name>
-        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_1st_fifo_0"/>
-        <spirit:activeInterface spirit:busRef="m_axis_art0l" spirit:componentRef="axi_data_provider_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>axis_data_fifo_1_M_AXIS</spirit:name>
@@ -1839,36 +1816,6 @@
         <spirit:activeInterface spirit:busRef="m_axis_art2r" spirit:componentRef="axi_data_provider_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r10_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_0"/>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r10"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r11_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_0"/>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r11"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r13_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r13"/>
-        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_2"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r12_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r12"/>
-        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_2"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r14_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_1"/>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r14"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>axis_broadcaster_1r15_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_1"/>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r15"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
         <spirit:name>axis_flow_control_d1_0_m_axis</spirit:name>
         <spirit:activeInterface spirit:busRef="S_AXIS_S2MM" spirit:componentRef="axi_dma_raw"/>
         <spirit:activeInterface spirit:busRef="m_axis" spirit:componentRef="axis_flow_control_D1"/>
@@ -1917,6 +1864,101 @@
         <spirit:name>inst_interconnect_100MHz_M14_AXI</spirit:name>
         <spirit:activeInterface spirit:busRef="M14_AXI" spirit:componentRef="inst_interconnect_100MHz"/>
         <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="axi_fifo4adcv"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_data_fifo_0_M_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_data_1st_fifo_0"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_broadcaster_00"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_00_M01_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axis_broadcaster_00"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_clock_converter_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_data_provider_0_m_axis_art0l</spirit:name>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_1st_fifo_0"/>
+        <spirit:activeInterface spirit:busRef="m_axis_art0l" spirit:componentRef="axi_data_provider_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_clock_converter_0_M_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_clock_converter_0"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_dwidth_converter_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r1_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_00"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_data_fifo_sa_00"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_dwidth_converter_0_M_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M_AXIS" spirit:componentRef="axis_dwidth_converter_0"/>
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="axis_broadcaster_1r10"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r10_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r10"/>
+        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M01_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_0"/>
+        <spirit:activeInterface spirit:busRef="M01_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r11_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r11"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r12_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r12"/>
+        <spirit:activeInterface spirit:busRef="S02_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M02_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M02_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_2"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M03_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_2"/>
+        <spirit:activeInterface spirit:busRef="M03_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r13_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r13"/>
+        <spirit:activeInterface spirit:busRef="S03_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r14_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r14"/>
+        <spirit:activeInterface spirit:busRef="S04_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M04_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M04_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="ALGO_B_1"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axis_broadcaster_1r15_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="axis_broadcaster_1r15"/>
+        <spirit:activeInterface spirit:busRef="S05_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>axi_pixel_mask_0_M05_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M05_AXIS" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="S01_AXIS" spirit:componentRef="ALGO_B_1"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>inst_interconnect_200MHz_M01_AXI</spirit:name>
+        <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="axi_pixel_mask_0"/>
+        <spirit:activeInterface spirit:busRef="M01_AXI" spirit:componentRef="inst_interconnect_200MHz"/>
       </spirit:interconnection>
     </spirit:interconnections>
     <spirit:adHocConnections>
@@ -1973,6 +2015,8 @@
         <spirit:internalPortReference spirit:componentRef="axi_gps_core_0" spirit:portRef="S_AXI_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="S_AXI_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_fifo4adcv" spirit:portRef="s_axi_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ACLK"/>
@@ -1994,8 +2038,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M14_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="m_axis_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>processing_system7_0_FCLK_RESET0_N</spirit:name>
@@ -2049,6 +2091,7 @@
         <spirit:internalPortReference spirit:componentRef="axi_gps_core_0" spirit:portRef="S_AXI_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_cathode_ctrl_0" spirit:portRef="S_AXI_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_fifo4adcv" spirit:portRef="s_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M01_ARESETN"/>
@@ -2068,7 +2111,6 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M12_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M13_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_100MHz" spirit:portRef="M14_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axi_data_provider_0" spirit:portRef="s00_axi_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>rst_processing_system7_0_50M_interconnect_aresetn</spirit:name>
@@ -2109,8 +2151,8 @@
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_ck_pc</spirit:name>
         <spirit:internalPortReference spirit:componentRef="spaciroc3_sc_0" spirit:portRef="sr_ck_pc"/>
-        <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
         <spirit:externalPortReference spirit:portRef="sr_ck_pc"/>
+        <spirit:externalPortReference spirit:portRef="sr_ck_pc_art"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>spaciroc3_sc_0_sr_rstb_pc</spirit:name>
@@ -2306,6 +2348,7 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M06_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="axi_pixel_mask_0" spirit:portRef="S_AXI_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axis_data_fifo_fc_L9_axis_data_count</spirit:name>
@@ -2396,6 +2439,7 @@
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M04_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M05_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="inst_interconnect_200MHz" spirit:portRef="M06_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="axi_pixel_mask_0" spirit:portRef="S_AXI_ARESETN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconcat_1_dout</spirit:name>
@@ -11512,6 +11556,12 @@
             <spirit:name>SEG_axi_data_provider_0_reg0</spirit:name>
             <spirit:displayName>/axi_data_provider_0/s00_axi/reg0</spirit:displayName>
             <spirit:addressOffset>0x83C30000</spirit:addressOffset>
+            <spirit:range>64K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_axi_pixel_mask_0_reg0</spirit:name>
+            <spirit:displayName>/axi_pixel_mask_0/S_AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0x43C30000</spirit:addressOffset>
             <spirit:range>64K</spirit:range>
           </spirit:segment>
         </spirit:segments>
