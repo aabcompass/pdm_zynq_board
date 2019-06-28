@@ -72,7 +72,11 @@ const char* hvps_log_records_txt[] = {
 		"AGC_1->0",
 		"AGC_0->1",
 		"AGC_1->3",
-		"STATUS"};
+		"STATUS",
+		"OVERBRIGHT",
+		"UNKNOWN1,"
+		"UNKNOWN2",
+		"UNKNOWN3"};
 
 
 static void delay(int time)
