@@ -406,59 +406,11 @@ architecture arch_ec of EC0EC1EC2 is
     signal  add_12_l15B                  :   std_logic_vector(9 downto 0) := ( others => '0');
     signal  add_12_l15S                  :   std_logic_vector(11 downto 0);
     
-    signal  mult_8_l0A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l0P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l1A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l1P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l2A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l2P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l3A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l3P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l4A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l4P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l5A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l5P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l6A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l6P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l7A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l7P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l8A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l8P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l9A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l9P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l10A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l10P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l11A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l11P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l12A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l12P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-    
-    signal  mult_8_l13A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l13P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l14A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l14P                   :   std_logic_vector(9 downto 0) := ( others => '0');
-        
-    signal  mult_8_l15A                   :   std_logic_vector(7 downto 0) := ( others => '0');
-    signal  mult_8_l15P                   :   std_logic_vector(9 downto 0) := ( others => '0');     
-    
     type    state_S_type                  is   (s0,s1);
     signal  state_S                       :    state_S_type := s0;
     signal  S_calc                        :    std_logic := '0';
     signal  S_rdy                         :    std_logic := '0';
-    type    state_set_type                is   (s0,s1,s2,s3,s4,s5);
+    type    state_set_type                is    (s0,s1);
     signal  state_set                     :    state_set_type := s0;
     
     --S MEMORY
@@ -581,14 +533,6 @@ architecture arch_ec of EC0EC1EC2 is
         B : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
         CLK : IN STD_LOGIC;
         S : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
-      );
-    END COMPONENT;
-    
-    COMPONENT MULT_8
-      PORT (
-        CLK : IN STD_LOGIC;
-        A : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-        P : OUT STD_LOGIC_VECTOR(9 DOWNTO 0)
       );
     END COMPONENT;
     
@@ -1200,118 +1144,6 @@ begin
         S => add_12_l15S
       );
       
-     mult_8_l0 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l0A,
-            P => mult_8_l0P
-     );
-        
-     mult_8_l1 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l1A,
-            P => mult_8_l1P
-     );
-     
-     mult_8_l2 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l2A,
-            P => mult_8_l2P
-     );
-        
-     mult_8_l3 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l3A,
-            P => mult_8_l3P
-     );
-     
-     mult_8_l4 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l4A,
-            P => mult_8_l4P
-     );
-        
-     mult_8_l5 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l5A,
-            P => mult_8_l5P
-     );
-     
-     mult_8_l6 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l6A,
-            P => mult_8_l6P
-     );
-        
-     mult_8_l7 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l7A,
-            P => mult_8_l7P
-     );
-     
-     mult_8_l8 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l8A,
-            P => mult_8_l8P
-     );
-        
-     mult_8_l9 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l9A,
-            P => mult_8_l9P
-     );
-     
-     mult_8_l10 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l10A,
-            P => mult_8_l10P
-     );
-        
-     mult_8_l11 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l11A,
-            P => mult_8_l11P
-     );
-     
-     mult_8_l12 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l12A,
-            P => mult_8_l12P
-     );
-        
-     mult_8_l13 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l13A,
-            P => mult_8_l13P
-     );
-     
-     mult_8_l14 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l14A,
-            P => mult_8_l14P
-     );
-        
-     mult_8_l15 : MULT_8
-        PORT MAP (
-            CLK => CLOCK,
-            A => mult_8_l15A,
-            P => mult_8_l15P
-     );                                   
-           
      S_MEM : S_MEMORY
       PORT MAP (
         clka => CLOCK,
@@ -1950,8 +1782,7 @@ begin
         end if;
     end process;
 
-    --S calculation (first part)
-    --S=(SUM/16)+(3*SQRT(SUM))
+    --S calculation
     S_calculation :    process (CLOCK)
     begin                
         if (CLOCK'event and CLOCK = '1') then
@@ -1983,22 +1814,22 @@ begin
                 when s1 =>
                     if (m_axis_dout_tvalid_l0 = '1') then--Check if SQRT(SUM) is ready
                         --SQRT minimum from IP Coregen => width 16 bit
-                        mult_8_l0A  <= m_axis_dout_tdata_l0; --3*SQRT(SUM)
-                        mult_8_l1A  <= m_axis_dout_tdata_l1; --3*SQRT(SUM)
-                        mult_8_l2A  <= m_axis_dout_tdata_l2; --3*SQRT(SUM)
-                        mult_8_l3A  <= m_axis_dout_tdata_l3; --3*SQRT(SUM)
-                        mult_8_l4A  <= m_axis_dout_tdata_l4; --3*SQRT(SUM)
-                        mult_8_l5A  <= m_axis_dout_tdata_l5; --3*SQRT(SUM)
-                        mult_8_l6A  <= m_axis_dout_tdata_l6; --3*SQRT(SUM)
-                        mult_8_l7A  <= m_axis_dout_tdata_l7; --3*SQRT(SUM)
-                        mult_8_l8A  <= m_axis_dout_tdata_l8; --3*SQRT(SUM)
-                        mult_8_l9A  <= m_axis_dout_tdata_l9; --3*SQRT(SUM)
-                        mult_8_l10A  <= m_axis_dout_tdata_l10; --3*SQRT(SUM)
-                        mult_8_l11A  <= m_axis_dout_tdata_l11; --3*SQRT(SUM)
-                        mult_8_l12A  <= m_axis_dout_tdata_l12; --3*SQRT(SUM)
-                        mult_8_l13A  <= m_axis_dout_tdata_l13; --3*SQRT(SUM)
-                        mult_8_l14A  <= m_axis_dout_tdata_l14; --3*SQRT(SUM)
-                        mult_8_l15A  <= m_axis_dout_tdata_l15; --3*SQRT(SUM)
+                        add_12_l0B  <= m_axis_dout_tdata_l0 & "00"; --4*SQRT(SUM)
+                        add_12_l1B  <= m_axis_dout_tdata_l1 & "00"; --4*SQRT(SUM)
+                        add_12_l2B  <= m_axis_dout_tdata_l2 & "00"; --4*SQRT(SUM)
+                        add_12_l3B  <= m_axis_dout_tdata_l3 & "00"; --4*SQRT(SUM)
+                        add_12_l4B  <= m_axis_dout_tdata_l4 & "00"; --4*SQRT(SUM)
+                        add_12_l5B  <= m_axis_dout_tdata_l5 & "00"; --4*SQRT(SUM)
+                        add_12_l6B  <= m_axis_dout_tdata_l6 & "00"; --4*SQRT(SUM)
+                        add_12_l7B  <= m_axis_dout_tdata_l7 & "00"; --4*SQRT(SUM)
+                        add_12_l8B  <= m_axis_dout_tdata_l8 & "00"; --4*SQRT(SUM)
+                        add_12_l9B  <= m_axis_dout_tdata_l9 & "00"; --4*SQRT(SUM)
+                        add_12_l10B <= m_axis_dout_tdata_l10 & "00"; --4*SQRT(SUM)
+                        add_12_l11B <= m_axis_dout_tdata_l11 & "00"; --4*SQRT(SUM)
+                        add_12_l12B <= m_axis_dout_tdata_l12 & "00"; --4*SQRT(SUM)
+                        add_12_l13B <= m_axis_dout_tdata_l13 & "00"; --4*SQRT(SUM)
+                        add_12_l14B <= m_axis_dout_tdata_l14 & "00"; --4*SQRT(SUM)
+                        add_12_l15B <= m_axis_dout_tdata_l15 & "00"; --4*SQRT(SUM)
                                             
                         state_S <= s0;
                         S_calc <= '1';
@@ -2007,7 +1838,6 @@ begin
         end if;
     end process;
     
-    --S calculation (second part)
     --Set "S" ready
     S_set :     process (CLOCK)
     begin
@@ -2015,35 +1845,10 @@ begin
             case (state_set) is
                 when s0 =>
                     if (S_calc = '1') then
-                        state_set <= s1;
+                        state_set <= s1; --Adder latency
                     end if;
                     S_rdy <= '0';
                 when s1 =>
-                    state_set <= s2; --Multiplier latency
-                when s2 =>
-                    state_set <= s3; --Multiplier latency
-                when s3 =>
-                    --SQRT minimum from IP Coregen => width 16 bit
-                    add_12_l0B  <= mult_8_l0P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l1B  <= mult_8_l1P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l2B  <= mult_8_l2P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l3B  <= mult_8_l3P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l4B  <= mult_8_l4P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l5B  <= mult_8_l5P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l6B  <= mult_8_l6P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l7B  <= mult_8_l7P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l8B  <= mult_8_l8P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l9B  <= mult_8_l9P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l10B  <= mult_8_l10P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l11B  <= mult_8_l11P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l12B  <= mult_8_l12P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l13B  <= mult_8_l13P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l14B  <= mult_8_l14P;--(SUM/16)+(3*SQRT(SUM))
-                    add_12_l15B  <= mult_8_l15P;--(SUM/16)+(3*SQRT(SUM))
-                    state_set <= s4;
-                when s4 =>
-                    state_set <= s5; --Adder latency
-                when s5 =>
                     S_rdy <= '1';--Now "S" is ready
                     state_set <= s0;
             end case;
@@ -2060,97 +1865,97 @@ begin
 				    if (S_rdy = '1' ) then--Check if S value is ready
 				        wea_smem <= "1";--Write on memory (column 0 to column ECx2)
 				        
-				        if (add_12_l0S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(11 downto 0) <= "000000011100";
+				        if (add_12_l0S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(11 downto 0) <= "000000001111";
 				        else
 				            dina_smem(11 downto 0) <= add_12_l0S;
 				        end if;
 				        
-				         if (add_12_l1S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(23 downto 12) <= "000000011100";
+				         if (add_12_l1S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(23 downto 12) <= "000000001111";
 				        else
 				            dina_smem(23 downto 12) <= add_12_l1S;
 				        end if;
 				        
-				         if (add_12_l2S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(35 downto 24) <= "000000011100";
+				         if (add_12_l2S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(35 downto 24) <= "000000001111";
 				        else
 				            dina_smem(35 downto 24) <= add_12_l2S;
 				        end if;
 				        
-				         if (add_12_l3S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(47 downto 36) <= "000000011100";
+				         if (add_12_l3S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(47 downto 36) <= "000000001111";
 				        else
 				            dina_smem(47 downto 36) <= add_12_l3S;
 				        end if;
 				        
-				         if (add_12_l4S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(59 downto 48) <= "000000011100";
+				         if (add_12_l4S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(59 downto 48) <= "000000001111";
 				        else
 				            dina_smem(59 downto 48) <= add_12_l4S;
 				        end if;
 				        
-				         if (add_12_l5S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(71 downto 60) <= "000000011100";
+				         if (add_12_l5S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(71 downto 60) <= "000000001111";
 				        else
 				            dina_smem(71 downto 60) <= add_12_l5S;
 				        end if;
 				        
-				         if (add_12_l6S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(83 downto 72) <= "000000011100";
+				         if (add_12_l6S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(83 downto 72) <= "000000001111";
 				        else
 				            dina_smem(83 downto 72) <= add_12_l6S;
 				        end if;
 				        
-				         if (add_12_l7S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(95 downto 84) <= "000000011100";
+				         if (add_12_l7S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(95 downto 84) <= "000000001111";
 				        else
 				            dina_smem(95 downto 84) <= add_12_l7S;
 				        end if;
 				        
-				         if (add_12_l8S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(107 downto 96) <= "000000011100";
+				         if (add_12_l8S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(107 downto 96) <= "000000001111";
 				        else
 				            dina_smem(107 downto 96) <= add_12_l8S;
 				        end if;
 				        
-				         if (add_12_l9S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(119 downto 108) <= "000000011100";
+				         if (add_12_l9S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(119 downto 108) <= "000000001111";
 				        else
 				            dina_smem(119 downto 108) <= add_12_l9S;
 				        end if;
 				        
-				         if (add_12_l10S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(131 downto 120) <= "000000011100";
+				         if (add_12_l10S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(131 downto 120) <= "000000001111";
 				        else
 				            dina_smem(131 downto 120) <= add_12_l10S;
 				        end if;
 				        
-				         if (add_12_l11S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(143 downto 132) <= "000000011100";
+				         if (add_12_l11S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(143 downto 132) <= "000000001111";
 				        else
 				            dina_smem(143 downto 132) <= add_12_l11S;
 				        end if;
 				        
-				         if (add_12_l12S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(155 downto 144) <= "000000011100";
+				         if (add_12_l12S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(155 downto 144) <= "000000001111";
 				        else
 				            dina_smem(155 downto 144) <= add_12_l12S;
 				        end if;
 				        
-				         if (add_12_l13S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(167 downto 156) <= "000000011100";
+				         if (add_12_l13S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(167 downto 156) <= "000000001111";
 				        else
 				            dina_smem(167 downto 156) <= add_12_l13S;
 				        end if;
 				        
-				         if (add_12_l14S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(179 downto 168) <= "000000011100";
+				         if (add_12_l14S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(179 downto 168) <= "000000001111";
 				        else
 				            dina_smem(179 downto 168) <= add_12_l14S;
 				        end if;
-				         if (add_12_l15S < "000000011100") then--If S<28 set S=28 
-				            dina_smem(191 downto 180) <= "000000011100";
+				         if (add_12_l15S < "000000001111") then--If S<15 set S=15 
+				            dina_smem(191 downto 180) <= "000000001111";
 				        else
 				            dina_smem(191 downto 180) <= add_12_l15S;
 				        end if;
