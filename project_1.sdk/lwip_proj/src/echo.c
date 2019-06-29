@@ -647,7 +647,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'r')
 	{
-		TestFunc();
+		for(i=0;i<64*6;i++)
+			for(j=0;j<6;j++)
+				LoadPixMaskL1(i, j, 1);
 	}
 
 }

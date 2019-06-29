@@ -238,7 +238,25 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		//SetIndSCPixelMask(param);
 		u32 pixel = GetIndSCCurrentPixel() + N_OF_PIXELS_PER_PMT*GetIndSCCurrentAsic();
 		u32 line = GetIndSCCurrentLine();
-		LoadPixMaskTst(pixel, line, param);
+		//LoadPixMaskTst(pixel, line, param);
+		LoadPixMaskL1(pixel, line, param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl maskasic %d", &param) == 1)
+	{
+		u32 pixel = N_OF_PIXELS_PER_PMT*GetIndSCCurrentAsic();
+		u32 line = GetIndSCCurrentLine();
+		for(i=pixel;i<pixel+N_OF_PIXELS_PER_PMT;i++)
+			LoadPixMaskL1(i, line, param);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "slowctrl maskline %d", &param) == 1)
+	{
+		u32 line = GetIndSCCurrentLine();
+		for(i=0;i<0+N_OF_PIXELS_PER_PMT*6;i++)
+			LoadPixMaskL1(i, line, param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
