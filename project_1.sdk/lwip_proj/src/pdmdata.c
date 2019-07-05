@@ -18,9 +18,9 @@
 
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_raw;
-uint8_t  DataDMA__Raw[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint16_t DataDMA__L1[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
@@ -65,10 +65,10 @@ u32 scurve_memcpy_pos = 0;
 void PrintD1_1stElements()
 {
 	int i, j;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_RAW*N_FRAMES_DMA_RAW*N_OF_PIXEL_PER_PDM);
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D1[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_RAW*N_FRAMES_DMA_RAW*N_OF_PIXEL_PER_PDM);
 	for(j=0;j<2;j++)
 		for(i=0;i<4;i++)
-			xil_printf("DataDMA__Raw[%d][%d][0][0]=0x%02x\n\r", j, i, DataDMA__Raw[j][i][0][0]);
+			xil_printf("DataDMA__Raw[%d][%d][0][0]=0x%02x\n\r", j, i, DataDMA_D1[j][i][0][0]);
 }
 
 int current_bank_L1=0, current_bank_L2=0;
@@ -204,11 +204,11 @@ void PrintFirstElementsL1(int num)
 {
 	int i;
 	static int alt_buffer = 0;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[num][0][0], 2304*sizeof(u16));
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D2[num][0][0], 2304*sizeof(u16));
 	for(i=0;i<2304;i++)
 	{
 		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
-		xil_printf("%02x  ", DataDMA__L1[num][0][i]);
+		xil_printf("%02x  ", DataDMA_D2[num][0][i]);
 	}
 	alt_buffer++;
 }
@@ -248,10 +248,10 @@ void CopyEventData_trig()
 		 */
 
 		memcpy_invalidate(&zynqPacket.level1_data[i].payload.raw_data[0][0],
-				&DataDMA__Raw[prev_alt_buffer%2][i][0][0],
+				&DataDMA_D1[prev_alt_buffer%2][i][0][0],
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0);
 
-		if(CheckZeros(&DataDMA__Raw[prev_alt_buffer%2][i][0][0], N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0))
+		if(CheckZeros(&DataDMA_D1[prev_alt_buffer%2][i][0][0], N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0))
 			print("All zeros!\n\r");
 
 
@@ -266,7 +266,7 @@ void CopyEventData_trig()
 			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
 			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
 			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
-					&DataDMA__L1[i][0][0],
+					&DataDMA_D2[i][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
 			// Mark the trigger as copied (sent)
 			triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
@@ -278,7 +278,7 @@ void CopyEventData_trig()
 			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoD3[prev_alt_buffer][i].n_gtu;
 			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoD3[prev_alt_buffer][i].unix_timestamp;
 			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
-					&DataDMA__L2[prev_alt_buffer%2][0][0],
+					&DataDMA_D3[prev_alt_buffer%2][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
 			// Mark the trigger as copied (sent)
 			triggerInfoD3[prev_alt_buffer][i].is_sent = 1;
@@ -326,11 +326,11 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
 void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 {
 	if(n_dma == 1)
-		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
+		DmaStart(&dma_raw, (UINTPTR)&DataDMA_D1[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
 	else if(n_dma == 2)
-		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_l1, (UINTPTR)&DataDMA_D2[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 	else if(n_dma == 3)
-		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_l2, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 }
 
 
@@ -531,12 +531,12 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 void DMA_init()
 {
 	int i;
-	memset(DataDMA__Raw, 0, sizeof(DataDMA__Raw));
-	memset(DataDMA__L1, 0, sizeof(DataDMA__L1));
-	memset(DataDMA__L2, 0, sizeof(DataDMA__L2));
-	xil_printf("sizeof(DataDMA_Raw)=%d\n\r", sizeof(DataDMA__Raw));
-	xil_printf("sizeof(DataDMA_L1)=%d\n\r", sizeof(DataDMA__L1));
-	xil_printf("sizeof(DataDMA_L2)=%d\n\r", sizeof(DataDMA__L2));
+	memset(DataDMA_D1, 0, sizeof(DataDMA_D1));
+	memset(DataDMA_D2, 0, sizeof(DataDMA_D2));
+	memset(DataDMA_D3, 0, sizeof(DataDMA_D3));
+	xil_printf("sizeof(DataDMA_D1)=%d\n\r", sizeof(DataDMA_D1));
+	xil_printf("sizeof(DataDMA_D2)=%d\n\r", sizeof(DataDMA_D2));
+	xil_printf("sizeof(DataDMA_D3)=%d\n\r", sizeof(DataDMA_D3));
 
 	memset(&zynqPacket, 0, sizeof(zynqPacket));
 
@@ -692,19 +692,19 @@ void ScurveService()
 		{
 			xil_printf("\n\rCopying data to the scurve array to pos. %d. current_alt_buffer=%d\n\r", scurve_memcpy_pos, current_alt_buffer);
 			//Invalidate DCache Range
-			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[!current_alt_buffer][0][0][0], sizeof(DataDMA__L2));
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D3[!current_alt_buffer][0][0][0], sizeof(DataDMA_D3));
 			//now we are expecting 1 double integrated GTU in L3 array
 			if(sCurveStruct.step_dac_value == 1)
 			{
 				memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos][0],
-						&DataDMA__L2[!current_alt_buffer][0][0][0],
+						&DataDMA_D3[!current_alt_buffer][0][0][0],
 						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*N_FRAMES_DMA_L2);
 			}
 			else if(sCurveStruct.step_dac_value == 8)
 			{
 				for(i=0;i<N_FRAMES_DMA_L2;i++)
 					memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos+sCurveStruct.step_dac_value*i][0],
-						&DataDMA__L2[!current_alt_buffer][0][i][0],
+						&DataDMA_D3[!current_alt_buffer][0][i][0],
 						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			}
 			scurve_memcpy_pos += N_FRAMES_DMA_L2;
