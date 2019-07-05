@@ -28,8 +28,8 @@ volatile u32 trig_counter__l1 = 0, trig_counter__l2 = 0;
 
 volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
 //volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
-volatile u32 buffer_L2_changed;
-volatile u32 buffer_L2_changed2;
+volatile u32 buffer_D3_changed;
+volatile u32 buffer_D3_changed2;
 volatile u32 current_trigbuf_d1 = 0, current_trigbuf_d2 = 0;
 
 int N1=4, N2=4, N3=1;
@@ -445,18 +445,18 @@ static void RxIntrHandler_D3(void *Callback)
 		ResetTriggerService_D1(); // added in v1.8.1
 		ResetTriggerService_D2();
 		print("z");
-		buffer_L2_changed = 1;
-		buffer_L2_changed2 = 1;
+		buffer_D3_changed = 1;
+		buffer_D3_changed2 = 1;
 		return;
 	}
 }
 
 
-int IsBufferL2Changed()
+int IsBufferD3Changed()
 {
-	if(buffer_L2_changed)
+	if(buffer_D3_changed)
 	{
-		buffer_L2_changed = 0;
+		buffer_D3_changed = 0;
 		return 1;
 	}
 	else
@@ -465,11 +465,11 @@ int IsBufferL2Changed()
 	}
 }
 
-int IsBufferL2Changed2()
+int IsBufferD3Changed2()
 {
-	if(buffer_L2_changed2)
+	if(buffer_D3_changed2)
 	{
-		buffer_L2_changed2 = 0;
+		buffer_D3_changed2 = 0;
 		return 1;
 	}
 	else

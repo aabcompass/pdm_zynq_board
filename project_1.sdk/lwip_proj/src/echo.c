@@ -240,7 +240,7 @@ void StopSM()
 			stop_sm_state = wait4interruptD3;
 		break;
 	case wait4interruptD3:
-		if(IsBufferL2Changed2())
+		if(IsBufferD3Changed2())
 			stop_sm_state = stop_sm_stopping;
 		break;
 	case stop_sm_stopping:
@@ -298,7 +298,7 @@ void DataPathSM()
 
 		break;
 	case datapath_wait4trigger_state:
-		if(IsBufferL2Changed())
+		if(IsBufferD3Changed())
 		{
 			print("*");
 			// collect data parts from DMA memory

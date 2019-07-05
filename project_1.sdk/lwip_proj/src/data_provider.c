@@ -131,7 +131,7 @@ void ProvideAndCheck()
 	print("Waiting for D3 interrupt\n\r");
 	for(i=0;i<10000;i++)
 	{
-		if(IsBufferL2Changed())
+		if(IsBufferD3Changed())
 			break;
 		for(j=0;j<10000000;j++);
 		print("*");
