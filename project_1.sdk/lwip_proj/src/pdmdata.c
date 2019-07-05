@@ -30,7 +30,7 @@ volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
 //volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_D3_changed;
 volatile u32 buffer_D3_changed2;
-volatile u32 current_trigbuf_d1 = 0, current_trigbuf_d2 = 0;
+volatile u32 current_trigbuf_d1  = 0;
 
 int N1=4, N2=4, N3=1;
 
@@ -159,8 +159,8 @@ void ClearTriggerInfo(int half)
 
 void printMMVars()
 {
-	xil_printf("trig_counter_raw=%d\n\r", trig_counter__l1);
-	xil_printf("trig_counter_l1=%d\n\r", trig_counter__l2);
+	xil_printf("trig_counter_l1=%d\n\r", trig_counter__l1);
+	xil_printf("trig_counter_l2=%d\n\r", trig_counter__l2);
 }
 
 void SetTime(u32 param0)
@@ -309,10 +309,10 @@ void DmaResetN(int n) // 1 - D1, 2 - D2, 3 - D3
 }
 
 
-void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
+void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_intr)
 {
 	u32 ret;
-	if(is_dma) XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
+	if(is_intr) XAxiDma_IntrEnable(pdma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);
 	ret=XAxiDma_SimpleTransfer(pdma, addr, length, XAXIDMA_DEVICE_TO_DMA); // in bytes
 	if(ret != XST_SUCCESS)
 	{
@@ -389,23 +389,23 @@ static void RxIntrHandler_D2(void *Callback)
 	// check whether trigger
 	if(CheckTrigger_L2())
 	{
-		triggerInfoD2[current_alt_buffer][current_trigbuf_d2].is_sent = 0;
-		triggerInfoD2[current_alt_buffer][current_trigbuf_d2].n_gtu = GetTrigNGTU_L2();
-		triggerInfoD2[current_alt_buffer][current_trigbuf_d2].trigger_type = GetTrigType_L2();
-		triggerInfoD2[current_alt_buffer][current_trigbuf_d2].unix_timestamp = GetUnixTimestamp_L2();
+		if(trig_counter__l2 < N2)
+		{
+			triggerInfoD2[current_alt_buffer][trig_counter__l2].is_sent = 0;
+			triggerInfoD2[current_alt_buffer][trig_counter__l2].n_gtu = GetTrigNGTU_L2();
+			triggerInfoD2[current_alt_buffer][trig_counter__l2].trigger_type = GetTrigType_L2();
+			triggerInfoD2[current_alt_buffer][trig_counter__l2].unix_timestamp = GetUnixTimestamp_L2();
+			trig_counter__l2++;
+		}
 		ReleaseTrigger_L2(2);
-		// Change current trigger buffer to the next one
-		if(current_trigbuf_d2 < N2)
-			current_trigbuf_d2++;
-		trig_counter__l2++;
 	}
 
-	//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[current_alt_buffer][current_trigbuf_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
-	DmaStartN(2, current_trigbuf_d2);
 	dma_intr_counter_d2++;
 
-	FlowControlClrIntr_D2(2);	//print("y");
-	//print("y");
+	DmaStartN(2, dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2);
+
+	FlowControlClrIntr_D2();	//print("y");
+	print("y");
 
 	return;
 
@@ -440,7 +440,7 @@ static void RxIntrHandler_D3(void *Callback)
 		// Restart DMA D3
 		DmaReset(AxiDmaInst);
 		DmaStartN(3, 0);
-		current_trigbuf_d1 = 0; current_trigbuf_d2 = 0;
+		current_trigbuf_d1 = 0; trig_counter__l2 = 0;
 		ClearTriggerInfo(current_alt_buffer);
 		ResetTriggerService_D1(); // added in v1.8.1
 		ResetTriggerService_D2();

@@ -28,6 +28,7 @@ void ResetTriggerService_D2()
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_CLR_FLAGS*4) &= ~BIT_FC_CLR_TRIG_SERVICE;
 }
 
+// clear trigger flag
 void ReleaseTrigger_L2()
 {
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_EDGE_FLAGS*4) = BIT_FC_RELEASE;
@@ -66,6 +67,7 @@ u32 GetNGTU()
 		return *(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGR_GTU_CNT*4);
 }
 
+// Allow to continue pass data to DMA block
 void FlowControlClrIntr_D2()
 {
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_INTR;
