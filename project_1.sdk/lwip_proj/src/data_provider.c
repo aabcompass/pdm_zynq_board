@@ -136,9 +136,9 @@ void ProvideAndCheck()
 		for(j=0;j<10000000;j++);
 		print("*");
 	}
-	xil_printf("DMAIntrCounterRaw=%d\n\r", GetDMAIntrCounterN(0));
-	xil_printf("DMAIntrCounterL1=%d\n\r", GetDMAIntrCounterN(1));
-	xil_printf("DMAIntrCounterL2=%d\n\r", GetDMAIntrCounterN(2));
+	xil_printf("DMAIntrCounterD1=%d\n\r", GetDMAIntrCounterN(1));
+	xil_printf("DMAIntrCounterD2=%d\n\r", GetDMAIntrCounterN(2));
+	xil_printf("DMAIntrCounterD3=%d\n\r", GetDMAIntrCounterN(3));
 }
 
 void LoadPixMaskTst(u32 pixel, u32 ec, u32 msk)

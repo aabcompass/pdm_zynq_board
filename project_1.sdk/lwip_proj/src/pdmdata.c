@@ -586,13 +586,13 @@ void DMA_init()
 
 
 
-u32 GetDMAIntrCounterN(int n)
+u32 GetDMAIntrCounterN(int n) // 1 - d1, 2 - d2, 3 - d3
 {
-	if(n==0)
+	if(n==1)
 		return dma_intr_counter_d1;
-	else if(n==1)
-		return dma_intr_counter_d2;
 	else if(n==2)
+		return dma_intr_counter_d2;
+	else if(n==3)
 		return dma_intr_counter_d3;
 	else
 		return 0;
