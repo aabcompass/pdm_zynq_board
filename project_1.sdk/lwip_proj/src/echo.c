@@ -518,9 +518,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("GetSWSMState()=0x%08x\n\r",  GetSWSMState());
 		xil_printf("GetFTPstate()=%d\n\r",  GetFTPstate());
 		xil_printf("GetCurPosFC1()=%d\n\r", GetCurPosFC1());
-		xil_printf("GetDMAIntrCounterN(0)=%d\n\r", GetDMAIntrCounterN(0));
 		xil_printf("GetDMAIntrCounterN(1)=%d\n\r", GetDMAIntrCounterN(1));
 		xil_printf("GetDMAIntrCounterN(2)=%d\n\r", GetDMAIntrCounterN(2));
+		xil_printf("GetDMAIntrCounterN(3)=%d\n\r", GetDMAIntrCounterN(3));
 
 		xil_printf("DMA RAW CR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_CR_OFFSET));
 		xil_printf("DMA RAW SR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET));

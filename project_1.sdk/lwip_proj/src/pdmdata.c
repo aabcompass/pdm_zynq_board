@@ -18,9 +18,22 @@
 
 XAxiDma dma_d1, dma_d2, dma_d3;//, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_d1;
+
+// this array contains only triggered D1 data
 uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D1][N_FRAMES_DMA_D1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+// Data is taken from this array every 5.24s
+
+// this array contains all D2 data. Updated circullary
 uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_D2][N_FRAMES_DMA_D2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+//Data is taken from this array on every trigger.
+
+// this array contains all D3 data. Updated circullary
 uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D3][N_FRAMES_DMA_D3][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+// Data is taken from this array every 5.24s
+
+// this array contains only triggered D2 data
+uint16_t Data_L2[N_ALT_BUFFERS][MAX_TRIGGERS_PER_CYCLE][N_FRAMES_DMA_D3][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+// Data is taken from this array every 5.24s
 
 
 volatile u32 dma_intr_counter_d1 = 0, dma_intr_counter_d2 = 0, dma_intr_counter_d3 = 0;
@@ -262,27 +275,26 @@ void CopyEventData_trig()
 	//copy D2
 	for(i=0;i<N2;i++)
 	{
-			zynqPacket.level2_data[i].payload.trig_type = triggerInfoD2[prev_alt_buffer][i].trigger_type;
-			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
-			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
-			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
-					&DataDMA_D2[i][0][0],
-					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
-			// Mark the trigger as copied (sent)
-			triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
+		zynqPacket.level2_data[i].payload.trig_type = triggerInfoD2[prev_alt_buffer][i].trigger_type;
+		zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
+		zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
+		memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
+				&DataDMA_D2[i][0][0],
+				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
+		// Mark the trigger as copied (sent)
+		triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
 	}
 	//copy D3
 	for(i=0;i<N3;i++)
 	{
-			zynqPacket.level3_data[i].payload.trig_type = triggerInfoD3[prev_alt_buffer][i].trigger_type;
-			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoD3[prev_alt_buffer][i].n_gtu;
-			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoD3[prev_alt_buffer][i].unix_timestamp;
-			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
-					&DataDMA_D3[prev_alt_buffer%2][0][0],
-					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
-			// Mark the trigger as copied (sent)
-			triggerInfoD3[prev_alt_buffer][i].is_sent = 1;
-
+		zynqPacket.level3_data[i].payload.trig_type = triggerInfoD3[prev_alt_buffer][i].trigger_type;
+		zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoD3[prev_alt_buffer][i].n_gtu;
+		zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoD3[prev_alt_buffer][i].unix_timestamp;
+		memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
+				&DataDMA_D3[prev_alt_buffer%2][0][0],
+				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
+		// Mark the trigger as copied (sent)
+		triggerInfoD3[prev_alt_buffer][i].is_sent = 1;
 	}
 }
 
@@ -405,6 +417,7 @@ static void RxIntrHandler_D2(void *Callback)
 	DmaStartN(2, dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2);
 
 	FlowControlClrIntr_D2();	//print("y");
+
 	print("y");
 
 	return;
