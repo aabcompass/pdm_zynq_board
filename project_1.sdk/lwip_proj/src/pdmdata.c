@@ -18,9 +18,9 @@
 
 XAxiDma dma_d1, dma_d2, dma_d3;//, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_d1;
-uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D1][N_FRAMES_DMA_D1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_D2][N_FRAMES_DMA_D2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D3][N_FRAMES_DMA_D3][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 
 volatile u32 dma_intr_counter_d1 = 0, dma_intr_counter_d2 = 0, dma_intr_counter_d3 = 0;
@@ -65,7 +65,7 @@ u32 scurve_memcpy_pos = 0;
 void PrintD1_1stElements()
 {
 	int i, j;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D1[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_RAW*N_FRAMES_DMA_RAW*N_OF_PIXEL_PER_PDM);
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D1[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_D1*N_FRAMES_DMA_D1*N_OF_PIXEL_PER_PDM);
 	for(j=0;j<2;j++)
 		for(i=0;i<4;i++)
 			xil_printf("DataDMA__Raw[%d][%d][0][0]=0x%02x\n\r", j, i, DataDMA_D1[j][i][0][0]);
@@ -326,11 +326,11 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
 void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 {
 	if(n_dma == 1)
-		DmaStart(&dma_d1, (UINTPTR)&DataDMA_D1[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
+		DmaStart(&dma_d1, (UINTPTR)&DataDMA_D1[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D1, 0);
 	else if(n_dma == 2)
-		DmaStart(&dma_d2, (UINTPTR)&DataDMA_D2[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_d2, (UINTPTR)&DataDMA_D2[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D2, 1);
 	else if(n_dma == 3)
-		DmaStart(&dma_d3, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_d3, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D3, 1);
 }
 
 
@@ -698,16 +698,16 @@ void ScurveService()
 			{
 				memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos][0],
 						&DataDMA_D3[!current_alt_buffer][0][0][0],
-						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*N_FRAMES_DMA_L2);
+						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*N_FRAMES_DMA_D3);
 			}
 			else if(sCurveStruct.step_dac_value == 8)
 			{
-				for(i=0;i<N_FRAMES_DMA_L2;i++)
+				for(i=0;i<N_FRAMES_DMA_D3;i++)
 					memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos+sCurveStruct.step_dac_value*i][0],
 						&DataDMA_D3[!current_alt_buffer][0][i][0],
 						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			}
-			scurve_memcpy_pos += N_FRAMES_DMA_L2;
+			scurve_memcpy_pos += N_FRAMES_DMA_D3;
 		}
 		sCurveStruct.current_dac_value += sCurveStruct.step_dac_value;
 		sCurveStruct.scurve_counter++;

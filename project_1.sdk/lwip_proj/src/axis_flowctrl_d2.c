@@ -77,7 +77,7 @@ void FlowControlInit_D2()
 
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_GTUS_PER_CYCLE*4) = N_FRAMES_PER_LIFECYCLE;
 
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_DMA_LENGTH*4) = N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1 / sizeof(uint32_t);
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_DMA_LENGTH*4) = N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D2 / sizeof(uint32_t);
 
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_PERIODIC_TRIG_PERIOD*4) = N_FRAMES_PER_LIFECYCLE/128*30;
 	//TODO these delays must be adjusted because currently the trigger is not in the middle of the kept data

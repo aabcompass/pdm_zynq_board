@@ -16,17 +16,17 @@
 #define DATA_TYPE_L2	2
 #define DATA_TYPE_L3	3
 
-#define N_FRAMES_DMA_RAW		 N_OF_FRAMES_L1_V0
-#define N_FRAMES_DMA_L1			(N_OF_FRAMES_L2_V0*2)
-#define N_FRAMES_DMA_L2			(N_OF_FRAMES_L3_V0*1)
+#define N_FRAMES_DMA_D1			 N_OF_FRAMES_L1_V0
+#define N_FRAMES_DMA_D2			(N_OF_FRAMES_L2_V0*2)
+#define N_FRAMES_DMA_D3			(N_OF_FRAMES_L3_V0*1)
 
 #define TRIGGER_DATA_OFFSET			64 /*in GTU*/
 
 #define N_ALT_BUFFERS				2
 
-#define N_TRIG_BUFFERS_DMA_RAW		16
-#define N_TRIG_BUFFERS_DMA_L1		64
-#define N_TRIG_BUFFERS_DMA_L2		1
+#define N_TRIG_BUFFERS_DMA_D1		16
+#define N_TRIG_BUFFERS_DMA_D2		64
+#define N_TRIG_BUFFERS_DMA_D3		1
 
 #define N_EVENTS_L1		524288			/*Number of events registered with L1 trigger*/
 
