@@ -335,7 +335,7 @@ void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 
 
 
-void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
+void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 {
 	u32 IrqStatus;
 
@@ -368,10 +368,10 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 void L1_trigger_service()
 {
 	if(IsD1Triggered())
-		RxIntrHandlerRaw(&dma_d1);
+		RxIntrHandler_L1(&dma_d1);
 }
 
-static void RxIntrHandlerL1(void *Callback)
+static void RxIntrHandler_D2(void *Callback)
 {
 
 
@@ -411,7 +411,7 @@ static void RxIntrHandlerL1(void *Callback)
 
 }
 
-static void RxIntrHandlerL2(void *Callback)
+static void RxIntrHandler_D3(void *Callback)
 {
 	u32 IrqStatus;
 	//int TimeOut;
@@ -500,12 +500,12 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 		print("Error XScuGic_Connect\n\r");
 	}*/
 	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_L1_S2MM_INTROUT_INTR,
-				 (Xil_ExceptionHandler)RxIntrHandlerL1, &dma_d2);
+				 (Xil_ExceptionHandler)RxIntrHandler_D2, &dma_d2);
 	if (Result != XST_SUCCESS) {
 		print("Error XScuGic_Connect\n\r");
 	}
 	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_L2_S2MM_INTROUT_INTR,
-				 (Xil_ExceptionHandler)RxIntrHandlerL2, &dma_d3);
+				 (Xil_ExceptionHandler)RxIntrHandler_D3, &dma_d3);
 	if (Result != XST_SUCCESS) {
 		print("Error XScuGic_Connect\n\r");
 	}
@@ -542,15 +542,15 @@ void DMA_init()
 
 	for(i=0; i<MAX_PACKETS_L1; i++)
 	{
-		zynqPacket.level1_data[i].zbh.header = BuildHeader(DATA_TYPE_SCI_L1, 1);
+		zynqPacket.level1_data[i].zbh.header = BuildHeader(DATA_TYPE_SCI_D1, 1);
 		zynqPacket.level1_data[i].zbh.payload_size = sizeof(zynqPacket.level1_data[i].payload);
 	}
 	for(i=0; i<MAX_PACKETS_L2; i++)
 	{
-		zynqPacket.level2_data[i].zbh.header = BuildHeader(DATA_TYPE_SCI_L2, 1);
+		zynqPacket.level2_data[i].zbh.header = BuildHeader(DATA_TYPE_SCI_D2, 1);
 		zynqPacket.level2_data[i].zbh.payload_size = sizeof(zynqPacket.level2_data[i].payload);
 	}
-	zynqPacket.level3_data[0].zbh.header = BuildHeader(DATA_TYPE_SCI_L3, 1);
+	zynqPacket.level3_data[0].zbh.header = BuildHeader(DATA_TYPE_SCI_D3, 1);
 	zynqPacket.level3_data[0].zbh.payload_size = sizeof(zynqPacket.level3_data[0].payload);
 
 

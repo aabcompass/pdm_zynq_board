@@ -48,9 +48,9 @@ typedef struct
 #define DATA_TYPE_SCI_INT16		2 	/* Scientific integrated data with 16 bit pixels*/
 #define DATA_TYPE_SCI_INT32		3 	/* Scientific integrated data with 32 bit pixels */
 #define DATA_TYPE_SCI_POLY		4   /* Scientific polytypic data*/
-#define DATA_TYPE_SCI_L1		10	/* Scientific data attached with L1 event*/
-#define DATA_TYPE_SCI_L2		11	/* Scientific data attached with L2 event*/
-#define DATA_TYPE_SCI_L3		12	/* Scientific data attached with L3 event*/
+#define DATA_TYPE_SCI_D1		10	/* Scientific data attached with L1 event*/
+#define DATA_TYPE_SCI_D2		11	/* Scientific data attached with L2 event*/
+#define DATA_TYPE_SCI_D3		12	/* Scientific data attached with L3 event*/
 #define DATA_TYPE_SCURVE		20  /* S-curve data */
 #define DATA_TYPE_SC_COMMON		40 	/* Slow control data (common loading) */
 #define DATA_TYPE_SC_INDIV		41  /* Slow control data (individual loading)  */
