@@ -19,15 +19,15 @@
 XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_raw;
 uint8_t  DataDMA__Raw[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint16_t DataDMA__L1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L1][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
-uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_ALT_TRIG_BUFFERS][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t DataDMA__L1[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint32_t DataDMA__L2[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 
 volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
 volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
 
 volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
-volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
+//volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
 volatile u32 buffer_L2_changed;
 volatile u32 buffer_L2_changed2;
 volatile u32 current_trigbuf_raw = 0, current_trigbuf_l1 = 0;
@@ -41,9 +41,9 @@ Z_DATA_TYPE_SCURVE_V1 scurvePacket;
 DATA_TYPE_SCURVE_4MATLAB scurvePacket4MatLab;
 SCurveStruct sCurveStruct;
 
-TriggerInfo triggerInfoL1[2][MAX_TRIGGERS_PER_CYCLE];
-TriggerInfo triggerInfoL2[2][MAX_TRIGGERS_PER_CYCLE];
-TriggerInfo triggerInfoL3[2][1];
+TriggerInfo triggerInfoD1[2][MAX_TRIGGERS_PER_CYCLE];
+TriggerInfo triggerInfoD2[2][MAX_TRIGGERS_PER_CYCLE];
+TriggerInfo triggerInfoD3[2][1];
 
 u32 scurve_memcpy_pos = 0;
 /*
@@ -99,13 +99,13 @@ void PrintTriggerInfo()
 			xil_printf("%d.%d\t%x\t%08d\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
-					triggerInfoL1[i][j].trigger_type,
-					triggerInfoL1[i][j].n_gtu,
-					triggerInfoL1[i][j].unix_timestamp,
-					triggerInfoL1[i][j].is_dma_error,
-					triggerInfoL1[i][j].n_intr,
-					triggerInfoL1[i][j].alt_trig_buffer,
-					triggerInfoL1[i][j].is_sent ? "sent" : "pending");
+					triggerInfoD1[i][j].trigger_type,
+					triggerInfoD1[i][j].n_gtu,
+					triggerInfoD1[i][j].unix_timestamp,
+					triggerInfoD1[i][j].is_dma_error,
+					triggerInfoD1[i][j].n_intr,
+					triggerInfoD1[i][j].alt_trig_buffer,
+					triggerInfoD1[i][j].is_sent ? "sent" : "pending");
 		}
 	}
 	print("Trigger info L2:\n\r");
@@ -116,12 +116,12 @@ void PrintTriggerInfo()
 			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
-					triggerInfoL2[i][j].trigger_type,
-					triggerInfoL2[i][j].n_gtu,
-					triggerInfoL2[i][j].unix_timestamp,
-					triggerInfoL2[i][j].n_intr,
-					triggerInfoL2[i][j].alt_trig_buffer,
-					triggerInfoL2[i][j].is_sent ? "sent" : "pending");
+					triggerInfoD2[i][j].trigger_type,
+					triggerInfoD2[i][j].n_gtu,
+					triggerInfoD2[i][j].unix_timestamp,
+					triggerInfoD2[i][j].n_intr,
+					triggerInfoD2[i][j].alt_trig_buffer,
+					triggerInfoD2[i][j].is_sent ? "sent" : "pending");
 		}
 	}
 	print("Trigger info L3:\n\r");
@@ -132,12 +132,12 @@ void PrintTriggerInfo()
 			xil_printf("%d.%d\t%x\t%08d\t%08d\t%06d\t%d\t%s\n\r",
 					i,
 					j,
-					triggerInfoL3[i][j].trigger_type,
-					triggerInfoL3[i][j].n_gtu,
-					triggerInfoL3[i][j].unix_timestamp,
-					triggerInfoL3[i][j].n_intr,
-					triggerInfoL3[i][j].alt_trig_buffer,
-					triggerInfoL3[i][j].is_sent ? "sent" : "pending");
+					triggerInfoD3[i][j].trigger_type,
+					triggerInfoD3[i][j].n_gtu,
+					triggerInfoD3[i][j].unix_timestamp,
+					triggerInfoD3[i][j].n_intr,
+					triggerInfoD3[i][j].alt_trig_buffer,
+					triggerInfoD3[i][j].is_sent ? "sent" : "pending");
 		}
 	}
 	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
@@ -150,10 +150,10 @@ void ClearTriggerInfo(int half)
 	int j;
 	for(j=0;j<4;j++)
 	{
-		triggerInfoL1[half][j].trigger_type = 0;
-		triggerInfoL1[half][j].is_sent = 0;
-		triggerInfoL2[half][j].trigger_type = 0;
-		triggerInfoL2[half][j].is_sent = 0;
+		triggerInfoD1[half][j].trigger_type = 0;
+		triggerInfoD1[half][j].is_sent = 0;
+		triggerInfoD2[half][j].trigger_type = 0;
+		triggerInfoD2[half][j].is_sent = 0;
 	}
 }
 
@@ -172,16 +172,6 @@ void SetTime(u32 param0)
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_EDGE_FLAGS*4) =
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_EDGE_FLAGS*4) = 0;
 
-}
-
-void InvalidateCacheRanges(int data_type) // 1 - L1, 2 - L2, 3 - L3
-{
-//	if(data_type == DATA_TYPE_L1)
-//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__Raw[0][0][0], 1*N_OF_FRAMES_RAW_POLY_V0*N_OF_PIXEL_PER_PDM);
-//	else if(data_type == DATA_TYPE_L2)
-//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[0][0][0], 2*N_OF_FRAMES_INT16_POLY_V0*N_OF_PIXEL_PER_PDM);
-//	else if(data_type == DATA_TYPE_L3)
-//		Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[prev_buffer_L2][0][0], 4*N_OF_FRAMES_INT32_POLY_V0*N_OF_PIXEL_PER_PDM);
 }
 
 void* GetZ_DATA_TYPE_SCI_ptr(int data_type) // 1 - L1, 2 - L2, 3 - L3
@@ -214,11 +204,11 @@ void PrintFirstElementsL1(int num)
 {
 	int i;
 	static int alt_buffer = 0;
-	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[alt_buffer%2][num][0][0][0], 2304*sizeof(u16));
+	Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L1[num][0][0], 2304*sizeof(u16));
 	for(i=0;i<2304;i++)
 	{
 		if(i%16 == 0) xil_printf("\n\r%04d: ", i);
-		xil_printf("%02x  ", DataDMA__L1[alt_buffer%2][num][0][0][i]);
+		xil_printf("%02x  ", DataDMA__L1[num][0][i]);
 	}
 	alt_buffer++;
 }
@@ -249,9 +239,9 @@ void CopyEventData_trig()
 	for(i=0;i<N1;i++)
 	{
 		// copy the metadata to zynqPacket
-		zynqPacket.level1_data[i].payload.trig_type = triggerInfoL1[prev_alt_buffer][i].trigger_type;
-		zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoL1[prev_alt_buffer][i].n_gtu;
-		zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoL1[prev_alt_buffer][i].unix_timestamp;
+		zynqPacket.level1_data[i].payload.trig_type = triggerInfoD1[prev_alt_buffer][i].trigger_type;
+		zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoD1[prev_alt_buffer][i].n_gtu;
+		zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoD1[prev_alt_buffer][i].unix_timestamp;
 
 		/*
 		 * If the data around trigger is not edge crossed by DMA page. In this case one pass copy is used.
@@ -267,31 +257,31 @@ void CopyEventData_trig()
 
 		//xil_printf("--- i=%d gtu_addr=%d prev_alt_buffer=%d\n\r", i, gtu_addr, prev_alt_buffer);
 		// Mark the trigger as copied (sent)
-		triggerInfoL1[prev_alt_buffer][i].is_sent = 1;
+		triggerInfoD1[prev_alt_buffer][i].is_sent = 1;
 	}
 	//copy D2
 	for(i=0;i<N2;i++)
 	{
-			zynqPacket.level2_data[i].payload.trig_type = triggerInfoL2[prev_alt_buffer][i].trigger_type;
-			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoL2[prev_alt_buffer][i].n_gtu;
-			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoL2[prev_alt_buffer][i].unix_timestamp;
+			zynqPacket.level2_data[i].payload.trig_type = triggerInfoD2[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
 			memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
-					&DataDMA__L1[prev_alt_buffer%2][i][0][0][0],
+					&DataDMA__L1[i][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
 			// Mark the trigger as copied (sent)
-			triggerInfoL2[prev_alt_buffer][i].is_sent = 1;
+			triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
 	}
 	//copy D3
 	for(i=0;i<N3;i++)
 	{
-			zynqPacket.level3_data[i].payload.trig_type = triggerInfoL3[prev_alt_buffer][i].trigger_type;
-			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoL3[prev_alt_buffer][i].n_gtu;
-			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoL3[prev_alt_buffer][i].unix_timestamp;
+			zynqPacket.level3_data[i].payload.trig_type = triggerInfoD3[prev_alt_buffer][i].trigger_type;
+			zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoD3[prev_alt_buffer][i].n_gtu;
+			zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoD3[prev_alt_buffer][i].unix_timestamp;
 			memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
-					&DataDMA__L2[prev_alt_buffer%2][i][0][0][0],
+					&DataDMA__L2[prev_alt_buffer%2][0][0],
 					N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint32_t));
 			// Mark the trigger as copied (sent)
-			triggerInfoL3[prev_alt_buffer][i].is_sent = 1;
+			triggerInfoD3[prev_alt_buffer][i].is_sent = 1;
 
 	}
 }
@@ -338,35 +328,25 @@ void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 	if(n_dma == 1)
 		DmaStart(&dma_raw, (UINTPTR)&DataDMA__Raw[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
 	else if(n_dma == 2)
-		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[current_alt_buffer][n_trig_buffer][current_alt_trig_buffer_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_l1, (UINTPTR)&DataDMA__L1[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 	else if(n_dma == 3)
-		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_l2, (UINTPTR)&DataDMA__L2[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 }
+
+
 
 void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 {
 	u32 IrqStatus;
-/*
-	 Read pending interrupts
-	IrqStatus = XAxiDma_IntrGetIrq(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA);
 
-	 Acknowledge pending interrupts
-	XAxiDma_IntrAckIrq(AxiDmaInst, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
-
-	DmaReset(AxiDmaInst);*/
-	//print("x");
-	//return if transfer is not completed
-	//if(XAxiDma_Busy(AxiDmaInst, XAXIDMA_DEVICE_TO_DMA)) return;
-
-	// check whether trigger
 	if(current_trigbuf_raw < N1)
 	{
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].is_dma_error = IsD1DMA_error();
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU_L1();
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType_L1();
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp_L1();
-		triggerInfoL1[current_alt_buffer][current_trigbuf_raw].n_intr = dma_intr_counter_raw;
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].is_sent = 0;
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].is_dma_error = IsD1DMA_error();
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].n_gtu = GetTrigNGTU_L1();
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].trigger_type = GetTrigType_L1();
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].unix_timestamp = GetUnixTimestamp_L1();
+		triggerInfoD1[current_alt_buffer][current_trigbuf_raw].n_intr = dma_intr_counter_raw;
 		// Change current trigger buffer to the next one
 
 	}
@@ -409,10 +389,10 @@ static void RxIntrHandlerL1(void *Callback)
 	// check whether trigger
 	if(CheckTrigger_L2())
 	{
-		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].is_sent = 0;
-		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].n_gtu = GetTrigNGTU_L2();
-		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].trigger_type = GetTrigType_L2();
-		triggerInfoL2[current_alt_buffer][current_trigbuf_l1].unix_timestamp = GetUnixTimestamp_L2();
+		triggerInfoD2[current_alt_buffer][current_trigbuf_l1].is_sent = 0;
+		triggerInfoD2[current_alt_buffer][current_trigbuf_l1].n_gtu = GetTrigNGTU_L2();
+		triggerInfoD2[current_alt_buffer][current_trigbuf_l1].trigger_type = GetTrigType_L2();
+		triggerInfoD2[current_alt_buffer][current_trigbuf_l1].unix_timestamp = GetUnixTimestamp_L2();
 		ReleaseTrigger_L2(2);
 		// Change current trigger buffer to the next one
 		if(current_trigbuf_l1 < N2)
@@ -423,9 +403,6 @@ static void RxIntrHandlerL1(void *Callback)
 	//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[current_alt_buffer][current_trigbuf_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 	DmaStartN(2, current_trigbuf_l1);
 	dma_intr_counter_l1++;
-	prev_alt_trig_buffer_l1 = current_alt_trig_buffer_l1;
-	if(N_ALT_TRIG_BUFFERS > 1)
-		current_alt_trig_buffer_l1 = dma_intr_counter_l1%2;
 
 	FlowControlClrIntr_D2(2);	//print("y");
 	//print("y");
@@ -450,10 +427,10 @@ static void RxIntrHandlerL2(void *Callback)
 	{
 		dma_intr_counter_l2++;
 
-		triggerInfoL3[current_alt_buffer][0].is_sent = 0;
-		triggerInfoL3[current_alt_buffer][0].n_gtu = GetNGTU();
-		triggerInfoL3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
-		triggerInfoL3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
+		triggerInfoD3[current_alt_buffer][0].is_sent = 0;
+		triggerInfoD3[current_alt_buffer][0].n_gtu = GetNGTU();
+		triggerInfoD3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
+		triggerInfoD3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
 		// change current_alt_buffer & prev_alt_buffer
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;
@@ -715,19 +692,19 @@ void ScurveService()
 		{
 			xil_printf("\n\rCopying data to the scurve array to pos. %d. current_alt_buffer=%d\n\r", scurve_memcpy_pos, current_alt_buffer);
 			//Invalidate DCache Range
-			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[!current_alt_buffer][0][0][0][0], sizeof(DataDMA__L2));
+			Xil_DCacheInvalidateRange((INTPTR)&DataDMA__L2[!current_alt_buffer][0][0][0], sizeof(DataDMA__L2));
 			//now we are expecting 1 double integrated GTU in L3 array
 			if(sCurveStruct.step_dac_value == 1)
 			{
 				memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos][0],
-						&DataDMA__L2[!current_alt_buffer][0][0][0][0],
+						&DataDMA__L2[!current_alt_buffer][0][0][0],
 						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM*N_FRAMES_DMA_L2);
 			}
 			else if(sCurveStruct.step_dac_value == 8)
 			{
 				for(i=0;i<N_FRAMES_DMA_L2;i++)
 					memcpy(&scurvePacket.payload.int32_data[scurve_memcpy_pos+sCurveStruct.step_dac_value*i][0],
-						&DataDMA__L2[!current_alt_buffer][0][0][i][0],
+						&DataDMA__L2[!current_alt_buffer][0][i][0],
 						sizeof(uint32_t)*N_OF_PIXEL_PER_PDM);
 			}
 			scurve_memcpy_pos += N_FRAMES_DMA_L2;

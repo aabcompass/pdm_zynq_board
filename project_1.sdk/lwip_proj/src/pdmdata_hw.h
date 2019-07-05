@@ -25,10 +25,8 @@
 #define N_ALT_BUFFERS				2
 
 #define N_TRIG_BUFFERS_DMA_RAW		16
-#define N_TRIG_BUFFERS_DMA_L1		8
+#define N_TRIG_BUFFERS_DMA_L1		128
 #define N_TRIG_BUFFERS_DMA_L2		1
-
-#define N_ALT_TRIG_BUFFERS			2
 
 #define N_EVENTS_L1		524288			/*Number of events registered with L1 trigger*/
 
