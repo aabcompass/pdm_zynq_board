@@ -17,14 +17,14 @@
 
 
 XAxiDma dma_d1, dma_d2, dma_d3;//, data_tst_l1;//, dma_tst_l2;
-XAxiDma_Config* CfgPtr_raw;
+XAxiDma_Config* CfgPtr_d1;
 uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_L2][N_FRAMES_DMA_L2][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 
 
-volatile u32 dma_intr_counter_raw = 0, dma_intr_counter_l1 = 0, dma_intr_counter_l2 = 0;
-volatile u32 trig_counter_raw = 0, trig_counter_l1 = 0;
+volatile u32 dma_intr_counter_d1 = 0, dma_intr_counter_d2 = 0, dma_intr_counter_d3 = 0;
+volatile u32 trig_counter__l1 = 0, trig_counter__l2 = 0;
 
 volatile u32 prev_alt_buffer = 0, current_alt_buffer = 0;
 //volatile u32 prev_alt_trig_buffer_l1 = 0, current_alt_trig_buffer_l1 = 0;
@@ -159,8 +159,8 @@ void ClearTriggerInfo(int half)
 
 void printMMVars()
 {
-	xil_printf("trig_counter_raw=%d\n\r", trig_counter_raw);
-	xil_printf("trig_counter_l1=%d\n\r", trig_counter_l1);
+	xil_printf("trig_counter_raw=%d\n\r", trig_counter__l1);
+	xil_printf("trig_counter_l1=%d\n\r", trig_counter__l2);
 }
 
 void SetTime(u32 param0)
@@ -346,7 +346,7 @@ void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].n_gtu = GetTrigNGTU_L1();
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].trigger_type = GetTrigType_L1();
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].unix_timestamp = GetUnixTimestamp_L1();
-		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].n_intr = dma_intr_counter_raw;
+		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].n_intr = dma_intr_counter_d1;
 		// Change current trigger buffer to the next one
 
 	}
@@ -354,9 +354,9 @@ void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 
 	xil_printf("=%d", current_trigbuf_d1);
 
-	trig_counter_raw++;
+	trig_counter__l1++;
 
-	dma_intr_counter_raw++;
+	dma_intr_counter_d1++;
 
 	D1_release();
 
@@ -397,12 +397,12 @@ static void RxIntrHandler_D2(void *Callback)
 		// Change current trigger buffer to the next one
 		if(current_trigbuf_d2 < N2)
 			current_trigbuf_d2++;
-		trig_counter_l1++;
+		trig_counter__l2++;
 	}
 
 	//DmaStart(AxiDmaInst, (UINTPTR)&DataDMA__L1[current_alt_buffer][current_trigbuf_l1][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1);
 	DmaStartN(2, current_trigbuf_d2);
-	dma_intr_counter_l1++;
+	dma_intr_counter_d2++;
 
 	FlowControlClrIntr_D2(2);	//print("y");
 	//print("y");
@@ -425,7 +425,7 @@ static void RxIntrHandler_D3(void *Callback)
 
 	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK) || (IrqStatus & XAXIDMA_IRQ_IOC_MASK))
 	{
-		dma_intr_counter_l2++;
+		dma_intr_counter_d3++;
 
 		triggerInfoD3[current_alt_buffer][0].is_sent = 0;
 		triggerInfoD3[current_alt_buffer][0].n_gtu = GetNGTU();
@@ -433,7 +433,7 @@ static void RxIntrHandler_D3(void *Callback)
 		triggerInfoD3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
 		// change current_alt_buffer & prev_alt_buffer
 		prev_alt_buffer = current_alt_buffer;
-		current_alt_buffer = dma_intr_counter_l2%2;
+		current_alt_buffer = dma_intr_counter_d3%2;
 		// Change DMA D1 pointer to zero
 		DmaReset(&dma_d1);
 		DmaStartN(1, 0);
@@ -556,11 +556,11 @@ void DMA_init()
 
 	XStatus status = 0;
 	XAxiDma_Config *CfgPtr;
-	CfgPtr_raw = XAxiDma_LookupConfig(XPAR_AXI_DMA_RAW_DEVICE_ID);
-	if (!CfgPtr_raw) {
+	CfgPtr_d1 = XAxiDma_LookupConfig(XPAR_AXI_DMA_RAW_DEVICE_ID);
+	if (!CfgPtr_d1) {
 		xil_printf("No config found for %d\r\n", XPAR_AXI_DMA_RAW_DEVICE_ID);
 	}
-	status = XAxiDma_CfgInitialize(&dma_d1, CfgPtr_raw);
+	status = XAxiDma_CfgInitialize(&dma_d1, CfgPtr_d1);
 	//xil_printf("dma_raw.RegBase=0x%08x\n\r", dma_raw.RegBase);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_raw !\n\r");
 	DmaStartN(1, 0);
@@ -589,11 +589,11 @@ void DMA_init()
 u32 GetDMAIntrCounterN(int n)
 {
 	if(n==0)
-		return dma_intr_counter_raw;
+		return dma_intr_counter_d1;
 	else if(n==1)
-		return dma_intr_counter_l1;
+		return dma_intr_counter_d2;
 	else if(n==2)
-		return dma_intr_counter_l2;
+		return dma_intr_counter_d3;
 	else
 		return 0;
 }
