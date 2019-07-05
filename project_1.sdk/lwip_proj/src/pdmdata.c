@@ -16,7 +16,7 @@
 #include "ftp_server.h"
 
 
-XAxiDma dma_raw, dma_l1, dma_l2, data_tst_l1;//, dma_tst_l2;
+XAxiDma dma_d1, dma_d2, dma_d3;//, data_tst_l1;//, dma_tst_l2;
 XAxiDma_Config* CfgPtr_raw;
 uint8_t  DataDMA_D1[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_RAW][N_FRAMES_DMA_RAW][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 uint16_t DataDMA_D2[N_TRIG_BUFFERS_DMA_L1][N_FRAMES_DMA_L1][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
@@ -141,7 +141,7 @@ void PrintTriggerInfo()
 		}
 	}
 	xil_printf("Next current_alt_buffer=%d\n\r", current_alt_buffer);
-	xil_printf("XAxiDma_Busy returns %d\n\r", XAxiDma_Busy(&dma_raw, XAXIDMA_DEVICE_TO_DMA));
+	xil_printf("XAxiDma_Busy returns %d\n\r", XAxiDma_Busy(&dma_d1, XAXIDMA_DEVICE_TO_DMA));
 }
 
 
@@ -298,14 +298,14 @@ void DmaReset(XAxiDma* pdma)
 	}
 }
 
-void DmaResetN(int n) // 1 - L1, 2 - L2, 3 - L3
+void DmaResetN(int n) // 1 - D1, 2 - D2, 3 - D3
 {
 	if(n == 1)
-		XAxiDma_Reset(&dma_raw);
+		XAxiDma_Reset(&dma_d1);
 	else if(n == 2)
-		XAxiDma_Reset(&dma_l1);
+		XAxiDma_Reset(&dma_d2);
 	else if(n == 3)
-		XAxiDma_Reset(&dma_l2);
+		XAxiDma_Reset(&dma_d3);
 }
 
 
@@ -326,11 +326,11 @@ void DmaStart(XAxiDma* pdma, UINTPTR addr, u32 length, u8 is_dma)
 void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 {
 	if(n_dma == 1)
-		DmaStart(&dma_raw, (UINTPTR)&DataDMA_D1[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
+		DmaStart(&dma_d1, (UINTPTR)&DataDMA_D1[current_alt_buffer][n_trig_buffer][0][0], 1 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_RAW, 0);
 	else if(n_dma == 2)
-		DmaStart(&dma_l1, (UINTPTR)&DataDMA_D2[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_d2, (UINTPTR)&DataDMA_D2[n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 	else if(n_dma == 3)
-		DmaStart(&dma_l2, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
+		DmaStart(&dma_d3, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 2 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_L1, 1);
 }
 
 
@@ -368,7 +368,7 @@ void RxIntrHandlerRaw(XAxiDma *AxiDmaInst)
 void L1_trigger_service()
 {
 	if(IsD1Triggered())
-		RxIntrHandlerRaw(&dma_raw);
+		RxIntrHandlerRaw(&dma_d1);
 }
 
 static void RxIntrHandlerL1(void *Callback)
@@ -435,7 +435,7 @@ static void RxIntrHandlerL2(void *Callback)
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_l2%2;
 		// Change DMA D1 pointer to zero
-		DmaReset(&dma_raw);
+		DmaReset(&dma_d1);
 		DmaStartN(1, 0);
 		// Restart DMA D3
 		DmaReset(AxiDmaInst);
@@ -500,12 +500,12 @@ void SetupDMAIntrSystem(XScuGic* pIntc)
 		print("Error XScuGic_Connect\n\r");
 	}*/
 	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_L1_S2MM_INTROUT_INTR,
-				 (Xil_ExceptionHandler)RxIntrHandlerL1, &dma_l1);
+				 (Xil_ExceptionHandler)RxIntrHandlerL1, &dma_d2);
 	if (Result != XST_SUCCESS) {
 		print("Error XScuGic_Connect\n\r");
 	}
 	Result = XScuGic_Connect(pIntc, XPAR_FABRIC_AXI_DMA_L2_S2MM_INTROUT_INTR,
-				 (Xil_ExceptionHandler)RxIntrHandlerL2, &dma_l2);
+				 (Xil_ExceptionHandler)RxIntrHandlerL2, &dma_d3);
 	if (Result != XST_SUCCESS) {
 		print("Error XScuGic_Connect\n\r");
 	}
@@ -560,18 +560,18 @@ void DMA_init()
 	if (!CfgPtr_raw) {
 		xil_printf("No config found for %d\r\n", XPAR_AXI_DMA_RAW_DEVICE_ID);
 	}
-	status = XAxiDma_CfgInitialize(&dma_raw, CfgPtr_raw);
+	status = XAxiDma_CfgInitialize(&dma_d1, CfgPtr_raw);
 	//xil_printf("dma_raw.RegBase=0x%08x\n\r", dma_raw.RegBase);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_raw !\n\r");
 	DmaStartN(1, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L1_DEVICE_ID);
-	status = XAxiDma_CfgInitialize(&dma_l1, CfgPtr);
+	status = XAxiDma_CfgInitialize(&dma_d2, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l1!\n\r");
 	DmaStartN(2, 0);
 
 	CfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_L2_DEVICE_ID);
-	status = XAxiDma_CfgInitialize(&dma_l2, CfgPtr);
+	status = XAxiDma_CfgInitialize(&dma_d3, CfgPtr);
 	if(status)	print("Error in XAxiDma_CfgInitialize dma_l2!\n\r");
 	DmaStartN(3, 0);
 
@@ -600,23 +600,23 @@ u32 GetDMAIntrCounterN(int n)
 
 
 
-void ProvideTestDataL1()
-{
-	u32 i, ret;
-	u32 tst_data_size = Get_receive_buffer_offset();
-	u32 packet_size = N_OF_PIXEL_PER_PDM/3;
-	char * addr = Get_receive_buffer();
-	for (i=0; i<tst_data_size; i+=packet_size)
-	{
-		ret=XAxiDma_SimpleTransfer(&data_tst_l1, addr + i, packet_size, XAXIDMA_DMA_TO_DEVICE);
-		if(ret) print("!");
-		while (XAxiDma_Busy(&data_tst_l1, XAXIDMA_DMA_TO_DEVICE)) {
-				/* Wait */
-		}
-
-		//print("*-------->");
-	}
-}
+//void ProvideTestDataL1()
+//{
+//	u32 i, ret;
+//	u32 tst_data_size = Get_receive_buffer_offset();
+//	u32 packet_size = N_OF_PIXEL_PER_PDM/3;
+//	char * addr = Get_receive_buffer();
+//	for (i=0; i<tst_data_size; i+=packet_size)
+//	{
+//		ret=XAxiDma_SimpleTransfer(&data_tst_l1, addr + i, packet_size, XAXIDMA_DMA_TO_DEVICE);
+//		if(ret) print("!");
+//		while (XAxiDma_Busy(&data_tst_l1, XAXIDMA_DMA_TO_DEVICE)) {
+//				/* Wait */
+//		}
+//
+//		//print("*-------->");
+//	}
+//}
 
 //////////////////////
 /// S-CURVE

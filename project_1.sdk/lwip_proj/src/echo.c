@@ -628,10 +628,6 @@ void ProcessUartCommands(struct netif *netif, char c)
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = BIT_FC_CLR_ALL;
 		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_CLR_FLAGS*4) = 0;
 	}
-	else if(c == 'U')
-	{
-		ProvideTestDataL1();
-	}
 	else if(c == '%')
 	{
 		SendTestSettingsToSp3(712, 10);
