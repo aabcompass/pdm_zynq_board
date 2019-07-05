@@ -32,7 +32,7 @@ uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D3][N_FRAMES_DMA_D3][N_OF_
 // Data is taken from this array every 5.24s
 
 // this array contains only triggered D2 data
-uint16_t Data_L2[N_ALT_BUFFERS][MAX_TRIGGERS_PER_CYCLE][N_FRAMES_DMA_D3][N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t Data_L2[N_ALT_BUFFERS][MAX_TRIGGERS_PER_CYCLE][N_FRAMES_DMA_D3*N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 // Data is taken from this array every 5.24s
 
 
@@ -74,6 +74,16 @@ u32 scurve_memcpy_pos = 0;
  *   Trigger event has: trigger type, memory address, n_gtu, unix_timestamp
  *
  */
+
+static enum  {
+	l2_sm_idle = 10,
+	l2_sm_cought=100,
+	l2_sm_timer=110,
+	l2_sm_copying=111,
+	l2_sm_copied=115,
+	l2_sm_max_riched=120
+	} l2_sm_state = l2_sm_idle;
+
 
 void PrintD1_1stElements()
 {
@@ -278,8 +288,9 @@ void CopyEventData_trig()
 		zynqPacket.level2_data[i].payload.trig_type = triggerInfoD2[prev_alt_buffer][i].trigger_type;
 		zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
 		zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
-		memcpy_invalidate(&zynqPacket.level2_data[i].payload.int16_data[0][0],
-				&DataDMA_D2[i][0][0],
+		memcpy(&zynqPacket.level2_data[i].payload.int16_data[0][0],
+				//&DataDMA_D2[i][0][0],
+				&Data_L2[prev_alt_buffer][i][0],
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
 		// Mark the trigger as copied (sent)
 		triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
@@ -399,18 +410,6 @@ static void RxIntrHandler_D2(void *Callback)
 
 	DmaReset(AxiDmaInst);
 	// check whether trigger
-	if(CheckTrigger_L2())
-	{
-		if(trig_counter__l2 < N2)
-		{
-			triggerInfoD2[current_alt_buffer][trig_counter__l2].is_sent = 0;
-			triggerInfoD2[current_alt_buffer][trig_counter__l2].n_gtu = GetTrigNGTU_L2();
-			triggerInfoD2[current_alt_buffer][trig_counter__l2].trigger_type = GetTrigType_L2();
-			triggerInfoD2[current_alt_buffer][trig_counter__l2].unix_timestamp = GetUnixTimestamp_L2();
-			trig_counter__l2++;
-		}
-		ReleaseTrigger_L2(2);
-	}
 
 	dma_intr_counter_d2++;
 
@@ -422,6 +421,51 @@ static void RxIntrHandler_D2(void *Callback)
 
 	return;
 
+}
+
+void L2_sm()
+{
+	u32 addr_gtu;
+	switch(l2_sm_state)
+	{
+		case l2_sm_idle:
+			if(CheckTrigger_L2())
+			{
+				if(trig_counter__l2 < N2)
+				{
+					triggerInfoD2[current_alt_buffer][trig_counter__l2].is_sent = 0;
+					triggerInfoD2[current_alt_buffer][trig_counter__l2].n_gtu = GetTrigNGTU_L2();
+					triggerInfoD2[current_alt_buffer][trig_counter__l2].trigger_type = GetTrigType_L2();
+					triggerInfoD2[current_alt_buffer][trig_counter__l2].unix_timestamp = GetUnixTimestamp_L2();
+
+				}
+				l2_sm_state = l2_sm_cought;
+			}
+			break;
+		case l2_sm_cought:
+			l2_sm_state = l2_sm_timer;
+			break;
+		case l2_sm_timer:
+			if(GetNGTU() - GetTrigNGTU_L2() > N_FRAMES_DMA_D2)
+				l2_sm_state = l2_sm_copying;
+			break;
+		case l2_sm_copying:
+			addr_gtu = GetTrigNGTU_L2() % (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0/2;
+			if((addr_gtu < (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0/2) &&
+					(addr_gtu > N_OF_FRAMES_L2_V0/2))
+			{
+				memcpy_invalidate(&Data_L2[current_alt_buffer][trig_counter__l2],
+					&DataDMA_D2[addr_gtu/N_TRIG_BUFFERS_DMA_D2][addr_gtu%N_TRIG_BUFFERS_DMA_D2][0],
+					N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM*sizeof(uint16_t));
+			}
+			l2_sm_state = l2_sm_copied;
+			break;
+		case l2_sm_copied:
+			ReleaseTrigger_L2(2);
+			trig_counter__l2++;
+			l2_sm_state = l2_sm_idle;
+			break;
+	}
 }
 
 static void RxIntrHandler_D3(void *Callback)
