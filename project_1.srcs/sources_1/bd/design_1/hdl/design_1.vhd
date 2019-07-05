@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Fri Jun 28 20:55:59 2019
+--Date        : Sun Jun 30 00:57:43 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10251,7 +10251,8 @@ architecture STRUCTURE of design_1 is
     s_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
     s_axi_rvalid : out STD_LOGIC;
     s_axi_rready : in STD_LOGIC;
-    gpio_io_o : out STD_LOGIC_VECTOR ( 31 downto 0 )
+    gpio_io_o : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    gpio2_io_o : out STD_LOGIC_VECTOR ( 11 downto 0 )
   );
   end component design_1_axi_gpio_1_0;
   component design_1_axis_flow_control_d1_0_0 is
@@ -10543,7 +10544,8 @@ architecture STRUCTURE of design_1 is
     S01_AXIS_TREADY : out STD_LOGIC;
     L1_EVENT : out STD_LOGIC;
     data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
+    frame_conv_out : out STD_LOGIC;
+    s_max : in STD_LOGIC_VECTOR ( 11 downto 0 )
   );
   end component design_1_ALGO_B_0_0;
   component design_1_ALGO_B_0_1 is
@@ -10558,7 +10560,8 @@ architecture STRUCTURE of design_1 is
     S01_AXIS_TREADY : out STD_LOGIC;
     L1_EVENT : out STD_LOGIC;
     data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
+    frame_conv_out : out STD_LOGIC;
+    s_max : in STD_LOGIC_VECTOR ( 11 downto 0 )
   );
   end component design_1_ALGO_B_0_1;
   component design_1_ALGO_B_0_2 is
@@ -10573,7 +10576,8 @@ architecture STRUCTURE of design_1 is
     S01_AXIS_TREADY : out STD_LOGIC;
     L1_EVENT : out STD_LOGIC;
     data_conv_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    frame_conv_out : out STD_LOGIC
+    frame_conv_out : out STD_LOGIC;
+    s_max : in STD_LOGIC_VECTOR ( 11 downto 0 )
   );
   end component design_1_ALGO_B_0_2;
   signal ALGO_B_0_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -10689,6 +10693,7 @@ architecture STRUCTURE of design_1 is
   signal axi_fifo_mm_s_1_AXI_STR_TXD_TREADY : STD_LOGIC;
   signal axi_fifo_mm_s_1_AXI_STR_TXD_TVALID : STD_LOGIC;
   signal axi_gpio_1_gpio_io_o : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal axi_gpio_TA_ev_gpio2_io_o : STD_LOGIC_VECTOR ( 11 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal axi_interconnect_0_M00_AXI_ARCACHE : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -11825,7 +11830,8 @@ ALGO_B_0: component design_1_ALGO_B_0_0
       S01_AXIS_TREADY => axi_pixel_mask_0_M01_AXIS_TREADY,
       S01_AXIS_TVALID => axi_pixel_mask_0_M01_AXIS_TVALID,
       data_conv_out(15 downto 0) => ALGO_B_0_data_conv_out(15 downto 0),
-      frame_conv_out => ALGO_B_0_frame_conv_out
+      frame_conv_out => ALGO_B_0_frame_conv_out,
+      s_max(11 downto 0) => axi_gpio_TA_ev_gpio2_io_o(11 downto 0)
     );
 ALGO_B_1: component design_1_ALGO_B_0_1
      port map (
@@ -11839,7 +11845,8 @@ ALGO_B_1: component design_1_ALGO_B_0_1
       S01_AXIS_TREADY => axi_pixel_mask_0_M05_AXIS_TREADY,
       S01_AXIS_TVALID => axi_pixel_mask_0_M05_AXIS_TVALID,
       data_conv_out(15 downto 0) => ALGO_B_1_data_conv_out(15 downto 0),
-      frame_conv_out => NLW_ALGO_B_1_frame_conv_out_UNCONNECTED
+      frame_conv_out => NLW_ALGO_B_1_frame_conv_out_UNCONNECTED,
+      s_max(11 downto 0) => axi_gpio_TA_ev_gpio2_io_o(11 downto 0)
     );
 ALGO_B_2: component design_1_ALGO_B_0_2
      port map (
@@ -11853,7 +11860,8 @@ ALGO_B_2: component design_1_ALGO_B_0_2
       S01_AXIS_TREADY => axi_pixel_mask_0_M02_AXIS_TREADY,
       S01_AXIS_TVALID => axi_pixel_mask_0_M02_AXIS_TVALID,
       data_conv_out(15 downto 0) => ALGO_B_2_data_conv_out(15 downto 0),
-      frame_conv_out => NLW_ALGO_B_2_frame_conv_out_UNCONNECTED
+      frame_conv_out => NLW_ALGO_B_2_frame_conv_out_UNCONNECTED,
+      s_max(11 downto 0) => axi_gpio_TA_ev_gpio2_io_o(11 downto 0)
     );
 ALGO_B_TA_1: component design_1_ALGO_B_TA_1_0
      port map (
@@ -12262,6 +12270,7 @@ axi_gpio_0: component design_1_axi_gpio_0_0
     );
 axi_gpio_TA_ev: component design_1_axi_gpio_1_0
      port map (
+      gpio2_io_o(11 downto 0) => axi_gpio_TA_ev_gpio2_io_o(11 downto 0),
       gpio_io_o(31 downto 0) => axi_gpio_1_gpio_io_o(31 downto 0),
       s_axi_aclk => processing_system7_0_FCLK_CLK1,
       s_axi_araddr(8 downto 0) => inst_interconnect_200MHz_M06_AXI_ARADDR(8 downto 0),

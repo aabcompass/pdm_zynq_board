@@ -44,7 +44,10 @@ entity EC0EC1EC2 is port (
 	rd_clk                      :   in  std_logic;
 	empty_sum_fifo_l1           :   out std_logic;
     rd_en_sum_fifo_l1           :   in  std_logic;
-    dout_sum_fifo_l1            :   out std_logic_vector(239 downto 0)
+    dout_sum_fifo_l1            :   out std_logic_vector(239 downto 0);
+    --parameters
+    s_max:   in std_logic_vector(11 downto 0)
+    
 	);
 	
 end EC0EC1EC2;
@@ -1865,97 +1868,97 @@ begin
 				    if (S_rdy = '1' ) then--Check if S value is ready
 				        wea_smem <= "1";--Write on memory (column 0 to column ECx2)
 				        
-				        if (add_12_l0S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(11 downto 0) <= "000000001111";
+				        if (add_12_l0S < s_max) then--If S<15 set S=15 
+				            dina_smem(11 downto 0) <= s_max;
 				        else
 				            dina_smem(11 downto 0) <= add_12_l0S;
 				        end if;
 				        
-				         if (add_12_l1S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(23 downto 12) <= "000000001111";
+				         if (add_12_l1S < s_max) then--If S<15 set S=15 
+				            dina_smem(23 downto 12) <= s_max;
 				        else
 				            dina_smem(23 downto 12) <= add_12_l1S;
 				        end if;
 				        
-				         if (add_12_l2S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(35 downto 24) <= "000000001111";
+				         if (add_12_l2S < s_max) then--If S<15 set S=15 
+				            dina_smem(35 downto 24) <= s_max;
 				        else
 				            dina_smem(35 downto 24) <= add_12_l2S;
 				        end if;
 				        
-				         if (add_12_l3S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(47 downto 36) <= "000000001111";
+				         if (add_12_l3S < s_max) then--If S<15 set S=15 
+				            dina_smem(47 downto 36) <= s_max;
 				        else
 				            dina_smem(47 downto 36) <= add_12_l3S;
 				        end if;
 				        
-				         if (add_12_l4S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(59 downto 48) <= "000000001111";
+				         if (add_12_l4S < s_max) then--If S<15 set S=15 
+				            dina_smem(59 downto 48) <= s_max;
 				        else
 				            dina_smem(59 downto 48) <= add_12_l4S;
 				        end if;
 				        
-				         if (add_12_l5S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(71 downto 60) <= "000000001111";
+				         if (add_12_l5S < s_max) then--If S<15 set S=15 
+				            dina_smem(71 downto 60) <= s_max;
 				        else
 				            dina_smem(71 downto 60) <= add_12_l5S;
 				        end if;
 				        
-				         if (add_12_l6S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(83 downto 72) <= "000000001111";
+				         if (add_12_l6S < s_max) then--If S<15 set S=15 
+				            dina_smem(83 downto 72) <= s_max;
 				        else
 				            dina_smem(83 downto 72) <= add_12_l6S;
 				        end if;
 				        
-				         if (add_12_l7S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(95 downto 84) <= "000000001111";
+				         if (add_12_l7S < s_max) then--If S<15 set S=15 
+				            dina_smem(95 downto 84) <= s_max;
 				        else
 				            dina_smem(95 downto 84) <= add_12_l7S;
 				        end if;
 				        
-				         if (add_12_l8S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(107 downto 96) <= "000000001111";
+				         if (add_12_l8S < s_max) then--If S<15 set S=15 
+				            dina_smem(107 downto 96) <= s_max;
 				        else
 				            dina_smem(107 downto 96) <= add_12_l8S;
 				        end if;
 				        
-				         if (add_12_l9S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(119 downto 108) <= "000000001111";
+				         if (add_12_l9S < s_max) then--If S<15 set S=15 
+				            dina_smem(119 downto 108) <= s_max;
 				        else
 				            dina_smem(119 downto 108) <= add_12_l9S;
 				        end if;
 				        
-				         if (add_12_l10S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(131 downto 120) <= "000000001111";
+				         if (add_12_l10S < s_max) then--If S<15 set S=15 
+				            dina_smem(131 downto 120) <= s_max;
 				        else
 				            dina_smem(131 downto 120) <= add_12_l10S;
 				        end if;
 				        
-				         if (add_12_l11S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(143 downto 132) <= "000000001111";
+				         if (add_12_l11S < s_max) then--If S<15 set S=15 
+				            dina_smem(143 downto 132) <= s_max;
 				        else
 				            dina_smem(143 downto 132) <= add_12_l11S;
 				        end if;
 				        
-				         if (add_12_l12S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(155 downto 144) <= "000000001111";
+				         if (add_12_l12S < s_max) then--If S<15 set S=15 
+				            dina_smem(155 downto 144) <= s_max;
 				        else
 				            dina_smem(155 downto 144) <= add_12_l12S;
 				        end if;
 				        
-				         if (add_12_l13S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(167 downto 156) <= "000000001111";
+				         if (add_12_l13S < s_max) then--If S<15 set S=15 
+				            dina_smem(167 downto 156) <= s_max;
 				        else
 				            dina_smem(167 downto 156) <= add_12_l13S;
 				        end if;
 				        
-				         if (add_12_l14S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(179 downto 168) <= "000000001111";
+				         if (add_12_l14S < s_max) then--If S<15 set S=15 
+				            dina_smem(179 downto 168) <= s_max;
 				        else
 				            dina_smem(179 downto 168) <= add_12_l14S;
 				        end if;
-				         if (add_12_l15S < "000000001111") then--If S<15 set S=15 
-				            dina_smem(191 downto 180) <= "000000001111";
+				         if (add_12_l15S < s_max) then--If S<15 set S=15 
+				            dina_smem(191 downto 180) <= s_max;
 				        else
 				            dina_smem(191 downto 180) <= add_12_l15S;
 				        end if;

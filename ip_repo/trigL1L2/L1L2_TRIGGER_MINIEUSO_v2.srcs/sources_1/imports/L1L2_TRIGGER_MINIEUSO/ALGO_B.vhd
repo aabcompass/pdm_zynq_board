@@ -24,6 +24,9 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_arith.ALL;
 USE ieee.std_logic_unsigned.ALL;
 
+Library xpm;
+use xpm.vcomponents.all;
+
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -48,7 +51,9 @@ entity ALGO_B is port (
 	L1_EVENT            :   out std_logic;
 	-- inputs forwarding for TA trigger tests
 	data_conv_out: out std_logic_vector(15 downto 0);
-	frame_conv_out: out std_logic 
+	frame_conv_out: out std_logic;
+	--parameters
+	s_max:   in std_logic_vector(11 downto 0) 
 	);
 	
 end ALGO_B;
@@ -63,6 +68,8 @@ signal  rd_clk_l1               : std_logic;
 signal  dout_sum_fifo_l1        : std_logic_vector(239 downto 0);
 signal  rd_en_sum_fifo_l1       : std_logic;
 signal  empty_sum_fifo_l1       : std_logic;
+
+signal s_max_synced: std_logic_vector(11 downto 0);
 
 component MMCM_CLK
 port
@@ -94,7 +101,9 @@ component L1
         rd_clk_l1           :  in  std_logic;
         empty_sum_fifo_l1   :  out std_logic;
         rd_en_sum_fifo_l1   :  in  std_logic;
-        dout_sum_fifo_l1    :  out std_logic_vector(239 downto 0)
+        dout_sum_fifo_l1    :  out std_logic_vector(239 downto 0);
+        -- parameters
+        s_max:   in std_logic_vector(11 downto 0) 
         );
 end component L1;
 
@@ -133,6 +142,25 @@ i_format_converter_l : format_converter
 	data_conv_out <= DATA_conv;
 	frame_conv_out <= FRAME_conv;
 	
+	
+xpm_cdc_array_single_inst: xpm_cdc_array_single
+	  generic map (
+	
+	    -- Common module generics
+	    DEST_SYNC_FF   => 4, -- integer; range: 2-10
+	    SIM_ASSERT_CHK => 0, -- integer; 0=disable simulation messages, 1=enable simulation messages
+	    SRC_INPUT_REG  => 0, -- integer; 0=do not register input, 1=register input
+	    WIDTH          => 12  -- integer; range: 2-1024
+	
+	  )
+	  port map (
+	
+	    src_clk  => '0',  -- optional; required when SRC_INPUT_REG = 1
+	    src_in   => s_max,
+	    dest_clk => S00_AXIS_ACLK,
+	    dest_out => s_max_synced
+	  );
+	
 
 	L1_TRIGGER : L1
     port map (
@@ -152,7 +180,9 @@ i_format_converter_l : format_converter
     rd_clk_l1           => rd_clk_l1,
     empty_sum_fifo_l1   => empty_sum_fifo_l1,
     rd_en_sum_fifo_l1   => rd_en_sum_fifo_l1,
-    dout_sum_fifo_l1    => dout_sum_fifo_l1
+    dout_sum_fifo_l1    => dout_sum_fifo_l1,
+    -- parameters
+    s_max => s_max_synced
     );
     
 				

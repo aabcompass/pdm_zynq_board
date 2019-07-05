@@ -9,6 +9,7 @@
 #include "xparameters.h"
 
 #define ADDR_TA_TRIG_L1 	XPAR_AXI_GPIO_TA_EV_BASEADDR
+#define ADDR_TRIG_L1 	(XPAR_AXI_GPIO_TA_EV_BASEADDR + 8)
 
 void SetL1TAthresholds(u32 pmt_trig1, u32 pmt_trig2, u32 ec_trig1, u32 ec_trig2, u32 pdm_trig1, u32 pdm_trig2)
 {
@@ -18,4 +19,9 @@ void SetL1TAthresholds(u32 pmt_trig1, u32 pmt_trig2, u32 ec_trig1, u32 ec_trig2,
 	*(u32*)ADDR_TA_TRIG_L1 = 1<<30 | ec_trig2<<0 | pdm_trig1<<10;
 	//Group 2
 	*(u32*)ADDR_TA_TRIG_L1 = 2<<30 | pdm_trig2<<0;
+}
+
+void SetSMax(u32 s_max)
+{
+	*(u32*)(ADDR_TRIG_L1) = s_max;
 }

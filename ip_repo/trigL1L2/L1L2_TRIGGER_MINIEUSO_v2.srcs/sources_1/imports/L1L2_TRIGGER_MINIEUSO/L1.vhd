@@ -52,7 +52,9 @@ entity L1 is port (
     rd_clk_l1                   :   in  std_logic;
     empty_sum_fifo_l1           :   out std_logic;
     rd_en_sum_fifo_l1           :   in  std_logic;
-    dout_sum_fifo_l1            :   out std_logic_vector(239 downto 0)
+    dout_sum_fifo_l1            :   out std_logic_vector(239 downto 0);
+    --parameters
+    s_max:   in std_logic_vector(11 downto 0)
 	);
 	
 end L1;
@@ -90,7 +92,9 @@ architecture Behavioral of L1 is
        rd_clk                  :   in  std_logic;
        empty_sum_fifo_l1       :   out std_logic;
        rd_en_sum_fifo_l1       :   in  std_logic;
-       dout_sum_fifo_l1        :   out std_logic_vector(239 downto 0)
+       dout_sum_fifo_l1        :   out std_logic_vector(239 downto 0);
+       --parameters
+       s_max:   in std_logic_vector(11 downto 0)
 	   );
     end component EC0EC1EC2;
 
@@ -126,7 +130,8 @@ begin
        rd_clk               => rd_clk_l1,
        empty_sum_fifo_l1    =>empty_sum_fifo_l1,
        rd_en_sum_fifo_l1    =>rd_en_sum_fifo_l1,
-       dout_sum_fifo_l1     =>dout_sum_fifo_l1
+       dout_sum_fifo_l1     =>dout_sum_fifo_l1,
+       s_max => s_max
 	);
 	
 	AXI4_FIFO_OUT : FIFO_OUT
