@@ -32,7 +32,7 @@ uint32_t DataDMA_D3[N_ALT_BUFFERS][N_TRIG_BUFFERS_DMA_D3][N_FRAMES_DMA_D3][N_OF_
 // Data is taken from this array every 5.24s
 
 // this array contains only triggered D2 data
-uint16_t Data_L2[N_ALT_BUFFERS][MAX_TRIGGERS_PER_CYCLE][N_FRAMES_DMA_D3*N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
+uint16_t Data_L2[N_ALT_BUFFERS][MAX_TRIGGERS_PER_CYCLE][N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM] __attribute__ ((aligned (64)));
 // Data is taken from this array every 5.24s
 
 
@@ -294,6 +294,7 @@ void CopyEventData_trig()
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_L1_V0*sizeof(uint16_t));
 		// Mark the trigger as copied (sent)
 		triggerInfoD2[prev_alt_buffer][i].is_sent = 1;
+		//xil_printf("tt=%d.", zynqPacket.level2_data[i].payload.trig_type);
 	}
 	//copy D3
 	for(i=0;i<N3;i++)
@@ -411,26 +412,31 @@ static void RxIntrHandler_D2(void *Callback)
 	DmaReset(AxiDmaInst);
 	// check whether trigger
 
+	//Xil_DCacheInvalidateRange(&DataDMA_D2[dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2][0][0], 16);
+	//xil_printf("[%d]", DataDMA_D2[dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2][0][0]);
+
 	dma_intr_counter_d2++;
 
 	DmaStartN(2, dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2);
 
 	FlowControlClrIntr_D2();	//print("y");
 
-	print("y");
+
+
 
 	return;
 
 }
 
-void L2_sm()
+void L2_trigger_service()
 {
-	u32 addr_gtu;
+	u32 addr_gtu, trig_gtu;
 	switch(l2_sm_state)
 	{
 		case l2_sm_idle:
 			if(CheckTrigger_L2())
 			{
+				print("L2 trigger!\n\r");
 				if(trig_counter__l2 < N2)
 				{
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].is_sent = 0;
@@ -445,18 +451,24 @@ void L2_sm()
 		case l2_sm_cought:
 			l2_sm_state = l2_sm_timer;
 			break;
-		case l2_sm_timer:
+		case l2_sm_timer: // in order to do not copy data from a region under DMA transfer
 			if(GetNGTU() - GetTrigNGTU_L2() > N_FRAMES_DMA_D2)
 				l2_sm_state = l2_sm_copying;
 			break;
 		case l2_sm_copying:
-			addr_gtu = GetTrigNGTU_L2() % (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0/2;
-			if((addr_gtu < (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0/2) &&
-					(addr_gtu > N_OF_FRAMES_L2_V0/2))
+			trig_gtu = GetTrigNGTU_L2();
+			addr_gtu = (trig_gtu/128) % (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0/2;
+			//xil_printf("=%d$%d$%d=", trig_gtu, addr_gtu, trig_counter__l2);
+			if((addr_gtu < (N_TRIG_BUFFERS_DMA_D2*N_FRAMES_DMA_D2) - N_OF_FRAMES_L2_V0) && (addr_gtu > 0))
 			{
-				memcpy_invalidate(&Data_L2[current_alt_buffer][trig_counter__l2],
-					&DataDMA_D2[addr_gtu/N_TRIG_BUFFERS_DMA_D2][addr_gtu%N_TRIG_BUFFERS_DMA_D2][0],
+				memcpy_invalidate(&Data_L2[current_alt_buffer][trig_counter__l2][0],
+					&DataDMA_D2[addr_gtu/N_FRAMES_DMA_D2][addr_gtu%N_FRAMES_DMA_D2][0],
 					N_OF_FRAMES_L2_V0*N_OF_PIXEL_PER_PDM*sizeof(uint16_t));
+				xil_printf("[%d]", DataDMA_D2[addr_gtu/N_FRAMES_DMA_D2][addr_gtu%N_FRAMES_DMA_D2][0]);
+			}
+			else
+			{
+				print("L2 data discarded\n\r");
 			}
 			l2_sm_state = l2_sm_copied;
 			break;

@@ -10,7 +10,7 @@
 
 
 
-#define REGW_FLAGS					0 /* 3=periodic_trig_en 2=en_algo_trig  1=en_int_trig 0=is_started*/
+#define REGW_FLAGS					0 /* 1=periodic_trig_en 2=self  3=en_int_trig  4=ext 0=is_started*/
 #define REGW_CLR_FLAGS				1 /* 5=clr_trig_service 4=clr_gtu_cnt 3=restart_intr 2=clr_all 1=clear_error 0=clr_trans_counter*/
 #define REGW_TRIG_DELAY				2 /* the delay between trigger event and message about it*/
 #define REGW_EDGE_FLAGS				3 /* 2=set_unix_time 1=trig_force 0=release */

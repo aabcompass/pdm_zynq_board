@@ -290,8 +290,8 @@ int main()
 	ScurveDataInit();
 	print("Setting L1 EUSO TA trigger default values\n\r");
 	SetL1TAthresholds(5, 6, 7, 9, 15, 20);
-	print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
-	ProvideAndCheck();
+	//print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
+	//ProvideAndCheck();
 	print("Setting HVPS protection maximum value (10000)");
 	SetGrandTotals(10000);
 
@@ -312,6 +312,7 @@ int main()
 		//ftp_config_sm();
 		DataPathSM();
 		L1_trigger_service();
+		L2_trigger_service();
 		StopSM();
 		//UpdateFW_SM();
 		ScurveService();

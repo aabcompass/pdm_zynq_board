@@ -278,7 +278,7 @@ void DataPathSM()
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = instrumentState.mode | BIT_FC_IS_STARTED;
 			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 2048*1000+20;
-			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 0;
+			*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_INT_TRIG_GTU_TIME*4) = 128*128*32;
 			*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_INFINITE) = 1;
 
 			datapath_sm_state = datapath_wait4trigger_state;
@@ -521,6 +521,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("GetDMAIntrCounterN(1)=%d\n\r", GetDMAIntrCounterN(1));
 		xil_printf("GetDMAIntrCounterN(2)=%d\n\r", GetDMAIntrCounterN(2));
 		xil_printf("GetDMAIntrCounterN(3)=%d\n\r", GetDMAIntrCounterN(3));
+		xil_printf("GetNGTU()=%d\n\r", GetNGTU());
+
 
 		xil_printf("DMA RAW CR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_CR_OFFSET));
 		xil_printf("DMA RAW SR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET));
