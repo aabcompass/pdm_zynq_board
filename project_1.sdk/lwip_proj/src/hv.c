@@ -614,7 +614,7 @@ void HVInterruptHandler(void *Callback)
 	if(exp3_intf)
 		setRegister(EXP3, GPINTEN, (~exp3_intf) & exp3_gpinten);
 
-	is_interrupt_pending |= (exp3_intf<<12 | exp2_intf<<6 | exp3_intf);
+	is_interrupt_pending |= (exp3_intf<<12 | exp2_intf<<6 | exp1_intf);
 	// Add log
 	HV_addLog(HVPS_INTR, is_interrupt_pending);
 	// Start timer0
