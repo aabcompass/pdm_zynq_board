@@ -138,7 +138,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
-	else if(strncmp(p->payload, "instrument ver", 14) == 0)
+	else if(strncmp(p->payload, "instrument ver", 14) == 0) //documented
 	{
 		char tmp_str[10];
 		//char ok_eomess_str[] = "Ok\n\r";
@@ -152,17 +152,17 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		strcat(ans_str, tmp_str);
 		tcp_write(tpcb, ans_str, strlen(ans_str), 1);
 	}
-	else if(sscanf(p->payload, "instrument mode %d %d",
+	else if(sscanf(p->payload, "instrument mode %d %d", //documented
 			&param, &param2) == 2)
 	{
 		ProcessInstrumentModeCommand(tpcb, param, param2);
 	}
-	else if(sscanf(p->payload, "instrument mode %d",
+	else if(sscanf(p->payload, "instrument mode %d", //documented
 			&param) == 1)
 	{
 		ProcessInstrumentModeCommand(tpcb, param, 0);
 	}
-	else if(sscanf(p->payload, "acq scurve %d %d %d %d",
+	else if(sscanf(p->payload, "acq scurve %d %d %d %d", //documented
 			&param0,
 			&param1,
 			&param2,
@@ -183,57 +183,57 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			tcp_write(tpcb, str, sizeof(str), 1);
 		}
 	}
-	else if(strncmp(p->payload, "acq scurve status", 17) == 0)
+	else if(strncmp(p->payload, "acq scurve status", 17) == 0) //documented
 	{
 		SCurveStruct* pSCurveStruct;
 		pSCurveStruct = GetSCurveStruct();
 		sprintf(reply, "CurrentDAC=%d GatheringInProgress=%d\n\r", pSCurveStruct->current_dac_value, pSCurveStruct->is_scurve_being_gathered);
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(sscanf(p->payload, "acq test %d", &param) == 1)
+	else if(sscanf(p->payload, "acq test %d", &param) == 1) //documented
 	{
 		SetDataProviderTestMode(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1) //documented
 	{
 		debugSettings.current_thr = param;
 		LoadSameDataToSlowControl2(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl line %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl line %d", &param) == 1) //documented
 	{
 		SetIndSCCurrentLine(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl asic %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl asic %d", &param) == 1) //documented
 	{
 		SetIndSCCurrentAsic(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl pixel %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl pixel %d", &param) == 1) //documented
 	{
 		SetIndSCCurrentPixel(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl dac10 %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl dac10 %d", &param) == 1) //documented
 	{
 		SetIndSCDac10(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl dac7 %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl dac7 %d", &param) == 1) //documented
 	{
 		SetIndSCDac7(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl mask %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl mask %d", &param) == 1) //documented
 	{
 		//SetIndSCPixelMask(param);
 		u32 pixel = GetIndSCCurrentPixel() + N_OF_PIXELS_PER_PMT*GetIndSCCurrentAsic();
@@ -243,7 +243,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl maskasic %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl maskasic %d", &param) == 1) //documented
 	{
 		u32 pixel = N_OF_PIXELS_PER_PMT*GetIndSCCurrentAsic();
 		u32 line = GetIndSCCurrentLine();
@@ -252,7 +252,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "slowctrl maskline %d", &param) == 1)
+	else if(sscanf(p->payload, "slowctrl maskline %d", &param) == 1) //documented
 	{
 		u32 line = GetIndSCCurrentLine();
 		for(i=0;i<0+N_OF_PIXELS_PER_PMT*6;i++)
@@ -260,18 +260,18 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(strncmp(p->payload, "slowctrl apply", 14) == 0)
+	else if(strncmp(p->payload, "slowctrl apply", 14) == 0) //documented
 	{
 		SendUserIndSCSettingsToSp3();
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(strncmp(p->payload, "slowctrl dac10?", 15) == 0)
+	else if(strncmp(p->payload, "slowctrl dac10?", 15) == 0) //documented
 	{
 		sprintf(reply, "%d\n\r", GetIndSCDac10());
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(strncmp(p->payload, "slowctrl dac7?", 14) == 0)
+	else if(strncmp(p->payload, "slowctrl dac7?", 14) == 0) //documented
 	{
 		sprintf(reply, "%d\n\r", GetIndSCDac7());
 		tcp_write(tpcb, reply, strlen(reply), 1);
@@ -281,12 +281,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 //		sprintf(reply, "%d\n\r", GetIndSCPixelMask());
 //		tcp_write(tpcb, reply, strlen(reply), 1);
 //	}
-	else if(strncmp(p->payload, "hvps status interrupt", 21) == 0)
+	else if(strncmp(p->payload, "hvps status interrupt", 21) == 0) //documented
 	{
 		sprintf(reply, "%d\n\r", GetIntrState());
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(sscanf(p->payload, "hvps turnon %d %d %d %d %d %d %d %d %d",
+	else if(sscanf(p->payload, "hvps turnon %d %d %d %d %d %d %d %d %d", //documented
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
 //		if(!instrumentState.is_HVPS_OK)
@@ -306,12 +306,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 //		tcp_write(tpcb, str, sizeof(str), 1);
 		hvpson_cmd(turn, tpcb);
 	}
-	else if(strncmp(p->payload, "hvps turnon all", 15) == 0)
+	else if(strncmp(p->payload, "hvps turnon all", 15) == 0) //documented
 	{
 		for(i=0;i<9;i++) turn[i] = 1;
 		hvpson_cmd(turn, tpcb);
 	}
-	else if(strncmp(p->payload, "hvps init", 9) == 0)
+	else if(strncmp(p->payload, "hvps init", 9) == 0) //documented
 	{
 		print("Additional try to initialize HVPS\n\r");
 		instrumentState.is_HVPS_OK = expIni(); //init hv
@@ -326,14 +326,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			tcp_write(tpcb, str, sizeof(str), 1);
 		}
 	}
-	else if(sscanf(p->payload, "hvps turnoff %d %d %d %d %d %d %d %d %d",
+	else if(sscanf(p->payload, "hvps turnoff %d %d %d %d %d %d %d %d %d", //documented
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
 		char str[] = "Ok\n\r";
 		HV_turnOFF_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(strncmp(p->payload, "hvps turnoff all", 16) == 0)
+	else if(strncmp(p->payload, "hvps turnoff all", 16) == 0) //documented
 	{
 		for(i=0;i<9;i++) turn[i] = 1;
 		char str[] = "Ok\n\r";
@@ -341,14 +341,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
 
-	else if(sscanf(p->payload, "hvps setdac %d %d %d %d %d %d %d %d %d",
+	else if(sscanf(p->payload, "hvps setdac %d %d %d %d %d %d %d %d %d", //documented
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
 		char str[] = "Ok\n\r";
 		setDacValue_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "hvps setdac all %d",
+	else if(sscanf(p->payload, "hvps setdac all %d", //documented
 			&turn[0]) == 1)
 	{
 		for(i=1;i<9;i++) turn[i] = turn[0];
@@ -356,14 +356,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		setDacValue_list(turn);
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "hvps cathode %d %d %d %d %d %d %d %d %d",
+	else if(sscanf(p->payload, "hvps cathode %d %d %d %d %d %d %d %d %d", //documented
 			&turn[0], &turn[1], &turn[2], &turn[3], &turn[4], &turn[5], &turn[6], &turn[7], &turn[8]) == 9)
 	{
 		HV_setCathodeVoltage(turn);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "hvps cathode all %d",
+	else if(sscanf(p->payload, "hvps cathode all %d", //documented
 			&turn[0]) == 1)
 	{
 		for(i=1;i<9;i++) turn[i] = turn[0];
@@ -371,27 +371,27 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(strncmp(p->payload, "hvps status gpio", 16) == 0)
+	else if(strncmp(p->payload, "hvps status gpio", 16) == 0) //documented
 	{
 		HV_getStatus(turn);
 		sprintf(reply, "%x %x %x %x %x %x %x %x %x\n\r",
 				turn[0], turn[1], turn[2], turn[3], turn[4], turn[5], turn[6], turn[7], turn[8]);
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
-	else if(sscanf(p->payload, "hvps protect %d", &param0) == 1)
+	else if(sscanf(p->payload, "hvps protect %d", &param0) == 1) //documented
 	{
 		SetGrandTotals(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "settime %d",
+	else if(sscanf(p->payload, "settime %d", //documented
 			&param0) == 1)
 	{
 		SetTime(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(strncmp(p->payload, "gettime", 7) == 0)
+	else if(strncmp(p->payload, "gettime", 7) == 0) //documented
 	{
 		sprintf(reply, "%d\n\r", *(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGR_UNIX_TIME*4));
 		tcp_write(tpcb, reply, strlen(reply), 1);

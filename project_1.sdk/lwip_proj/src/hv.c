@@ -584,8 +584,8 @@ void HVInterruptService()
 	}
 }
 
-// Interrupt Hundler which  is automatically called where interrupt line from expanders is rising up.
-void HVInterruptHundler(void *Callback)
+// Interrupt Handler which  is automatically called where interrupt line from expanders is rising up.
+void HVInterruptHandler(void *Callback)
 {
 	print("H");
 	u32 exp1_intf, exp2_intf, exp3_intf;
@@ -608,11 +608,11 @@ void HVInterruptHundler(void *Callback)
 
 	// turn off corresponding interrupt lines
 	if(exp1_intf)
-		setRegister(EXP2, GPINTEN, (~exp1_intf) & exp1_gpinten);
+		setRegister(EXP1, GPINTEN, (~exp1_intf) & exp1_gpinten);
 	if(exp2_intf)
 		setRegister(EXP2, GPINTEN, (~exp2_intf) & exp2_gpinten);
 	if(exp3_intf)
-		setRegister(EXP2, GPINTEN, (~exp3_intf) & exp3_gpinten);
+		setRegister(EXP3, GPINTEN, (~exp3_intf) & exp3_gpinten);
 
 	is_interrupt_pending |= (exp3_intf<<12 | exp2_intf<<6 | exp3_intf);
 	// Add log
@@ -862,7 +862,7 @@ void SetupHVPSIntrSystem(XScuGic* pIntc)
 		 * interrupt occurs for the device.
 		 */
 		Result = XScuGic_Connect(pIntc, XPAR_FABRIC_HV_HK_V1_0_0_INTR_OUT_INTR,
-					 (Xil_ExceptionHandler)HVInterruptHundler, NULL);
+					 (Xil_ExceptionHandler)HVInterruptHandler, NULL);
 		if (Result != XST_SUCCESS) {
 			print("Error XScuGic_Connect\n\r");
 		}
