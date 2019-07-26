@@ -623,9 +623,13 @@ void HVInterruptHandler(void *Callback)
 	//adding an interrupt event control array hv_n_interrupts[]
 	// determine which line interrupt is occured on
 	for(i=0;i<NUM_OF_HV*2;i++)
+	{
 		if(is_interrupt_pending & (1<<i))
+		{
+			hv_n_interrupts[i]++;
 			break;
-	hv_n_interrupts[i]++;
+		}
+	}
 }
 
 
