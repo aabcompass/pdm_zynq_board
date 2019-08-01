@@ -148,3 +148,8 @@ void LoadPixMaskTst(u32 pixel, u32 ec, u32 msk)
 	val = msk*BIT_PIX_DISCARD | pixel*BIT_PIX_NUM | ec*BIT_ECASIC_LINE | BIT_PIX_WR;
 	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_LOAD_PIX_MASK) = val;
 }
+
+void SetDefaultECsigParameters()
+{
+	*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR+4*REGW_ADCV_CONF) = 10*BIT_ADCV_MAX_PIXEL_NUM + 60*BIT_ADCV_ASIC_CNT;
+}
