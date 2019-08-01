@@ -436,7 +436,7 @@ void L2_trigger_service()
 		case l2_sm_idle:
 			if(CheckTrigger_L2())
 			{
-				print("L2 trigger!\n\r");
+				//print("L2 trigger!\n\r");
 				if(trig_counter__l2 < N2)
 				{
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].is_sent = 0;

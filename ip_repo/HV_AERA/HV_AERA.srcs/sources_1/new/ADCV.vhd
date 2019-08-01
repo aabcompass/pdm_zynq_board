@@ -56,12 +56,13 @@ entity ADCV is
            en: in std_logic;
            en_ec_units: in std_logic_vector(8 downto 0);
            -- ec mapping
-           en_mapping: in std_logic_vector(4*9-1 downto 0);
+           ec_mapping: in std_logic_vector(4*9-1 downto 0);
            -- parameters
            release_time: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty: in std_logic_vector(15 downto 0));
+           gtu_big_pulses_qty: in std_logic_vector(15 downto 0);
+           ec0_timer: out std_logic_vector(31 downto 0));
 end ADCV;
 
 architecture Behavioral of ADCV is
@@ -108,6 +109,9 @@ begin
 					ec_release_sig(ec_num) <= '1';
 				else
 					ec_release_sig(ec_num) <= '0';
+				end if;
+				if(ec_num = 0) then
+					ec0_timer <= ec_timer;
 				end if;
 			end if;
 		end process;

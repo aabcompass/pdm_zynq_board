@@ -418,6 +418,12 @@ void PrnAllRegs()
 		if(i%4==0) xil_printf("\n\r%d.", i);
 		xil_printf("\t%08X",  *(u32*)(XPAR_HV_HK_V1_0_0_BASEADDR+i*4));
 	}
+	print("\n\rXPAR_AXI_CATHODE_CTRL_0_BASEADDR");
+	for(i=0;i<32;i++)
+	{
+		if(i%4==0) xil_printf("\n\r%d.", i);
+		xil_printf("\t%08X",  *(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR+i*4));
+	}
 	print("\n\rXPAR_AXI_GPS_CORE_0_BASEADDR");
 	for(i=0;i<8;i++)
 	{
@@ -464,7 +470,8 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'T')
 	{
-		TrgImmediate();
+		//TrgImmediate();
+		TestEC_sig();
 	}
 	else if(c == 'm')
 	{

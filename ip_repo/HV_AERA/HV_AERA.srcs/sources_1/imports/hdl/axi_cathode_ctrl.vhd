@@ -190,12 +190,13 @@ architecture arch_imp of axi_cathode_ctrl is
            en: in std_logic;
            en_ec_units: in std_logic_vector(8 downto 0);
            -- ec mapping
-           en_mapping: in std_logic_vector(4*9-1 downto 0);
+           ec_mapping: in std_logic_vector(4*9-1 downto 0);
            -- parameters
            release_time: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty: in std_logic_vector(15 downto 0));
+           gtu_big_pulses_qty: in std_logic_vector(15 downto 0);
+           ec0_timer: out std_logic_vector(31 downto 0));
 	end component;
 	
 	signal command_adcv: std_logic_vector(17 downto 0) := (others => '0');
@@ -203,7 +204,9 @@ architecture arch_imp of axi_cathode_ctrl is
 	signal adcv_en: std_logic :=  '0';
 	signal TRANSMIT: std_logic :=  '0';
 	signal gtu_len_adcv: std_logic_vector(4 downto 0) := (others => '0');
-	signal en_mapping: std_logic_vector(35 downto 0) := (others => '0');
+	signal ec_mapping: std_logic_vector(35 downto 0) := (others => '0');
+	
+	signal ec_sig2: std_logic_vector(8 downto 0) := (others => '0');
 
 
 begin
@@ -311,8 +314,8 @@ begin
 						slv_reg11 <= (others => '0');
 						slv_reg12 <= (others => '0');
 						slv_reg13 <= (others => '0');
-			--	      slv_reg14 <= (others => '0');
-			--	      slv_reg15 <= (others => '0');
+			      slv_reg14 <= (others => '0');
+			      slv_reg15 <= (others => '0');
 			--	      slv_reg16 <= (others => '0');
 			--	      slv_reg17 <= (others => '0');
 			--	      slv_reg18 <= (others => '0');
@@ -445,22 +448,22 @@ begin
 											slv_reg13(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 										end if;
 									end loop;
-			--	          when b"01110" =>
-			--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-			--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-			--	                -- Respective byte enables are asserted as per write strobes                   
-			--	                -- slave registor 14
-			--	                slv_reg14(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
-			--	              end if;
-			--	            end loop;
-			--	          when b"01111" =>
-			--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-			--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-			--	                -- Respective byte enables are asserted as per write strobes                   
-			--	                -- slave registor 15
-			--	                slv_reg15(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
-			--	              end if;
-			--	            end loop;
+								when b"01110" =>
+									for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+										if ( S_AXI_WSTRB(byte_index) = '1' ) then
+											-- Respective byte enables are asserted as per write strobes                   
+											-- slave registor 14
+											slv_reg14(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+										end if;
+									end loop;
+								when b"01111" =>
+									for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+										if ( S_AXI_WSTRB(byte_index) = '1' ) then
+											-- Respective byte enables are asserted as per write strobes                   
+											-- slave registor 15
+											slv_reg15(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+										end if;
+									end loop;
 			--	          when b"10000" =>
 			--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 			--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
@@ -604,8 +607,8 @@ begin
 									slv_reg11 <= slv_reg11;
 									slv_reg12 <= slv_reg12;
 									slv_reg13 <= slv_reg13;
-			--	            slv_reg14 <= slv_reg14;
-			--	            slv_reg15 <= slv_reg15;
+			            slv_reg14 <= slv_reg14;
+			            slv_reg15 <= slv_reg15;
 			--	            slv_reg16 <= slv_reg16;
 			--	            slv_reg17 <= slv_reg17;
 			--	            slv_reg18 <= slv_reg18;
@@ -804,7 +807,8 @@ begin
 
 ---------------------------------------------------------------------------------
 		adcv_en <= slv_reg1(0);
-		en_mapping <= slv_reg9(3 downto 0) & slv_reg10;
+		ec_mapping <= slv_reg9(3 downto 0) & slv_reg10;
+		ec_sig2 <= ec_sig or slv_reg11(8 downto 0);
 		
 		i_ADCV: ADCV 
     Port map( clk => S_AXI_ACLK,--: in STD_LOGIC;
@@ -812,7 +816,7 @@ begin
     			 -- 
     			 gtu_sig => GTU_HV,--: in std_logic;
            -- from Artix
-           ec_sig => ec_sig,--: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
+           ec_sig => ec_sig2,--: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
            -- to Cathode ctrl
            command => command_adcv,--: out STD_LOGIC_VECTOR (17 downto 0);
            command_dv => command_adcv_dv,--: out STD_LOGIC;
@@ -821,13 +825,16 @@ begin
            en => adcv_en,--: in std_logic;
            en_ec_units => slv_reg4(8 downto 0),--: in std_logic_vector(8 downto 0);
            -- ec mapping
-           en_mapping => en_mapping,--: in std_logic_vector(4*9-1 downto 0);
+           ec_mapping => ec_mapping,--: in std_logic_vector(4*9-1 downto 0);
            -- parameters
            release_time => slv_reg5,--: in std_logic_vector(31 downto 0);
            gtu_pulse_len_param0 => slv_reg6(4 downto 0),--: in std_logic_vector(4 downto 0);--number of bug pulses
            gtu_pulse_len_param1 => slv_reg7(4 downto 0),--: in std_logic_vector(4 downto 0);
-           gtu_big_pulses_qty => slv_reg8(15 downto 0));--: in std_logic_vector(7 downto 0));
+           gtu_big_pulses_qty => slv_reg8(15 downto 0),
+           ec0_timer => slv_reg20);--: in std_logic_vector(7 downto 0));
 
+	slv_reg16(18 downto 0) <= command_adcv_dv & command_adcv;
+	 
 	adcv_select: process(S_AXI_ACLK)
 	begin
 		if(rising_edge(S_AXI_ACLK)) then

@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Fri Jul  5 14:53:55 2019
+--Date        : Thu Aug  1 14:51:32 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -10293,40 +10293,6 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component design_1_xlconstant_0_0;
-  component design_1_axi_cathode_ctrl_0_0 is
-  port (
-    GTU_HV_p : out STD_LOGIC;
-    GTU_HV_n : out STD_LOGIC;
-    CLK_HV_p : out STD_LOGIC;
-    CLK_HV_n : out STD_LOGIC;
-    DATA_HV_p : out STD_LOGIC;
-    DATA_HV_n : out STD_LOGIC;
-    ec_sig : in STD_LOGIC_VECTOR ( 8 downto 0 );
-    axis_cathode_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    axis_cathode_tvalid : out STD_LOGIC;
-    S_AXI_ACLK : in STD_LOGIC;
-    S_AXI_ARESETN : in STD_LOGIC;
-    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_AWVALID : in STD_LOGIC;
-    S_AXI_AWREADY : out STD_LOGIC;
-    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S_AXI_WVALID : in STD_LOGIC;
-    S_AXI_WREADY : out STD_LOGIC;
-    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_BVALID : out STD_LOGIC;
-    S_AXI_BREADY : in STD_LOGIC;
-    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S_AXI_ARVALID : in STD_LOGIC;
-    S_AXI_ARREADY : out STD_LOGIC;
-    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S_AXI_RVALID : out STD_LOGIC;
-    S_AXI_RREADY : in STD_LOGIC
-  );
-  end component design_1_axi_cathode_ctrl_0_0;
   component design_1_axi_fifo_mm_s_0_1 is
   port (
     interrupt : out STD_LOGIC;
@@ -10580,6 +10546,40 @@ architecture STRUCTURE of design_1 is
     S_AXI_RREADY : in STD_LOGIC
   );
   end component design_1_axis_flow_control_L2_0;
+  component design_1_axi_cathode_ctrl_0_0 is
+  port (
+    GTU_HV_p : out STD_LOGIC;
+    GTU_HV_n : out STD_LOGIC;
+    CLK_HV_p : out STD_LOGIC;
+    CLK_HV_n : out STD_LOGIC;
+    DATA_HV_p : out STD_LOGIC;
+    DATA_HV_n : out STD_LOGIC;
+    ec_sig : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    axis_cathode_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    axis_cathode_tvalid : out STD_LOGIC;
+    S_AXI_ACLK : in STD_LOGIC;
+    S_AXI_ARESETN : in STD_LOGIC;
+    S_AXI_AWADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_AWPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_AWVALID : in STD_LOGIC;
+    S_AXI_AWREADY : out STD_LOGIC;
+    S_AXI_WDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_WSTRB : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S_AXI_WVALID : in STD_LOGIC;
+    S_AXI_WREADY : out STD_LOGIC;
+    S_AXI_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_BVALID : out STD_LOGIC;
+    S_AXI_BREADY : in STD_LOGIC;
+    S_AXI_ARADDR : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    S_AXI_ARPROT : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S_AXI_ARVALID : in STD_LOGIC;
+    S_AXI_ARREADY : out STD_LOGIC;
+    S_AXI_RDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S_AXI_RVALID : out STD_LOGIC;
+    S_AXI_RREADY : in STD_LOGIC
+  );
+  end component design_1_axi_cathode_ctrl_0_0;
   signal ALGO_B_0_data_conv_out : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal ALGO_B_0_frame_conv_out : STD_LOGIC;
   signal ALGO_B_1_L1_EVENT : STD_LOGIC;
