@@ -170,7 +170,7 @@ begin
 					when 0 => if(cathode_voltage /= cathode_voltage_d1) then
 											state := state + 1;
 										end if;
-					when 1 => if(gtu_sig = '1' and gtu_sig_d1 = '0') then
+					when 1 => if(gtu_sig = '0' and gtu_sig_d1 = '1') then
 											command <= cathode_voltage;
 											command_dv <= '1';
 											state := state + 1;
