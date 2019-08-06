@@ -461,16 +461,18 @@ void ProcessUartCommands(struct netif *netif, char c)
 	else if(c == 't')
 	{
 		// TURN ON THE TRIG LED
-		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
+		//*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_NUM_OF_TRIGS_FLAGS2*4) |= BIT_FC_IS_TRIGGER_LED;
 		//static int is_test_mode = 0;
 		//is_test_mode = !is_test_mode;
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
 		//xil_printf("is_test_mode=%d\n\r", is_test_mode);
+		CathodeSetAutoMode(0);
 	}
 	else if(c == 'T')
 	{
-		//TrgImmediate();
+		ConfADCV();
+		CathodeSetAutoMode(1);
 		TestEC_sig();
 	}
 	else if(c == 'm')
@@ -535,8 +537,11 @@ void ProcessUartCommands(struct netif *netif, char c)
 		xil_printf("DMA RAW SR=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET));
 		xil_printf("DMA RAW DEST=0x%08x\n\r", *(u32*)(XPAR_AXI_DMA_RAW_BASEADDR + XAXIDMA_RX_OFFSET + XAXIDMA_DESTADDR_OFFSET));
 		xil_printf("Data provider status = 0x%08x\n\r", *(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGR_STATUS));
+		xil_printf("GetADCVEcTimer() returns 0x%08x\n\r", GetADCVEcTimer());
+		GetADCVEcTimer();
 		printMMVars();
 		PrintFS();
+
 	}
 	else if(c == 'S')
 	{

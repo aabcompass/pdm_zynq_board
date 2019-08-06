@@ -79,7 +79,12 @@ architecture Behavioral of ADCV is
 		signal transformer_boost: std_logic := '0';
 		
 		signal transformer_boost_timer: std_logic_vector(15 downto 0) := (others => '0');
-
+		
+		
+		
+		attribute KEEP : string;
+		attribute KEEP of cathode_voltage: signal is "TRUE";
+		attribute KEEP of ec_release_sig: signal is "TRUE";
 
 begin
 
@@ -119,13 +124,17 @@ begin
 		cathode_voltage_process: process(clk)
 		begin
 			if(rising_edge(clk)) then
-				if(ec_sig_front = '1') then
-					if(cathode_voltage(ec_num*2+1 downto ec_num*2)>1) then
-						cathode_voltage(ec_num*2+1 downto ec_num*2) <= cathode_voltage(ec_num*2+1 downto ec_num*2) - 1;
-					end if;
-				elsif(ec_release_sig(ec_num) = '1') then
-					if(cathode_voltage(ec_num*2+1 downto ec_num*2)<3) then
-						cathode_voltage(ec_num*2+1 downto ec_num*2) <= cathode_voltage(ec_num*2+1 downto ec_num*2) + 1;
+				if(reset = '1') then
+					cathode_voltage(ec_num*2+1 downto ec_num*2) <= "11";
+				else
+					if(ec_sig_front = '1') then
+						if(cathode_voltage(ec_num*2+1 downto ec_num*2)=3) then
+							cathode_voltage(ec_num*2+1 downto ec_num*2) <= cathode_voltage(ec_num*2+1 downto ec_num*2) - 1;
+						end if;
+					elsif(ec_release_sig(ec_num) = '1') then
+						if(cathode_voltage(ec_num*2+1 downto ec_num*2)=2) then
+							cathode_voltage(ec_num*2+1 downto ec_num*2) <= cathode_voltage(ec_num*2+1 downto ec_num*2) + 1;
+						end if;
 					end if;
 				end if;
 			end if;
@@ -135,19 +144,45 @@ begin
 	
 	cathode_voltage_d1 <= cathode_voltage when rising_edge(clk);
 	
+--	command_process: process(clk)
+--	begin
+--		if(rising_edge(clk)) then
+--			if(gtu_sig = '1' and gtu_sig_d1 = '0') then
+--				if(cathode_voltage /= cathode_voltage_d1) then
+--					command <= cathode_voltage;
+--					command_dv <= '1';
+--				else
+--					command_dv <= '0';
+--				end if;
+--			end if;
+--		end if;
+--	end process;
+
 	command_process: process(clk)
+		variable state : integer range 0 to 2 := 0;
 	begin
-		if(rising_edge(clk)) then
-			if(gtu_sig = '1' and gtu_sig_d1 = '0') then
-				if(cathode_voltage /= cathode_voltage_d1) then
-					command <= cathode_voltage;
-					command_dv <= '1';
-				else
-					command_dv <= '0';
-				end if;
-			end if;
+		if(rising_edge(clk)) then			
+			if(reset = '1') then
+				state := 0;
+				command_dv <= '0';
+			else
+				case state is
+					when 0 => if(cathode_voltage /= cathode_voltage_d1) then
+											state := state + 1;
+										end if;
+					when 1 => if(gtu_sig = '1' and gtu_sig_d1 = '0') then
+											command <= cathode_voltage;
+											command_dv <= '1';
+											state := state + 1;
+										end if;
+					when 2 => command_dv <= '0';
+										state := 0;
+										
+				end case;
+			end if;	
 		end if;
 	end process;
+
 
 	gtu_len_process: process(clk)
 	begin

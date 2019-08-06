@@ -114,8 +114,8 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	u32 pmt_trig1,  pmt_trig2,  ec_trig1,  ec_trig2,  pdm_trig1,  pdm_trig2;
 	// print command
 	print("TCP: ");
-	for(i=0; i<p->len; i++)
-		xil_printf("%c", *(char*)(p->payload+i));
+	//for(i=0; i<p->len; i++)
+	//	xil_printf("%c", *(char*)(p->payload+i)); // DON'T DO IT !!!
 	print("\r");
 	if(strncmp(p->payload, "help", 4) == 0)
 	{
@@ -521,7 +521,7 @@ static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 
 	/* indicate that the packet has been received */
 	tcp_recved(tpcb, p->len);
-
+	xil_printf("  recv_callback 0x%08x %d\n\r", p->payload, p->len);
 	if(p->len > 2)
 		ProcessTelnetCommands(tpcb, p, err);
 
