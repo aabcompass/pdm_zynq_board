@@ -54,6 +54,10 @@ end EC;
 
 architecture arch_ec of EC is
 
+		attribute KEEP_HIERARCHY : string;
+		attribute KEEP_HIERARCHY of arch_ec: architecture is "TRUE";
+
+
     signal  pixel_value0_s   :  std_logic_vector(7 downto 0) := ( others => '0');
     signal  pixel_value1_s   :  std_logic_vector(7 downto 0) := ( others => '0');
     signal  pixel_value2_s   :  std_logic_vector(7 downto 0) := ( others => '0');

@@ -77,6 +77,9 @@ end L1;
 
 architecture Behavioral of L1 is
 
+		attribute KEEP_HIERARCHY : string;
+		attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
+
     --OUT_FIFO
     signal  s_axis_tvalid_fifo_out_ec0ec1ec2      : std_logic := '0';
     signal  s_axis_tready_fifo_out_ec0ec1ec2      : std_logic;

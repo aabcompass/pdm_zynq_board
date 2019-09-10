@@ -87,6 +87,10 @@ end flow_control_d1;
      
 architecture Behavioral of flow_control_d1 is
 
+	attribute KEEP_HIERARCHY : string;
+	attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
+
+
 	signal sm_state, sm_state_sink: std_logic_vector(3 downto 0) := "0000";
 
 	signal is_started: std_logic := '0';
@@ -308,7 +312,7 @@ architecture Behavioral of flow_control_d1 is
 	attribute keep of m_axis_tlast_cnt: signal is "true";  
 	attribute keep of m_axis_tvalid_i: signal is "true";  
 
-
+	signal s_axis_ta_event_tdata_d1: std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 
@@ -496,9 +500,26 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	self_trig <= ((trig0 or trig1 or trig2) and en_algo_trig);
 	trig_4led <= trig0 or trig1 or trig2;
 	ext_trig <= (trig_ext_in_sync and en_ext_trig);
-	ta_trig <= (s_axis_ta_event_tvalid and en_ta_trig);
+	--ta_trig <= (s_axis_ta_event_tvalid and en_ta_trig);
+	ta_trig_process: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(en_ta_trig = '1') then
+				if(s_axis_ta_event_tdata = 0) then
+					ta_trig <= '0';
+				else
+					ta_trig <= '1';
+				end if;
+			else
+				ta_trig <= '0';
+			end if;
+		end if;
+	end process;
+	
+	s_axis_ta_event_tdata_d1 <= s_axis_ta_event_tdata when rising_edge(s_axis_aclk);
 
 	trig <= self_trig or int_trig or periodic_trig or trig_force or trig_button_debounced or ext_trig or trig_immediate or ta_trig;
+	
 	latency_process: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then
@@ -511,7 +532,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 				ext_trig_latch <= ext_trig;
 				trig_immediate_latch <= trig_immediate;
 				ta_trig_latch <= ta_trig;
-				ta_trig_param_latch <= s_axis_ta_event_tdata;
+				ta_trig_param_latch <= s_axis_ta_event_tdata_d1;
 			end if;
 		end if;
 	end process;
@@ -566,9 +587,9 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											trig_type_i(3 downto 0) <= X"4";
 										elsif(ta_trig_latch = '1') then
 											trig_type_i(3 downto 0) <= X"5";
+											trig_type_i(31 downto 11) <= ta_trig_param_latch(20 downto 0);
 										else
 											trig_type_i(3 downto 0) <= X"8";
-											trig_type_i(31 downto 11) <= ta_trig_param_latch(20 downto 0);
 										end if;
 										trig_cnt <= trig_cnt + 1;							
 										trig_latch <= '1';		
