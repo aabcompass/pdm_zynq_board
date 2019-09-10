@@ -437,21 +437,20 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			tcp_write(tpcb, str_ok, sizeof(str_ok), 1);
 		}
 	}
-	else if(strncmp(p->payload, "trg", 3) == 0)
-	{
-		TrgImmediate();
-		char str[] = "Ok\n\r";
-		tcp_write(tpcb, str, sizeof(str), 1);
-	}
+//	else if(strncmp(p->payload, "trg", 3) == 0)
+//	{
+//		TrgImmediate();
+//		char str[] = "Ok\n\r";
+//		tcp_write(tpcb, str, sizeof(str), 1);
+//	}
 //	u32 pmt_trig1, u32 pmt_trig2, u32 ec_trig1, u32 ec_trig2, u32 pdm_trig1, u32 pdm_trig2;
-
 	else if(sscanf(p->payload, "trig1ta %d %d %d %d %d %d",
 			&pmt_trig1, &pmt_trig2, &ec_trig1, &ec_trig2, &pdm_trig1, &pdm_trig2) == 6)
 	{
 		char str[] = "Ok\n\r";
 		SetL1TAthresholds(pmt_trig1, pmt_trig2, ec_trig1, ec_trig2, pdm_trig1, pdm_trig2);
 		tcp_write(tpcb, str, sizeof(str), 1);
-		SetupHVPSIntrSystem(getIntcPtr());
+		//SetupHVPSIntrSystem(getIntcPtr());
 	}
 	else if(sscanf(p->payload, "trig l1 smax %d",
 			&pmt_trig1) == 1)
@@ -459,7 +458,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		SetSMax(pmt_trig1);
 		tcp_write(tpcb, str, sizeof(str), 1);
-		SetupHVPSIntrSystem(getIntcPtr());
+		//SetupHVPSIntrSystem(getIntcPtr());
 	}
 	else if(sscanf(p->payload, "mmg N1 %d",
 				&param0) == 1)
