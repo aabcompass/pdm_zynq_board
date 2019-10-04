@@ -29,12 +29,12 @@
 		<link>
 			<name>source</name>
 			<type>2</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/.apc/.src</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/.apc/.src</location>
 		</link>
 		<link>
 			<name>testbench</name>
 			<type>2</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/.apc/.tb</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/.apc/.tb</location>
 		</link>
 		<link>
 			<name>solution1/constraints</name>
@@ -42,19 +42,24 @@
 			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/solution1/.tcls</location>
 		</link>
 		<link>
+			<name>solution2/constraints</name>
+			<type>2</type>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/.tcls</location>
+		</link>
+		<link>
+			<name>source/scurve_adder.cpp</name>
+			<type>1</type>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/cpp_code/v4/scurve_adder.cpp</location>
+		</link>
+		<link>
 			<name>source/scurve_adder.h</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/cpp_code/v4/scurve_adder.h</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/cpp_code/v4/scurve_adder.h</location>
 		</link>
 		<link>
 			<name>testbench/scurve_adder_test.cpp</name>
 			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/cpp_code/v4/scurve_adder_test.cpp</location>
-		</link>
-		<link>
-			<name>solution1/constraints/.xml.directive</name>
-			<type>1</type>
-			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/solution1/solution1.directive</location>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/cpp_code/v4/scurve_adder_test.cpp</location>
 		</link>
 		<link>
 			<name>solution1/constraints/directives.tcl</name>
@@ -65,6 +70,21 @@
 			<name>solution1/constraints/script.tcl</name>
 			<type>1</type>
 			<location>/home/alx/xil_proj/pdm_zynq_board/current/ip_develop/scurve_adder_v4/solution1/script.tcl</location>
+		</link>
+		<link>
+			<name>solution2/constraints/.xml.directive</name>
+			<type>1</type>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/solution2.directive</location>
+		</link>
+		<link>
+			<name>solution2/constraints/directives.tcl</name>
+			<type>1</type>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/directives.tcl</location>
+		</link>
+		<link>
+			<name>solution2/constraints/script.tcl</name>
+			<type>1</type>
+			<location>/home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

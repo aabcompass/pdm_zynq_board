@@ -11,7 +11,12 @@
   </errorLogs>
   <warningLogs>
     <logs>
-      <synLog/>
+      <synLog>
+        <logs message="CRITICAL WARNING: [HLS 200-70] Cannot find any design unit to elaborate.&#xA;Error in linking the design.&#xA;    while executing&#xA;&quot;source /home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/csynth.tcl&quot;&#xA;    invoked from within&#xA;&quot;hls::main /home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution2/csynth.tcl&quot;&#xA;    (&quot;uplevel&quot; body line 1)&#xA;    invoked from within&#xA;&quot;uplevel 1 hls::main {*}$args&quot;&#xA;    (procedure &quot;hls_proc&quot; line 5)&#xA;    invoked from within&#xA;&quot;hls_proc $argv&quot;&#xA;" projectName="scurve_adder_v4" solutionName="solution2" date="2019-09-18T14:42:14.494+0000" type="Warning"/>
+        <logs message="WARNING: [HLS 200-40] Cannot find source file scurve_adder.cpp; skipping it." projectName="scurve_adder_v4" solutionName="solution2" date="2019-09-18T14:42:14.469+0000" type="Warning"/>
+        <logs message="WARNING: [HLS 200-40] Cannot find design file 'scurve_adder.cpp'" projectName="scurve_adder_v4" solutionName="solution2" date="2019-09-18T14:42:13.950+0000" type="Warning"/>
+        <logs message="WARNING: [HLS 200-40] No /home/alx/xil_proj/pdm_zynq_board/current3/ip_hls_repo/scurve_adder_v4/solution1/solution1.aps file found." projectName="scurve_adder_v4" solutionName="solution2" date="2019-09-18T14:42:13.933+0000" type="Warning"/>
+      </synLog>
       <simLog/>
       <mgLog/>
       <packageLog/>

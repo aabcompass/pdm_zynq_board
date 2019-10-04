@@ -162,6 +162,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	{
 		ProcessInstrumentModeCommand(tpcb, param, 0);
 	}
+	else if(strncmp(p->payload, "conf inf 0", 10) == 0)
+	{
+		ConfInfinite0();
+		char ok_eomess_str[] = "Ok\n\r";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	}
 	else if(sscanf(p->payload, "acq scurve %d %d %d %d", //documented
 			&param0,
 			&param1,

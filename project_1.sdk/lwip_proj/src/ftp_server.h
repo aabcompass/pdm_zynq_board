@@ -34,7 +34,6 @@ int RemoveAllSciDataFilesFromFTP();
 
 
 
-
 #ifndef SRC_FTP_SERVER_H_
 #define SRC_FTP_SERVER_H_
 

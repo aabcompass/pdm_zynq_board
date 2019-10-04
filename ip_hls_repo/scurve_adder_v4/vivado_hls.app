@@ -6,7 +6,8 @@
     <file name="scurve_adder_v4/cpp_code/v4/scurve_adder.h" sc="0" tb="false" cflags=""/>
   </files>
   <solutions>
-    <solution name="solution1" status="active"/>
+    <solution name="solution1" status="inactive"/>
+    <solution name="solution2" status="active"/>
   </solutions>
   <includePaths/>
   <libraryPaths/>

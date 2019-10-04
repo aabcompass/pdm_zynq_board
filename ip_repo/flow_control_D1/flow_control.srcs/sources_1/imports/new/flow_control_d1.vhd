@@ -311,6 +311,8 @@ architecture Behavioral of flow_control_d1 is
 	attribute keep of trig_latch_clr: signal is "true";  
 	attribute keep of m_axis_tlast_cnt: signal is "true";  
 	attribute keep of m_axis_tvalid_i: signal is "true";  
+	attribute keep of trig_cnt: signal is "true";  
+	attribute keep of release: signal is "true";  
 
 	signal s_axis_ta_event_tdata_d1: std_logic_vector(31 downto 0) := (others => '0');
 
@@ -504,7 +506,7 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 	ta_trig_process: process(s_axis_aclk)
 	begin
 		if(rising_edge(s_axis_aclk)) then
-			if(en_ta_trig = '1') then
+			if(s_axis_ta_event_tvalid = '1' and en_ta_trig = '1') then
 				if(s_axis_ta_event_tdata = 0) then
 					ta_trig <= '0';
 				else

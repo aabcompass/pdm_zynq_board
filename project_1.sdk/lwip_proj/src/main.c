@@ -317,7 +317,7 @@ int main()
 		//UpdateFW_SM();
 		ScurveService();
 		HVInterruptService();
-		HVprotectionService();
+		//HVprotectionService();
 		GPS_service();
 		IncProgramCounter();
 		SetDefaultECsigParameters();
