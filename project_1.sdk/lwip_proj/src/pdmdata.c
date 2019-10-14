@@ -422,8 +422,6 @@ static void RxIntrHandler_D2(void *Callback)
 	FlowControlClrIntr_D2();	//print("y");
 
 
-
-
 	return;
 
 }
