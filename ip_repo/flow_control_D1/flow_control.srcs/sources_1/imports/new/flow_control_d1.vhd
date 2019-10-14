@@ -605,17 +605,17 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 											trig_latch <= '0';
 											state := state + 1;
 										end if;
-					when 4 => if(trigger_relax_time_cnt = trigger_relax_time) then
+					when 4 => if(m_axis_tlast_i = '0') then
+											state := state + 1;
+										end if;
+					when 5 => if(m_axis_tlast_i = '1') then
+											state := state + 1;
+										end if;
+					when 6 => if(trigger_relax_time_cnt = trigger_relax_time) then
 											state := state + 1;
 											trigger_relax_time_cnt <= (others => '0');
 										else
 											trigger_relax_time_cnt <= trigger_relax_time_cnt + 1;
-										end if;
-					when 5 => if(m_axis_tlast_i = '0') then
-											state := state + 1;
-										end if;
-					when 6 => if(m_axis_tlast_i = '1') then
-											state := state + 1;
 										end if;
 					when 7 => if(release = '1' or release_always = '1') then
 											state := 0;
