@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#define MINIEUSO_ZYNQ_VER_STRING "v2.5.9"
+#define MINIEUSO_ZYNQ_VER_STRING "v2.5.10"
 
 // Constants
 

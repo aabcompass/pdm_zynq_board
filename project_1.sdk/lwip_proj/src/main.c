@@ -293,7 +293,7 @@ int main()
 	//print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
 	//ProvideAndCheck();
 	print("Setting HVPS protection maximum value (10000)");
-	SetGrandTotals(60000);
+	SetGrandTotals(40000);
 
 	/* receive and process packets */
 	while (1) {
