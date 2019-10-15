@@ -295,6 +295,8 @@ int main()
 	print("Setting HVPS protection maximum value (40000)");
 	SetGrandTotals(40000);
 
+	TmrCntrInit();
+
 	/* receive and process packets */
 	while (1) {
 

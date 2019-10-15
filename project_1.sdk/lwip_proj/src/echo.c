@@ -64,6 +64,8 @@
 #include "data_provider.h"
 #include "ftp_server.h"
 
+#include "xtmrctr.h"
+
 u8 test_data[10000];
 
 #define N_LINES 	N_OF_ECASIC_PER_PDM
@@ -119,6 +121,8 @@ int current_hvdac_value = 0;
 //#define MAX_PKT_LEN		0x20
 
 char hvps_log_file_ftp[sizeof(Z_DATA_TYPE_HVPS_LOG_V1)];
+
+XTmrCtr TimerCounter;
 
 void RebootZynq()
 {
@@ -270,6 +274,8 @@ void DataPathSM()
 	char filename_str[20];
 	static int what_trigger_armed = 0; // 1- L1, 2 - L2, 3 - L3
 	if(systemSettings.isPrinting) xil_printf("#%d", datapath_sm_state);
+
+	u32 timer_value = 0;
 	switch(datapath_sm_state)
 	{
 	case datapath_idle_state:
@@ -300,6 +306,9 @@ void DataPathSM()
 	case datapath_wait4trigger_state:
 		if(IsBufferD3Changed())
 		{
+			XTmrCtr_Reset(&TimerCounter, 0);
+			XTmrCtr_Start(&TimerCounter, 0);
+			timer_value = XTmrCtr_GetValue(&TimerCounter, 0);
 			print("*");
 			// collect data parts from DMA memory
 			CopyEventData_trig();
@@ -325,6 +334,8 @@ void DataPathSM()
 			//SendSpectrum2FTP((char*)Get_ZYNQ_PACKET(), sizeof(DATA_TYPE_SCI_ALLTRG_V1), filename_str);
 			datapath_sm_state = datapath_wait4ftp_ready2;
 			what_trigger_armed = 3;
+			timer_value = XTmrCtr_GetValue(&TimerCounter, 0);
+			//print("~");
 		}
 		break;
 	case datapath_wait4ftp_ready2:
@@ -717,5 +728,12 @@ static void delay(int time)
 	for(i=0;i<70000*time;i++); // 100 thousands means 1 ms
 }
 
-
+void TmrCntrInit()
+{
+	XStatus Status = XTmrCtr_Initialize(&TimerCounter, XPAR_AXI_TIMER_0_DEVICE_ID);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	//XTmrCtr_Start(&TimerCounter, 0);
+}
 
