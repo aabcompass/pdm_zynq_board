@@ -71,7 +71,7 @@ architecture Behavioral of ADCV is
 		attribute KEEP_HIERARCHY of Behavioral: architecture is "TRUE";
 
 
-		signal ec_sig_d1: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
+		--signal ec_sig_d1: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
 		signal ec_release_sig: std_logic_vector(8 downto 0) := "000000000"; -- art2[2:0], art1[2:0], art0[2:0]
 		signal cathode_voltage, cathode_voltage_d1: std_logic_vector(2*9-1 downto 0) := (others => '1');
 		
@@ -80,15 +80,54 @@ architecture Behavioral of ADCV is
 		
 		signal transformer_boost_timer: std_logic_vector(15 downto 0) := (others => '0');
 		
-		
+		signal ec_all_remapped: std_logic_vector(9*9-1 downto 0) := (others => '0');
+		signal ec_sig_remapped: std_logic_vector(8 downto 0) := (others => '0');
+		signal ec_sig_remapped_d1: std_logic_vector(8 downto 0) := (others => '0');
 		
 		attribute KEEP : string;
 		attribute KEEP of cathode_voltage: signal is "TRUE";
 		attribute KEEP of ec_release_sig: signal is "TRUE";
+		attribute KEEP of transformer_boost: signal is "TRUE";
+		attribute KEEP of ec_sig_remapped: signal is "TRUE";
 
 begin
 
-	ec_sig_d1 <= ec_sig when rising_edge(clk);
+	ec_mapping_gen: for ec_num in 0 to 8 generate
+		ec_mapping_process: process(clk)
+		begin
+			if(rising_edge(clk)) then
+				if(ec_sig(ec_num) = '1') then
+					case ec_mapping(ec_num*4+3 downto ec_num*4) is
+						when X"0" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000000001";
+						when X"1" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000000010";
+						when X"2" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000000100";
+						when X"3" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000001000";
+						when X"4" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000010000";
+						when X"5" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000100000";
+						when X"6" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "001000000";
+						when X"7" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "010000000";
+						when X"8" =>   ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "100000000";
+						when others => ec_all_remapped(ec_num*9+8 downto ec_num*9) <= "000000000";
+					end case;
+				else
+					ec_all_remapped(ec_num*9+8 downto ec_num*9) <= (others => '0');
+				end if;
+			end if;
+		end process;
+	end generate ec_mapping_gen;
+	
+	ec_sig_remapped <= 
+		ec_all_remapped(8*0+8 downto 9*0)  or
+		ec_all_remapped(9*1+8 downto 9*1)  or
+		ec_all_remapped(9*2+8 downto 9*2)  or
+		ec_all_remapped(9*3+8 downto 9*3)  or
+		ec_all_remapped(9*4+8 downto 9*4)  or
+		ec_all_remapped(9*5+8 downto 9*5)  or
+		ec_all_remapped(9*6+8 downto 9*6)  or
+		ec_all_remapped(9*7+8 downto 9*7)  or
+		ec_all_remapped(9*8+8 downto 9*8) when rising_edge(clk);
+
+	ec_sig_remapped_d1 <= ec_sig_remapped when rising_edge(clk);
 	gtu_sig_d1 <= gtu_sig when rising_edge(clk);
 	
 	-- Generates ec_release_sig signal which trigger release cathode voltage.
@@ -97,7 +136,7 @@ begin
 		signal ec_sig_front: std_logic := '0';
 	begin
 	
-		ec_sig_front <= ec_sig(ec_num) and (not ec_sig_d1(ec_num)) when rising_edge(clk);
+		ec_sig_front <= ec_sig_remapped(ec_num) and (not ec_sig_remapped_d1(ec_num)) when rising_edge(clk);
 	
 		timer: process(clk)
 			variable state : integer range 0 to 4 := 0;
@@ -187,7 +226,7 @@ begin
 	gtu_len_process: process(clk)
 	begin
 		if(rising_edge(clk)) then
-			if(ec_sig > ec_sig_d1) then -- i.e. one of EC usits sent a signal
+			if(ec_sig_remapped > ec_sig_remapped_d1) then -- i.e. one of EC usits sent a signal
 				transformer_boost <= '1';
 				transformer_boost_timer <= gtu_big_pulses_qty;
 			elsif(transformer_boost_timer > 0) then

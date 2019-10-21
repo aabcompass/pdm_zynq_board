@@ -17,7 +17,8 @@
 #define REGW_HVCATH_GTU_LEN0		6 /*4:0=gtu_pulse_len_param0*/
 #define REGW_HVCATH_GTU_LEN1		7 /*4:0=gtu_pulse_len_param1*/
 #define REGW_HVCATH_BIG_PULSES_NUM	8 /*15:0=gtu_big_pulses_qty*/
-#define REGW_HVCATH_EC_MAPPING		10 /*ec_mapping <= slv_reg9(3 downto 0) & slv_reg10;*/
+#define REGW_HVCATH_EC_MAPPING_H	9 /*ec_mapping <= slv_reg9(3 downto 0) & slv_reg10;*/
+#define REGW_HVCATH_EC_MAPPING_L	10 /*ec_mapping <= slv_reg9(3 downto 0) & slv_reg10;*/
 #define REGW_HVCATH_STIM_EC_SIG		11 /*ec_sig2 <= ec_sig or slv_reg11(8 downto 0);*/
 
 #define REGR_HVCATH_GET_EC0_TIMER	20 /*31:0*/
