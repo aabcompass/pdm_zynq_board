@@ -357,7 +357,17 @@ void DmaStartN(int n_dma, int n_trig_buffer) //1 - D1, 2 - D2, 3 - D3
 		DmaStart(&dma_d3, (UINTPTR)&DataDMA_D3[current_alt_buffer][n_trig_buffer][0][0], 4 * N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D3, 1);
 }
 
+void DmaStartForLive()
+{
+	DmaReset(&dma_d3);
+	DmaStart(&dma_d3, (UINTPTR)&DataDMA_D3[0][0][0][0], 4 * N_OF_PIXEL_PER_PDM * 1, 1);
+}
 
+UINTPTR GetPtrForLive()
+{
+	Xil_DCacheInvalidateRange((UINTPTR)&DataDMA_D3[0][0][0][0], N_OF_PIXEL_PER_PDM*4);
+	return (UINTPTR)&DataDMA_D3[0][0][0][0];
+}
 
 void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 {

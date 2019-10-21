@@ -21,6 +21,7 @@ typedef struct
 	u8 severity; // 0 - max;  ... then low
 	char device_modelname[12];
 	u8 isPrinting;
+	u8 no_files;
 } SystemSettings;
 
 //// ------------------- ������� ���������, ����������� � flash ---------------------

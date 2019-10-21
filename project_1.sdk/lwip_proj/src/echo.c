@@ -326,8 +326,11 @@ void DataPathSM()
 					//xil_printf("link addr %08X occupied\n\r", &sci_data[current_scidata_record]);
 					// create file
 					if((instrumentState.file_counter_cc+1)%25 == 0) SendHVPSLogToFTP(0);
-					ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
-					if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);
+					if(systemSettings.no_files == 0)
+					{
+						ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
+						if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);
+					}
 					break;
 				}
 			}
@@ -679,6 +682,7 @@ void SetDefaultParameters()
 {
 	//FillExperimentalData();
 	systemSettings.isPrinting = 0;
+	systemSettings.no_files = 0;
 
 	sCurveStruct.start_dac_value = 0;
 	sCurveStruct.step_dac_value = 5;

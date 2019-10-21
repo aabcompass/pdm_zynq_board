@@ -13,7 +13,7 @@
 #define REGW_HVCATH_OPT				1 /*0=adcv_en*/
 #define REGW_HVCATH_CTRL			2 /*0=BIT_TRANSMIT  1=reset*/
 #define REGW_HVCATH_EN_EC			4 /*8:0=en_ec_units*/
-#define REGW_HVCATH_RELEASE_TIME	5 /*31:0=release_time*/
+#define REGW_HVCATH_RELEASE_TIME	5 /*31:0=release_time (in CLKs)*/
 #define REGW_HVCATH_GTU_LEN0		6 /*4:0=gtu_pulse_len_param0*/
 #define REGW_HVCATH_GTU_LEN1		7 /*4:0=gtu_pulse_len_param1*/
 #define REGW_HVCATH_BIG_PULSES_NUM	8 /*15:0=gtu_big_pulses_qty*/

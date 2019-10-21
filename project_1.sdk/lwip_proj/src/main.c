@@ -318,7 +318,7 @@ int main()
 		StopSM();
 		//UpdateFW_SM();
 		ScurveService();
-		HVInterruptService();
+		//HVInterruptService();
 		HVprotectionService();
 		GPS_service();
 		IncProgramCounter();

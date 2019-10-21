@@ -12,6 +12,7 @@
 
 #include "unix_date_time.h"
 #include "xl2_trigger.h"
+#include "pdmdata_hw.h"
 
 extern XL2_trigger l2trigger;
 
@@ -23,6 +24,8 @@ u32 frame_buffer_all_pdm[N_OF_PIXEL_PER_PDM/4];
 u32 frame_counter = 0;
 extern SCurveStruct sCurveStruct;
 extern InstrumentState instrumentState;
+extern SystemSettings systemSettings;
+
 DebugSettings debugSettings;
 
 void SetInstrumentMode(u32 mode)
@@ -113,10 +116,10 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	int turn[NUM_OF_HV];
 	u32 pmt_trig1,  pmt_trig2,  ec_trig1,  ec_trig2,  pdm_trig1,  pdm_trig2;
 	// print command
-	print("TCP: ");
+	//print("TCP: ");
 	//for(i=0; i<p->len; i++)
 	//	xil_printf("%c", *(char*)(p->payload+i)); // DON'T DO IT !!!
-	print("\r");
+	//print("\r");
 	if(strncmp(p->payload, "help", 4) == 0)
 	{
 		char ok_eomess_str[] = "Mini-EUSO PDM DP console\n\r";
@@ -135,6 +138,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(strncmp(p->payload, "instrument clean", 16) == 0)
 	{
 		DeleteAllFiles();
+		char ok_eomess_str[] = "Ok\n\r";
+		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
+	}
+	else if(strncmp(p->payload, "instrument opt no_files", 23) == 0) //documented
+	{
+		systemSettings.no_files = 1;
 		char ok_eomess_str[] = "Ok\n\r";
 		tcp_write(tpcb, ok_eomess_str, sizeof(ok_eomess_str), 1);
 	}
@@ -201,6 +210,19 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		SetDataProviderTestMode(param);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(strncmp(p->payload, "acq live", 8) == 0)
+	{
+		err_t err;
+		DmaStartForLive();
+		Provide(N_OF_FRAMES_RAW_POLY_V0*N_OF_FRAMES_INT16_POLY_V0);
+		for(i=0;i<1000;i++)
+			print("\r");
+//		char str[] = "Ok\n\r";
+		err = tcp_write(tpcb, GetPtrForLive(), 4 * N_OF_PIXEL_PER_PDM, 1);
+		//xil_printf("err = %d\n\r", err);
+		err = tcp_output(tpcb);
+		//xil_printf("err = %d\n\r", err);
 	}
 	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1) //documented
 	{
@@ -526,7 +548,7 @@ static err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
 
 	/* indicate that the packet has been received */
 	tcp_recved(tpcb, p->len);
-	xil_printf("  recv_callback 0x%08x %d\n\r", p->payload, p->len);
+	//xil_printf("  recv_callback 0x%08x %d\n\r", p->payload, p->len);
 	if(p->len > 2)
 		ProcessTelnetCommands(tpcb, p, err);
 
