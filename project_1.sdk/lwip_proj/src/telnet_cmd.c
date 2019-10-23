@@ -28,6 +28,8 @@ extern SystemSettings systemSettings;
 
 DebugSettings debugSettings;
 
+u32 live_sent = 0;
+
 void SetInstrumentMode(u32 mode)
 {
 	instrumentState.mode = mode;
@@ -100,6 +102,18 @@ void hvpson_cmd(int* turn, struct tcp_pcb *tpcb)
 	SetupHVPSIntrSystem(getIntcPtr());
 	char str[] = "Ok\n\r";
 	tcp_write(tpcb, str, sizeof(str), 1);
+}
+
+void sent_callback(void *arg, struct tcp_pcb *tpcb, u16_t len)
+{
+
+	err_t err;
+	if(live_sent == 0)
+	{
+		err = tcp_write(tpcb, GetPtrForLive() + (4 * N_OF_PIXEL_PER_PDM / 2), 4 * N_OF_PIXEL_PER_PDM / 2, 1);
+		xil_printf("!err_t=%d\n\r", err);
+		live_sent = 1;
+	}
 }
 
 void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
@@ -219,9 +233,12 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		for(i=0;i<1000;i++)
 			print("\r");
 //		char str[] = "Ok\n\r";
-		err = tcp_write(tpcb, GetPtrForLive(), 4 * N_OF_PIXEL_PER_PDM, 1);
+		err = tcp_write(tpcb, GetPtrForLive(), 4 * N_OF_PIXEL_PER_PDM / 2, 1);
+		tcp_sent(tpcb, sent_callback);
+		xil_printf("@err = %d\n\r", err);
+		live_sent = 0;
 		//xil_printf("err = %d\n\r", err);
-		err = tcp_output(tpcb);
+		//err = tcp_output(tpcb);
 		//xil_printf("err = %d\n\r", err);
 	}
 	else if(sscanf(p->payload, "slowctrl all dac %d", &param) == 1) //documented
@@ -568,6 +585,7 @@ static err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
 
 	/* set the receive callback for this connection */
 	tcp_recv(newpcb, recv_callback);
+
 
 	/* just use an integer number indicating the connection id as the
 	   callback argument */
