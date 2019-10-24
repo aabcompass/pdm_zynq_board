@@ -294,6 +294,8 @@ int main()
 	//ProvideAndCheck();
 	print("Setting HVPS protection maximum value (40000)");
 	SetGrandTotals(40000);
+	print("Turning cathode switching ON");
+	CathodeSetAutoMode(1);
 
 	TmrCntrInit();
 

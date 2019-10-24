@@ -128,6 +128,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	double double_param, double_param2, double_param3;
 	int ret;
 	int turn[NUM_OF_HV];
+	u8 ec_mapping[NUM_OF_HV];
 	u32 pmt_trig1,  pmt_trig2,  ec_trig1,  ec_trig2,  pdm_trig1,  pdm_trig2;
 	// print command
 	//print("TCP: ");
@@ -422,6 +423,20 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		sprintf(reply, "%x %x %x %x %x %x %x %x %x\n\r",
 				turn[0], turn[1], turn[2], turn[3], turn[4], turn[5], turn[6], turn[7], turn[8]);
 		tcp_write(tpcb, reply, strlen(reply), 1);
+	}
+	else if(sscanf(p->payload, "hvps mapping %d %d %d %d %d %d %d %d %d",
+			&ec_mapping[0], &ec_mapping[1], &ec_mapping[2], &ec_mapping[3], &ec_mapping[4], &ec_mapping[5], &ec_mapping[6], &ec_mapping[7], &ec_mapping[8]) == 9)
+	{
+		SetECMapping(ec_mapping);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "hvps switching on %d",
+			&param0) == 1)
+	{
+		CathodeSetAutoMode(param0);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
 	}
 	else if(sscanf(p->payload, "hvps protect %d", &param0) == 1) //documented
 	{
