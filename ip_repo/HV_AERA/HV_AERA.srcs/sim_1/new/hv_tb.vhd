@@ -37,19 +37,21 @@ end hv_tb;
 
 architecture Behavioral of hv_tb is
 
-	component HV is
-			port(   
-						RESET                       : in std_logic;
-						PDM_CLK                     : in std_logic;
-						gtu_width										: in std_logic_vector(4 downto 0);
-						GTU_HV                    	 : out std_logic;
-						CLK_HV                    	 : out std_logic;
-						DATA_HV                     : out std_logic;
-						COMMAND							 : in std_logic_vector(31 downto 0);
-						TRANSMIT 						 : in std_logic;			
-						TEST                        : out std_logic_vector(31 downto 0)
-					);
+	component HV_v2 is
+		port(   
+					RESET                       : in std_logic;
+					PDM_CLK                     : in std_logic;
+					gtu_width										: in std_logic_vector(4 downto 0); --min 2
+					
+					GTU_HV                    	 : out std_logic;
+					CLK_HV                    	 : out std_logic;
+					DATA_HV                     : out std_logic;
+					COMMAND							 : in std_logic_vector(31 downto 0);
+					TRANSMIT 						 : in std_logic;			
+					TEST                        : out std_logic_vector(31 downto 0)
+				);
 	end component;
+
 	
 	constant period_pdm_clk: time := 5 ns;
 	signal PDM_CLK: std_logic := '0';
@@ -68,11 +70,11 @@ begin
 		PDM_CLK_counter <= PDM_CLK_counter + 1;
 	end process;
 
-	dut: HV
+	dut: HV_v2
 			port map(   
 						RESET => '0', --                     : in std_logic;
 						PDM_CLK  =>  PDM_CLK,--                   : in std_logic;
-						gtu_width => "00001",
+						gtu_width => "00011",
 						GTU_HV   => open , --                	 : out std_logic;
 						CLK_HV   =>  open, --                	 : out std_logic;
 						DATA_HV   => open ,  --                : out std_logic;

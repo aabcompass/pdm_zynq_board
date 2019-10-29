@@ -174,7 +174,7 @@ begin
 		gtu_hv_1 <= '0';		
 	elsif (PDM_CLK='1' and PDM_CLK'event) then
 		if(Aera_clk = '1' and Aera_clk_d1 = '0') then
-			if cnt_1 <= 1 then
+			if cnt_1 <= 0 then
 				gtu_hv_1 <= '1';
 			elsif(cnt_1 >= gtu_width) then
 				gtu_hv_1 <= '0';
