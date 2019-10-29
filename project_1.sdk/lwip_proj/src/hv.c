@@ -887,7 +887,7 @@ void HVprotectionService()
 	if(status && (hvps_protection_started == 0))
 	{
 		int list[] = {0,0,0, 0,0,0, 0,0,0};
-		HV_setCathodeVoltage(list);
+		//HV_setCathodeVoltage(list);
 		HV_turnOFF_all();
 		HV_addLog(HVPS_OVERBRIGHT, status);
 		print("Overbright!\n\r");
