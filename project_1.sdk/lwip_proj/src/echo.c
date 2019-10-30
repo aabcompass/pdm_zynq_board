@@ -487,7 +487,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	{
 		ConfADCV();
 		CathodeSetAutoMode(1);
-		TestEC_sig();
+		//TestEC_sig();
 	}
 	else if(c == 'm')
 	{

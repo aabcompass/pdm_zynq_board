@@ -5,16 +5,17 @@
    <db_ref_list>
       <db_ref path="hv_tb_behav.wdb" id="1">
          <top_modules>
+            <top_module name="glbl" />
             <top_module name="hv_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="76300000001fs"></ZoomEndTime>
-      <Cursor1Time time="10500000000fs"></Cursor1Time>
+      <ZoomStartTime time="550000000fs"></ZoomStartTime>
+      <ZoomEndTime time="6360000001fs"></ZoomEndTime>
+      <Cursor1Time time="2200000000fs"></Cursor1Time>
    </zoom_setting>
-   <WVObjectSize size="9" />
+   <WVObjectSize size="10" />
    <wvobject type="logic" fp_name="/hv_tb/PDM_CLK">
       <obj_property name="ElementShortName">PDM_CLK</obj_property>
       <obj_property name="ObjectShortName">PDM_CLK</obj_property>
@@ -50,5 +51,9 @@
    <wvobject type="logic" fp_name="/hv_tb/dut/DATA_HV">
       <obj_property name="ElementShortName">DATA_HV</obj_property>
       <obj_property name="ObjectShortName">DATA_HV</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/hv_tb/dut/cnt_1">
+      <obj_property name="ElementShortName">cnt_1</obj_property>
+      <obj_property name="ObjectShortName">cnt_1</obj_property>
    </wvobject>
 </wave_config>

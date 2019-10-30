@@ -111,7 +111,7 @@ void sent_callback(void *arg, struct tcp_pcb *tpcb, u16_t len)
 	if(live_sent == 0)
 	{
 		err = tcp_write(tpcb, GetPtrForLive() + (4 * N_OF_PIXEL_PER_PDM / 2), 4 * N_OF_PIXEL_PER_PDM / 2, 1);
-		xil_printf("!err_t=%d\n\r", err);
+		//xil_printf("!err_t=%d\n\r", err);
 		live_sent = 1;
 	}
 }
@@ -236,7 +236,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 //		char str[] = "Ok\n\r";
 		err = tcp_write(tpcb, GetPtrForLive(), 4 * N_OF_PIXEL_PER_PDM / 2, 1);
 		tcp_sent(tpcb, sent_callback);
-		xil_printf("@err = %d\n\r", err);
+		//xil_printf("@err = %d\n\r", err);
 		live_sent = 0;
 		//xil_printf("err = %d\n\r", err);
 		//err = tcp_output(tpcb);
