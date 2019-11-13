@@ -453,7 +453,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>d97d322d</spirit:value>
+            <spirit:value>009a39ad</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -472,7 +472,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>d97d322d</spirit:value>
+            <spirit:value>009a39ad</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -869,6 +869,23 @@
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>unix_time_ngtu</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">63</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -1282,7 +1299,7 @@
       <spirit:file>
         <spirit:name>new/axis_flow_control_d1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_8cc37e78</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_4e0d828f</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1390,18 +1407,18 @@
       </xilinx:taxonomies>
       <xilinx:displayName>axis_flow_control_d1_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>4</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-03-16T16:12:20Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>5</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2019-11-13T11:53:04Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
-        <xilinx:tag xilinx:name="user.org:user:axis_flow_control_d1:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current2/ip_repo/flow_control_D1/flow_control.srcs/sources_1</xilinx:tag>
+        <xilinx:tag xilinx:name="user.org:user:axis_flow_control_d1:1.0_ARCHIVE_LOCATION">/home/alx/xil_proj/pdm_zynq_board/current4/ip_repo/flow_control_D1/flow_control.srcs/sources_1</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2016.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="2e5a5386"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="b4e114b7"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="08efac23"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="8bdc91d5"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="f1ce1bdc"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="92ddde56"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="c316330d"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="2acc771e"/>
     </xilinx:packagingInfo>

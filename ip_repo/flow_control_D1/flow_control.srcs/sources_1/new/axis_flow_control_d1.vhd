@@ -59,6 +59,8 @@ entity axis_flow_control_d1 is
   		trig_out: out std_logic;
   		
   		gtu_sig: in std_logic; 	
+  		unix_time_ngtu: out std_logic_vector(63 downto 0);
+  		
   		
   		
 		-- Global Clock Signal
@@ -261,6 +263,9 @@ architecture Behavioral of axis_flow_control_d1 is
 				trig_all_cnt: OUT STD_LOGIC_VECTOR(31 downto 0) --25
 		);
 	end component;  
+	
+	signal unix_time_i: std_logic_vector(31 downto 0) := (others => '0');
+	signal gtu_sig_counter_i: std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 
@@ -925,8 +930,8 @@ begin
 				trigger_relax_time => slv_reg12(23 downto 0),
 				
 				status => slv_reg14,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --14
-				gtu_sig_counter => slv_reg15,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
-				unix_time => slv_reg17,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --17
+				gtu_sig_counter => gtu_sig_counter_i,--slv_reg15,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --15
+				unix_time => unix_time_i,--slv_reg17,--: OUT STD_LOGIC_VECTOR(31 downto 0);  --17
 				trans_counter => slv_reg18(C_CNT_DWIDTH-1 downto 0),--: OUT STD_LOGIC_VECTOR(C_CNT_DWIDTH-1 downto 0); --18
 				m_axis_fifo_error => slv_reg19,--: OUT STD_LOGIC_VECTOR(31 downto 0); --19
 				gtu_timestamp => slv_reg20,--: OUT STD_LOGIC_VECTOR(31 downto 0); --20
@@ -936,5 +941,9 @@ begin
 				maxis_accepted_cnt => slv_reg24, 
 				trig_all_cnt => slv_reg25
 		);
+		
+			slv_reg15 <= gtu_sig_counter_i;
+			slv_reg17 <= unix_time_i;
+			unix_time_ngtu <= unix_time_i & gtu_sig_counter_i;
 		
 end Behavioral;

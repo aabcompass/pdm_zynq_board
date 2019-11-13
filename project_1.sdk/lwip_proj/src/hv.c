@@ -58,6 +58,7 @@ int hvps_protection_started = 0; // to do not do protection before hvps start
 #define		HVPS_AGC_UP_1_to_3	10	/* Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded. */
 #define		HVPS_STATUS         11 /* POLISH STATUS */
 #define 	HVPS_OVERBRIGHT		12
+#define		HVPS_SWITCHING		13
 //};
 
 const char* hvps_log_records_txt[] = {

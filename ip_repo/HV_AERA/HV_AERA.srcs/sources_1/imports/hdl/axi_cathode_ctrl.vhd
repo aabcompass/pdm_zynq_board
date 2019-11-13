@@ -21,13 +21,16 @@ entity axi_cathode_ctrl is
 	port (
 		-- Users to add ports here
 		GTU_HV_p, GTU_HV_n, CLK_HV_p, CLK_HV_n, DATA_HV_p, DATA_HV_n: out std_logic;
-		--ADCV
+		--ADCV 
 		ec_sig: in std_logic_vector(8 downto 0);
 		--To HVPS log file
-		axis_cathode_tdata: out std_logic_vector(31 downto 0);
+		axis_cathode_tdata: out std_logic_vector(32*4-1 downto 0);
 		axis_cathode_tvalid: out std_logic;
+		axis_cathode_tlast: out std_logic := '1';
 		-- User ports ends
 		-- Do not modify the ports beyond this line
+		
+		unix_time_ngtu: in std_logic_vector(63 downto 0);
 
 		-- Global Clock Signal
 		S_AXI_ACLK	: in std_logic;
@@ -863,7 +866,7 @@ begin
 						TEST     =>  open--slv_reg3               -- : out std_logic_vector(31 downto 0)
 					);
 
-	axis_cathode_tdata <= COMMAND;
+	axis_cathode_tdata <= COMMAND & X"0000000D" & unix_time_ngtu;
 	axis_cathode_tvalid <= TRANSMIT;
 	
 	i_obufds_GTU_HV: obufds port map(GTU_HV_p, GTU_HV_n, GTU_HV);
