@@ -428,7 +428,15 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		tcp_write(tpcb, reply, strlen(reply), 1);
 	}
 	else if(sscanf(p->payload, "hvps mapping %d %d %d %d %d %d %d %d %d",
-			&ec_mapping[0], &ec_mapping[1], &ec_mapping[2], &ec_mapping[3], &ec_mapping[4], &ec_mapping[5], &ec_mapping[6], &ec_mapping[7], &ec_mapping[8]) == 9)
+			&ec_mapping[0]-1,
+			&ec_mapping[1]-1,
+			&ec_mapping[2]-1,
+			&ec_mapping[3]-1,
+			&ec_mapping[4]-1,
+			&ec_mapping[5]-1,
+			&ec_mapping[6]-1,
+			&ec_mapping[7]-1,
+			&ec_mapping[8]-1) == 9)
 	{
 		SetECMapping(ec_mapping);
 		char str[] = "Ok\n\r";
