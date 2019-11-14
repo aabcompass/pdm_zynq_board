@@ -4,6 +4,7 @@
 #include "axi_spectral_core.h"
 #include <string.h>
 #include "hv.h"
+#include "hv_cathode.h"
 #include "pdmdp_err.h"
 #include "axis_flowctrl_d1.h"
 #include "axis_flowctrl_d2.h"
@@ -129,6 +130,7 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	int ret;
 	int turn[NUM_OF_HV];
 	u8 ec_mapping[NUM_OF_HV];
+	u32 param_array[NUM_OF_HV];
 	u32 pmt_trig1,  pmt_trig2,  ec_trig1,  ec_trig2,  pdm_trig1,  pdm_trig2;
 	// print command
 	//print("TCP: ");
@@ -428,6 +430,13 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 			&ec_mapping[0], &ec_mapping[1], &ec_mapping[2], &ec_mapping[3], &ec_mapping[4], &ec_mapping[5], &ec_mapping[6], &ec_mapping[7], &ec_mapping[8]) == 9)
 	{
 		SetECMapping(ec_mapping);
+		char str[] = "Ok\n\r";
+		tcp_write(tpcb, str, sizeof(str), 1);
+	}
+	else if(sscanf(p->payload, "hvps swpulses %d %d %d",
+			&param_array[0], &param_array[1], &param_array[2]) == 3)
+	{
+		ConfADCV(param_array[0], param_array[1], param_array[2]);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}

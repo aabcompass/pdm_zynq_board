@@ -294,9 +294,10 @@ int main()
 	SetL1TAthresholds(5, 6, 7, 9, 15, 20);
 	//print("Provide data for 5.24 sec (128*128*128 GTUs)\n\r");
 	//ProvideAndCheck();
-	print("Setting HVPS protection maximum value (15000)\n\r");
-	SetGrandTotals(15000);
+	//print("Setting HVPS protection maximum value (15000)\n\r");
+	//SetGrandTotals(15000);
 	print("Turning cathode switching ON");
+	ConfADCV(3,1,5);
 	CathodeSetAutoMode(1);
 
 	TmrCntrInit();
@@ -323,7 +324,7 @@ int main()
 		//UpdateFW_SM();
 		ScurveService();
 		HVInterruptService();
-		HVprotectionService();
+		//HVprotectionService();
 		GPS_service();
 		IncProgramCounter();
 		SetDefaultECsigParameters();

@@ -33,5 +33,7 @@
 
 void CathodeSetAutoMode(int mode);
 void TestEC_sig();
+void SetSwitchingPulsesParams(int len0, int len1, int num);
+void ConfADCV(int len0, int len1, int num);
 
 #endif /* SRC_HV_CATHODE_H_ */
