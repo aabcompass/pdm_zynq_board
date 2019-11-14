@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Nov 13 15:14:46 2019
+--Date        : Thu Nov 14 16:47:39 2019
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -11023,6 +11023,7 @@ architecture STRUCTURE of design_1 is
   signal axis_dwidth_converter_9_M_AXIS_TLAST : STD_LOGIC;
   signal axis_dwidth_converter_9_M_AXIS_TREADY : STD_LOGIC;
   signal axis_dwidth_converter_9_M_AXIS_TVALID : STD_LOGIC;
+  signal axis_flow_control_D1_unix_time_ngtu : STD_LOGIC_VECTOR ( 63 downto 0 );
   signal axis_flow_control_L2_m_axis_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_flow_control_L2_m_axis_TLAST : STD_LOGIC;
   signal axis_flow_control_L2_m_axis_TREADY : STD_LOGIC;
@@ -11716,7 +11717,6 @@ architecture STRUCTURE of design_1 is
   signal NLW_axis_flow_control_D1_m_axis_events_tvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_axis_flow_control_D1_trig_button_UNCONNECTED : STD_LOGIC;
   signal NLW_axis_flow_control_D1_m_axis_events_tdata_UNCONNECTED : STD_LOGIC_VECTOR ( 63 downto 0 );
-  signal NLW_axis_flow_control_D1_unix_time_ngtu_UNCONNECTED : STD_LOGIC_VECTOR ( 63 downto 0 );
   signal NLW_axis_flow_control_D2_m_axis_events_tvalid_UNCONNECTED : STD_LOGIC;
   signal NLW_axis_flow_control_D2_trig_button_UNCONNECTED : STD_LOGIC;
   signal NLW_axis_flow_control_D2_trig_out_UNCONNECTED : STD_LOGIC;
@@ -11964,7 +11964,7 @@ axi_cathode_ctrl_0: component design_1_axi_cathode_ctrl_0_0
       axis_cathode_tlast => axi_cathode_ctrl_0_axis_cathode_TLAST,
       axis_cathode_tvalid => axi_cathode_ctrl_0_axis_cathode_TVALID,
       ec_sig(8 downto 0) => axi_data_provider_0_ec_sig_out(8 downto 0),
-      unix_time_ngtu(63 downto 0) => B"0000000000000000000000000000000000000000000000000000000000000000"
+      unix_time_ngtu(63 downto 0) => axis_flow_control_D1_unix_time_ngtu(63 downto 0)
     );
 axi_data_provider_0: component design_1_axi_data_provider_0_0
      port map (
@@ -13466,7 +13466,7 @@ axis_flow_control_D1: component design_1_axis_flow_control_d1_0_0
       trig_ext_in => trig_ext_in_1,
       trig_led => axis_flow_control_d1_0_trig_led,
       trig_out => axis_flow_control_d1_0_trig_out,
-      unix_time_ngtu(63 downto 0) => NLW_axis_flow_control_D1_unix_time_ngtu_UNCONNECTED(63 downto 0)
+      unix_time_ngtu(63 downto 0) => axis_flow_control_D1_unix_time_ngtu(63 downto 0)
     );
 axis_flow_control_D2: component design_1_axis_flow_control_L2_0
      port map (

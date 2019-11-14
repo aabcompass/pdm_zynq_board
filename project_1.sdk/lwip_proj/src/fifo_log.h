@@ -8,6 +8,8 @@
 #ifndef SRC_FIFO_LOG_H_
 #define SRC_FIFO_LOG_H_
 
-
+int XLlFifoEventsInit();
+u32 GetLogFifoOcc();
+void GetNextRecordFromFifoLog(void * data);
 
 #endif /* SRC_FIFO_LOG_H_ */

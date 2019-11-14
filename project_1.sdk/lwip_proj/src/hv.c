@@ -462,6 +462,20 @@ void HV_addLog(u32 record_type, u32 channels)
 	}
 }
 
+void HV_addLog2(u32 * data)
+{
+	if(hvps_log_current_record < HVPS_LOG_SIZE_NRECORDS)
+	{
+		//memcpy(&hvps_log.payload[hvps_log_current_record].ts.n_gtu, data, sizeof(DATA_TYPE_HVPS_LOG_V1));
+		hvps_log.payload[hvps_log_current_record].ts.n_gtu = data[0];
+		hvps_log.payload[hvps_log_current_record].ts.unix_time = data[1];
+		hvps_log.payload[hvps_log_current_record].record_type = data[2];
+		hvps_log.payload[hvps_log_current_record].channels = data[3];
+		hvps_log_current_record++;
+	}
+}
+
+
 int HV_getLogSize()
 {
 	return hvps_log_current_record;

@@ -68,9 +68,10 @@ void ProcessInstrumentModeCommand(struct tcp_pcb *tpcb, u32 param, u32 param2)
 	}
 	else
 	{
-		if(param == 0)
-			SendHVPSLogToFTP(1);
-		else
+		//if(param == 0)
+		//	SendHVPSLogToFTP(1);
+		//else
+		if(param != 0)
 			xil_printf("RRemoved  all sci data files from FTP server: %d files\n\r", RemoveAllSciDataFilesFromFTP());
 		SetInstrumentMode(param);
 		SetTime(param2);
@@ -433,15 +434,13 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "hvps swpulses %d %d %d",
-			&param_array[0], &param_array[1], &param_array[2]) == 3)
+	else if(sscanf(p->payload, "hvps swpulses %d %d %d", &param_array[0], &param_array[1], &param_array[2]) == 3)
 	{
 		ConfADCV(param_array[0], param_array[1], param_array[2]);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
-	else if(sscanf(p->payload, "hvps switching on %d",
-			&param0) == 1)
+	else if(sscanf(p->payload, "hvps switching on %d", &param0) == 1)
 	{
 		CathodeSetAutoMode(param0);
 		char str[] = "Ok\n\r";

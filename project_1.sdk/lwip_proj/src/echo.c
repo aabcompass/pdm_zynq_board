@@ -455,6 +455,7 @@ void ProcessUartCommands(struct netif *netif, char c)
 	u16* p;
 	static int num = 0;
 	static int ec = 0;
+	u32 log_data[4];
 
 	if(c == '*')
 	{
@@ -584,7 +585,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 	}
 	else if(c == 'l')
 	{
-		SendHVPSLogToFTP(0);
+		GetNextRecordFromFifoLog(log_data);
+		xil_printf("0x%08x 0x%08x 0x%08x 0x%08x\n\r", log_data[0], log_data[1], log_data[2], log_data[3]);
+		//SendHVPSLogToFTP(0);
 	}
 	else if(c == 'f')
 	{

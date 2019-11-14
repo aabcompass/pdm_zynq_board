@@ -325,6 +325,7 @@ int main()
 		ScurveService();
 		HVInterruptService();
 		//HVprotectionService();
+		HVLogService();
 		GPS_service();
 		IncProgramCounter();
 		SetDefaultECsigParameters();
