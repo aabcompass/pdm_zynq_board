@@ -44,16 +44,10 @@ typedef struct
 //-----------------------------------------------------------------------------
 // Data types
 
-#define DATA_TYPE_SCI_RAW		1 	/* Scientific raw data */
-#define DATA_TYPE_SCI_INT16		2 	/* Scientific integrated data with 16 bit pixels*/
-#define DATA_TYPE_SCI_INT32		3 	/* Scientific integrated data with 32 bit pixels */
-#define DATA_TYPE_SCI_POLY		4   /* Scientific polytypic data*/
-#define DATA_TYPE_SCI_D1		10	/* Scientific data attached with L1 event*/
-#define DATA_TYPE_SCI_D2		11	/* Scientific data attached with L2 event*/
-#define DATA_TYPE_SCI_D3		12	/* Scientific data attached with L3 event*/
+#define DATA_TYPE_SCI_D1		10	/* Scientific data  D1 */
+#define DATA_TYPE_SCI_D2		11	/* Scientific data  D2 */
+#define DATA_TYPE_SCI_D3		12	/* Scientific data  D3 */
 #define DATA_TYPE_SCURVE		20  /* S-curve data */
-#define DATA_TYPE_SC_COMMON		40 	/* Slow control data (common loading) */
-#define DATA_TYPE_SC_INDIV		41  /* Slow control data (individual loading)  */
 #define DATA_TYPE_HVPS_LOG		60  /* HVPS log file */
 
 
@@ -72,11 +66,11 @@ typedef struct
 
 
 // Number of small GTU frames recorded with L1 event
-#define N_OF_FRAMES_L1_V0	128
+#define N_OF_FRAMES_D1_V0	128
 // Number of big GTU frames recorded with L2 event
-#define N_OF_FRAMES_L2_V0	128
+#define N_OF_FRAMES_D2_V0	128
 // Number of huge GTU frames recorded with L3 event
-#define N_OF_FRAMES_L3_V0	128
+#define N_OF_FRAMES_D3_V0	128
 
 // Small/Big/Huge GTU scale factors
 // Small GTU = 2.5 us
@@ -106,8 +100,8 @@ typedef struct
 	// Cathode status
 	uint8_t cathode_status[12];
 	// raw data (2.5 us GTU)
-	uint8_t raw_data [N_OF_FRAMES_L1_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L1_V2;
+	uint8_t raw_data [N_OF_FRAMES_D1_V0][N_OF_PIXEL_PER_PDM];
+} DATA_TYPE_SCI_D1_V2;
 
 // At the end of lifecycle Zynq packs DATA_TYPE_SCI_L1 structures in the structure Z_DATA_TYPE_SCI_L1 (with header)
 // and sends it to DP
@@ -115,8 +109,8 @@ typedef struct
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L1_V2 payload;
-} Z_DATA_TYPE_SCI_L1_V2;
+	DATA_TYPE_SCI_D1_V2 payload;
+} Z_DATA_TYPE_SCI_D1_V2;
 
 
 // If L2 occurred, Zynq makes:
@@ -135,8 +129,8 @@ typedef struct
 	// Cathode status
 	uint8_t cathode_status[12];
 	// intergrated data
-	uint16_t int16_data[N_OF_FRAMES_L2_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L2_V2;
+	uint16_t int16_data[N_OF_FRAMES_D2_V0][N_OF_PIXEL_PER_PDM];
+} DATA_TYPE_SCI_D2_V2;
 
 // At the end of lifecycle Zynq packs DATA_TYPE_SCI_L2 structures in the structure Z_DATA_TYPE_SCI_L2 (with header)
 // and sends it to DP
@@ -144,8 +138,8 @@ typedef struct
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L2_V2 payload;
-} Z_DATA_TYPE_SCI_L2_V2;
+	DATA_TYPE_SCI_D2_V2 payload;
+} Z_DATA_TYPE_SCI_D2_V2;
 
 // L3 events are automatically generated at the end of lifecycle.  Zynq makes:
 // 1) the timestamp for this event,
@@ -166,14 +160,14 @@ typedef struct
 	// HVPS status
 	uint32_t hv_status;
 	// double integrated data
-	uint32_t int32_data[N_OF_FRAMES_L3_V0][N_OF_PIXEL_PER_PDM];
-} DATA_TYPE_SCI_L3_V2;
+	uint32_t int32_data[N_OF_FRAMES_D3_V0][N_OF_PIXEL_PER_PDM];
+} DATA_TYPE_SCI_D3_V2;
 
 typedef struct
 {
 	ZynqBoardHeader zbh;
-	DATA_TYPE_SCI_L3_V2 payload;
-} Z_DATA_TYPE_SCI_L3_V2;
+	DATA_TYPE_SCI_D3_V2 payload;
+} Z_DATA_TYPE_SCI_D3_V2;
 
 /* zynq packet passed to the CPU every 5.24 s */
 /* 4718772 bytes */
@@ -182,9 +176,9 @@ typedef struct
 #define MAX_PACKETS_L3 1
 typedef struct
 {
-  Z_DATA_TYPE_SCI_L1_V2 level1_data[MAX_PACKETS_L1]; /* 294932 * 4 bytes */
-  Z_DATA_TYPE_SCI_L2_V2 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
-  Z_DATA_TYPE_SCI_L3_V2 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
+  Z_DATA_TYPE_SCI_D1_V2 level1_data[MAX_PACKETS_L1]; /* 294932 * 4 bytes */
+  Z_DATA_TYPE_SCI_D2_V2 level2_data[MAX_PACKETS_L2]; /* 589844 * 4 bytes */
+  Z_DATA_TYPE_SCI_D3_V2 level3_data[MAX_PACKETS_L3]; /* 1179668 bytes */
 } DATA_TYPE_SCI_ALLTRG_V1;
 
 
