@@ -561,7 +561,8 @@ void HVInterruptService()
 						setRegister(expAddressW, GPINTEN, datGPINTEN | hvonok);
 						is_interrupt_pending &= ~(1<<i);
 						hv_n_tries_to_release[i] = 0;
-						print("Interrupt has been released\n\r");
+						//print("Interrupt has been released\n\r");
+						print("v");
 					}
 					else
 					{
@@ -574,7 +575,8 @@ void HVInterruptService()
 							hv_working_successful &= ~(1<<i/2);
 							is_interrupt_pending &= ~(1<<i);
 							HV_addLog(HVPS_BLOCK_ECUNIT, (1<<i));
-							print("HV channel has been blocked\n\r");
+							print("V");
+							//print("HV channel has been blocked\n\r");
 						}
 					}
 				}
