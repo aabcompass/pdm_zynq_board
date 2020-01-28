@@ -63,6 +63,7 @@
 #include "xl2_trigger.h"
 #include "data_provider.h"
 #include "ftp_server.h"
+#include "log_records.h"
 
 #include "xtmrctr.h"
 
@@ -330,6 +331,7 @@ void DataPathSM()
 					{
 						ret = CreateFile(filename_str, &sci_data[current_scidata_record].sci_data, sizeof(DATA_TYPE_SCI_ALLTRG_V1), 0, file_scidata);
 						if(ret<0) xil_printf("CreateFile returns error %d\n\r", ret);
+						HV_addLog(FTP_FILE_CREATED, (u32)ret);
 					}
 					break;
 				}

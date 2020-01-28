@@ -12,6 +12,7 @@
 #include "xscugic.h"
 #include "minieuso_pdmdata.h"
 #include "hv_cathode.h"
+#include "log_records.h"
 
 // hv_turned_on_user - represents for each HV channel is it switched on by user or not.
 // LSB bit represents channel0, etc...
@@ -44,22 +45,6 @@ volatile u32 hvps_log_current_record = 0;
 int hvps_protection_started = 0; // to do not do protection before hvps start
 
 
-//enum hvps_log_records {
-#define		HVPS_TURN_ON		0  		/* turn on */
-#define		HVPS_TURN_OFF		1		/* turn off */
-#define		HVPS_DACS_LOADED	2		/* DAC loaded by user */
-#define		HVPS_SR_LOADED		3		/* Shift register loaded by user */
-#define		HVPS_INTR			4			/* Interrupt */
-#define		HVPS_BLOCK_ECUNIT	5	/* HVPS channel has been turned as its HVOK line was deasserted at least on 1 second */
-#define		HVPS_BLOCK_INTR		6		/* HVPS channel (EC) has been turned off because of too many interrupts from its lines */
-#define		HVPS_AGC_UP_3_to_1	7	/* Automatic gain control: HVPS automatically switched from "3" to "1". Shift register reloaded. */
-#define		HVPS_AGC_UP_1_to_0	8	/* Automatic gain control: HVPS automatically switched from "1" to "0". Shift register reloaded. */
-#define		HVPS_AGC_UP_0_to_1	9	/* Automatic gain control: HVPS automatically switched from "0" to "1". Shift register reloaded. */
-#define		HVPS_AGC_UP_1_to_3	10	/* Automatic gain control: HVPS automatically switched from "1" to "3". Shift register reloaded. */
-#define		HVPS_STATUS         11 /* POLISH STATUS */
-#define 	HVPS_OVERBRIGHT		12
-#define		HVPS_SWITCHING		13
-//};
 
 const char* hvps_log_records_txt[] = {
 		"TURN_ON",
