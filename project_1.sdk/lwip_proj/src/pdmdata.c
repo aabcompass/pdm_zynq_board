@@ -429,7 +429,8 @@ static void RxIntrHandler_D2(void *Callback)
 
 	DmaStartN(2, dma_intr_counter_d2%N_TRIG_BUFFERS_DMA_D2);
 
-	FlowControlClrIntr_D2();	//print("y");
+	FlowControlClrIntr_D2();
+	print("y");
 
 
 	return;
@@ -439,6 +440,7 @@ static void RxIntrHandler_D2(void *Callback)
 void L2_trigger_service()
 {
 	u32 addr_gtu, trig_gtu;
+	static dma_intr_counter_d2_trg;
 	switch(l2_sm_state)
 	{
 		case l2_sm_idle:
@@ -453,6 +455,7 @@ void L2_trigger_service()
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].unix_timestamp = GetUnixTimestamp_L2();
 
 				}
+				dma_intr_counter_d2_trg = dma_intr_counter_d2;
 				l2_sm_state = l2_sm_cought;
 			}
 			break;
@@ -460,7 +463,9 @@ void L2_trigger_service()
 			l2_sm_state = l2_sm_timer;
 			break;
 		case l2_sm_timer: // in order to do not copy data from a region under DMA transfer
-			if(GetNGTU() - GetTrigNGTU_L2() > N_FRAMES_DMA_D2)
+			//if(GetNGTU() - GetTrigNGTU_L2() > N_FRAMES_DMA_D2)
+			//if(dma_intr_counter_d2_trg != dma_intr_counter_d2)
+			if(dma_intr_counter_d2_trg - dma_intr_counter_d2 >= 2)
 				l2_sm_state = l2_sm_copying;
 			break;
 		case l2_sm_copying:
