@@ -297,8 +297,11 @@ int main()
 	//ProvideAndCheck();
 	print("Setting HVPS protection maximum value (15000)\n\r");
 	SetGrandTotals(15000);
-	print("Turning cathode switching ON");
+	print("Setting default EC mapping for ADCV\n\r");
+	SetDefaultECMapping();
+	print("Configuring ADCV (Automatic Drop Cathode Voltage) timing parameters\n\r");
 	ConfADCV(3,1,5);
+	print("Turning cathode switching ON\n\r");
 	CathodeSetAutoMode(1);
 
 	TmrCntrInit();
