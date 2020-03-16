@@ -47,6 +47,6 @@ typedef struct
 	u32 alt_trig_buffer;
 } TriggerInfo;
 
-#define MAX_TRIGGERS_PER_CYCLE		4
+#define MAX_TRIGGERS_PER_CYCLE		8
 
 #endif /* SRC_PDMDATA_HW_H_ */

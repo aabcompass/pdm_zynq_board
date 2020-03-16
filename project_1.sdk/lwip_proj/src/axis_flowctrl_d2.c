@@ -81,7 +81,7 @@ void FlowControlInit_D2()
 
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_DMA_LENGTH*4) = N_OF_PIXEL_PER_PDM * N_FRAMES_DMA_D2 / sizeof(uint16_t);
 
-	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_PERIODIC_TRIG_PERIOD*4) = N_FRAMES_PER_LIFECYCLE/128*30-128*128*2;
+	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_PERIODIC_TRIG_PERIOD*4) = N_FRAMES_PER_LIFECYCLE/128*15-128*128*2;
 	//TODO these delays must be adjusted because currently the trigger is not in the middle of the kept data
 //	*(u32*)(XPAR_AXIS_FLOW_CONTROL_L1_BASEADDR + REGW_TRIG_DELAY*4) =
 //			2500 /*ns GTU*/ / 5/*ns clk*/ * 64 /*GTU to save after event*/;
@@ -91,7 +91,7 @@ void FlowControlInit_D2()
 
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
 
-	Set_N2(4);
+	Set_N2(8);
 
 	//reset flow control core
 	FlowControlsClr_D2();

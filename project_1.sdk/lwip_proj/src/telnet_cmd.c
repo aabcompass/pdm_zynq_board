@@ -539,14 +539,14 @@ void ProcessTelnetCommands(struct tcp_pcb *tpcb, struct pbuf* p, err_t err)
 	else if(sscanf(p->payload, "mmg N1 %d",
 				&param0) == 1)
 	{
-		Set_N1(param0);
+		//Set_N1(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
 	else if(sscanf(p->payload, "mmg N2 %d",
 				&param0) == 1)
 	{
-		Set_N2(param0);
+		//Set_N2(param0);
 		char str[] = "Ok\n\r";
 		tcp_write(tpcb, str, sizeof(str), 1);
 	}
