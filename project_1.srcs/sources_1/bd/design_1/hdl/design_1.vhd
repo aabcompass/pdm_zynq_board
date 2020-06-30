@@ -1,7 +1,7 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Thu Nov 14 16:47:39 2019
+--Date        : Wed Apr  8 20:53:23 2020
 --Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1

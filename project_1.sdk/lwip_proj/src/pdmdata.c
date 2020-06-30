@@ -171,7 +171,7 @@ void PrintTriggerInfo()
 void ClearTriggerInfo(int half)
 {
 	int j;
-	for(j=0;j<4;j++)
+	for(j=0;j<MAX_TRIGGERS_PER_CYCLE;j++)
 	{
 		triggerInfoD1[half][j].trigger_type = 0;
 		triggerInfoD1[half][j].is_sent = 0;

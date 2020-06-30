@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current5/project_1.xpr">
+<Project Version="7" Minor="14" Path="/home/alx/xil_proj/pdm_zynq_board/current6_morepackets/project_1.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="c9b7a2d05ef04b44936c96c8e916fb81"/>
@@ -53,24 +53,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_0_7"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xci">
-          <Proxy FileSetName="design_1_processing_system7_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_top_switch_raw_0/design_1_top_switch_raw_0.xci">
-          <Proxy FileSetName="design_1_top_switch_raw_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
-          <Proxy FileSetName="design_1_xlconcat_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_5_0/design_1_axis_fifo_sw_5_0.xci">
-          <Proxy FileSetName="design_1_axis_fifo_sw_5_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_4_0/design_1_axis_fifo_sw_4_0.xci">
-          <Proxy FileSetName="design_1_axis_fifo_sw_4_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_1_0/design_1_axis_fifo_sw_1_0.xci">
           <Proxy FileSetName="design_1_axis_fifo_sw_1_0"/>
         </CompFileExtendedInfo>
@@ -80,35 +62,71 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_conv_sw_3_0/design_1_axis_dwidth_conv_sw_3_0.xci">
           <Proxy FileSetName="design_1_axis_dwidth_conv_sw_3_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_conv_sw_1_0/design_1_axis_dwidth_conv_sw_1_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_conv_sw_1_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_3/design_1_auto_pc_3.xci">
+          <Proxy FileSetName="design_1_auto_pc_3"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r15_0/design_1_axis_broadcaster_1r15_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r15_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_2/design_1_auto_pc_2.xci">
+          <Proxy FileSetName="design_1_auto_pc_2"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r14_0/design_1_axis_broadcaster_1r14_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r14_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_us_0/design_1_auto_us_0.xci">
+          <Proxy FileSetName="design_1_auto_us_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r13_0/design_1_axis_broadcaster_1r13_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r13_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_1/design_1_auto_pc_1.xci">
+          <Proxy FileSetName="design_1_auto_pc_1"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r12_0/design_1_axis_broadcaster_1r12_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r12_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_0/design_1_auto_pc_0.xci">
+          <Proxy FileSetName="design_1_auto_pc_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r11_0/design_1_axis_broadcaster_1r11_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r11_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_0/design_1_axis_dwidth_converter_7_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_converter_7_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r10_0/design_1_axis_broadcaster_1r10_0.xci">
-          <Proxy FileSetName="design_1_axis_broadcaster_1r10_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xci">
+          <Proxy FileSetName="design_1_axi_timer_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
-          <Proxy FileSetName="design_1_xlslice_0_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_pixel_mask_0_0/design_1_axi_pixel_mask_0_0.xci">
+          <Proxy FileSetName="design_1_axi_pixel_mask_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0.xci">
-          <Proxy FileSetName="design_1_clk_wiz_1_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_1/design_1_axi_fifo_mm_s_0_1.xci">
+          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_1"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_processing_system7_0_200M_0/design_1_rst_processing_system7_0_200M_0.xci">
-          <Proxy FileSetName="design_1_rst_processing_system7_0_200M_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_cathode_ctrl_0_0/design_1_axi_cathode_ctrl_0_0.xci">
+          <Proxy FileSetName="design_1_axi_cathode_ctrl_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
+          <Proxy FileSetName="design_1_xlconstant_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xci">
+          <Proxy FileSetName="design_1_axi_gpio_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_0/design_1_axi_fifo_mm_s_0_0.xci">
+          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_TA_1_0/design_1_ALGO_B_TA_1_0.xci">
+          <Proxy FileSetName="design_1_ALGO_B_TA_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gps_core_0_0/design_1_axi_gps_core_0_0.xci">
+          <Proxy FileSetName="design_1_axi_gps_core_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_d1_0_0/design_1_axis_flow_control_d1_0_0.xci">
+          <Proxy FileSetName="design_1_axis_flow_control_d1_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_2/design_1_ALGO_B_0_2.xci">
+          <Proxy FileSetName="design_1_ALGO_B_0_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_1/design_1_ALGO_B_0_1.xci">
+          <Proxy FileSetName="design_1_ALGO_B_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_4_0/design_1_axis_data_fifo_4_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_4_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_3_0/design_1_axis_data_fifo_3_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_3_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_2_0/design_1_axis_data_fifo_2_0.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7.xci">
+          <Proxy FileSetName="design_1_axis_data_fifo_0_7"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6.xci">
           <Proxy FileSetName="design_1_axis_data_fifo_0_6"/>
@@ -143,6 +161,45 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_0/design_1_ALGO_B_0_0.xci">
           <Proxy FileSetName="design_1_ALGO_B_0_0"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_top_switch_raw_0/design_1_top_switch_raw_0.xci">
+          <Proxy FileSetName="design_1_top_switch_raw_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
+          <Proxy FileSetName="design_1_xlconcat_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_5_0/design_1_axis_fifo_sw_5_0.xci">
+          <Proxy FileSetName="design_1_axis_fifo_sw_5_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r14_0/design_1_axis_broadcaster_1r14_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r14_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r13_0/design_1_axis_broadcaster_1r13_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r13_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_conv_sw_1_0/design_1_axis_dwidth_conv_sw_1_0.xci">
+          <Proxy FileSetName="design_1_axis_dwidth_conv_sw_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r15_0/design_1_axis_broadcaster_1r15_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r15_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r12_0/design_1_axis_broadcaster_1r12_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r12_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r11_0/design_1_axis_broadcaster_1r11_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r11_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_broadcaster_1r10_0/design_1_axis_broadcaster_1r10_0.xci">
+          <Proxy FileSetName="design_1_axis_broadcaster_1r10_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_processing_system7_0_200M_0/design_1_rst_processing_system7_0_200M_0.xci">
+          <Proxy FileSetName="design_1_rst_processing_system7_0_200M_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0.xci">
+          <Proxy FileSetName="design_1_clk_wiz_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
+          <Proxy FileSetName="design_1_xlslice_0_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_3_0/design_1_axis_fifo_sw_3_0.xci">
           <Proxy FileSetName="design_1_axis_fifo_sw_3_0"/>
         </CompFileExtendedInfo>
@@ -161,7 +218,6 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_conv_sw_0_0/design_1_axis_dwidth_conv_sw_0_0.xci">
           <Proxy FileSetName="design_1_axis_dwidth_conv_sw_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_interconnect_DMA_RAW_0/design_1_axi_interconnect_DMA_RAW_0.xci"/>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_6_0/design_1_axis_dwidth_converter_6_0.xci">
           <Proxy FileSetName="design_1_axis_dwidth_converter_6_0"/>
         </CompFileExtendedInfo>
@@ -255,8 +311,6 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_L1_0/design_1_axi_dma_L1_0.xci">
           <Proxy FileSetName="design_1_axi_dma_L1_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_inst_interconnect_200MHz_0/design_1_inst_interconnect_200MHz_0.xci"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_interconnect_DMA_INT_0/design_1_axi_interconnect_DMA_INT_0.xci"/>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_2_0/design_1_clk_wiz_2_0.xci">
           <Proxy FileSetName="design_1_clk_wiz_2_0"/>
         </CompFileExtendedInfo>
@@ -275,7 +329,6 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xci">
           <Proxy FileSetName="design_1_rst_processing_system7_0_100M_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_inst_interconnect_100MHz_0/design_1_inst_interconnect_100MHz_0.xci"/>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0.xci">
           <Proxy FileSetName="design_1_axi_quad_spi_0_0"/>
         </CompFileExtendedInfo>
@@ -288,73 +341,11 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_artix_conf_v1_0_0_0/design_1_axi_artix_conf_v1_0_0_0.xci">
           <Proxy FileSetName="design_1_axi_artix_conf_v1_0_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.hwdef"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hw_handoff/design_1.hwh"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="design_1_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_3/design_1_auto_pc_3.xci">
-          <Proxy FileSetName="design_1_auto_pc_3"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xci">
+          <Proxy FileSetName="design_1_processing_system7_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_2/design_1_auto_pc_2.xci">
-          <Proxy FileSetName="design_1_auto_pc_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_us_0/design_1_auto_us_0.xci">
-          <Proxy FileSetName="design_1_auto_us_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_1/design_1_auto_pc_1.xci">
-          <Proxy FileSetName="design_1_auto_pc_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_auto_pc_0/design_1_auto_pc_0.xci">
-          <Proxy FileSetName="design_1_auto_pc_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_dwidth_converter_7_0/design_1_axis_dwidth_converter_7_0.xci">
-          <Proxy FileSetName="design_1_axis_dwidth_converter_7_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xci">
-          <Proxy FileSetName="design_1_axi_timer_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_pixel_mask_0_0/design_1_axi_pixel_mask_0_0.xci">
-          <Proxy FileSetName="design_1_axi_pixel_mask_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_1/design_1_axi_fifo_mm_s_0_1.xci">
-          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_cathode_ctrl_0_0/design_1_axi_cathode_ctrl_0_0.xci">
-          <Proxy FileSetName="design_1_axi_cathode_ctrl_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
-          <Proxy FileSetName="design_1_xlconstant_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xci">
-          <Proxy FileSetName="design_1_axi_gpio_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_fifo_mm_s_0_0/design_1_axi_fifo_mm_s_0_0.xci">
-          <Proxy FileSetName="design_1_axi_fifo_mm_s_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_TA_1_0/design_1_ALGO_B_TA_1_0.xci">
-          <Proxy FileSetName="design_1_ALGO_B_TA_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gps_core_0_0/design_1_axi_gps_core_0_0.xci">
-          <Proxy FileSetName="design_1_axi_gps_core_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="hdl/design_1.vhd"/>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_flow_control_d1_0_0/design_1_axis_flow_control_d1_0_0.xci">
-          <Proxy FileSetName="design_1_axis_flow_control_d1_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_2/design_1_ALGO_B_0_2.xci">
-          <Proxy FileSetName="design_1_ALGO_B_0_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ALGO_B_0_1/design_1_ALGO_B_0_1.xci">
-          <Proxy FileSetName="design_1_ALGO_B_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_4_0/design_1_axis_data_fifo_4_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_4_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_3_0/design_1_axis_data_fifo_3_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_3_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_2_0/design_1_axis_data_fifo_2_0.xci">
-          <Proxy FileSetName="design_1_axis_data_fifo_2_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_fifo_sw_4_0/design_1_axis_fifo_sw_4_0.xci">
+          <Proxy FileSetName="design_1_axis_fifo_sw_4_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_1/hdl/design_1_wrapper.vhd">
