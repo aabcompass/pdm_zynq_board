@@ -11,6 +11,7 @@
 #define SRC_PDMDATA_HW_H_
 
 #include "minieuso_pdmdata.h"
+#include "hv.h"
 
 #define DATA_TYPE_L1	1
 #define DATA_TYPE_L2	2
@@ -45,6 +46,7 @@ typedef struct
 	u8 is_dma_error;
 	u32 n_intr;
 	u32 alt_trig_buffer;
+	u8 hv_data[NUM_OF_HV];
 } TriggerInfo;
 
 #define MAX_TRIGGERS_PER_CYCLE		8

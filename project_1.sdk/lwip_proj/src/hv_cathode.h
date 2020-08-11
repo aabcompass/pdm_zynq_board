@@ -8,6 +8,8 @@
 #ifndef SRC_HV_CATHODE_H_
 #define SRC_HV_CATHODE_H_
 
+#include "stdint.h"
+
 // HV CATHODE regs
 #define REGW_HVCATH_SW				0 /*17:0=aera_command*/
 #define REGW_HVCATH_OPT				1 /*0=adcv_en*/
@@ -35,5 +37,8 @@ void CathodeSetAutoMode(int mode);
 void TestEC_sig();
 void SetSwitchingPulsesParams(int len0, int len1, int num);
 void ConfADCV(int len0, int len1, int num);
+
+void UpdateCathodeLevels(uint32_t data);
+uint32_t GetCathodeData();
 
 #endif /* SRC_HV_CATHODE_H_ */

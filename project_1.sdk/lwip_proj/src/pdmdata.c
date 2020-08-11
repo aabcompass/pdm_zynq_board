@@ -14,6 +14,7 @@
 #include "pdmdp_err.h"
 #include "data_provider.h"
 #include "ftp_server.h"
+#include "hv_cathode.h"
 
 
 XAxiDma dma_d1, dma_d2, dma_d3;//, data_tst_l1;//, dma_tst_l2;
@@ -265,6 +266,7 @@ void CopyEventData_trig()
 		zynqPacket.level1_data[i].payload.trig_type = triggerInfoD1[prev_alt_buffer][i].trigger_type;
 		zynqPacket.level1_data[i].payload.ts.n_gtu = triggerInfoD1[prev_alt_buffer][i].n_gtu;
 		zynqPacket.level1_data[i].payload.ts.unix_time = triggerInfoD1[prev_alt_buffer][i].unix_timestamp;
+		memcpy(&zynqPacket.level1_data[i].payload.cathode_status[0],  &triggerInfoD1[prev_alt_buffer][i].hv_data[0], NUM_OF_HV);
 
 		/*
 		 * If the data around trigger is not edge crossed by DMA page. In this case one pass copy is used.
@@ -288,6 +290,7 @@ void CopyEventData_trig()
 		zynqPacket.level2_data[i].payload.trig_type = triggerInfoD2[prev_alt_buffer][i].trigger_type;
 		zynqPacket.level2_data[i].payload.ts.n_gtu = triggerInfoD2[prev_alt_buffer][i].n_gtu;
 		zynqPacket.level2_data[i].payload.ts.unix_time = triggerInfoD2[prev_alt_buffer][i].unix_timestamp;
+		memcpy(&zynqPacket.level2_data[i].payload.cathode_status[0],  &triggerInfoD2[prev_alt_buffer][i].hv_data[0], NUM_OF_HV);
 		memcpy(&zynqPacket.level2_data[i].payload.int16_data[0][0],
 				//&DataDMA_D2[i][0][0],
 				&Data_L2[prev_alt_buffer][i][0],
@@ -302,6 +305,7 @@ void CopyEventData_trig()
 		zynqPacket.level3_data[i].payload.trig_type = triggerInfoD3[prev_alt_buffer][i].trigger_type;
 		zynqPacket.level3_data[i].payload.ts.n_gtu = triggerInfoD3[prev_alt_buffer][i].n_gtu;
 		zynqPacket.level3_data[i].payload.ts.unix_time = triggerInfoD3[prev_alt_buffer][i].unix_timestamp;
+		memcpy(&zynqPacket.level3_data[i].payload.cathode_status[0],  &triggerInfoD3[prev_alt_buffer][i].hv_data[0], NUM_OF_HV);
 		memcpy_invalidate(&zynqPacket.level3_data[i].payload.int32_data[0][0],
 				&DataDMA_D3[prev_alt_buffer%2][0][0],
 				N_OF_PIXEL_PER_PDM * N_OF_FRAMES_D1_V0*sizeof(uint32_t));
@@ -372,6 +376,8 @@ UINTPTR GetPtrForLive()
 void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 {
 	u32 IrqStatus;
+	int i;
+	u32 cathode_data;
 
 	if(current_trigbuf_d1 < N1)
 	{
@@ -381,6 +387,13 @@ void RxIntrHandler_L1(XAxiDma *AxiDmaInst)
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].trigger_type = GetTrigType_L1();
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].unix_timestamp = GetUnixTimestamp_L1();
 		triggerInfoD1[current_alt_buffer][current_trigbuf_d1].n_intr = dma_intr_counter_d1;
+		cathode_data = GetCathodeLevels();
+		//xil_printf("(%08x)",cathode_data);
+		for(i=0;i<NUM_OF_HV;i++)
+		{
+			triggerInfoD1[current_alt_buffer][current_trigbuf_d1].hv_data[i] = (cathode_data >> 2*i)  & 0x3;
+			//triggerInfoD1[current_alt_buffer][current_trigbuf_d1].hv_data[i] |=
+		}
 		// Change current trigger buffer to the next one
 
 	}
@@ -441,6 +454,7 @@ void L2_trigger_service()
 {
 	u32 addr_gtu, trig_gtu;
 	static dma_intr_counter_d2_trg;
+	u32 cathode_data, i;
 	switch(l2_sm_state)
 	{
 		case l2_sm_idle:
@@ -453,6 +467,12 @@ void L2_trigger_service()
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].n_gtu = GetTrigNGTU_L2();
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].trigger_type = GetTrigType_L2();
 					triggerInfoD2[current_alt_buffer][trig_counter__l2].unix_timestamp = GetUnixTimestamp_L2();
+					cathode_data = GetCathodeLevels();
+					for(i=0; i<NUM_OF_HV; i++)
+					{
+						triggerInfoD2[current_alt_buffer][trig_counter__l2].hv_data[i] = (cathode_data >> 2*i)  & 0x3;
+						//triggerInfoD1[current_alt_buffer][current_trigbuf_d1].hv_data[i] |=
+					}
 
 				}
 				dma_intr_counter_d2_trg = dma_intr_counter_d2;
@@ -495,7 +515,7 @@ void L2_trigger_service()
 
 static void RxIntrHandler_D3(void *Callback)
 {
-	u32 IrqStatus;
+	u32 IrqStatus, cathode_data, i;
 	//int TimeOut;
 	XAxiDma *AxiDmaInst = (XAxiDma *)Callback;
 
@@ -513,6 +533,14 @@ static void RxIntrHandler_D3(void *Callback)
 		triggerInfoD3[current_alt_buffer][0].n_gtu = GetNGTU();
 		triggerInfoD3[current_alt_buffer][0].unix_timestamp = GetUnixTime();
 		triggerInfoD3[current_alt_buffer][0].trigger_type = TRIG_PERIODIC;
+		cathode_data = GetCathodeLevels();
+		//xil_printf("(%08x)",cathode_data);
+		for(i=0;i<NUM_OF_HV;i++)
+		{
+			triggerInfoD3[current_alt_buffer][0].hv_data[i] = (cathode_data >> 2*i)  & 0x3;
+			//triggerInfoD1[current_alt_buffer][current_trigbuf_d1].hv_data[i] |=
+		}
+
 		// change current_alt_buffer & prev_alt_buffer
 		prev_alt_buffer = current_alt_buffer;
 		current_alt_buffer = dma_intr_counter_d3%2;

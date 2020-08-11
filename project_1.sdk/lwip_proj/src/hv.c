@@ -581,7 +581,7 @@ void HVInterruptService()
 				hv_working_successful &= ~(1<<i/2);
 				HV_addLog(HVPS_BLOCK_INTR, 1<<i);
 				HV_turnOFF(i/2);
-				print("HV channel turned off because of a big number if interrupts\n\r");
+				print("HV channel turned off because of a big number of interrupts\n\r");
 			}
 		}
 	}
@@ -839,6 +839,7 @@ int HV_setCathodeVoltage(int list[NUM_OF_HV])
 	print("t");
 	*(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR + 4*REGW_HVCATH_CTRL) = 0;
 	HV_addLog(HVPS_SR_LOADED, reg);
+	UpdateCathodeLevels(reg);
 	return 0;
 }
 

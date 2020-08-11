@@ -8,6 +8,7 @@
 #include "hv_cathode.h"
 #include "xil_types.h"
 
+uint32_t cathode_data;
 
 
 void TestEC_sig()
@@ -83,3 +84,12 @@ void SetECMapping(u8* mapping)
 	*(u32*)(XPAR_AXI_CATHODE_CTRL_0_BASEADDR + 4*REGW_HVCATH_EC_MAPPING_H) = mapping[8];
 }
 
+void UpdateCathodeLevels(uint32_t data)
+{
+	cathode_data = data;
+}
+
+uint32_t GetCathodeLevels()
+{
+	return cathode_data;
+}
