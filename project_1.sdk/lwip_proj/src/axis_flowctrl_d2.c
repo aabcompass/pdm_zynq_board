@@ -91,7 +91,7 @@ void FlowControlInit_D2()
 
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D2_BASEADDR + REGW_FLAGS*4) = BIT_FC_IS_STARTED | BIT_FC_EN_PERIODIC_TRIG;
 
-	Set_N2(8);
+	Set_N2(MAX_PACKETS_L2);
 
 	//reset flow control core
 	FlowControlsClr_D2();

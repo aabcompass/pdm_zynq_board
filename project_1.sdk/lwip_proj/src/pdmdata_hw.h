@@ -49,6 +49,6 @@ typedef struct
 	u8 hv_data[NUM_OF_HV];
 } TriggerInfo;
 
-#define MAX_TRIGGERS_PER_CYCLE		8
+#define MAX_TRIGGERS_PER_CYCLE		MAX_PACKETS_L1
 
 #endif /* SRC_PDMDATA_HW_H_ */

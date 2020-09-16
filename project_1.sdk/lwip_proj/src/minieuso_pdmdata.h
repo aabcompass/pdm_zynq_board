@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#define MINIEUSO_ZYNQ_VER_STRING "v2.7.2"
+#define MINIEUSO_ZYNQ_VER_STRING "v2.7.3"
 
 // Constants
 
@@ -171,8 +171,8 @@ typedef struct
 
 /* zynq packet passed to the CPU every 5.24 s */
 /* 4718772 bytes */
-#define MAX_PACKETS_L1 8
-#define MAX_PACKETS_L2 8
+#define MAX_PACKETS_L1 4
+#define MAX_PACKETS_L2 4
 #define MAX_PACKETS_L3 1
 typedef struct
 {

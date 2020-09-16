@@ -64,7 +64,7 @@ void FlowControlInit_D1()
 	*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + REGW_TRIGGER_RELAX_TIME*4) = 0;//500/*clkper gtu*/*128;
 
 
-	Set_N1(8);
+	Set_N1(MAX_PACKETS_L1);
 
 	//reset flow control cores
 	FlowControlsClr_D1();

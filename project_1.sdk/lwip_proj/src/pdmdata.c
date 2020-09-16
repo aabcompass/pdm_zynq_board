@@ -46,7 +46,7 @@ volatile u32 buffer_D3_changed;
 volatile u32 buffer_D3_changed2;
 volatile u32 current_trigbuf_d1  = 0;
 
-int N1=4, N2=4, N3=1;
+int N1=MAX_PACKETS_L1, N2=MAX_PACKETS_L2, N3=1;
 
 extern InstrumentState instrumentState;
 
@@ -91,7 +91,7 @@ void PrintD1_1stElements()
 	int i, j;
 	Xil_DCacheInvalidateRange((INTPTR)&DataDMA_D1[0][0][0][0], N_ALT_BUFFERS*N_TRIG_BUFFERS_DMA_D1*N_FRAMES_DMA_D1*N_OF_PIXEL_PER_PDM);
 	for(j=0;j<2;j++)
-		for(i=0;i<4;i++)
+		for(i=0;i<MAX_PACKETS_L1;i++)
 			xil_printf("DataDMA__Raw[%d][%d][0][0]=0x%02x\n\r", j, i, DataDMA_D1[j][i][0][0]);
 }
 
