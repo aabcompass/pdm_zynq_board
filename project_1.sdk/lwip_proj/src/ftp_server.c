@@ -599,6 +599,7 @@ void send_data_sm()
 //			sprintf(str3, "150 Opening BINARY mode data connection for %s (%d bytes).\r\n", files[requested_record].filename, (int)files[requested_record].length);
 //			tcp_write(ctrl_tpcb, str3, strlen(str3), 1);
 		}
+		break;
 	case send_portion:
 		portion_size = spectrum_nbytes > MAX_SIZE_TCP_PACKET ? MAX_SIZE_TCP_PACKET : spectrum_nbytes;
 		ret = ftp_send_data(spectrum_addr, portion_size);
