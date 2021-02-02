@@ -254,7 +254,7 @@ architecture Behavioral of flow_control_d1 is
 	signal int_trig_gen_cnt: std_logic_vector(31 downto 0) := (others => '0');
 	
 	
-	signal en_trig_led, en_trig_out, trig_out_pulse, trig_out_force : std_logic := '0';
+	signal en_trig_led, en_trig_out, trig_out_pulse, trig_out_force, trig_out_front : std_logic := '0';
 	signal trig_ext_in_sync, trig_ext_in_sync_d1 : std_logic := '0';
 	
 	signal s_axis_tvalid_d1, s_axis_tlast_d1: std_logic := '0';
@@ -597,8 +597,10 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 										trig_latch <= '1';		
 										gtu_timestamp <= gtu_sig_counter_i;
 										unix_timestamp <= unix_time_i;
+										trig_out_front <= en_trig_out;
 										state := state + 1;										
-					when 2 => if(trig = '0') then
+					when 2 => trig_out_front <= '0';
+										if(trig = '0') then
 											state := state + 1;
 										end if;
 					when 3 => if(trig_latch_clr = '1') then
@@ -622,6 +624,21 @@ xpm_cdc_extsync_inst: xpm_cdc_single
 										end if;
 				end case; 
 			end if;
+		end if;
+	end process;
+	
+	trig_out_process: process(s_axis_aclk)
+	begin
+		if(rising_edge(s_axis_aclk)) then
+			if(trig_out_front = '1') then 
+				trig_out <= en_trig_out;	
+				trig_out_cnt <= (others => '0');			
+			elsif trig_out_cnt(9) = '1' then -- 512 clks trigout length
+				trig_out <= trig_out_force;
+			else
+				trig_out <= en_trig_out;
+				trig_out_cnt <= trig_out_cnt + 1;
+			end if; 
 		end if;
 	end process;
 	

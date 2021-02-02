@@ -484,7 +484,9 @@ void ProcessUartCommands(struct netif *netif, char c)
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = 1;
 		//*(u32*)(XPAR_AXI_DATA_PROVIDER_0_BASEADDR + 4*REGW_TESTMODE) = is_test_mode<<1;
 		//xil_printf("is_test_mode=%d\n\r", is_test_mode);
-		CathodeSetAutoMode(0);
+		//CathodeSetAutoMode(0);
+		print("BIT_FC_TRIG_OUT_FORCE\n\r");
+		*(u32*)(XPAR_AXIS_FLOW_CONTROL_D1_BASEADDR + 4*REGW_NUM_OF_TRIGS_FLAGS2) |= BIT_FC_TRIG_OUT_FORCE;
 	}
 	else if(c == 'T')
 	{

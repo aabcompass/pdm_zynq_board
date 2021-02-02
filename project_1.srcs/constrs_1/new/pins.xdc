@@ -231,8 +231,10 @@ set_property IOSTANDARD LVCMOS15 [get_ports trig_L2_4led]
 
 set_property PACKAGE_PIN Y12 [get_ports trig_ext_in]
 set_property PACKAGE_PIN AF13 [get_ports trig_out]
+set_property PACKAGE_PIN AF17 [get_ports trig_out2]
 set_property IOSTANDARD LVCMOS25 [get_ports trig_ext_in]
 set_property IOSTANDARD LVCMOS25 [get_ports trig_out]
+set_property IOSTANDARD LVCMOS25 [get_ports trig_out2]
 
 set_property PACKAGE_PIN Y18 [get_ports pps_signal]
 set_property IOSTANDARD LVCMOS25 [get_ports pps_signal]
