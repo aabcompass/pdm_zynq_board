@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
---Date        : Wed Apr  8 20:53:23 2020
---Host        : alx-hp-envy-notebook running 64-bit Ubuntu 16.04.6 LTS
+--Date        : Sun Jan  3 17:11:16 2021
+--Host        : alx-laptop running 64-bit Ubuntu 18.04.5 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
 --Purpose     : IP block netlist
@@ -128,8 +128,8 @@ architecture STRUCTURE of design_1_wrapper is
     artx_conf_cclk : out STD_LOGIC;
     frame_art1 : in STD_LOGIC;
     data_art1 : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    sr_ck_pc_art : out STD_LOGIC;
     sr_ck_pc : out STD_LOGIC;
+    sr_ck_pc_art : out STD_LOGIC;
     sr_rstb_pc : out STD_LOGIC;
     select_sc_probe_pc : out STD_LOGIC;
     resetb_pc : out STD_LOGIC;
